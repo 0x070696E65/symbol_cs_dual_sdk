@@ -1,0 +1,4518 @@
+using CatSdk.Utils;
+namespace CatSdk.Nem;
+/*
+public class Amount : BaseValue, ISerializer {
+	private const byte SIZE = 8;
+
+	public Amount(ulong amount = 0): base(SIZE, amount) {
+	}
+
+	public static Amount Deserialize(BinaryReader br) {
+		return new Amount(br.ReadUInt64());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes((ulong)Value);
+	}
+}
+
+public class Height : BaseValue, ISerializer {
+	private const byte SIZE = 8;
+
+	public Height(ulong height = 0): base(SIZE, height) {
+	}
+
+	public static Height Deserialize(BinaryReader br) {
+		return new Height(br.ReadUInt64());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes((ulong)Value);
+	}
+}
+
+public class Timestamp : BaseValue, ISerializer {
+	private const byte SIZE = 4;
+
+	public Timestamp(uint timestamp = 0): base(SIZE, timestamp) {
+	}
+
+	public static Timestamp Deserialize(BinaryReader br) {
+		return new Timestamp(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes((uint)Value);
+	}
+}
+
+public class Address : ByteArray, ISerializer {
+	private const byte SIZE = 40;
+
+	public Address(byte[]? address = null): base(SIZE, address) {
+	}
+
+	public static Address Deserialize(BinaryReader br) {
+		return new Address(br.ReadBytes(40));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class Hash256 : ByteArray, ISerializer {
+	private const byte SIZE = 32;
+
+	public Hash256(byte[]? hash256 = null): base(SIZE, hash256) {
+	}
+
+	public static Hash256 Deserialize(BinaryReader br) {
+		return new Hash256(br.ReadBytes(32));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class PublicKey : ByteArray, ISerializer {
+	private const byte SIZE = 32;
+
+	public PublicKey(byte[]? publicKey = null): base(SIZE, publicKey) {
+	}
+
+	public static PublicKey Deserialize(BinaryReader br) {
+		return new PublicKey(br.ReadBytes(32));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class Signature : ByteArray, ISerializer {
+	private const byte SIZE = 64;
+
+	public Signature(byte[]? signature = null): base(SIZE, signature) {
+	}
+
+	public static Signature Deserialize(BinaryReader br) {
+		return new Signature(br.ReadBytes(64));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class NetworkType : IEnum<byte> {
+	public static readonly NetworkType MAINNET = new (104);
+
+	public static readonly NetworkType TESTNET = new (152);
+
+	public byte Value { get; }
+
+	public NetworkType(byte value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			104, 152
+		};
+		var keys = new []{
+			"MAINNET", "TESTNET"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static NetworkType FromValue(uint value) {
+		return value switch
+		{
+			104 => MAINNET,
+			152 => TESTNET,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 1;
+		}
+	}
+
+	public static NetworkType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadByte());
+	}
+
+	public byte[] Serialize() {
+		return new []{Value};
+	}
+
+	public override string ToString() {
+		return $"NetworkType.{ValueToKey(Value)}";
+	}
+}
+
+public class TransactionType : IEnum<uint> {
+	public static readonly TransactionType TRANSFER = new (257);
+
+	public static readonly TransactionType ACCOUNT_KEY_LINK = new (2049);
+
+	public static readonly TransactionType MULTISIG_ACCOUNT_MODIFICATION = new (4097);
+
+	public static readonly TransactionType MULTISIG_COSIGNATURE = new (4098);
+
+	public static readonly TransactionType MULTISIG_TRANSACTION = new (4100);
+
+	public static readonly TransactionType NAMESPACE_REGISTRATION = new (8193);
+
+	public static readonly TransactionType MOSAIC_DEFINITION = new (16385);
+
+	public static readonly TransactionType MOSAIC_SUPPLY_CHANGE = new (16386);
+
+	public uint Value { get; }
+
+	public TransactionType(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			257, 2049, 4097, 4098, 4100, 8193, 16385, 16386
+		};
+		var keys = new []{
+			"TRANSFER", "ACCOUNT_KEY_LINK", "MULTISIG_ACCOUNT_MODIFICATION", "MULTISIG_COSIGNATURE", "MULTISIG_TRANSACTION",
+			"NAMESPACE_REGISTRATION", "MOSAIC_DEFINITION", "MOSAIC_SUPPLY_CHANGE"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static TransactionType FromValue(uint value) {
+		return value switch
+		{
+			257 => TRANSFER,
+			2049 => ACCOUNT_KEY_LINK,
+			4097 => MULTISIG_ACCOUNT_MODIFICATION,
+			4098 => MULTISIG_COSIGNATURE,
+			4100 => MULTISIG_TRANSACTION,
+			8193 => NAMESPACE_REGISTRATION,
+			16385 => MOSAIC_DEFINITION,
+			16386 => MOSAIC_SUPPLY_CHANGE,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static TransactionType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"TransactionType.{ValueToKey(Value)}";
+	}
+}
+
+public class Transaction : ITransaction {
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"}
+	};
+
+	public Transaction() {
+		Type = TransactionType.TRANSFER;
+		Version = 0;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			return size;
+		}
+	}
+
+	public static Transaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+
+		var instance = new Transaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableTransaction : ITransaction {
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"}
+	};
+
+	public NonVerifiableTransaction() {
+		Type = TransactionType.TRANSFER;
+		Version = 0;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			return size;
+		}
+	}
+
+	public static NonVerifiableTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+
+		var instance = new NonVerifiableTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LinkAction : IEnum<uint> {
+	public static readonly LinkAction LINK = new (1);
+
+	public static readonly LinkAction UNLINK = new (2);
+
+	public uint Value { get; }
+
+	public LinkAction(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			1, 2
+		};
+		var keys = new []{
+			"LINK", "UNLINK"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static LinkAction FromValue(uint value) {
+		return value switch
+		{
+			1 => LINK,
+			2 => UNLINK,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static LinkAction Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"LinkAction.{ValueToKey(Value)}";
+	}
+}
+
+public class AccountKeyLinkTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int RemotePublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"LinkAction", "enum:LinkAction"},
+		{"RemotePublicKey", "pod:PublicKey"}
+	};
+
+	public AccountKeyLinkTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		LinkAction = LinkAction.LINK;
+		RemotePublicKey = new PublicKey();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		RemotePublicKeySize = 32; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public LinkAction LinkAction { get; set; }
+
+	public PublicKey RemotePublicKey { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += LinkAction.Size;
+			size += 4;
+			size += RemotePublicKey.Size;
+			return size;
+		}
+	}
+
+	public static AccountKeyLinkTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var linkAction = LinkAction.Deserialize(br);
+		var remotePublicKeySize = br.ReadUInt32();
+		if (32 != remotePublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({remotePublicKeySize})");
+		var remotePublicKey = PublicKey.Deserialize(br);
+
+		var instance = new AccountKeyLinkTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			LinkAction = linkAction,
+			RemotePublicKey = remotePublicKey
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(LinkAction.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RemotePublicKeySize)); 
+		bw.Write(RemotePublicKey.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"linkAction: {LinkAction}, ";
+		result += $"remotePublicKey: {RemotePublicKey}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableAccountKeyLinkTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int RemotePublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"LinkAction", "enum:LinkAction"},
+		{"RemotePublicKey", "pod:PublicKey"}
+	};
+
+	public NonVerifiableAccountKeyLinkTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		LinkAction = LinkAction.LINK;
+		RemotePublicKey = new PublicKey();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		RemotePublicKeySize = 32; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public LinkAction LinkAction { get; set; }
+
+	public PublicKey RemotePublicKey { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += LinkAction.Size;
+			size += 4;
+			size += RemotePublicKey.Size;
+			return size;
+		}
+	}
+
+	public static NonVerifiableAccountKeyLinkTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var linkAction = LinkAction.Deserialize(br);
+		var remotePublicKeySize = br.ReadUInt32();
+		if (32 != remotePublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({remotePublicKeySize})");
+		var remotePublicKey = PublicKey.Deserialize(br);
+
+		var instance = new NonVerifiableAccountKeyLinkTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			LinkAction = linkAction,
+			RemotePublicKey = remotePublicKey
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(LinkAction.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RemotePublicKeySize)); 
+		bw.Write(RemotePublicKey.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"linkAction: {LinkAction}, ";
+		result += $"remotePublicKey: {RemotePublicKey}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NamespaceId : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Name", "bytes_array"}
+	};
+
+	public NamespaceId() {
+		Name = Array.Empty<byte>();
+	}
+
+	public byte[] Name { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += (uint)Name.Length;
+			return size;
+		}
+	}
+
+	public static NamespaceId Deserialize(BinaryReader br) {
+		var nameSize = br.ReadUInt32();
+		var name = br.ReadBytes((int)nameSize);
+
+		var instance = new NamespaceId()
+		{
+			Name = name
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
+		bw.Write(Name); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicId : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"NamespaceId", "struct:NamespaceId"},
+		{"Name", "bytes_array"}
+	};
+
+	public MosaicId() {
+		NamespaceId = new NamespaceId();
+		Name = Array.Empty<byte>();
+	}
+
+	public NamespaceId NamespaceId { get; set; }
+
+	public byte[] Name { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += NamespaceId.Size;
+			size += 4;
+			size += (uint)Name.Length;
+			return size;
+		}
+	}
+
+	public static MosaicId Deserialize(BinaryReader br) {
+		var namespaceId = NamespaceId.Deserialize(br);
+		var nameSize = br.ReadUInt32();
+		var name = br.ReadBytes(nameSize);
+
+		var instance = new MosaicId()
+		{
+			NamespaceId = namespaceId,
+			Name = name
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(NamespaceId.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
+		bw.Write(Name); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"namespaceId: {NamespaceId}, ";
+		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += ")";
+		return result;
+	}
+}
+
+public class Mosaic : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"MosaicId", "struct:MosaicId"},
+		{"Amount", "pod:Amount"}
+	};
+
+	public Mosaic() {
+		MosaicId = new MosaicId();
+		Amount = new Amount();
+	}
+
+	public MosaicId MosaicId { get; set; }
+
+	public Amount Amount { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += MosaicId.Size;
+			size += Amount.Size;
+			return size;
+		}
+	}
+
+	public static Mosaic Deserialize(BinaryReader br) {
+		var mosaicIdSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicId = MosaicId.Deserialize(br);
+		var amount = Amount.Deserialize(br);
+
+		var instance = new Mosaic()
+		{
+			MosaicId = mosaicId,
+			Amount = amount
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)MosaicId.Size));  // bound: mosaic_id_size
+		bw.Write(MosaicId.Serialize()); 
+		bw.Write(Amount.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"mosaicId: {MosaicId}, ";
+		result += $"amount: {Amount}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class SizePrefixedMosaic : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Mosaic", "struct:Mosaic"}
+	};
+
+	public SizePrefixedMosaic() {
+		Mosaic = new Mosaic();
+	}
+
+	public Mosaic Mosaic { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += Mosaic.Size;
+			return size;
+		}
+	}
+
+	public static SizePrefixedMosaic Deserialize(BinaryReader br) {
+		var mosaicSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaic = Mosaic.Deserialize(view.window(mosaicSize));
+
+		var instance = new SizePrefixedMosaic()
+		{
+			Mosaic = mosaic
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)Mosaic.Size));  // bound: mosaic_size
+		bw.Write(Mosaic.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"mosaic: {Mosaic}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicTransferFeeType : IEnum<uint> {
+	public static readonly MosaicTransferFeeType ABSOLUTE = new (1);
+
+	public static readonly MosaicTransferFeeType PERCENTILE = new (2);
+
+	public uint Value { get; }
+
+	public MosaicTransferFeeType(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			1, 2
+		};
+		var keys = new []{
+			"ABSOLUTE", "PERCENTILE"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static MosaicTransferFeeType FromValue(uint value) {
+		return value switch
+		{
+			1 => ABSOLUTE,
+			2 => PERCENTILE,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static MosaicTransferFeeType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"MosaicTransferFeeType.{ValueToKey(Value)}";
+	}
+}
+
+public class MosaicLevy : IStruct {
+	private readonly int RecipientAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"TransferFeeType", "enum:MosaicTransferFeeType"},
+		{"RecipientAddress", "pod:Address"},
+		{"MosaicId", "struct:MosaicId"},
+		{"Fee", "pod:Amount"}
+	};
+
+	public MosaicLevy() {
+		TransferFeeType = MosaicTransferFeeType.ABSOLUTE;
+		RecipientAddress = new Address();
+		MosaicId = new MosaicId();
+		Fee = new Amount();
+		RecipientAddressSize = 40; // reserved field
+	}
+
+	public MosaicTransferFeeType TransferFeeType { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public MosaicId MosaicId { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += TransferFeeType.Size;
+			size += 4;
+			size += RecipientAddress.Size;
+			size += 4;
+			size += MosaicId.Size;
+			size += Fee.Size;
+			return size;
+		}
+	}
+
+	public static MosaicLevy Deserialize(BinaryReader br) {
+		var transferFeeType = MosaicTransferFeeType.Deserialize(br);
+		var recipientAddressSize = br.ReadUInt32();
+		if (40 != recipientAddressSize)
+			throw new Exception($"Invalid value of reserved field ({recipientAddressSize})");
+		var recipientAddress = Address.Deserialize(br);
+		var mosaicIdSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var fee = Amount.Deserialize(br);
+
+		var instance = new MosaicLevy()
+		{
+			TransferFeeType = transferFeeType,
+			RecipientAddress = recipientAddress,
+			MosaicId = mosaicId,
+			Fee = fee
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(TransferFeeType.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
+		bw.Write(RecipientAddress.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)MosaicId.Size));  // bound: mosaic_id_size
+		bw.Write(MosaicId.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"transferFeeType: {TransferFeeType}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += $"mosaicId: {MosaicId}, ";
+		result += $"fee: {Fee}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicProperty : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Name", "bytes_array"},
+		{"Value", "bytes_array"}
+	};
+
+	public MosaicProperty() {
+		Name = Array.Empty<byte>();
+		Value = Array.Empty<byte>();
+	}
+
+	public byte[] Name { get; set; }
+
+	public byte[] Value { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += (uint)Name.Length;
+			size += 4;
+			size += (uint)Value.Length;
+			return size;
+		}
+	}
+
+	public static MosaicProperty Deserialize(BinaryReader br) {
+		var nameSize = br.ReadUInt32();
+		var name = br.ReadBytes(nameSize);
+		var valueSize = br.ReadUInt32();
+		var value = br.ReadBytes(valueSize);
+
+		var instance = new MosaicProperty()
+		{
+			Name = name,
+			Value = value
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
+		bw.Write(Name); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Value.Length));  // bound: value_size
+		bw.Write(Value); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += ")";
+		return result;
+	}
+}
+
+public class SizePrefixedMosaicProperty : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Property", "struct:MosaicProperty"}
+	};
+
+	public SizePrefixedMosaicProperty() {
+		Property = new MosaicProperty();
+	}
+
+	public MosaicProperty Property { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += Property.Size;
+			return size;
+		}
+	}
+
+	public static SizePrefixedMosaicProperty Deserialize(BinaryReader br) {
+		var propertySize = br.ReadUInt32();
+		// marking sizeof field
+		var property = MosaicProperty.Deserialize(view.window(propertySize));
+
+		var instance = new SizePrefixedMosaicProperty()
+		{
+			Property = property
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)Property.Size));  // bound: property_size
+		bw.Write(Property.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"property: {Property}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicDefinition : IStruct {
+	private readonly int OwnerPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"OwnerPublicKey", "pod:PublicKey"},
+		{"Id", "struct:MosaicId"},
+		{"Description", "bytes_array"},
+		{"Properties", "array[SizePrefixedMosaicProperty]"},
+		{"Levy", "struct:MosaicLevy"}
+	};
+
+	public MosaicDefinition() {
+		OwnerPublicKey = new PublicKey();
+		Id = new MosaicId();
+		Description = Array.Empty<byte>();
+		Properties = Array.Empty<SizePrefixedMosaicProperty>();
+		LevySize = 0;
+		Levy = new MosaicLevy();
+		OwnerPublicKeySize = 32; // reserved field
+	}
+
+	public PublicKey OwnerPublicKey { get; set; }
+
+	public MosaicId Id { get; set; }
+
+	public byte[] Description { get; set; }
+
+	public SizePrefixedMosaicProperty[] Properties { get; set; }
+
+	public uint LevySize { get; set; }
+
+	public MosaicLevy Levy { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += OwnerPublicKey.Size;
+			size += 4;
+			size += Id.Size;
+			size += 4;
+			size += (uint)Description.Length;
+			size += 4;
+			size += ArrayHelpers.Size(Properties);
+			size += 4;
+			if (0.Value != LevySize.Value)
+				size += Levy.Size;
+
+			return size;
+		}
+	}
+
+	public static MosaicDefinition Deserialize(BinaryReader br) {
+		var ownerPublicKeySize = br.ReadUInt32();
+		if (32 != ownerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({ownerPublicKeySize})");
+		var ownerPublicKey = PublicKey.Deserialize(br);
+		var idSize = br.ReadUInt32();
+		// marking sizeof field
+		var id = MosaicId.Deserialize(view.window(idSize));
+		var descriptionSize = br.ReadUInt32();
+		var description = br.ReadBytes(descriptionSize);
+		var propertiesCount = br.ReadUInt32();
+		var properties = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaicProperty.Deserialize, propertiesCount);
+		var levySize = br.ReadUInt32();
+		var levy = new MosaicLevy();
+		if (0.Value != levySize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				levy = MosaicLevy.Deserialize(tempBr);
+			}
+		}
+
+		var instance = new MosaicDefinition()
+		{
+			OwnerPublicKey = ownerPublicKey,
+			Id = id,
+			Description = description,
+			Properties = properties,
+			LevySize = levySize,
+			Levy = levy
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)OwnerPublicKeySize)); 
+		bw.Write(OwnerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)Id.Size));  // bound: id_size
+		bw.Write(Id.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Description.Length));  // bound: description_size
+		bw.Write(Description); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Properties.Length));  // bound: properties_count
+		ArrayHelpers.WriteArray(bw, Properties);
+		bw.Write(BitConverter.GetBytes((uint)(uint)LevySize)); 
+		if (0.Value != LevySize.Value)
+			bw.Write(Levy.Serialize()); 
+
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"ownerPublicKey: {OwnerPublicKey}, ";
+		result += $"id: {Id}, ";
+		result += $"description: hex({Converter.Uint8ToHex(Description)}), ";
+		result += $"properties: [{string.Join(",", Properties.Select(e => e.ToString()))}], ";
+		result += $"levySize: {Converter.ToString(LevySize)}, ";
+		if (0.Value != LevySize.Value)
+			result += $"levy: {Levy}, ";
+
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicDefinitionTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int RentalFeeSinkSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"MosaicDefinition", "struct:MosaicDefinition"},
+		{"RentalFeeSink", "pod:Address"},
+		{"RentalFee", "pod:Amount"}
+	};
+
+	public MosaicDefinitionTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		MosaicDefinition = new MosaicDefinition();
+		RentalFeeSink = new Address();
+		RentalFee = new Amount();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public MosaicDefinition MosaicDefinition { get; set; }
+
+	public Address RentalFeeSink { get; set; }
+
+	public Amount RentalFee { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += MosaicDefinition.Size;
+			size += 4;
+			size += RentalFeeSink.Size;
+			size += RentalFee.Size;
+			return size;
+		}
+	}
+
+	public static MosaicDefinitionTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var mosaicDefinitionSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicDefinition = MosaicDefinition.Deserialize(view.window(mosaicDefinitionSize));
+		var rentalFeeSinkSize = br.ReadUInt32();
+		if (40 != rentalFeeSinkSize)
+			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
+		var rentalFeeSink = Address.Deserialize(br);
+		var rentalFee = Amount.Deserialize(br);
+
+		var instance = new MosaicDefinitionTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			MosaicDefinition = mosaicDefinition,
+			RentalFeeSink = rentalFeeSink,
+			RentalFee = rentalFee
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)MosaicDefinition.Size));  // bound: mosaic_definition_size
+		bw.Write(MosaicDefinition.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RentalFeeSinkSize)); 
+		bw.Write(RentalFeeSink.Serialize()); 
+		bw.Write(RentalFee.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"mosaicDefinition: {MosaicDefinition}, ";
+		result += $"rentalFeeSink: {RentalFeeSink}, ";
+		result += $"rentalFee: {RentalFee}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableMosaicDefinitionTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int RentalFeeSinkSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"MosaicDefinition", "struct:MosaicDefinition"},
+		{"RentalFeeSink", "pod:Address"},
+		{"RentalFee", "pod:Amount"}
+	};
+
+	public NonVerifiableMosaicDefinitionTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		MosaicDefinition = new MosaicDefinition();
+		RentalFeeSink = new Address();
+		RentalFee = new Amount();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public MosaicDefinition MosaicDefinition { get; set; }
+
+	public Address RentalFeeSink { get; set; }
+
+	public Amount RentalFee { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += MosaicDefinition.Size;
+			size += 4;
+			size += RentalFeeSink.Size;
+			size += RentalFee.Size;
+			return size;
+		}
+	}
+
+	public static NonVerifiableMosaicDefinitionTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var mosaicDefinitionSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicDefinition = MosaicDefinition.Deserialize(view.window(mosaicDefinitionSize));
+		var rentalFeeSinkSize = br.ReadUInt32();
+		if (40 != rentalFeeSinkSize)
+			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
+		var rentalFeeSink = Address.Deserialize(br);
+		var rentalFee = Amount.Deserialize(br);
+
+		var instance = new NonVerifiableMosaicDefinitionTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			MosaicDefinition = mosaicDefinition,
+			RentalFeeSink = rentalFeeSink,
+			RentalFee = rentalFee
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)MosaicDefinition.Size));  // bound: mosaic_definition_size
+		bw.Write(MosaicDefinition.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RentalFeeSinkSize)); 
+		bw.Write(RentalFeeSink.Serialize()); 
+		bw.Write(RentalFee.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"mosaicDefinition: {MosaicDefinition}, ";
+		result += $"rentalFeeSink: {RentalFeeSink}, ";
+		result += $"rentalFee: {RentalFee}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicSupplyChangeAction : IEnum<uint> {
+	public static readonly MosaicSupplyChangeAction INCREASE = new (1);
+
+	public static readonly MosaicSupplyChangeAction DECREASE = new (2);
+
+	public uint Value { get; }
+
+	public MosaicSupplyChangeAction(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			1, 2
+		};
+		var keys = new []{
+			"INCREASE", "DECREASE"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static MosaicSupplyChangeAction FromValue(uint value) {
+		return value switch
+		{
+			1 => INCREASE,
+			2 => DECREASE,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static MosaicSupplyChangeAction Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"MosaicSupplyChangeAction.{ValueToKey(Value)}";
+	}
+}
+
+public class MosaicSupplyChangeTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"MosaicId", "struct:MosaicId"},
+		{"Action", "enum:MosaicSupplyChangeAction"},
+		{"Delta", "pod:Amount"}
+	};
+
+	public MosaicSupplyChangeTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		MosaicId = new MosaicId();
+		Action = MosaicSupplyChangeAction.INCREASE;
+		Delta = new Amount();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public MosaicId MosaicId { get; set; }
+
+	public MosaicSupplyChangeAction Action { get; set; }
+
+	public Amount Delta { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += MosaicId.Size;
+			size += Action.Size;
+			size += Delta.Size;
+			return size;
+		}
+	}
+
+	public static MosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var mosaicIdSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var action = MosaicSupplyChangeAction.Deserialize(br);
+		var delta = Amount.Deserialize(br);
+
+		var instance = new MosaicSupplyChangeTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			MosaicId = mosaicId,
+			Action = action,
+			Delta = delta
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)MosaicId.Size));  // bound: mosaic_id_size
+		bw.Write(MosaicId.Serialize()); 
+		bw.Write(Action.Serialize()); 
+		bw.Write(Delta.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"mosaicId: {MosaicId}, ";
+		result += $"action: {Action}, ";
+		result += $"delta: {Delta}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableMosaicSupplyChangeTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"MosaicId", "struct:MosaicId"},
+		{"Action", "enum:MosaicSupplyChangeAction"},
+		{"Delta", "pod:Amount"}
+	};
+
+	public NonVerifiableMosaicSupplyChangeTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		MosaicId = new MosaicId();
+		Action = MosaicSupplyChangeAction.INCREASE;
+		Delta = new Amount();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public MosaicId MosaicId { get; set; }
+
+	public MosaicSupplyChangeAction Action { get; set; }
+
+	public Amount Delta { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += MosaicId.Size;
+			size += Action.Size;
+			size += Delta.Size;
+			return size;
+		}
+	}
+
+	public static NonVerifiableMosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var mosaicIdSize = br.ReadUInt32();
+		// marking sizeof field
+		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var action = MosaicSupplyChangeAction.Deserialize(br);
+		var delta = Amount.Deserialize(br);
+
+		var instance = new NonVerifiableMosaicSupplyChangeTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			MosaicId = mosaicId,
+			Action = action,
+			Delta = delta
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)MosaicId.Size));  // bound: mosaic_id_size
+		bw.Write(MosaicId.Serialize()); 
+		bw.Write(Action.Serialize()); 
+		bw.Write(Delta.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"mosaicId: {MosaicId}, ";
+		result += $"action: {Action}, ";
+		result += $"delta: {Delta}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MultisigAccountModificationType : IEnum<uint> {
+	public static readonly MultisigAccountModificationType ADD_COSIGNATORY = new (1);
+
+	public static readonly MultisigAccountModificationType DELETE_COSIGNATORY = new (2);
+
+	public uint Value { get; }
+
+	public MultisigAccountModificationType(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			1, 2
+		};
+		var keys = new []{
+			"ADD_COSIGNATORY", "DELETE_COSIGNATORY"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static MultisigAccountModificationType FromValue(uint value) {
+		return value switch
+		{
+			1 => ADD_COSIGNATORY,
+			2 => DELETE_COSIGNATORY,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static MultisigAccountModificationType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"MultisigAccountModificationType.{ValueToKey(Value)}";
+	}
+}
+
+public class MultisigAccountModification : IStruct {
+	private readonly int CosignatoryPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"ModificationType", "enum:MultisigAccountModificationType"},
+		{"CosignatoryPublicKey", "pod:PublicKey"}
+	};
+
+	public MultisigAccountModification() {
+		ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY;
+		CosignatoryPublicKey = new PublicKey();
+		CosignatoryPublicKeySize = 32; // reserved field
+	}
+
+	public MultisigAccountModificationType ModificationType { get; set; }
+
+	public PublicKey CosignatoryPublicKey { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += ModificationType.Size;
+			size += 4;
+			size += CosignatoryPublicKey.Size;
+			return size;
+		}
+	}
+
+	public static MultisigAccountModification Deserialize(BinaryReader br) {
+		var modificationType = MultisigAccountModificationType.Deserialize(br);
+		var cosignatoryPublicKeySize = br.ReadUInt32();
+		if (32 != cosignatoryPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({cosignatoryPublicKeySize})");
+		var cosignatoryPublicKey = PublicKey.Deserialize(br);
+
+		var instance = new MultisigAccountModification()
+		{
+			ModificationType = modificationType,
+			CosignatoryPublicKey = cosignatoryPublicKey
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(ModificationType.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)CosignatoryPublicKeySize)); 
+		bw.Write(CosignatoryPublicKey.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"modificationType: {ModificationType}, ";
+		result += $"cosignatoryPublicKey: {CosignatoryPublicKey}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class SizePrefixedMultisigAccountModification : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Modification", "struct:MultisigAccountModification"}
+	};
+
+	public SizePrefixedMultisigAccountModification() {
+		Modification = new MultisigAccountModification();
+	}
+
+	public MultisigAccountModification Modification { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += Modification.Size;
+			return size;
+		}
+	}
+
+	public static SizePrefixedMultisigAccountModification Deserialize(BinaryReader br) {
+		var modificationSize = br.ReadUInt32();
+		// marking sizeof field
+		var modification = MultisigAccountModification.Deserialize(view.window(modificationSize));
+
+		var instance = new SizePrefixedMultisigAccountModification()
+		{
+			Modification = modification
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)Modification.Size));  // bound: modification_size
+		bw.Write(Modification.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"modification: {Modification}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MultisigAccountModificationTransactionV1 : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
+	};
+
+	public MultisigAccountModificationTransactionV1() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		Modifications = Array.Empty<SizePrefixedMultisigAccountModification>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Modifications);
+			return size;
+		}
+	}
+
+	public static MultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var modificationsCount = br.ReadUInt32();
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+
+		var instance = new MultisigAccountModificationTransactionV1()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			Modifications = modifications
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Modifications.Length));  // bound: modifications_count
+		ArrayHelpers.WriteArray(bw, Modifications);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"modifications: [{string.Join(",", Modifications.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableMultisigAccountModificationTransactionV1 : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
+	};
+
+	public NonVerifiableMultisigAccountModificationTransactionV1() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		Modifications = Array.Empty<SizePrefixedMultisigAccountModification>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Modifications);
+			return size;
+		}
+	}
+
+	public static NonVerifiableMultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var modificationsCount = br.ReadUInt32();
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+
+		var instance = new NonVerifiableMultisigAccountModificationTransactionV1()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			Modifications = modifications
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Modifications.Length));  // bound: modifications_count
+		ArrayHelpers.WriteArray(bw, Modifications);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"modifications: [{string.Join(",", Modifications.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MultisigAccountModificationTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int MinApprovalDeltaSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
+	};
+
+	public MultisigAccountModificationTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		Modifications = Array.Empty<SizePrefixedMultisigAccountModification>();
+		MinApprovalDelta = 0;
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		MinApprovalDeltaSize = 4; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+
+	public uint MinApprovalDelta { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Modifications);
+			size += 4;
+			size += 4;
+			return size;
+		}
+	}
+
+	public static MultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var modificationsCount = br.ReadUInt32();
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var minApprovalDeltaSize = br.ReadUInt32();
+		if (4 != minApprovalDeltaSize)
+			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
+		var minApprovalDelta = br.ReadUInt32();
+
+		var instance = new MultisigAccountModificationTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			Modifications = modifications,
+			MinApprovalDelta = minApprovalDelta
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Modifications.Length));  // bound: modifications_count
+		ArrayHelpers.WriteArray(bw, Modifications);
+		bw.Write(BitConverter.GetBytes((uint)(uint)MinApprovalDeltaSize)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MinApprovalDelta)); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"modifications: [{string.Join(",", Modifications.Select(e => e.ToString()))}], ";
+		result += $"minApprovalDelta: {Converter.ToString(MinApprovalDelta)}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableMultisigAccountModificationTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int MinApprovalDeltaSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
+	};
+
+	public NonVerifiableMultisigAccountModificationTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		Modifications = Array.Empty<SizePrefixedMultisigAccountModification>();
+		MinApprovalDelta = 0;
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		MinApprovalDeltaSize = 4; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+
+	public uint MinApprovalDelta { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Modifications);
+			size += 4;
+			size += 4;
+			return size;
+		}
+	}
+
+	public static NonVerifiableMultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var modificationsCount = br.ReadUInt32();
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var minApprovalDeltaSize = br.ReadUInt32();
+		if (4 != minApprovalDeltaSize)
+			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
+		var minApprovalDelta = br.ReadUInt32();
+
+		var instance = new NonVerifiableMultisigAccountModificationTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			Modifications = modifications,
+			MinApprovalDelta = minApprovalDelta
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Modifications.Length));  // bound: modifications_count
+		ArrayHelpers.WriteArray(bw, Modifications);
+		bw.Write(BitConverter.GetBytes((uint)(uint)MinApprovalDeltaSize)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MinApprovalDelta)); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"modifications: [{string.Join(",", Modifications.Select(e => e.ToString()))}], ";
+		result += $"minApprovalDelta: {Converter.ToString(MinApprovalDelta)}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class Cosignature : IStruct {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_COSIGNATURE;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int MultisigTransactionHashOuterSize;
+	private readonly int MultisigTransactionHashSize;
+	private readonly int MultisigAccountAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"MultisigTransactionHash", "pod:Hash256"},
+		{"MultisigAccountAddress", "pod:Address"}
+	};
+
+	public Cosignature() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		MultisigTransactionHash = new Hash256();
+		MultisigAccountAddress = new Address();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		MultisigTransactionHashOuterSize = 36; // reserved field
+		MultisigTransactionHashSize = 32; // reserved field
+		MultisigAccountAddressSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Hash256 MultisigTransactionHash { get; set; }
+
+	public Address MultisigAccountAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += 4;
+			size += MultisigTransactionHash.Size;
+			size += 4;
+			size += MultisigAccountAddress.Size;
+			return size;
+		}
+	}
+
+	public static Cosignature Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var multisigTransactionHashOuterSize = br.ReadUInt32();
+		if (36 != multisigTransactionHashOuterSize)
+			throw new Exception($"Invalid value of reserved field ({multisigTransactionHashOuterSize})");
+		var multisigTransactionHashSize = br.ReadUInt32();
+		if (32 != multisigTransactionHashSize)
+			throw new Exception($"Invalid value of reserved field ({multisigTransactionHashSize})");
+		var multisigTransactionHash = Hash256.Deserialize(br);
+		var multisigAccountAddressSize = br.ReadUInt32();
+		if (40 != multisigAccountAddressSize)
+			throw new Exception($"Invalid value of reserved field ({multisigAccountAddressSize})");
+		var multisigAccountAddress = Address.Deserialize(br);
+
+		var instance = new Cosignature()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			MultisigTransactionHash = multisigTransactionHash,
+			MultisigAccountAddress = multisigAccountAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MultisigTransactionHashOuterSize)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MultisigTransactionHashSize)); 
+		bw.Write(MultisigTransactionHash.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MultisigAccountAddressSize)); 
+		bw.Write(MultisigAccountAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"multisigTransactionHash: {MultisigTransactionHash}, ";
+		result += $"multisigAccountAddress: {MultisigAccountAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class SizePrefixedCosignature : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Cosignature", "struct:Cosignature"}
+	};
+
+	public SizePrefixedCosignature() {
+		Cosignature = new Cosignature();
+	}
+
+	public Cosignature Cosignature { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += Cosignature.Size;
+			return size;
+		}
+	}
+
+	public static SizePrefixedCosignature Deserialize(BinaryReader br) {
+		var cosignatureSize = br.ReadUInt32();
+		// marking sizeof field
+		var cosignature = Cosignature.Deserialize(view.window(cosignatureSize));
+
+		var instance = new SizePrefixedCosignature()
+		{
+			Cosignature = cosignature
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)Cosignature.Size));  // bound: cosignature_size
+		bw.Write(Cosignature.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"cosignature: {Cosignature}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MultisigTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_TRANSACTION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"InnerTransaction", "struct:NonVerifiableTransaction"},
+		{"Cosignatures", "array[SizePrefixedCosignature]"}
+	};
+
+	public MultisigTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		InnerTransaction = new NonVerifiableTransaction();
+		Cosignatures = Array.Empty<SizePrefixedCosignature>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public NonVerifiableTransaction InnerTransaction { get; set; }
+
+	public SizePrefixedCosignature[] Cosignatures { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += InnerTransaction.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Cosignatures);
+			return size;
+		}
+	}
+
+	public static MultisigTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var innerTransactionSize = br.ReadUInt32();
+		// marking sizeof field
+		var innerTransaction = NonVerifiableTransactionFactory.Deserialize(view.window(innerTransactionSize));
+		var cosignaturesCount = br.ReadUInt32();
+		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignature.Deserialize, cosignaturesCount);
+
+		var instance = new MultisigTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			InnerTransaction = innerTransaction,
+			Cosignatures = cosignatures
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)InnerTransaction.Size));  // bound: inner_transaction_size
+		bw.Write(InnerTransaction.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Cosignatures.Length));  // bound: cosignatures_count
+		ArrayHelpers.WriteArray(bw, Cosignatures);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"innerTransaction: {InnerTransaction}, ";
+		result += $"cosignatures: [{string.Join(",", Cosignatures.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NamespaceRegistrationTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int RentalFeeSinkSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RentalFeeSink", "pod:Address"},
+		{"RentalFee", "pod:Amount"},
+		{"Name", "bytes_array"},
+		{"ParentName", "bytes_array"}
+	};
+
+	public NamespaceRegistrationTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RentalFeeSink = new Address();
+		RentalFee = new Amount();
+		Name = Array.Empty<byte>();
+		ParentName = Array.Empty<byte>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RentalFeeSink { get; set; }
+
+	public Amount RentalFee { get; set; }
+
+	public byte[] Name { get; set; }
+
+	public byte[] ParentName { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RentalFeeSink.Size;
+			size += RentalFee.Size;
+			size += 4;
+			size += (uint)Name.Length;
+			size += 4;
+			if (parentName)
+				size += (uint)ParentName.Length;
+
+			return size;
+		}
+	}
+
+	public static NamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var rentalFeeSinkSize = br.ReadUInt32();
+		if (40 != rentalFeeSinkSize)
+			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
+		var rentalFeeSink = Address.Deserialize(br);
+		var rentalFee = Amount.Deserialize(br);
+		var nameSize = br.ReadUInt32();
+		var name = br.ReadBytes(nameSize);
+		var parentNameSize = br.ReadUInt32();
+		var parentName = new byte[]();
+		if (4294967295.Value != parentNameSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				parentName = tempBr.ReadBytes(parentNameSize);
+			}
+		}
+
+		var instance = new NamespaceRegistrationTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			RentalFeeSink = rentalFeeSink,
+			RentalFee = rentalFee,
+			Name = name,
+			ParentName = parentName
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RentalFeeSinkSize)); 
+		bw.Write(RentalFeeSink.Serialize()); 
+		bw.Write(RentalFee.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
+		bw.Write(Name); 
+		bw.Write(BitConverter.GetBytes((uint)(ParentName ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
+		if (parentName)
+			bw.Write(ParentName); 
+
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"rentalFeeSink: {RentalFeeSink}, ";
+		result += $"rentalFee: {RentalFee}, ";
+		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		if (parentName)
+			result += $"parentName: hex({Converter.Uint8ToHex(ParentName)}), ";
+
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int RentalFeeSinkSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RentalFeeSink", "pod:Address"},
+		{"RentalFee", "pod:Amount"},
+		{"Name", "bytes_array"},
+		{"ParentName", "bytes_array"}
+	};
+
+	public NonVerifiableNamespaceRegistrationTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RentalFeeSink = new Address();
+		RentalFee = new Amount();
+		Name = Array.Empty<byte>();
+		ParentName = Array.Empty<byte>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RentalFeeSink { get; set; }
+
+	public Amount RentalFee { get; set; }
+
+	public byte[] Name { get; set; }
+
+	public byte[] ParentName { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RentalFeeSink.Size;
+			size += RentalFee.Size;
+			size += 4;
+			size += (uint)Name.Length;
+			size += 4;
+			if (parentName)
+				size += (uint)ParentName.Length;
+
+			return size;
+		}
+	}
+
+	public static NonVerifiableNamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var rentalFeeSinkSize = br.ReadUInt32();
+		if (40 != rentalFeeSinkSize)
+			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
+		var rentalFeeSink = Address.Deserialize(br);
+		var rentalFee = Amount.Deserialize(br);
+		var nameSize = br.ReadUInt32();
+		var name = br.ReadBytes(nameSize);
+		var parentNameSize = br.ReadUInt32();
+		var parentName = new byte[]();
+		if (4294967295.Value != parentNameSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				parentName = tempBr.ReadBytes(parentNameSize);
+			}
+		}
+
+		var instance = new NonVerifiableNamespaceRegistrationTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			RentalFeeSink = rentalFeeSink,
+			RentalFee = rentalFee,
+			Name = name,
+			ParentName = parentName
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RentalFeeSinkSize)); 
+		bw.Write(RentalFeeSink.Serialize()); 
+		bw.Write(RentalFee.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
+		bw.Write(Name); 
+		bw.Write(BitConverter.GetBytes((uint)(ParentName ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
+		if (parentName)
+			bw.Write(ParentName); 
+
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"rentalFeeSink: {RentalFeeSink}, ";
+		result += $"rentalFee: {RentalFee}, ";
+		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		if (parentName)
+			result += $"parentName: hex({Converter.Uint8ToHex(ParentName)}), ";
+
+		result += ")";
+		return result;
+	}
+}
+
+public class MessageType : IEnum<uint> {
+	public static readonly MessageType PLAIN = new (1);
+
+	public static readonly MessageType ENCRYPTED = new (2);
+
+	public uint Value { get; }
+
+	public MessageType(uint value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			1, 2
+		};
+		var keys = new []{
+			"PLAIN", "ENCRYPTED"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static MessageType FromValue(uint value) {
+		return value switch
+		{
+			1 => PLAIN,
+			2 => ENCRYPTED,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 4;
+		}
+	}
+
+	public static MessageType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt32());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"MessageType.{ValueToKey(Value)}";
+	}
+}
+
+public class Message : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"MessageType", "enum:MessageType"},
+		{"Message", "bytes_array"}
+	};
+
+	public Message() {
+		MessageType = MessageType.PLAIN;
+		Message = Array.Empty<byte>();
+	}
+
+	public MessageType MessageType { get; set; }
+
+	public byte[] Message { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += MessageType.Size;
+			size += 4;
+			size += (uint)Message.Length;
+			return size;
+		}
+	}
+
+	public static Message Deserialize(BinaryReader br) {
+		var messageType = MessageType.Deserialize(br);
+		var messageSize = br.ReadUInt32();
+		var message = br.ReadBytes(messageSize);
+
+		var instance = new Message()
+		{
+			MessageType = messageType,
+			Message = message
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(MessageType.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Message.Length));  // bound: message_size
+		bw.Write(Message); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"messageType: {MessageType}, ";
+		result += $"message: hex({Converter.Uint8ToHex(Message)}), ";
+		result += ")";
+		return result;
+	}
+}
+
+public class TransferTransactionV1 : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int RecipientAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RecipientAddress", "pod:Address"},
+		{"Amount", "pod:Amount"},
+		{"Message", "struct:Message"}
+	};
+
+	public TransferTransactionV1() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RecipientAddress = new Address();
+		Amount = new Amount();
+		MessageEnvelopeSize = 0;
+		Message = new Message();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		RecipientAddressSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public Amount Amount { get; set; }
+
+	public uint MessageEnvelopeSize { get; set; }
+
+	public Message Message { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RecipientAddress.Size;
+			size += Amount.Size;
+			size += 4;
+			if (0.Value != MessageEnvelopeSize.Value)
+				size += Message.Size;
+
+			return size;
+		}
+	}
+
+	public static TransferTransactionV1 Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var recipientAddressSize = br.ReadUInt32();
+		if (40 != recipientAddressSize)
+			throw new Exception($"Invalid value of reserved field ({recipientAddressSize})");
+		var recipientAddress = Address.Deserialize(br);
+		var amount = Amount.Deserialize(br);
+		var messageEnvelopeSize = br.ReadUInt32();
+		var message = new Message();
+		if (0.Value != messageEnvelopeSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				message = Message.Deserialize(tempBr);
+			}
+		}
+
+		var instance = new TransferTransactionV1()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			RecipientAddress = recipientAddress,
+			Amount = amount,
+			MessageEnvelopeSize = messageEnvelopeSize,
+			Message = message
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
+		bw.Write(RecipientAddress.Serialize()); 
+		bw.Write(Amount.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
+		if (0.Value != MessageEnvelopeSize.Value)
+			bw.Write(Message.Serialize()); 
+
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += $"amount: {Amount}, ";
+		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
+		if (0.Value != MessageEnvelopeSize.Value)
+			result += $"message: {Message}, ";
+
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableTransferTransactionV1 : ITransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int RecipientAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RecipientAddress", "pod:Address"},
+		{"Amount", "pod:Amount"},
+		{"Message", "struct:Message"}
+	};
+
+	public NonVerifiableTransferTransactionV1() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RecipientAddress = new Address();
+		Amount = new Amount();
+		MessageEnvelopeSize = 0;
+		Message = new Message();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		RecipientAddressSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public Amount Amount { get; set; }
+
+	public uint MessageEnvelopeSize { get; set; }
+
+	public Message Message { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RecipientAddress.Size;
+			size += Amount.Size;
+			size += 4;
+			if (0.Value != MessageEnvelopeSize.Value)
+				size += Message.Size;
+
+			return size;
+		}
+	}
+
+	public static NonVerifiableTransferTransactionV1 Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var recipientAddressSize = br.ReadUInt32();
+		if (40 != recipientAddressSize)
+			throw new Exception($"Invalid value of reserved field ({recipientAddressSize})");
+		var recipientAddress = Address.Deserialize(br);
+		var amount = Amount.Deserialize(br);
+		var messageEnvelopeSize = br.ReadUInt32();
+		var message = new Message();
+		if (0.Value != messageEnvelopeSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				message = Message.Deserialize(tempBr);
+			}
+		}
+
+		var instance = new NonVerifiableTransferTransactionV1()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			RecipientAddress = recipientAddress,
+			Amount = amount,
+			MessageEnvelopeSize = messageEnvelopeSize,
+			Message = message
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
+		bw.Write(RecipientAddress.Serialize()); 
+		bw.Write(Amount.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
+		if (0.Value != MessageEnvelopeSize.Value)
+			bw.Write(Message.Serialize()); 
+
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += $"amount: {Amount}, ";
+		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
+		if (0.Value != MessageEnvelopeSize.Value)
+			result += $"message: {Message}, ";
+
+		result += ")";
+		return result;
+	}
+}
+
+public class TransferTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int SignatureSize;
+	private readonly int RecipientAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Signature", "pod:Signature"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RecipientAddress", "pod:Address"},
+		{"Amount", "pod:Amount"},
+		{"Message", "struct:Message"},
+		{"Mosaics", "array[SizePrefixedMosaic]"}
+	};
+
+	public TransferTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Signature = new Signature();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RecipientAddress = new Address();
+		Amount = new Amount();
+		MessageEnvelopeSize = 0;
+		Message = new Message();
+		Mosaics = Array.Empty<SizePrefixedMosaic>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		SignatureSize = 64; // reserved field
+		RecipientAddressSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Signature Signature { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public Amount Amount { get; set; }
+
+	public uint MessageEnvelopeSize { get; set; }
+
+	public Message Message { get; set; }
+
+	public SizePrefixedMosaic[] Mosaics { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += Signature.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RecipientAddress.Size;
+			size += Amount.Size;
+			size += 4;
+			if (0.Value != MessageEnvelopeSize.Value)
+				size += Message.Size;
+
+			size += 4;
+			size += ArrayHelpers.Size(Mosaics);
+			return size;
+		}
+	}
+
+	public static TransferTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var signatureSize = br.ReadUInt32();
+		if (64 != signatureSize)
+			throw new Exception($"Invalid value of reserved field ({signatureSize})");
+		var signature = Signature.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var recipientAddressSize = br.ReadUInt32();
+		if (40 != recipientAddressSize)
+			throw new Exception($"Invalid value of reserved field ({recipientAddressSize})");
+		var recipientAddress = Address.Deserialize(br);
+		var amount = Amount.Deserialize(br);
+		var messageEnvelopeSize = br.ReadUInt32();
+		var message = new Message();
+		if (0.Value != messageEnvelopeSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				message = Message.Deserialize(tempBr);
+			}
+		}
+		var mosaicsCount = br.ReadUInt32();
+		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, mosaicsCount);
+
+		var instance = new TransferTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Signature = signature,
+			Fee = fee,
+			Deadline = deadline,
+			RecipientAddress = recipientAddress,
+			Amount = amount,
+			MessageEnvelopeSize = messageEnvelopeSize,
+			Message = message,
+			Mosaics = mosaics
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignatureSize)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
+		bw.Write(RecipientAddress.Serialize()); 
+		bw.Write(Amount.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
+		if (0.Value != MessageEnvelopeSize.Value)
+			bw.Write(Message.Serialize()); 
+
+		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
+		ArrayHelpers.WriteArray(bw, Mosaics);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"signature: {Signature}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += $"amount: {Amount}, ";
+		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
+		if (0.Value != MessageEnvelopeSize.Value)
+			result += $"message: {Message}, ";
+
+		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableTransferTransaction : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+	private readonly int RecipientAddressSize;
+
+	public Dictionary<string, string> TypeHints { get; } = new (){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"RecipientAddress", "pod:Address"},
+		{"Amount", "pod:Amount"},
+		{"Message", "struct:Message"},
+		{"Mosaics", "array[SizePrefixedMosaic]"}
+	};
+
+	public NonVerifiableTransferTransaction() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		RecipientAddress = new Address();
+		Amount = new Amount();
+		MessageEnvelopeSize = 0;
+		Message = new Message();
+		Mosaics = Array.Empty<SizePrefixedMosaic>();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+		RecipientAddressSize = 40; // reserved field
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public Amount Amount { get; set; }
+
+	public uint MessageEnvelopeSize { get; set; }
+
+	public Message Message { get; set; }
+
+	public SizePrefixedMosaic[] Mosaics { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += RecipientAddress.Size;
+			size += Amount.Size;
+			size += 4;
+			if (0.Value != MessageEnvelopeSize.Value)
+				size += Message.Size;
+
+			size += 4;
+			size += ArrayHelpers.Size(Mosaics);
+			return size;
+		}
+	}
+
+	public static NonVerifiableTransferTransaction Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var recipientAddressSize = br.ReadUInt32();
+		if (40 != recipientAddressSize)
+			throw new Exception($"Invalid value of reserved field ({recipientAddressSize})");
+		var recipientAddress = Address.Deserialize(br);
+		var amount = Amount.Deserialize(br);
+		var messageEnvelopeSize = br.ReadUInt32();
+		var message = new Message();
+		if (0.Value != messageEnvelopeSize.Value) {
+			{
+				var tempMs = new MemoryStream(durationTemporary.Serialize());
+				var tempBr = new BinaryReader(tempMs);
+				message = Message.Deserialize(tempBr);
+			}
+		}
+		var mosaicsCount = br.ReadUInt32();
+		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, mosaicsCount);
+
+		var instance = new NonVerifiableTransferTransaction()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			RecipientAddress = recipientAddress,
+			Amount = amount,
+			MessageEnvelopeSize = messageEnvelopeSize,
+			Message = message,
+			Mosaics = mosaics
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
+		bw.Write(RecipientAddress.Serialize()); 
+		bw.Write(Amount.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
+		if (0.Value != MessageEnvelopeSize.Value)
+			bw.Write(Message.Serialize()); 
+
+		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
+		ArrayHelpers.WriteArray(bw, Mosaics);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += $"amount: {Amount}, ";
+		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
+		if (0.Value != MessageEnvelopeSize.Value)
+			result += $"message: {Message}, ";
+
+		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class TransactionFactory {
+	public static IBaseTransaction Deserialize(BinaryReader br) {
+		var position = br.BaseStream.Position;
+		var parent = Transaction.Deserialize(br);
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		{
+			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.TRANSACTION_VERSION, AccountKeyLinkTransaction.Deserialize},
+			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.TRANSACTION_VERSION, MosaicDefinitionTransaction.Deserialize},
+			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, MosaicSupplyChangeTransaction.TRANSACTION_VERSION, MosaicSupplyChangeTransaction.Deserialize},
+			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.TRANSACTION_VERSION, MultisigAccountModificationTransactionV1.Deserialize},
+			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, MultisigAccountModificationTransaction.TRANSACTION_VERSION, MultisigAccountModificationTransaction.Deserialize},
+			{Cosignature.TRANSACTION_TYPE, Cosignature.TRANSACTION_VERSION, Cosignature.Deserialize},
+			{MultisigTransaction.TRANSACTION_TYPE, MultisigTransaction.TRANSACTION_VERSION, MultisigTransaction.Deserialize},
+			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, NamespaceRegistrationTransaction.TRANSACTION_VERSION, NamespaceRegistrationTransaction.Deserialize},
+			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.TRANSACTION_VERSION, TransferTransactionV1.Deserialize},
+			{TransferTransaction.TRANSACTION_TYPE, TransferTransaction.TRANSACTION_VERSION, TransferTransaction.Deserialize}
+		};
+		br.BaseStream.Position = position;
+		return mapping[parent.Type](br);
+	}
+
+	public static IBaseTransaction Deserialize(string payload) {
+		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var br = new BinaryReader(ms);
+		return Deserialize(br);
+	}
+
+	public static IBaseTransaction CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+		{
+			{AccountKeyLinkTransaction.TRANSACTION_TYPE, new AccountKeyLinkTransaction()},
+			{MosaicDefinitionTransaction.TRANSACTION_TYPE, new MosaicDefinitionTransaction()},
+			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, new MosaicSupplyChangeTransaction()},
+			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, new MultisigAccountModificationTransactionV1()},
+			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, new MultisigAccountModificationTransaction()},
+			{Cosignature.TRANSACTION_TYPE, new Cosignature()},
+			{MultisigTransaction.TRANSACTION_TYPE, new MultisigTransaction()},
+			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, new NamespaceRegistrationTransaction()},
+			{TransferTransactionV1.TRANSACTION_TYPE, new TransferTransactionV1()},
+			{TransferTransaction.TRANSACTION_TYPE, new TransferTransaction()}
+
+		};
+		return mapping[entityName];
+	}
+}
+
+public class NonVerifiableTransactionFactory {
+	public static IBaseTransaction Deserialize(BinaryReader br) {
+		var position = br.BaseStream.Position;
+		var parent = NonVerifiableTransaction.Deserialize(br);
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		{
+			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransaction.TRANSACTION_VERSION, NonVerifiableAccountKeyLinkTransaction.Deserialize},
+			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransaction.TRANSACTION_VERSION, NonVerifiableMosaicDefinitionTransaction.Deserialize},
+			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_VERSION, NonVerifiableMosaicSupplyChangeTransaction.Deserialize},
+			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_VERSION, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
+			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_VERSION, NonVerifiableMultisigAccountModificationTransaction.Deserialize},
+			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_VERSION, NonVerifiableNamespaceRegistrationTransaction.Deserialize},
+			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.TRANSACTION_VERSION, NonVerifiableTransferTransactionV1.Deserialize},
+			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, NonVerifiableTransferTransaction.TRANSACTION_VERSION, NonVerifiableTransferTransaction.Deserialize}
+		};
+		br.BaseStream.Position = position;
+		return mapping[parent.Type](br);
+	}
+
+	public static IBaseTransaction Deserialize(string payload) {
+		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var br = new BinaryReader(ms);
+		return Deserialize(br);
+	}
+
+	public static IBaseTransaction CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+		{
+			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, new NonVerifiableAccountKeyLinkTransaction()},
+			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicDefinitionTransaction()},
+			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicSupplyChangeTransaction()},
+			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, new NonVerifiableMultisigAccountModificationTransactionV1()},
+			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, new NonVerifiableMultisigAccountModificationTransaction()},
+			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, new NonVerifiableNamespaceRegistrationTransaction()},
+			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, new NonVerifiableTransferTransactionV1()},
+			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, new NonVerifiableTransferTransaction()}
+
+		};
+		return mapping[entityName];
+	}
+}
+*/

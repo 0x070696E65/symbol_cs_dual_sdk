@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AhmhVTLTBwAqe7ErgSsoYE7zm418jCH0+pviifNvsADWH1pxy5Kw4oABV50Ku9VxsokUjCNmLTdcS60PJKdKbw==",
+  "dgSpecHash": "nLCti6VVy+CYavGvCOamfc0V8A+qZjV6Rwi4DlniNQJ7KLkeVfWgyBShKo9TZ8dJbLhtIKTlSTrBrvSO9w8tgg==",
   "success": true,
-  "projectFilePath": "/Users/matsukawatoshiya/programs/newSdkUtil/CatSdk/CatSdk.csproj",
+  "projectFilePath": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj",
   "expectedPackageFiles": [
     "/Users/matsukawatoshiya/.nuget/packages/bouncycastle/1.8.9/bouncycastle.1.8.9.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",

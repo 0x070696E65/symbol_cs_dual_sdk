@@ -1,0 +1,11 @@
+defaultCiPipeline {
+	platform = ['ubuntu']
+	ciBuildDockerfile = 'python.Dockerfile'
+
+	packageId = 'catbuffer-parser'
+
+	publisher = 'pypi'
+
+	codeCoverageTool = 'coverage'
+	minimumCodeCoverage = 95
+}

@@ -248,11 +248,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/matsukawatoshiya/programs/newSdkUtil/CatSdk/CatSdk.csproj",
+      "projectUniqueName": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj",
       "projectName": "CatSdk",
-      "projectPath": "/Users/matsukawatoshiya/programs/newSdkUtil/CatSdk/CatSdk.csproj",
+      "projectPath": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj",
       "packagesPath": "/Users/matsukawatoshiya/.nuget/packages/",
-      "outputPath": "/Users/matsukawatoshiya/programs/newSdkUtil/CatSdk/obj/",
+      "outputPath": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/matsukawatoshiya/.nuget/NuGet/NuGet.Config"

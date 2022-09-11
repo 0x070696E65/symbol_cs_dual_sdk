@@ -3,6 +3,14 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.CatbufferTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountAddressRestrictionTransaction_account_address_restriction_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountAddressRestrictionTransaction_account_address_restriction_single_2&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.HashLockTransaction_hash_lock_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.MultisigAccountModificationTransaction_multisig_account_modification_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.NamespaceMetadataTransaction_namespace_metadata_single_2&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountMetadataTransaction_account_metadata_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountKeyLinkTransaction_account_key_link_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

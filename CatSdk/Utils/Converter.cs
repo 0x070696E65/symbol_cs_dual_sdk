@@ -84,6 +84,10 @@ public static class Converter
         return hexString;
     }
     
+    public static byte[] Utf8ToBytes(string input) {
+        return Encoding.UTF8.GetBytes(input);
+    }
+    
     public static string HexToUtf8(string input) {
         return Encoding.UTF8.GetString(Converter.HexToUint8(input));
     }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using CatSdk.Symbol;
 using CatSdk.Utils;
@@ -176,28 +177,15 @@ public class RuleBasedTransactionFactory
         {
             if (type == typeof(UnresolvedMosaicId))
             {
+                if (values.GetType() == typeof(UnresolvedMosaicId[])) return values;
                 if (values.GetType() == typeof(ulong[]))
                 {
-                    var result = ((ulong[]) values).ToList().Select((value) =>
-                    {
-                        if (value.GetType() == typeof(UnresolvedMosaicId))
-                        {
-                            return elementRule(value);
-                        }
-                        return elementRule(new UnresolvedMosaicId(value));
-                    }).ToArray();
+                    var result = ((ulong[]) values).ToList().Select((value) => elementRule(new UnresolvedMosaicId(value))).ToArray();
                     return result.Cast<UnresolvedMosaicId>().ToArray();
                 }
                 if (values.GetType() == typeof(int[]))
                 {
-                    var result = ((uint[]) values).ToList().Select((value) =>
-                    {
-                        if (value.GetType() == typeof(UnresolvedMosaicId))
-                        {
-                            return elementRule(value);
-                        }
-                        return elementRule(new UnresolvedMosaicId(value));
-                    }).ToArray();
+                    var result = ((uint[]) values).ToList().Select((value) => elementRule(new UnresolvedMosaicId(value))).ToArray();
                     return result.Cast<UnresolvedMosaicId>().ToArray();   
                 }
             }
@@ -205,10 +193,10 @@ public class RuleBasedTransactionFactory
             var list = ((object[]) values).ToList();
             if (type == typeof(UnresolvedMosaic))
             {
+                if (values.GetType() == typeof(UnresolvedMosaic[])) return values;
+                
                 var result = list.Select((value) =>
                 {
-                    if (value.GetType() == typeof(UnresolvedMosaic)) return elementRule(value);
-
                     if (value.GetType() != typeof(Dictionary<string, object>)) return elementRule(value);
                     var d = (Dictionary<string, object>) value;
                     return elementRule(new UnresolvedMosaic
@@ -222,6 +210,8 @@ public class RuleBasedTransactionFactory
             }
             if (type == typeof(UnresolvedAddress))
             {
+                if (values.GetType() == typeof(UnresolvedAddress[])) return values;
+                
                 var result = list.Select((value) =>
                 {
                     if (value.GetType() == typeof(UnresolvedAddress)) return elementRule(value);
@@ -234,6 +224,8 @@ public class RuleBasedTransactionFactory
 
             if (type == typeof(TransactionType))
             {
+                if (values.GetType() == typeof(TransactionType[])) return values;
+                
                 var result = list.Select((value) =>
                 {
                     if (value.GetType() == typeof(TransactionType)) return elementRule(value);
@@ -254,11 +246,19 @@ public class RuleBasedTransactionFactory
     {
         Rules[name] = flags =>
         {
-            var valueType = flags.GetType();
-            if (valueType == flagsClass) return flags;
             object? instance;
             switch (flags)
             {
+                case AccountRestrictionFlags[] array:
+                    var accountRestrictionFlagsSum = array.ToList().Select((flag) => (int)flag.Value).Sum();
+                    instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(accountRestrictionFlagsSum));
+                    if (instance == null)  throw new NullReferenceException("instance is null");
+                    return instance;
+                case MosaicFlags[] array:
+                    var mosaicFlagsSum = array.ToList().Select((flag) => (int)flag.Value).Sum();
+                    instance = Activator.CreateInstance(flagsClass, Convert.ToByte(mosaicFlagsSum));
+                    if (instance == null)  throw new NullReferenceException("instance is null");
+                    return instance;
                 case int when flagsClass == typeof(MosaicFlags):
                 {
                     instance = Activator.CreateInstance(flagsClass, Convert.ToByte(flags));

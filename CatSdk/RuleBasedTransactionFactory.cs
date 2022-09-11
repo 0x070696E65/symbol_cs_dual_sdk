@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Specialized;
-using System.Reflection;
 using System.Text;
 using CatSdk.Symbol;
-using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 using Address = CatSdk.Symbol.Address;
 namespace CatSdk;
 
 public class RuleBasedTransactionFactory
 {
-    public List<Type> Module;
-    public Dictionary<string, Func<object, object>> Rules;
-    public Func<object, object?>? TypeConverter;
-    public Dictionary<Type, Func<object, object>>? TypeRuleOverrides;
+    private readonly List<Type> Module;
+    private readonly Dictionary<string, Func<object, object>> Rules;
+    private readonly Func<object, object?>? TypeConverter;
+    private readonly Dictionary<Type, Func<object, object>>? TypeRuleOverrides;
 
     public RuleBasedTransactionFactory(List<Type> module, Func<object, object?>? typeConverter = null, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
@@ -23,14 +19,13 @@ public class RuleBasedTransactionFactory
         Rules = new Dictionary<string, Func<object, object>>();
     }
 
-    public static object? TypeConverterFactory(IEnumerable<Type> module, Func<object, object?>? customTypeConverter, object? value)
+    private static object? TypeConverterFactory(IEnumerable<Type> module, Func<object, object?>? customTypeConverter, object? value)
     {
         if (value != null && customTypeConverter?.Invoke(value) != null) return customTypeConverter(value);
         var type = module.Select(_ => value?.GetType()).First();
         if (value is not ByteArray byteArray) return value;
         if (type == null) throw new NullReferenceException("type is null");
-        var bar = Activator.CreateInstance(type, byteArray.bytes)!;
-        return bar;
+        return Activator.CreateInstance(type, byteArray.bytes);
     }
 
     public IBaseTransaction CreateFromFactory(Func<TransactionType, IBaseTransaction> factory, Dictionary<string, object> descriptor)
@@ -212,36 +207,27 @@ public class RuleBasedTransactionFactory
             {
                 var result = list.Select((value) =>
                 {
-                    if (value.GetType() == typeof(UnresolvedMosaic))
-                    {
-                        return elementRule(value);
-                    }
+                    if (value.GetType() == typeof(UnresolvedMosaic)) return elementRule(value);
 
                     if (value.GetType() != typeof(Dictionary<string, object>)) return elementRule(value);
-                    var b = (Dictionary<string, object>) value;
-                    var a = new UnresolvedMosaic
+                    var d = (Dictionary<string, object>) value;
+                    return elementRule(new UnresolvedMosaic
                     {
-                        MosaicId = new UnresolvedMosaicId(Convert.ToUInt64(b["MosaicId"])),
-                        Amount = new Amount(Convert.ToUInt64(b["Amount"]))
-                    };
-                    return elementRule(a);
+                        MosaicId = new UnresolvedMosaicId(Convert.ToUInt64(d["MosaicId"])),
+                        Amount = new Amount(Convert.ToUInt64(d["Amount"]))
+                    });
                 }).ToArray();
+                
                 return result.Cast<UnresolvedMosaic>().ToArray();
             }
             if (type == typeof(UnresolvedAddress))
             {
                 var result = list.Select((value) =>
                 {
-                    if (value.GetType() == typeof(UnresolvedAddress))
-                    {
-                        return elementRule(value);
-                    }
-                    if (value is string s)
-                    {
-                        var unresolvedAddress = new UnresolvedAddress(Converter.StringToAddress(s));
-                        return elementRule(unresolvedAddress);
-                    }
-                    throw new Exception("value is invalid type");
+                    if (value.GetType() == typeof(UnresolvedAddress)) return elementRule(value);
+                    if (value is not string s) throw new Exception("value is invalid type");
+                    var unresolvedAddress = new UnresolvedAddress(Converter.StringToAddress(s));
+                    return elementRule(unresolvedAddress);
                 }).ToArray();
                 return result.Cast<UnresolvedAddress>().ToArray();
             }
@@ -250,28 +236,17 @@ public class RuleBasedTransactionFactory
             {
                 var result = list.Select((value) =>
                 {
-                    if (value.GetType() == typeof(TransactionType))
-                    {
-                        return elementRule(value);
-                    }
-                    if (value is string s)
-                    {
-                        var stringToEnum = BuildEnumStringToValueMap(type);
-                        var enumInt = NameToEnumValue(stringToEnum, typeof(TransactionType), s);
-                        var transactionType = new TransactionType((ushort)enumInt);
-                        return elementRule(transactionType);
-                    }
-                    
-                    throw new Exception("value is invalid type");
+                    if (value.GetType() == typeof(TransactionType)) return elementRule(value);
+                    if (value is not string s) throw new Exception("value is invalid type");
+                    var stringToEnum = BuildEnumStringToValueMap(type);
+                    var enumInt = NameToEnumValue(stringToEnum, typeof(TransactionType), s);
+                    var transactionType = new TransactionType((ushort)enumInt);
+                    return elementRule(transactionType);
+
                 }).ToArray();
                 return result.Cast<TransactionType>().ToArray();
             }
-            
-            if(type == typeof(Dictionary<string, object>))
-            {
-                return list.Select((value) => elementRule((Dictionary<string, object>)value)).ToArray();
-            }
-            return list.Select((value) => elementRule(value)).ToArray();
+            return type == typeof(Dictionary<string, object>) ? list.Select((value) => elementRule((Dictionary<string, object>)value)).ToArray() : list.Select((value) => elementRule(value)).ToArray();
         };
     }
 
@@ -280,11 +255,7 @@ public class RuleBasedTransactionFactory
         Rules[name] = flags =>
         {
             var valueType = flags.GetType();
-            if (valueType == flagsClass)
-            {
-                return flags;
-            }
-
+            if (valueType == flagsClass) return flags;
             object? instance;
             switch (flags)
             {
@@ -339,10 +310,7 @@ public class RuleBasedTransactionFactory
         Rules[name] = enumValue =>
         {
             var valueType = enumValue.GetType();
-            if (valueType == flagsClass)
-            {
-                return enumValue;
-            }
+            if (valueType == flagsClass) return enumValue;
 
             object? instance;
             if (flagsClass == typeof(TransactionType))

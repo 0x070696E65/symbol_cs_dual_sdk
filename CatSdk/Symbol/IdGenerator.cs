@@ -4,7 +4,7 @@ using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Symbol;
 
-public class IdGenerator
+public static class IdGenerator
 {
     private const ulong NAMESPACE_FLAG = (ulong) 1 << 63;
 

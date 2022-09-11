@@ -1,12 +1,11 @@
 using System.Reflection;
-using System.Text;
 using CatSdk.Utils;
 
 namespace CatSdk.Symbol.Factory;
 public class TransactionsFactory
 {
-    public RuleBasedTransactionFactory Factory;
-    public Network Network;
+    private readonly RuleBasedTransactionFactory Factory;
+    private readonly Network Network;
     public TransactionsFactory(Network network, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
         Factory = BuildRules(typeRuleOverrides);
@@ -47,24 +46,22 @@ public class TransactionsFactory
                 return namespaceRegistrationTransaction;   
             }
         }
-        if (transaction.Type == TransactionType.MOSAIC_DEFINITION)
+
+        if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
+        if (transactionFactory == typeof(TransactionFactory))
         {
-            if (transactionFactory == typeof(TransactionFactory))
-            {
-                var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
-                var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-                mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-                return mosaicDefinitionTransaction;
-            }
-            else
-            {
-                var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
-                var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-                mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-                return mosaicDefinitionTransaction;   
-            }
+            var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
+            var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
+            mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
+            return mosaicDefinitionTransaction;
         }
-        return transaction;
+        else
+        {
+            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
+            var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
+            mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
+            return mosaicDefinitionTransaction;   
+        }
     }
 
     public IBaseTransaction Create(Dictionary<string, object> transactionDescriptor)
@@ -77,12 +74,6 @@ public class TransactionsFactory
         return CreateAndExtend(transactionDescriptor, typeof(EmbeddedTransactionFactory));
     }
     
-    /**
-	 * Attaches a signature to a transaction.
-	 * @param {object} transaction Transaction object.
-	 * @param {Signature} signature Signature to attach.
-	 * @returns {string} JSON transaction payload.
-	 */
     public static string AttachSignature(ITransaction transaction, CatSdk.Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         var transactionBuffer = transaction.Serialize();

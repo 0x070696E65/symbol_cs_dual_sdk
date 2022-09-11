@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Specialized;
 using System.Text;
 using CatSdk.Facade;
 using CatSdk.Symbol;
@@ -7,13 +5,12 @@ using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 
 namespace CatSdk;
-
 public class TransactionDescriptorProcessor
 {
-    public Dictionary<string, object> TransactionDescriptor;
-    public Dictionary<string, Func<object, object>> TypeParsingRules;
-    public Func<object, object?>? TypeConverter;
-    public Dictionary<string, string>? TypeHints;
+    private readonly Dictionary<string, object> TransactionDescriptor;
+    private readonly Dictionary<string, Func<object, object>> TypeParsingRules;
+    private readonly Func<object, object?>? TypeConverter;
+    private Dictionary<string, string>? TypeHints;
     public TransactionDescriptorProcessor(Dictionary<string, object> transactionDescriptor, Dictionary<string, Func<object, object>> typeParsingRules, Func<object, object?>? typeConverter = null)
     {
         TransactionDescriptor = transactionDescriptor;
@@ -26,31 +23,7 @@ public class TransactionDescriptorProcessor
         if (null == TransactionDescriptor[key])
             throw new ArgumentOutOfRangeException($"transaction descriptor does not have attribute {key}");
         var value = TransactionDescriptor[key];
-        
-        switch (key)
-        {
-            case "Type" when value is string s:
-                return StringToTransactionType(s);
-            case "ScopedMetadataKey" or "ValueSizeDelta" when value is int i:
-                return RuleBasedTransactionFactory.KeyParser(key, i);
-            case "RestrictionKey" or "NewRestrictionValue" or "PreviousRestrictionValue" when value is int i:
-                return RuleBasedTransactionFactory.IntParser(i);
-            case "RestrictionKey" or "NewRestrictionValue" or "PreviousRestrictionValue" when value is long i:
-                return RuleBasedTransactionFactory.IntParser(i);
-            case "Divisibility" or "MinRemovalDelta" or "MinApprovalDelta" when value is int i:
-                return RuleBasedTransactionFactory.ByteParser(i);
-            case "Value" when value is int i:
-                return RuleBasedTransactionFactory.StringParser(Converter.HexToUtf8(i.ToString() ?? throw new InvalidOperationException()));
-            case "Value" when value is long i:
-                return RuleBasedTransactionFactory.StringParser(Converter.HexToUtf8(i.ToString() ?? throw new InvalidOperationException()));
-            case "Value" when value is string s:
-                return RuleBasedTransactionFactory.StringParser(s);
-        }
-
-        if (TypeHints == null)
-        {
-            return value;
-        }
+        if (TypeHints == null) return value;
         if (!TypeHints.ContainsKey(key)) return value;
         var typeHint = TypeHints?[key];
         if (typeHint != null && TypeParsingRules.ContainsKey(typeHint)) value = TypeParsingRules[typeHint](value);
@@ -60,6 +33,7 @@ public class TransactionDescriptorProcessor
     public object? LookupValue(string key)
     {
         var value = LookupValueAndApplyTypeHints(key);
+        value = ValueParser(key, value);
         if (value.GetType() != typeof(Dictionary<string, object>[])) return TypeConverter?.Invoke(value);
         switch (key)
         {
@@ -99,10 +73,7 @@ public class TransactionDescriptorProcessor
             var p = transaction.GetType().GetProperty(key);
             if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {key}");
             var value = LookupValue(key);
-            if (value is string s)
-            {
-                value = Converter.IsHexString(s) ? Converter.HexToUint8(s) : Encoding.UTF8.GetBytes(s);
-            }
+            if (value is string s) value = Converter.IsHexString(s) ? Converter.HexToUint8(s) : Encoding.UTF8.GetBytes(s);
             p.SetValue(transaction, value);
         }
     }
@@ -110,6 +81,28 @@ public class TransactionDescriptorProcessor
     public void SetTypeHints(Dictionary<string, string>? typeHint)
     {
         TypeHints = typeHint ?? null;
+    }
+
+    private static object ValueParser(string key, object value)
+    {
+        return key switch
+        {
+            "Type" when value is string s => StringToTransactionType(s),
+            "ScopedMetadataKey" or "ValueSizeDelta" when value is int i =>
+                RuleBasedTransactionFactory.KeyParser(key, i),
+            "RestrictionKey" or "NewRestrictionValue" or "PreviousRestrictionValue" when value is int i =>
+                RuleBasedTransactionFactory.IntParser(i),
+            "RestrictionKey" or "NewRestrictionValue" or "PreviousRestrictionValue" when value is long i =>
+                RuleBasedTransactionFactory.IntParser(i),
+            "Divisibility" or "MinRemovalDelta" or "MinApprovalDelta" when value is int i => RuleBasedTransactionFactory
+                .ByteParser(i),
+            "Value" when value is int i => RuleBasedTransactionFactory.StringParser(
+                Converter.HexToUtf8(i.ToString() ?? throw new InvalidOperationException())),
+            "Value" when value is long i => RuleBasedTransactionFactory.StringParser(
+                Converter.HexToUtf8(i.ToString() ?? throw new InvalidOperationException())),
+            "Value" when value is string s => RuleBasedTransactionFactory.StringParser(s),
+            _ => value
+        };
     }
     
     private static TransactionType StringToTransactionType(string type)

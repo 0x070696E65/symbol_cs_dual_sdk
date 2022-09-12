@@ -1,3 +1,4 @@
+using CatSdk.CryptoTypes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
 
@@ -22,12 +23,12 @@ public class KeyPair
     public PrivateKey PrivateKey { get; }
     public PublicKey PublicKey { get; }
     
-    public CatSdk.Signature Sign(byte[] data) {
+    public CryptoTypes.Signature Sign(byte[] data) {
         var privateKey = new Ed25519PrivateKeyParameters(PrivateKey.bytes, 0);
         var signer = new Ed25519Signer();
         signer.Init(true, privateKey);
         signer.BlockUpdate(data, 0, data.Length);
         var signature = signer.GenerateSignature();
-        return new CatSdk.Signature(signature);
+        return new CryptoTypes.Signature(signature);
     }
 }

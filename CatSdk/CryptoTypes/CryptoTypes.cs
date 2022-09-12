@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace CatSdk;
+namespace CatSdk.CryptoTypes;
 
 /**
  *  Represents a 256-bit hash.

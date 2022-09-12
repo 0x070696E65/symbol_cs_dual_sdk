@@ -1,8 +1,7 @@
-using System.Linq;
 using System.Text;
 using CatSdk.Symbol;
 using CatSdk.Utils;
-using Address = CatSdk.Symbol.Address;
+
 namespace CatSdk;
 
 public class RuleBasedTransactionFactory
@@ -29,7 +28,7 @@ public class RuleBasedTransactionFactory
         return Activator.CreateInstance(type, byteArray.bytes);
     }
 
-    public IBaseTransaction CreateFromFactory(Func<TransactionType, IBaseTransaction> factory, Dictionary<string, object> descriptor)
+    public T CreateFromFactory<T>(Func<TransactionType, T> factory, Dictionary<string, object> descriptor) where T : IBaseTransaction
     {
         var processor = CreateProcessor(descriptor);
         var entityType = (TransactionType)processor.LookupValue("Type")!;
@@ -39,7 +38,7 @@ public class RuleBasedTransactionFactory
         processor.CopyTo(entity, new []{"Type"});
         return entity;
     }
-    
+
     private TransactionDescriptorProcessor CreateProcessor(Dictionary<string, object> descriptor) {
         return new TransactionDescriptorProcessor(descriptor, Rules, TypeConverter);
     }
@@ -100,7 +99,6 @@ public class RuleBasedTransactionFactory
             {
                 return value;
             }
-
             {
                 object? instance;
                 if (
@@ -122,8 +120,8 @@ public class RuleBasedTransactionFactory
                     return instance;
                 }
                 if (
-                    podClass == typeof(CatSdk.Symbol.Hash256)
-                    || podClass == typeof(CatSdk.Symbol.PublicKey)
+                    podClass == typeof(Hash256)
+                    || podClass == typeof(PublicKey)
                     || podClass == typeof(VotingPublicKey)
                    )
                 {
@@ -146,14 +144,14 @@ public class RuleBasedTransactionFactory
                     if (instance == null)  throw new NullReferenceException("instance is null");
                     return instance;
                 }
-                if (podClass == typeof(CatSdk.Symbol.Signature))
+                if (podClass == typeof(Signature))
                 {
                     value = value is string s ? Converter.HexToUint8(s) : value;
                     instance = Activator.CreateInstance(podClass, value);
                     if (instance == null)  throw new NullReferenceException("instance is null");
                     return instance;
                 }
-                if (podClass == typeof(CatSdk.Symbol.Signature))
+                if (podClass == typeof(Signature))
                 {
                     value = value is string s ? Converter.HexToUint8(s) : value;
                     instance = Activator.CreateInstance(podClass, value);

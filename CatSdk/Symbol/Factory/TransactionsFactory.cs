@@ -12,69 +12,47 @@ public class TransactionsFactory
         Network = network;
     }
     
-    private IBaseTransaction CreateAndExtend(Dictionary<string, object> transactionDescriptor, Type transactionFactory)
+    public ITransaction Create(Dictionary<string, object> transactionDescriptor)
     {
         var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
         transactionDescriptor.Add("Network", networkType);
-        IBaseTransaction transaction;
-        if (transactionFactory == typeof(TransactionFactory))
-        {
-            transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
-        }
-        else if (transactionFactory == typeof(EmbeddedTransactionFactory))
-        {
-            transaction = Factory.CreateFromFactory(EmbeddedTransactionFactory.CreateByName, transactionDescriptor);
-        }
-        else
-        {
-            throw new Exception("transactionFactory is invalid type");
-        }
+        var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
         if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
         {
-            if (transactionFactory == typeof(TransactionFactory))
-            {
-                var namespaceRegistrationTransaction = (NamespaceRegistrationTransaction) transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
-                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
-                return namespaceRegistrationTransaction;
-            }
-            else
-            {
-                var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransaction) transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
-                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
-                return namespaceRegistrationTransaction;   
-            }
+            var namespaceRegistrationTransaction = (NamespaceRegistrationTransaction) transaction;
+            var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
+            namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
+            return namespaceRegistrationTransaction; 
         }
 
         if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-        if (transactionFactory == typeof(TransactionFactory))
-        {
-            var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
-            var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-            mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-            return mosaicDefinitionTransaction;
-        }
-        else
-        {
-            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
-            var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-            mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-            return mosaicDefinitionTransaction;   
-        }
-    }
-
-    public IBaseTransaction Create(Dictionary<string, object> transactionDescriptor)
-    {
-        return CreateAndExtend(transactionDescriptor, typeof(TransactionFactory));
+        var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
+        var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
+        mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
+        return mosaicDefinitionTransaction;
     }
     
     public IBaseTransaction CreateEmbedded(Dictionary<string, object> transactionDescriptor)
     {
-        return CreateAndExtend(transactionDescriptor, typeof(EmbeddedTransactionFactory));
+        var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
+        transactionDescriptor.Add("Network", networkType);
+        var transaction = Factory.CreateFromFactory(EmbeddedTransactionFactory.CreateByName, transactionDescriptor);
+        if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
+        {
+            var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransaction) transaction;
+            var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
+            namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId); 
+            return namespaceRegistrationTransaction;
+        }
+
+        if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
+        var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
+        var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
+        mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
+        return mosaicDefinitionTransaction;
     }
     
-    public static string AttachSignature(ITransaction transaction, CatSdk.Signature signature) {
+    public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         var transactionBuffer = transaction.Serialize();
         var hexPayload = Converter.Uint8ToHex(transactionBuffer);
@@ -82,11 +60,16 @@ public class TransactionsFactory
         return jsonPayload;
     }
     
-    private static UnresolvedAddress? SymbolTypeConverter(object value)
+    public ITransaction AttachSignatureTransaction(ITransaction transaction, CryptoTypes.Signature signature) {
+        transaction.Signature = new Signature(signature.bytes);
+        return transaction;
+    }
+    
+    private static Address? SymbolTypeConverter(object value)
     {
         if (value.GetType() != typeof(Address)) return null;
         var castValue = (ByteArray)value;
-        return new UnresolvedAddress(castValue.bytes);
+        return new Address(castValue.bytes);
     }
     
     private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
@@ -131,7 +114,7 @@ public class TransactionsFactory
         var sdkTypeMapping = new Dictionary<string, Type>()
         {
             {"UnresolvedAddress", typeof(UnresolvedAddress)},
-            {"Address", typeof(CatSdk.Symbol.Address)},
+            {"Address", typeof(Address)},
             {"Hash256", typeof(Hash256)},
             {"PublicKey", typeof(PublicKey)},
             {"VotingPublicKey", typeof(VotingPublicKey)},

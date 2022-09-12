@@ -39,7 +39,7 @@ public class Network : Network<Address>
         GenerationHashSeed = generationHashSeed;
     }
 
-    public static Address CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)
+    private static Address CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)
     {
         var newBytes = new byte[addressWithoutChecksum.Length + checksum.Length];
         addressWithoutChecksum.CopyTo(newBytes, 0);
@@ -47,7 +47,7 @@ public class Network : Network<Address>
         return new Address(newBytes);
     }
 }
-
+/*
 public class Address : ByteArray
 {
     private const byte SIZE = 24;
@@ -63,3 +63,4 @@ public class Address : ByteArray
     public Address(ByteArray address) : base(SIZE, address.bytes) { }
     public Address(byte[] address) : base(SIZE, address) { }
 }
+*/

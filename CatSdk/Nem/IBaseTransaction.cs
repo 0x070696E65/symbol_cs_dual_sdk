@@ -1,3 +1,5 @@
+using CatSdk.CryptoTypes;
+
 namespace CatSdk.Nem;
 
 public interface IBaseTransaction : IStruct

@@ -34,7 +34,10 @@ public class TransactionDescriptorProcessor
     {
         var value = LookupValueAndApplyTypeHints(key);
         value = ValueParser(key, value);
-        if (value.GetType() != typeof(Dictionary<string, object>[])) return TypeConverter?.Invoke(value);
+        if (value.GetType() != typeof(Dictionary<string, object>[]))
+        {
+            return TypeConverter?.Invoke(value);
+        }
         switch (key)
         {
             case "Transactions":
@@ -50,8 +53,8 @@ public class TransactionDescriptorProcessor
             {
                 var cosignatures = ((Dictionary<string, object>[]) value).ToList().Select((cosignatureDic) =>
                 {
-                    var signerPublicKey = new CatSdk.Symbol.PublicKey(Converter.HexToUint8((string)cosignatureDic["SignerPublicKey"]));
-                    var signature = new CatSdk.Symbol.Signature(Converter.HexToUint8((string)cosignatureDic["Signature"]));
+                    var signerPublicKey = new PublicKey(Converter.HexToUint8((string)cosignatureDic["SignerPublicKey"]));
+                    var signature = new Signature(Converter.HexToUint8((string)cosignatureDic["Signature"]));
                     return new Cosignature
                     {
                         SignerPublicKey = signerPublicKey,

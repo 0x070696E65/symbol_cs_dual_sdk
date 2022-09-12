@@ -14,23 +14,22 @@ def skip_embedded(name):
 
 	return name[len('embedded_'):]
 
-
 class FactoryClassFormatter(ClassFormatter):
 	def generate_deserializer(self):
 		method_descriptor = self.provider.get_deserialize_descriptor()
-		method_descriptor.method_name = 'public static IBaseTransaction Deserialize'
+		method_descriptor.method_name = f'public static {self.provider.return_class} Deserialize'
 		method_descriptor.arguments = ['BinaryReader br']
 		return self.generate_method(method_descriptor)
 
 	def generate_deserializer2(self):
 		method_descriptor = self.provider.get_deserialize_descriptor2()
-		method_descriptor.method_name = 'public static IBaseTransaction Deserialize'
+		method_descriptor.method_name = f'public static {self.provider.return_class} Deserialize'
 		method_descriptor.arguments = ['string payload']
 		return self.generate_method(method_descriptor)
 
 	def generate_create_by_name(self):
 		method_descriptor = self.provider.get_create_by_name_descriptor()
-		method_descriptor.method_name = 'public static IBaseTransaction CreateByName'
+		method_descriptor.method_name = f'public static {self.provider.return_class} CreateByName'
 		method_descriptor.arguments = [
 			'TransactionType entityName'
 		]
@@ -58,6 +57,13 @@ class FactoryFormatter(AbstractTypeFormatter):
 		self.printer = BuiltinPrinter(abstract_model, 'parent')
 		self.factory_descriptor = factory_map.get(self.abstract.name)
 
+	@property
+	def return_class(self):
+		if self.abstract.name == "Transaction":
+			return "ITransaction"
+		elif self.abstract.name == "EmbeddedTransaction":
+			return "IBaseTransaction"
+
 	def get_ctor_descriptor(self):
 		raise NotImplementedError('`get_ctor_descriptor` not supported by FactoryFormatter')
 
@@ -83,7 +89,7 @@ class FactoryFormatter(AbstractTypeFormatter):
 		body = 'var position = br.BaseStream.Position;\n'
 		body += f'var {self.printer.name} = {self.printer.load()};\n'
 
-		body += 'var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>\n{\n'
+		body += f'var mapping = new Dictionary<TransactionType, Func<BinaryReader, {self.return_class}>>\n{{\n'
 
 		if self.factory_descriptor:
 			names = [f'{concrete.name}' for concrete in self.factory_descriptor.children]
@@ -106,7 +112,7 @@ class FactoryFormatter(AbstractTypeFormatter):
 
 	def get_create_by_name_descriptor(self):
 		body = ''
-		body += 'var mapping = new Dictionary<TransactionType, IBaseTransaction>\n{\n'
+		body += f'var mapping = new Dictionary<TransactionType, {self.return_class}>\n{{\n'
 		body += indent(
 			',\n'.join(
 				map(

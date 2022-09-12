@@ -848,7 +848,7 @@ public class NamespaceId : IStruct {
 
 	public static NamespaceId Deserialize(BinaryReader br) {
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes((int)nameSize);
+		var name = br.ReadBytes(nameSize);
 
 		var instance = new NamespaceId()
 		{
@@ -959,7 +959,7 @@ public class Mosaic : IStruct {
 	public static Mosaic Deserialize(BinaryReader br) {
 		var mosaicIdSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicId = MosaicId.Deserialize(br);
+		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
 		var amount = Amount.Deserialize(br);
 
 		var instance = new Mosaic()
@@ -4429,10 +4429,10 @@ public class NonVerifiableTransferTransaction : ITransaction {
 }
 
 public class TransactionFactory {
-	public static IBaseTransaction Deserialize(BinaryReader br) {
+	public static ITransaction Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = Transaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
 		{
 			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.TRANSACTION_VERSION, AccountKeyLinkTransaction.Deserialize},
 			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.TRANSACTION_VERSION, MosaicDefinitionTransaction.Deserialize},
@@ -4449,14 +4449,14 @@ public class TransactionFactory {
 		return mapping[parent.Type](br);
 	}
 
-	public static IBaseTransaction Deserialize(string payload) {
+	public static ITransaction Deserialize(string payload) {
 		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
 
-	public static IBaseTransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+	public static ITransaction CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, ITransaction>
 		{
 			{AccountKeyLinkTransaction.TRANSACTION_TYPE, new AccountKeyLinkTransaction()},
 			{MosaicDefinitionTransaction.TRANSACTION_TYPE, new MosaicDefinitionTransaction()},
@@ -4475,10 +4475,10 @@ public class TransactionFactory {
 }
 
 public class NonVerifiableTransactionFactory {
-	public static IBaseTransaction Deserialize(BinaryReader br) {
+	public static None Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = NonVerifiableTransaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, None>>
 		{
 			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransaction.TRANSACTION_VERSION, NonVerifiableAccountKeyLinkTransaction.Deserialize},
 			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransaction.TRANSACTION_VERSION, NonVerifiableMosaicDefinitionTransaction.Deserialize},
@@ -4493,14 +4493,14 @@ public class NonVerifiableTransactionFactory {
 		return mapping[parent.Type](br);
 	}
 
-	public static IBaseTransaction Deserialize(string payload) {
+	public static None Deserialize(string payload) {
 		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
 
-	public static IBaseTransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+	public static None CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, None>
 		{
 			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, new NonVerifiableAccountKeyLinkTransaction()},
 			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicDefinitionTransaction()},

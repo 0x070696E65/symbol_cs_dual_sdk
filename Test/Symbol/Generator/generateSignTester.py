@@ -34,8 +34,8 @@ public class SignTest
         body += indent(f'const string sig = "{c["signature"]}";\n')
         body += indent(f'var privateKey = new PrivateKey(pKey);\n')
         body += indent(f'var keyPair = new KeyPair(privateKey);\n')
-        body += indent(f'var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);\n')
-        body += indent(f'var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);\n')
+        body += indent(f'var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);\n')
+        body += indent(f'var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);\n')
         body += indent(f'Assert.AreEqual(pubKey, publicKey);\n')
         body += indent(f'Assert.AreEqual(sig, signature);\n')
         body += f'}}\n'

@@ -102,7 +102,7 @@ public class TransactionTest
             body += indent(f'{{"{to_pascal_case(key)}", {type_check(key, c["descriptor"][key], c["test_name"])}}},\n', 2)
         body += indent(f'}};\n')
         body += indent(f'var tx = Facade.TransactionFactory.Create(descriptor);\n')
-        body += indent(f'Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));\n')
+        body += indent(f'Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));\n')
         body += f'}}\n'
         result += indent(body)
     result += "}"

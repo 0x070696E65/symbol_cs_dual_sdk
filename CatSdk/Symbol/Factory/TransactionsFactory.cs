@@ -55,7 +55,7 @@ public class TransactionsFactory
     public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         var transactionBuffer = transaction.Serialize();
-        var hexPayload = Converter.Uint8ToHex(transactionBuffer);
+        var hexPayload = Converter.BytesToHex(transactionBuffer);
         var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
         return jsonPayload;
     }

@@ -122,8 +122,8 @@ def to_cosignature_array(value):
     for i in range(len(value)):
         t3 = ''
         t3 += indent(f'new (){{\n')
-        t3 += indent(f'SignerPublicKey = new PublicKey(Converter.HexToUint8("{str(value[i]["signer_public_key"])}")),',2)
-        t3 += indent(f'Signature = new Signature(Converter.HexToUint8("{str(value[i]["signature"])}")),',2)
+        t3 += indent(f'SignerPublicKey = new PublicKey(Converter.HexToBytes("{str(value[i]["signer_public_key"])}")),',2)
+        t3 += indent(f'Signature = new Signature(Converter.HexToBytes("{str(value[i]["signature"])}")),',2)
         t3 += f'}},\n'
         t2 += indent(t3)
     t = t2
@@ -167,7 +167,7 @@ def type_check(key, value, txType):
         return indent(a)
     if key == "value":
         if value.isdecimal():
-            return f'Converter.HexToUint8("{value}")'
+            return f'Converter.HexToBytes("{value}")'
         else:
             return f'Converter.Utf8ToBytes("{value}")'
     if key == "restriction_additions" or key == "restriction_deletions":
@@ -208,15 +208,15 @@ def type_check(key, value, txType):
     if key == "registration_type":
         return to_enum(value, "NamespaceRegistrationType")
     if key == "signer_public_key":
-        return f'new PublicKey(Converter.HexToUint8("{value}"))'
+        return f'new PublicKey(Converter.HexToBytes("{value}"))'
     if key == "linked_public_key":
         if "voting_key" in txType:
-            return f'new VotingPublicKey(Converter.HexToUint8("{value}"))'    
-        return f'new PublicKey(Converter.HexToUint8("{value}"))'
+            return f'new VotingPublicKey(Converter.HexToBytes("{value}"))'    
+        return f'new PublicKey(Converter.HexToBytes("{value}"))'
     if key == "signature":
-        return f'new Signature(Converter.HexToUint8("{value}"))'
+        return f'new Signature(Converter.HexToBytes("{value}"))'
     if key == "transactions_hash" or key == "hash":
-        return f'new Hash256(Converter.HexToUint8("{value}"))'
+        return f'new Hash256(Converter.HexToBytes("{value}"))'
     if isinstance(value, int):
         return value
     if isinstance(value, str):
@@ -247,7 +247,7 @@ public class TransactionNonParserTest
             body += indent(f'{{"{to_pascal_case(key)}", {type_check(key, c["descriptor"][key], c["test_name"])}}},\n', 2)
         body += indent(f'}};\n')
         body += indent(f'var tx = Facade.TransactionFactory.Create(descriptor);\n')
-        body += indent(f'Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));\n')
+        body += indent(f'Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));\n')
         body += f'}}\n'
         result += indent(body)
     result += "}"

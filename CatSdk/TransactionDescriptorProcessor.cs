@@ -53,8 +53,8 @@ public class TransactionDescriptorProcessor
             {
                 var cosignatures = ((Dictionary<string, object>[]) value).ToList().Select((cosignatureDic) =>
                 {
-                    var signerPublicKey = new PublicKey(Converter.HexToUint8((string)cosignatureDic["SignerPublicKey"]));
-                    var signature = new Signature(Converter.HexToUint8((string)cosignatureDic["Signature"]));
+                    var signerPublicKey = new PublicKey(Converter.HexToBytes((string)cosignatureDic["SignerPublicKey"]));
+                    var signature = new Signature(Converter.HexToBytes((string)cosignatureDic["Signature"]));
                     return new Cosignature
                     {
                         SignerPublicKey = signerPublicKey,
@@ -76,7 +76,7 @@ public class TransactionDescriptorProcessor
             var p = transaction.GetType().GetProperty(key);
             if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {key}");
             var value = LookupValue(key);
-            if (value is string s) value = Converter.IsHexString(s) ? Converter.HexToUint8(s) : Encoding.UTF8.GetBytes(s);
+            if (value is string s) value = Converter.IsHexString(s) ? Converter.HexToBytes(s) : Encoding.UTF8.GetBytes(s);
             p.SetValue(transaction, value);
         }
     }

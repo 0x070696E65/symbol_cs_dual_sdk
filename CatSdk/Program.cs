@@ -27,5 +27,5 @@ var signed = Facade.SignTransaction(keyPair, tx);
 //var signedTx = Facade.TransactionFactory.AttachSignatureTransaction(tx, tx);
 ((ITransaction)tx).Signature = new Signature(signed.bytes);
 
-Console.WriteLine(Converter.Uint8ToHex(signed.bytes));
-Console.WriteLine(Converter.Uint8ToHex(Facade.HashTransaction((ITransaction)tx).bytes));
+Console.WriteLine(Converter.BytesToHex(signed.bytes));
+Console.WriteLine(Converter.BytesToHex(Facade.HashTransaction((ITransaction)tx).bytes));

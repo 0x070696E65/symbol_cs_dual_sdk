@@ -15,8 +15,8 @@ public class SignTest
 		const string sig = "31D272F0662915CAC43AB7D721CAF65D8601F52B2E793EA1533E7BC20E04EA97B74859D9209A7B18DFECFD2C4A42D6957628F5357E3FB8B87CF6A888BAB4280E";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -28,8 +28,8 @@ public class SignTest
 		const string sig = "F21E4BE0A914C0C023F724E1EAB9071A3743887BB8824CB170404475873A827B301464261E93700725E8D4427A3E39D365AFB2C9191F75D33C6BE55896E0CC00";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -41,8 +41,8 @@ public class SignTest
 		const string sig = "939CD8932093571E24B21EA53F1359279BA5CFC32CE99BB020E676CF82B0AA1DD4BC76FCDE41EF784C06D122B3D018135352C057F079C926B3EFFA7E73CF1D06";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -54,8 +54,8 @@ public class SignTest
 		const string sig = "9B4AFBB7B96CAD7726389C2A4F31115940E6EEE3EA29B3293C82EC8C03B9555C183ED1C55CA89A58C17729EFBA76A505C79AA40EC618D83124BC1134B887D305";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -67,8 +67,8 @@ public class SignTest
 		const string sig = "7AF2F0D9B30DE3B6C40605FDD4EBA93ECE39FA7458B300D538EC8D0ABAC1756DEFC0CA84C8A599954313E58CE36EFBA4C24A82FD6BB8127023A58EFC52A8410A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -80,8 +80,8 @@ public class SignTest
 		const string sig = "1D660056554F8AF19DE1F6774A4434B092CE3AAF68CAA302CCF77DC7AB4735C135545B1861297387E8902DBA7FCCE69D4A25DF996E3F0C33938B4B89EECF6B03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -93,8 +93,8 @@ public class SignTest
 		const string sig = "032F9FCA99BE7B72D4F76792DD5ADFEED94FCCC75E4B311292534C5CCA64205BBC4B1E92E734B94B99995A186ECD0B1768F24DF9CEF744DC9A922FEF96533509";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -106,8 +106,8 @@ public class SignTest
 		const string sig = "DE32F224B6A4C8C3761D3F4904F03D8ED15D9B13AEE5C5671E03131560819FC9DF23F61CA5984B19C287DE63C7410A081B6E2F772D33193A4B48DED5056D6C0A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -119,8 +119,8 @@ public class SignTest
 		const string sig = "1A6499428B2E8BEA6370B31363E93552BA597746EE074A276867A3889F9CB50BB85E4D17C1F4140555C9862CCD80300830D2517AE6BE308B8FAB8C6412F2B205";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -132,8 +132,8 @@ public class SignTest
 		const string sig = "96E67B41AED22D8D77D3E7F2212DB5324A27D83FC5974C7F6B497E0A70C216C40066F78D0E68E4BB36490246C327B85236BAC9BA2057ADC8D25869F33759D009";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -145,8 +145,8 @@ public class SignTest
 		const string sig = "D0441615DE0A07DB213D18DC97BFF8857C629D1E1AE3EE6E3CDAA3DA0221ED36415BFE5E8C2D2F9848B8139A031158ED748EE315B8A8B18C7C2D365F99C1FE0B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -158,8 +158,8 @@ public class SignTest
 		const string sig = "8E2F0CED0546D6D2F0C59DCFCF2110A0200D331ABBE5A3B6867594EC2A7E3BA98D18DDA2B63CF7BFE6252F50B82823FC62B66F5E29AC71BBDD0A3A5B412C600E";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -171,8 +171,8 @@ public class SignTest
 		const string sig = "E68AAA2D854D411492EA26FFDBF69E6236531D2BBEA6B1015BDCF08A31F0E0030D2A177F2F375F2591A49E745B54EBEFA44D71C6B27B780C195E6C9045C68F06";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -184,8 +184,8 @@ public class SignTest
 		const string sig = "DC9A32E94379B259FE77E53762AD759250747162BBF9832B25AA502E9D5BBA23AABB74BA39470F111ADCE67D7647342E502342499B2AC34D2E19A1BB49D1BA0F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -197,8 +197,8 @@ public class SignTest
 		const string sig = "D770890819CE6B117F4E9CE754C70716116880FAF67C34DFAE789A4131AA9A9EEDAD713EA363AC12073FE36D224CE37C15B7D92068C3C5CE06BEAABE9EDCAE0A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -210,8 +210,8 @@ public class SignTest
 		const string sig = "0BE56B9D1C7509070EADE0CB817DC7D7B89B46158E917AF8544AE3441802D071F7A2FEA9293D76869EABD0CB2BB30CA7043D2A9B7F07B49EC06B9D0E8907C40B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -223,8 +223,8 @@ public class SignTest
 		const string sig = "2D56049F2C92173FADE821CF3BABFBE78BE249C72664C528A59998899AE83CF2E8B17EF71C5D2B42C1E81FE1ADE2558C16FC308AF19641E7EEC6FFF46788170D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -236,8 +236,8 @@ public class SignTest
 		const string sig = "0176BC5AC41091F5F26FFB906A0AD59CA6BF09A1CC93AAB944706656752E9AF953DCA16482E7DFB836264394699A00DCEA0ED32B28280B5A6047E193CB805407";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -249,8 +249,8 @@ public class SignTest
 		const string sig = "8405727BFE8EA916BD2B9F169026528DED0A8D913DF217AD3AF0A9F10D0ABDFBFC5187A9C2AE2CB49DD0D76388C1A1E7CFF7D1E938134C1ED8E407CBECF01F0F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -262,8 +262,8 @@ public class SignTest
 		const string sig = "7340B72E36115DC472871C149EE74D8030766960FD62FAC35A38B2198D1836AA9538F253CE048891AF2199DE224CB6C0586696140B6977433E6BBA5DC5F3D10A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -275,8 +275,8 @@ public class SignTest
 		const string sig = "12856F010456E647BA799D142FF5908EA14322B54AB22F8EC39FFAC8712F9AABB259014E49CBB56E2A8001E5FA69CCDDE3EEAC2434298160B3CA3478E6ABCD05";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -288,8 +288,8 @@ public class SignTest
 		const string sig = "D576A5D0E713C72E5D048CE38B15753E3E3F2C23825F471D69C599A40CA2B2F28A02127AAEFD1E028A08DB91A640F3DD50420349D0C477F11B3CDC8C6C79FE09";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -301,8 +301,8 @@ public class SignTest
 		const string sig = "C873CF9357A46CB0BA91DC0FC83E65BA7194E7B347B2771DAA3EABCFC672F02F9FCD55F5738D3CBD69872731C0A3AC954064E9BF802131ED08477478A13F9E06";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -314,8 +314,8 @@ public class SignTest
 		const string sig = "A9CCE10862E910071D0A1974E65578E5536AACB9E1D90B1274A30D8E4CB437BCD06A221902B59306B825A43C6BAB021A9ECE238C136E2A966897D2594141350D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -327,8 +327,8 @@ public class SignTest
 		const string sig = "2E32A8A934C2B8BC54A1594643A866CCDB3166BD41B6DE3E0C9FC779E7F3F421A0BCC798408ACCC92F47A3A45EF237D5CB7473D768991EE79AC659E1DA8CBB0C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -340,8 +340,8 @@ public class SignTest
 		const string sig = "E57C65FD7C9C445CA7C7723B506E569F278FBCF02E572E30365668EFBF764A4303BD43105B1840FB57C6342ABA8771ED42A20867049AC0C9DD356775AF2FDB01";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -353,8 +353,8 @@ public class SignTest
 		const string sig = "0C1C9BC4C96F71656293DE75394C2C698519A5762FFD0478BD31D3CA137014E68C85682EF77F5F6FE2BDC66C78183AEA5DCCB2FA06CF61B8B08E8E2EAA01F90A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -366,8 +366,8 @@ public class SignTest
 		const string sig = "D5D3E033F51244BD65255AC558B8BFF06C311F7AC534542277945DB3B247633BE264458D116DD5A5FD5EDADF95F561B03511727E5579F1112C70E38217D6FF0D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -379,8 +379,8 @@ public class SignTest
 		const string sig = "74C62500E24E71054C12AD44ADFCC64F938B8BECD4C494A718EC7B6343F5F3DD4299280EC95FBA1B5ECAB0B4FA0017AA84B05A042422249255231C0CC0A80D0C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -392,8 +392,8 @@ public class SignTest
 		const string sig = "8E514CD7AE01ADB20D6C4CA551255C1DFABC4E41531EF23539E29D27626BBD1F11BFD5030B6973981D515C627C3623F87926FAE4FC5CF15EB3C6DB75F7C26A03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -405,8 +405,8 @@ public class SignTest
 		const string sig = "AC347785DC36B2259D84F879CFC8FAF25615DB80288CC594A87759CD611E8B065AD5A57AD95C96085527C4D3E65CEE36BA7EE911097FCCD3625FAC07968B3E04";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -418,8 +418,8 @@ public class SignTest
 		const string sig = "69E609B0DB38EEC29758BA5AF310B52390E4D6AB22E261C326BDF26ABFDF1A485E7D8F074F786B306C49D193BA0553FE7BAA7C27419DF1515BA7B8F8E77D6D07";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -431,8 +431,8 @@ public class SignTest
 		const string sig = "7D7803920DC48D8D681E46571F5501E6B139800D7AEB464EF732FAD469AB0E451D6F31391E74340A03A2B69DB0346B7E727ABF637B70267EAEE9509FA41B5E0C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -444,8 +444,8 @@ public class SignTest
 		const string sig = "531B8436475C77AA90B891B7BED2A0E13FEAA5A603D8A53C27E64645690B9102AC48CDA7238F1CDA635634BDCEAEFC451569A57F0AA72D956B60ED455463BE0C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -457,8 +457,8 @@ public class SignTest
 		const string sig = "AA627DCD21F2A9F35FD1E32E945DD24CC74035DCEC32CF3082B5C7FA1D9FA6B1F99D67CFCE41D54F2461B380956EBFF36CBD21712D8AF3E50B17D14FE2A29F02";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -470,8 +470,8 @@ public class SignTest
 		const string sig = "CC009F182DB0E92262DFC28D9A65EC1546F9A825EA58642D38AACE7B7DFE12189308C3DF71A0A22F8E7FD01AAE11BCCC1DDB1B2F048D7C6C01F10D8D610C830A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -483,8 +483,8 @@ public class SignTest
 		const string sig = "1D8A36B56141025771F0816ADBC44046FFB3C13FDE22C67616BE5574959C936CC4D71D29F9CA7E136C54C3708C8426A9B9C7ADA5137CCA9A2DFD4BFFABAAE303";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -496,8 +496,8 @@ public class SignTest
 		const string sig = "7F7022FD153FBE0D01D174F1B1C0A515AD5A5E92B801F7F9C060789AA87DECEEB6CE11078836A75C54C3BD2313FF9C81C26E4EFD29E4FB388CA86EE2A217C60C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -509,8 +509,8 @@ public class SignTest
 		const string sig = "08AFCC9CE11473F49DF7115B20B820101136248DFFA9A5F84F9A41B56280192B40C43DD3D416FA8B99CFFC608331A623FC2D691C9CEA4DA073368B8CB93E470F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -522,8 +522,8 @@ public class SignTest
 		const string sig = "B752F24584C13AEBB6C253F33C8B5D2AA1B3471607F6D92AA1BD20AA8EA526918F08F4E55B4A6A7FCBB07563949BDC12F16E9C75E564931FA190A55A4CD64608";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -535,8 +535,8 @@ public class SignTest
 		const string sig = "63D5E6937F926729BC25556DDFEF1308D8DEA3476B1240FE0B43D43F14322F654198631E940603468E4D57922CCC1A9F28BF879C737244AD9F408F6D389AA10F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -548,8 +548,8 @@ public class SignTest
 		const string sig = "4971948AAC210159C1E806A615932FDF06AE37A6F06A4368160CEFAA5C2CFA6B35AA254C279AE57D448B910448C13331C23AD4F031A661E5DBFA23227C7E4507";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -561,8 +561,8 @@ public class SignTest
 		const string sig = "E937149644EF70B2F1546E0D5B8FA986E82B40D944A3490DD50B3F051827CC136D7289C50ED1C64364242339FDAF31A7E36F2242BE9E29AB65404CCAF127150D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -574,8 +574,8 @@ public class SignTest
 		const string sig = "F8BCACCA577BC24FE37155AB4111CA0F9C9CDC9BEEEEFF4551126DBF90CCA4CFBFD35500B319F0EAE449583D84A42CF272404D477E6DE08713B50BBB74B3A808";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -587,8 +587,8 @@ public class SignTest
 		const string sig = "C45F6C30CFC167926C5BC3C34F2B29C57FA2C8DB8E67D2DA86345BA02C2013A8C09BF0B1901071C6DCB8FDF74E79F508BC2F4B3B28FE132A06DCF53F6D53990B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -600,8 +600,8 @@ public class SignTest
 		const string sig = "87DDAF5F0AB3B43A898332E423F096863DAA97B13E598EC2E0448E927119114DC933C655C0BCB6921F72BF8374207D730BA9FB8C5A8A891E3A5D8BC9E7E0F707";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -613,8 +613,8 @@ public class SignTest
 		const string sig = "C37C4906FEF387022ADFCD664319DCA282893C6BF66BC41581B9402C36F537ED20A683BC0F52B7C079B18317F7B35B7E70BBB792541956E48206B44149B26501";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -626,8 +626,8 @@ public class SignTest
 		const string sig = "F546F9F56CFE6B976E46E1B71709E4FB7563F4B52570B07DA9CE40B4BDABC1A332CA7C64EE9FE3DBCC6137D0A3DAD6C99F93F466A93A0596CB06494F4BA3CB0A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -639,8 +639,8 @@ public class SignTest
 		const string sig = "E7325CC1B7F4F67A704B9CC87C918777823071CD3BF888C1857DE273D0421BD5699DFAB857A7C90BE2907AFE0C361CC7002D0353C719A96ED3EE0A04B67A7007";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -652,8 +652,8 @@ public class SignTest
 		const string sig = "726E867D23D6DDAC3C69B4B313F7951057197083427B38ED82178BC09DF98B6DF71C59D51649822D618111AB4A5E378A1A9418084DA59787F38B713B2EB59E05";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -665,8 +665,8 @@ public class SignTest
 		const string sig = "A440B334D5D3853F96BF910EEFA5285C9EF8702DC1036D94DF08C7B428BEE796C57033081D0AF0A640DD20A10937628934B1F7A291E88CDC018292BC787C6B08";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -678,8 +678,8 @@ public class SignTest
 		const string sig = "6B3D9033B7B0E926D70FD4991DD1D9B40045E0E27097186FC50860A811C3E659E443F5027ADA8B29D80E31AC75520D68C36431E196F9F691E182481DDBA66B04";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -691,8 +691,8 @@ public class SignTest
 		const string sig = "751422EBABB558FCEE300027413083F7AC206DA8589AABB966204DD22AB4A29825C3ADBA1F9B985E2E4E0C0CE7BF2059CDFA1DDE6FD715C8218E87055C805608";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -704,8 +704,8 @@ public class SignTest
 		const string sig = "CBDD3036A9964F2B000FB43F2A420F235B0FC8AF2A21A3017DA45547AC91C4F322E3BA0822DF6982EBAFA60BFCE41CC52FFA8E3BE7148044F70805F84E585D08";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -717,8 +717,8 @@ public class SignTest
 		const string sig = "16B8630CE5268C4AF312EDF8791DB70FBB1F1ACDA6E1D468A3A266C221574D9E3C666373B4CCB68FDE86270A8EC7C1228A0E4E4073CFE9807364FED3CE231304";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -730,8 +730,8 @@ public class SignTest
 		const string sig = "E37836858C29ECF256586D303F5D09C0A576FA20EA8DB77F026B5372D6C23BD5D2B82F12A3C9D321E38BE3B048F7B43BEAE5D81218DDAED2284058A372CF6904";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -743,8 +743,8 @@ public class SignTest
 		const string sig = "C43B4FF7453A8063321AA877D4F4B2EC70A087D5B50464BCF63FA9270C717FB567A4034F56661F269A0310E07B190493393C7221D94549E33C0C61335A1D9B0D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -756,8 +756,8 @@ public class SignTest
 		const string sig = "00175568E98362C66EA8EEED9E1594F104952C02CDE4E2836C637C26D402E52C0934842390E63CEB166D56BB43723F52E58B36E2A644772D16379DE40CFBC10B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -769,8 +769,8 @@ public class SignTest
 		const string sig = "2D7595F8470BB2F94D52A7DEE30B345E3C8036B034A9DE366714782CC802368B3E9E32883D2A9E6D91816B28C108682499FDF154F912486F0C35B635913F5402";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -782,8 +782,8 @@ public class SignTest
 		const string sig = "4C236E60A00A7DE0E362BCD35B1455104617ADCED5E1BF96BA71D6DC80A7324A097FA3D6F3E91596D58CCD4FF26B5335CB3D4A1622B370ACB4DEB69759408301";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -795,8 +795,8 @@ public class SignTest
 		const string sig = "8D0E034D9880FD9D5A256A39C329AFFB588289524A9C4BC76711B00B03C5367C1D5B24DD75C1AF87386AE35933B7F0925378A7CD3E07237541285657129EA601";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -808,8 +808,8 @@ public class SignTest
 		const string sig = "EF883C9D6D496CE8A476EEA7C399B78C164DB2CED1809D4DE36BD9354488675A8F4771F8CF33E6CE58C79F9D9DCA1485142340C5E0DE194BFB5A5D226A83CD04";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -821,8 +821,8 @@ public class SignTest
 		const string sig = "64EF79C0BCFDFFE8B51FD2CBA90DE31ECED82FFE6CF4EA9A8F2E39E2833C642288AD4A09E501FC151E45D4219211C3A4E79706D852CBC97F8971443DB3415D0E";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -834,8 +834,8 @@ public class SignTest
 		const string sig = "0602F3C8CA10DE8364AC80D3B6B484CA18FC87AE07F6ADA4ADBE79CC8813370FC5BF10CEA9FEED676F990DDE74529E78A188FA85A0B47EDCF51B6DC3DFB8F30D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -847,8 +847,8 @@ public class SignTest
 		const string sig = "1613FD614AE6B562AF159D3348A21E1961F76E6F9B96AC0D2BE9E713978048E066023CF08BC7DBEAF16F27E7C280B9F0264272E488BF7A4702C261F2677CA204";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -860,8 +860,8 @@ public class SignTest
 		const string sig = "B48CAF93B64B987E4E5A5F03F436B02AC4AA0EEE456E81AD4AE19B5AF58F0D2E5DBAFBBD6C08775FCE01B7109D8DB1F3ED5E58BB7198EC09412696726FD68607";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -873,8 +873,8 @@ public class SignTest
 		const string sig = "CA2804DDDC648193F4A43CF320E1DFDE73422D5D60CEB10204CE6B65B476BF5170FF759395B0599B0854B0B1F6F4B5E7DAC304FF22F942E878060C963A25FD0A";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -886,8 +886,8 @@ public class SignTest
 		const string sig = "C957CE99B6DC7DFC01E53D979092DA129F87E88F6688A7787611848757016E24EF007A9D9DE95005B5A9805C397A20BFA17427EB509BAACEC4CA8789A0CE510D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -899,8 +899,8 @@ public class SignTest
 		const string sig = "AD16683F1A3D3A843D2D5B6ADB9EC337DFDE8B2A3A5506C32899AABA519B935A1C85F2BB1A5E3CEC633FE12AFAA8C45B8D6D9BD28988A02D4839A1EF639F3102";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -912,8 +912,8 @@ public class SignTest
 		const string sig = "FFF47B6C21CDD186C0EBB6E9C763BD2AA7D6572F297564F9BF88C06A44A0DCA1793E38984138D4CFD40B0B825D9F6BCCE084EA6F068B4B93270F50DF8FC34902";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -925,8 +925,8 @@ public class SignTest
 		const string sig = "599B4CA4B6FFAD6948086B094920D03122F925E810EC6B1E383F9A939B95A3924F9E2DBDD64E6B3BB8B9A32F9E58BAB418ADCB8A173AF32017B91A9535DA920B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -938,8 +938,8 @@ public class SignTest
 		const string sig = "6FA952CA0EC7A74749DE7741E9C27F7428E63499BC3130446DE0E47E816D9AD8386EA427A352987DE1F5BBBAB542B5D1885E2A6C373028364D29B61856CFCC0B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -951,8 +951,8 @@ public class SignTest
 		const string sig = "10A022F721E33C20BA7C9EFA4874889803EC4E776D36B2AA1AA81AACE7ADE9FADDF49813B15643E0DB3BA9ACB91A5A1BC6306056A08A1F3BF450A0365AFEC20D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -964,8 +964,8 @@ public class SignTest
 		const string sig = "5365D0A3B5DB75285DDDEDEC6EDDF2C48DB30F9355112693D58A753A637F7F8B8440143BD70584534FB29E195767143876A541A218228D6CB4CEC3019E4F180B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -977,8 +977,8 @@ public class SignTest
 		const string sig = "EB4FDF2AD8EE552974650E8414DCCC9780875EE47F06588B109C89736B8D93E10D700B3C15259C97F7E5D9D1ED7670E9750580EFA8C33BBD641D1CA42E440F05";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -990,8 +990,8 @@ public class SignTest
 		const string sig = "46BEB7B070CBFD4533FD49B10DD237A3C4ED976DC73423FE3DA338662FBE2FDB90F104CAF712E3E5B6B70E1EF19B005E21E58221E12DC25963E89A55E7CD7E0E";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1003,8 +1003,8 @@ public class SignTest
 		const string sig = "59F88A985908EA120BB71F34CD477B5E0ED27B2ABCF4F1B19E739E0CE3D1093C2306E6718122CEAF20E358C222D57FFFC5DEAA6FD2206D64C0380F9C4CA12603";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1016,8 +1016,8 @@ public class SignTest
 		const string sig = "FE3C4A1FC084425474572A794BEB3E83F7B265FFF8FDD2B7022D9B1AFFF877500F0564DE2AD40A2C6F2B73C64D9CC430546F73616DD2709D00442DF5F623070C";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1029,8 +1029,8 @@ public class SignTest
 		const string sig = "8A13C9E9FD48799B227AC2E0F214DFE5B1A5686F0DC15DB10E2FFD8C9684AEB670DD956A612503FF1873FC9ACF6E57B71DD3F1856820E4C9CBA91E08F4143E03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1042,8 +1042,8 @@ public class SignTest
 		const string sig = "87DC26681556A81487A05AE4A8B9321D35797820D0A37D12EDBA5BA7A6A8CED18A32DC8D52C252D90571B75D5698838D91EA59BD5731782EC721D0CD6F825B03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1055,8 +1055,8 @@ public class SignTest
 		const string sig = "15C851D264FD979A2B84942DE697223D721B0C73AD240FFDDA1B5839974301B7AFEED79481800883BAE9BBEFDD22029351665E7763B1A9702E25D026BC046C03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1068,8 +1068,8 @@ public class SignTest
 		const string sig = "E2B48B1EA7CF98C8152FD836ECF017DAF8598D12DD6F461D3F1D787AF1DEEDC362573D1041B15B9849EE2C68368EDD22F9988F69AC859301EED081336070AF02";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1081,8 +1081,8 @@ public class SignTest
 		const string sig = "BEC637C03FFD03DD4E9E65F183B41C4CD63425B6248D065360E874EF8342257067909B7236AEACA07816FB4AFF0B0775E767FD9E657E48B2FE3848EDEE274301";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1094,8 +1094,8 @@ public class SignTest
 		const string sig = "FF36587898B60ECF81AEE3A61E64183B2659F241A2C4050E6D813413A39CA6C4D8F46F232E0C75B6702D35B103321EC687AA270D5447BF77170A126EF60D0D01";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1107,8 +1107,8 @@ public class SignTest
 		const string sig = "4D64EEEF21BC9D9697720746D24090E85B39A47C7E046C18543E8E7203317B8B782841073E427A2AFCAEC5BA7065F9733B7F18BD090DD65CFD987C3970C71F03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1120,8 +1120,8 @@ public class SignTest
 		const string sig = "156A81603CB75C3910D62947DF2B7C3512AD212E4F1875B76C97890F6EAF455664E0906B5935A55E08911B7B29830DC6C82398C22A36209F1BCED2F94726910D";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1133,8 +1133,8 @@ public class SignTest
 		const string sig = "730113BB2042DF8CF866F051BCF9D86A91AD155E9B9C7689F12FA84CFD5DAA0492BF9A736B139BE5B6F3FD6A3E35A918180A5A70E4ED3B935443A6D30C37E80F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1146,8 +1146,8 @@ public class SignTest
 		const string sig = "32114FC174E627840DD700875DF30BB313CEC7FD73DCA98258F35819F13C6C9349A8105BFC946D498D2D306B6C4CCCC413D38ECF55C858DA34C07F3F6224CA08";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1159,8 +1159,8 @@ public class SignTest
 		const string sig = "42B795770A8E50121D2A7E8E110A1FF022AA090FC3CED6E13656D785EB4AE03D58B2E6AA6DA74C7C8F8F8D7D81E1634F74E29F2E742FBF093C6A5581DC5A2C0B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1172,8 +1172,8 @@ public class SignTest
 		const string sig = "CDEBC4DFF87D46FB6299D7E397F0164E301C47F2EC2FCCE8B9FE11CF05A4C4792AB84B2000193F5A31EED2B179B3285F482103BC2B71520E2E91B30CDD8BAA01";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1185,8 +1185,8 @@ public class SignTest
 		const string sig = "691E1308EF1837011032CB1AC4C91FAF138B1EB5B430B1E927159805FE098CB214FDD479177613D2CDC3DBE1C9002175289B55A763761194337F7CD19FAEDB01";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1198,8 +1198,8 @@ public class SignTest
 		const string sig = "6E7EA8F42361E7958C9CFE45B945E2F543FB016F47A36F1B83649BB56E025BC05045A69A9748D280C5E7B95EC0064D365D5E0116F44C3AF5663D07FE92566D09";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1211,8 +1211,8 @@ public class SignTest
 		const string sig = "2071DA29931A120F389DEA9C90F0AF82AA6BE0A474F9231D0A9731763520B4F1A2608D9ED4D897C35B78991A654F5057FA06377FED078A2EA6B52A37F5C5F30E";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1224,8 +1224,8 @@ public class SignTest
 		const string sig = "9A5999F578D6E9DB6F95CF168979569B258EED2E7CA7B0BF19FC57B0E188771179180096C559C1396659924672435C61E377A88A7CC5BD179B112D0E749D6306";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1237,8 +1237,8 @@ public class SignTest
 		const string sig = "105FFC243FD18AE0B625F1CD048DCF77F24942E11627CEE0A3744BEBF697852290EA7CCCD32B725DD3354811320632F6F3EFFBB0518F70075A631CA5BD0DDF06";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1250,8 +1250,8 @@ public class SignTest
 		const string sig = "67A12E32DC41BD399E72E493F6C8563187A616F8989922E712B7BD96FE87D96B5D2A07100F7FA720C26243D9EB7C1930CF23375984D6C9DE03A4C342E5CF610B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1263,8 +1263,8 @@ public class SignTest
 		const string sig = "3CBA3DB501AE0770DB484FBA50617A1611DD4F9062D056D3ECA67F7D05538137FA37DCBE760B4BE176D8D97FA04203013D66C1DA07AB7B89C946361E0227880F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1276,8 +1276,8 @@ public class SignTest
 		const string sig = "1F60371E0B998A78E6BFA9855BE439393F7F94CC7A87C72521F460080B8A7414C5FAC22BBEEA105B352014995268CA2EF3A17B5BA30BE3780232483EC64FA90F";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1289,8 +1289,8 @@ public class SignTest
 		const string sig = "DD8B2AFB3CCE85DBDB1E105713218C8F5BB7465C4FA2C5DC2BA91152425FF7AA5B473C1AC7D7DF6ADB3F3400A1E6810ED562D67D7E5CD24B963254938155BC03";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1302,8 +1302,8 @@ public class SignTest
 		const string sig = "4B8026776E0675F15F23A15643311B5A4A41B0FF3D5B1B3BD2FB4954EAFB87117D0BE6F95637A41EF2734D679F540FDE3E6D21E55C36E95C83444E521948E10B";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
@@ -1315,8 +1315,8 @@ public class SignTest
 		const string sig = "6641BAF99916F55D914EE99D8F03CE5B5DF86CA069F947472B60632133360B88E662C9241942C3FA2D7A6D8709079E8D247369686086CF3E3F5004394AFB6F08";
 		var privateKey = new PrivateKey(pKey);
 		var keyPair = new KeyPair(privateKey);
-		var publicKey = Converter.Uint8ToHex(keyPair.PublicKey.bytes);
-		var signature = Converter.Uint8ToHex(keyPair.Sign(Converter.HexToUint8(data)).bytes);
+		var publicKey = Converter.BytesToHex(keyPair.PublicKey.bytes);
+		var signature = Converter.BytesToHex(keyPair.Sign(Converter.HexToBytes(data)).bytes);
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}

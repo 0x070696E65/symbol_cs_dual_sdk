@@ -9,11 +9,11 @@ public class CatbufferTest
 {
     private static string Test<T>(string hex, Func<BinaryReader, T> func) where T: ISerializer
     {
-        var barr = Converter.HexToUint8(hex);
+        var barr = Converter.HexToBytes(hex);
         var ms = new MemoryStream(barr);
         var br = new BinaryReader(ms);
         var d = func(br);
-        return Converter.Uint8ToHex(d.Serialize());
+        return Converter.BytesToHex(d.Serialize());
     }
     [Test]public void MosaicMetadataTransaction0(){    Assert.AreEqual(Transactions.transactions[0].value, Test(Transactions.transactions[0].value, Transactions.transactions[0].func));}
 [Test]public void MosaicMetadataTransaction1(){    Assert.AreEqual(Transactions.transactions[1].value, Test(Transactions.transactions[1].value, Transactions.transactions[1].func));}

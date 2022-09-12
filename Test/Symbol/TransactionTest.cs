@@ -23,7 +23,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_single_2(){
@@ -39,7 +39,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_agregate_1(){
@@ -67,7 +67,7 @@ public class TransactionTest
 			{"TransactionsHash", "553D90AFA4B171840BCBA16DB6F82A767C98344D5F6D5F2B0B05A8902D01BD4D"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_agregate_2(){
@@ -95,7 +95,7 @@ public class TransactionTest
 			{"TransactionsHash", "FFBAABB2E7655A0D6388DA5736FB9BA45EF6F08DB5D2659F427467FD80D6A341"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_single_1(){
@@ -110,7 +110,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_single_2(){
@@ -125,7 +125,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_agregate_1(){
@@ -152,7 +152,7 @@ public class TransactionTest
 			{"TransactionsHash", "5E870D460A2A239AE83466240C3ED08742134705FB55A85E3536527D4EA07210"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_agregate_2(){
@@ -179,7 +179,7 @@ public class TransactionTest
 			{"TransactionsHash", "06C15A5AFC09E2EB3DE1B42E3B8E9674438C7D60995469ACDBED1D453F596269"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_single_1(){
@@ -196,7 +196,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_single_2(){
@@ -213,7 +213,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_agregate_1(){
@@ -242,7 +242,7 @@ public class TransactionTest
 			{"TransactionsHash", "21CD7DF1DCA82BB7DEF6F46B360EDF56376CCE4C8B80D17F22AD39D5321D052C"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_agregate_2(){
@@ -271,7 +271,7 @@ public class TransactionTest
 			{"TransactionsHash", "5AA2E82C4CDE5674CF0EA42BB6128CF177E5135126645C2BE70956F2018A08B4"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_single_1(){
@@ -287,7 +287,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_single_2(){
@@ -303,7 +303,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_agregate_1(){
@@ -331,7 +331,7 @@ public class TransactionTest
 			{"TransactionsHash", "C9B816E2B225F39322E72150DADA9F4A8C6F46C2A429F6DF4C89776A4CA8443B"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_agregate_2(){
@@ -359,7 +359,7 @@ public class TransactionTest
 			{"TransactionsHash", "3B8D31922E345C3F457E73D6DA388FA8F09E0C157AA9E77680A4EBBC3B070562"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_single_1(){
@@ -375,7 +375,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_single_2(){
@@ -391,7 +391,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_agregate_1(){
@@ -419,7 +419,7 @@ public class TransactionTest
 			{"TransactionsHash", "C257D6202832DE1D7C1632853DA071244EAE31867DD5AEBD2E3A2232B7772D2D"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_agregate_2(){
@@ -447,7 +447,7 @@ public class TransactionTest
 			{"TransactionsHash", "85170A5F6579EC36FC651524D1F953744E635AEF2D890C3DD696C34F683A0391"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_single_1(){
@@ -463,7 +463,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_single_2(){
@@ -479,7 +479,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_agregate_1(){
@@ -507,7 +507,7 @@ public class TransactionTest
 			{"TransactionsHash", "CC226F4051790D1150EA87A77C6425DCC44CB90BB827C859F57CD2963147788F"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_agregate_2(){
@@ -535,7 +535,7 @@ public class TransactionTest
 			{"TransactionsHash", "7C624B5B7854988BC31B8B7CBE48B9BD388A6247A45AB5591D4832A2ADB5C17A"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AggregateBondedTransaction_aggregate_bonded_agregate_1(){
@@ -583,7 +583,7 @@ public class TransactionTest
 			{"TransactionsHash", "3F2BE873F569828C88CD0DE37BB31C998FA0AAEB3308A1FFBF3D01CE49E8E9F7"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AggregateCompleteTransaction_aggregate_complete_agregate_1(){
@@ -643,7 +643,7 @@ public class TransactionTest
 			{"TransactionsHash", "DCE7DC355A58AEDC834B89C2E3D42DD07DBB8C9167A046856CA56EBE4EEE5AC2"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void HashLockTransaction_hash_lock_single_1(){
@@ -664,7 +664,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void HashLockTransaction_hash_lock_agregate_1(){
@@ -697,7 +697,7 @@ public class TransactionTest
 			{"TransactionsHash", "F0197674A946DD65165C9E7FFD0CAA15745F2E304BB9DD41ABAF2630112592D8"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAddressRestrictionTransaction_mosaic_address_restriction_single_1(){
@@ -715,7 +715,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAddressRestrictionTransaction_mosaic_address_restriction_agregate_1(){
@@ -745,7 +745,7 @@ public class TransactionTest
 			{"TransactionsHash", "7B6ED24A1F78B4BEC3900FBFED34AC0D18ECD29D2EB179BD0C46291107EDDEEF"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_single_1(){
@@ -761,7 +761,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_single_2(){
@@ -777,7 +777,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_agregate_1(){
@@ -805,7 +805,7 @@ public class TransactionTest
 			{"TransactionsHash", "2FDCAABBB776C8A409B39AB27525383DC06A271643372B03F622F886C08B44B6"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_agregate_2(){
@@ -833,7 +833,7 @@ public class TransactionTest
 			{"TransactionsHash", "05270A1D4E45A3D4898353D52F890D573445F81914D96DBF5A9A7EA113564E34"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_1(){
@@ -850,7 +850,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_2(){
@@ -867,7 +867,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_3(){
@@ -884,7 +884,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_1(){
@@ -913,7 +913,7 @@ public class TransactionTest
 			{"TransactionsHash", "E22385E28D66F4A783AC56C45640070DB628B0A9192B1F773DED09C41123ADFA"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_2(){
@@ -942,7 +942,7 @@ public class TransactionTest
 			{"TransactionsHash", "9F08B173200F10F08F6FC4C6E1B37DAE1C3B425A98C8D1EB4B3BC44AF6B2906E"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_3(){
@@ -971,7 +971,7 @@ public class TransactionTest
 			{"TransactionsHash", "D1C267AFAC897195F41696647A89AC5E0B75A0910D0F2A3DD404F93113C35633"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_single_1(){
@@ -991,7 +991,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_single_2(){
@@ -1011,7 +1011,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_agregate_1(){
@@ -1043,7 +1043,7 @@ public class TransactionTest
 			{"TransactionsHash", "94049515EBF52723CC7B217DE82D79D5ADFFF719C1934CB50AE91693FADEDC25"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_agregate_2(){
@@ -1075,7 +1075,7 @@ public class TransactionTest
 			{"TransactionsHash", "8D93F6BF096B6D02432E54A73A39F70937971A10926195552EFC67396C9F33AB"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_single_1(){
@@ -1093,7 +1093,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_single_2(){
@@ -1111,7 +1111,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_agregate_1(){
@@ -1141,7 +1141,7 @@ public class TransactionTest
 			{"TransactionsHash", "E2553E2E3FC4A959406B0F1AF9ADB9FC67D558615D523FD24119A7915FD00468"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_agregate_2(){
@@ -1171,7 +1171,7 @@ public class TransactionTest
 			{"TransactionsHash", "494C04ABA6F7275CDE4C6C829C99AC3C668EE50E46F6324020E0EADA8B08E518"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_single_1(){
@@ -1187,7 +1187,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_single_2(){
@@ -1203,7 +1203,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_agregate_1(){
@@ -1231,7 +1231,7 @@ public class TransactionTest
 			{"TransactionsHash", "6FFAC840B2C866960FCBCF42AF16B113FFE309A0991DFC0E4F3772E7AFC2FB69"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_agregate_2(){
@@ -1259,7 +1259,7 @@ public class TransactionTest
 			{"TransactionsHash", "137E5D6F7F63CCB9E2B51A4C22481D2766E8A4FCD6A387E667A35723F2C68428"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MultisigAccountModificationTransaction_multisig_account_modification_single_1(){
@@ -1280,7 +1280,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MultisigAccountModificationTransaction_multisig_account_modification_agregate_1(){
@@ -1313,7 +1313,7 @@ public class TransactionTest
 			{"TransactionsHash", "23CC3A9D303266D2E163A8B8AA1A991F3EC9012B7F7490C6870BB5F6ED9E4D8D"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_single_1(){
@@ -1331,7 +1331,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_single_2(){
@@ -1349,7 +1349,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_agregate_1(){
@@ -1379,7 +1379,7 @@ public class TransactionTest
 			{"TransactionsHash", "A716D958F0076204E3F1DDD9CCFB4087C8B934826E977A978914CF3D619494EE"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_agregate_2(){
@@ -1409,7 +1409,7 @@ public class TransactionTest
 			{"TransactionsHash", "A92D6804B56AF5C4439906441DEE2EC265756E9D95914230483A4D1BF6283C1D"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_single_1(){
@@ -1426,7 +1426,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_single_2(){
@@ -1443,7 +1443,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_agregate_1(){
@@ -1472,7 +1472,7 @@ public class TransactionTest
 			{"TransactionsHash", "64148373332A1284E316AC070194019D786C29F3B879A0AAFACEC2E393D0FCB5"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_agregate_2(){
@@ -1501,7 +1501,7 @@ public class TransactionTest
 			{"TransactionsHash", "9777CD6B81EED8832122E7D4692D5AC09D6144D30E3A8D1DF559FDB21C1B4FAC"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NodeKeyLinkTransaction_node_key_link_single_1(){
@@ -1516,7 +1516,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NodeKeyLinkTransaction_node_key_link_agregate_1(){
@@ -1543,7 +1543,7 @@ public class TransactionTest
 			{"TransactionsHash", "D1E0E4543AD54FB41747EAA74009AE05DB685DD0FB2B8CB6385327DCC71ED8B2"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_single_1(){
@@ -1566,7 +1566,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_single_2(){
@@ -1589,7 +1589,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_agregate_1(){
@@ -1624,7 +1624,7 @@ public class TransactionTest
 			{"TransactionsHash", "36927A7B0987EB9A13129BA53AC0597E96F9D8F2C8306EA3F750518ACD15529A"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_agregate_2(){
@@ -1659,7 +1659,7 @@ public class TransactionTest
 			{"TransactionsHash", "81F7349CC9785016A1435572751389F02926573244D7F97E14F811D60627750A"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretProofTransaction_secret_proof_single_1(){
@@ -1676,7 +1676,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretProofTransaction_secret_proof_agregate_1(){
@@ -1705,7 +1705,7 @@ public class TransactionTest
 			{"TransactionsHash", "2082780E43D0C6AB646FF178295F5B7CE48B9DE845A3DA98EF595433BDA184E9"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_1(){
@@ -1727,7 +1727,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_2(){
@@ -1753,7 +1753,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_3(){
@@ -1783,7 +1783,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_4(){
@@ -1802,7 +1802,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_5(){
@@ -1825,7 +1825,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_6(){
@@ -1852,7 +1852,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_1(){
@@ -1886,7 +1886,7 @@ public class TransactionTest
 			{"TransactionsHash", "708124B1E5E63878225B38A343BDB300A1A06150343BA85DFC608331265D0DA5"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_2(){
@@ -1924,7 +1924,7 @@ public class TransactionTest
 			{"TransactionsHash", "F34F69D90B202FC2752058059E3BC49A8CA4BE331D5F49C2C13B8F2A9A3BC331"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_3(){
@@ -1966,7 +1966,7 @@ public class TransactionTest
 			{"TransactionsHash", "611B90A6E05EE33D30D87DE5B58505B8B9807E54BB8B9229EAF95DBBD43819BC"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_4(){
@@ -1997,7 +1997,7 @@ public class TransactionTest
 			{"TransactionsHash", "AB122F570B57922F4B25A37E13EC53E14BE4A6A3F38C06CE4AF510060633667D"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_5(){
@@ -2032,7 +2032,7 @@ public class TransactionTest
 			{"TransactionsHash", "9ACF4807E95D6989038C5FCFEA053C55077439DFB93C06C98237C73815CABE87"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_6(){
@@ -2071,7 +2071,7 @@ public class TransactionTest
 			{"TransactionsHash", "754207E883B1237A94D2892613D382C17B0F0A2EC93042871724F6AE0D991ABA"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_single_1(){
@@ -2088,7 +2088,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_single_2(){
@@ -2105,7 +2105,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_agregate_1(){
@@ -2134,7 +2134,7 @@ public class TransactionTest
 			{"TransactionsHash", "56C4DAA441CE9528C6F0F1431E6FDD78AD33943E568964DF3AADAA9023B97F26"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_agregate_2(){
@@ -2163,7 +2163,7 @@ public class TransactionTest
 			{"TransactionsHash", "7BEFAC9DE1ED91FF6A7F9252CBDF9825C5DEF3D65EBC9CE6D07475854D69978C"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_single_1(){
@@ -2178,7 +2178,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_single_2(){
@@ -2193,7 +2193,7 @@ public class TransactionTest
 			{"Deadline", 8207562320463688160},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_agregate_1(){
@@ -2220,7 +2220,7 @@ public class TransactionTest
 			{"TransactionsHash", "DFED773D9A8101C3DEE6A0F1B8F2D2414FAA3EA509980ED2A6A68DD1F11C32B5"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_agregate_2(){
@@ -2247,6 +2247,6 @@ public class TransactionTest
 			{"TransactionsHash", "20DBC70A82354FC46E727F9925707398981300E40BE3778FF9EFBE86D722AF59"},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 }

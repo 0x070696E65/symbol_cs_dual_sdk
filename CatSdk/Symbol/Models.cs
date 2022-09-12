@@ -3077,7 +3077,7 @@ public class SecretProofTransaction : ITransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"secret: {Secret}, ";
 		result += $"hashAlgorithm: {HashAlgorithm}, ";
-		result += $"proof: hex({Converter.Uint8ToHex(Proof)}), ";
+		result += $"proof: hex({Converter.BytesToHex(Proof)}), ";
 		result += ")";
 		return result;
 	}
@@ -3208,7 +3208,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"secret: {Secret}, ";
 		result += $"hashAlgorithm: {HashAlgorithm}, ";
-		result += $"proof: hex({Converter.Uint8ToHex(Proof)}), ";
+		result += $"proof: hex({Converter.BytesToHex(Proof)}), ";
 		result += ")";
 		return result;
 	}
@@ -3364,7 +3364,7 @@ public class AccountMetadataTransaction : ITransaction {
 		result += $"targetAddress: {TargetAddress}, ";
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -3493,7 +3493,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 		result += $"targetAddress: {TargetAddress}, ";
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -3658,7 +3658,7 @@ public class MosaicMetadataTransaction : ITransaction {
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"targetMosaicId: {TargetMosaicId}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -3796,7 +3796,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"targetMosaicId: {TargetMosaicId}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -4084,7 +4084,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"targetNamespaceId: {TargetNamespaceId}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -4222,7 +4222,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 		result += $"scopedMetadataKey: {Converter.ToString(ScopedMetadataKey)}, ";
 		result += $"targetNamespaceId: {TargetNamespaceId}, ";
 		result += $"valueSizeDelta: {Converter.ToString(ValueSizeDelta)}, ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -6185,7 +6185,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 
 		result += $"id: {Id}, ";
 		result += $"registrationType: {RegistrationType}, ";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		result += ")";
 		return result;
 	}
@@ -6353,7 +6353,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 
 		result += $"id: {Id}, ";
 		result += $"registrationType: {RegistrationType}, ";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		result += ")";
 		return result;
 	}
@@ -8155,7 +8155,7 @@ public class TransferTransaction : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
-		result += $"message: hex({Converter.Uint8ToHex(Message)}), ";
+		result += $"message: hex({Converter.BytesToHex(Message)}), ";
 		result += ")";
 		return result;
 	}
@@ -8294,7 +8294,7 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 		result += $"type: {Type}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
-		result += $"message: hex({Converter.Uint8ToHex(Message)}), ";
+		result += $"message: hex({Converter.BytesToHex(Message)}), ";
 		result += ")";
 		return result;
 	}
@@ -8337,7 +8337,7 @@ public class TransactionFactory {
 	}
 
 	public static ITransaction Deserialize(string payload) {
-		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
@@ -8411,7 +8411,7 @@ public class EmbeddedTransactionFactory {
 	}
 
 	public static IBaseTransaction Deserialize(string payload) {
-		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}

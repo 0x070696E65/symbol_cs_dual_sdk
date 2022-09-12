@@ -201,7 +201,7 @@ class ArrayPrinter(Printer):
 
 	@staticmethod
 	def to_string(field_name):
-		return f'Converter.Uint8ToHex({field_name})'
+		return f'Converter.BytesToHex({field_name})'
 
 
 class BuiltinPrinter(Printer):

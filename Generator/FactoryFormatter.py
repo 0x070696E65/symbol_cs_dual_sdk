@@ -104,7 +104,7 @@ class FactoryFormatter(AbstractTypeFormatter):
 		return MethodDescriptor(body=body)
 
 	def get_deserialize_descriptor2(self):
-		body = 'using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());\n'
+		body = 'using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());\n'
 		body += 'using var br = new BinaryReader(ms);\n'
 		body += 'return Deserialize(br);'
 

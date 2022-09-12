@@ -18,13 +18,13 @@ public class Network : Network<Address>
         "mainnet",
         0x68,
         new DateTime(2021, 2, 16, 0, 6, 25),
-        new Hash256(Converter.HexToUint8("57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6"))
+        new Hash256(Converter.HexToBytes("57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6"))
         );
     public static Network TestNet = new Network(
         "testnet",
         0x98,
         new DateTime(2021, 10, 25, 14, 0, 47),
-        new Hash256(Converter.HexToUint8("7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836"))
+        new Hash256(Converter.HexToBytes("7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836"))
     );
     public Network(string name, byte identifier, DateTime epochTime, Hash256? generationHashSeed = null) : base(
         name,

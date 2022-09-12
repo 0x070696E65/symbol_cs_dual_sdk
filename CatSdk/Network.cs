@@ -29,7 +29,7 @@ public class Network<T>
 	 */
 	public T PublicKeyToAddress(string publicKey)
 	{
-		return PublicKeyToAddress(Converter.HexToUint8(publicKey));
+		return PublicKeyToAddress(Converter.HexToBytes(publicKey));
     }
 	
 	public T PublicKeyToAddress(byte[] publicKey)

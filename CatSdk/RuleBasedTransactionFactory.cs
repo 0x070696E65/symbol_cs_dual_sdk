@@ -125,7 +125,7 @@ public class RuleBasedTransactionFactory
                     || podClass == typeof(VotingPublicKey)
                    )
                 {
-                    value = value is string s ? Converter.HexToUint8(s) : value;
+                    value = value is string s ? Converter.HexToBytes(s) : value;
                     instance = Activator.CreateInstance(podClass, value);
                     if (instance == null)  throw new NullReferenceException("instance is null");
                     return instance;
@@ -146,14 +146,14 @@ public class RuleBasedTransactionFactory
                 }
                 if (podClass == typeof(Signature))
                 {
-                    value = value is string s ? Converter.HexToUint8(s) : value;
+                    value = value is string s ? Converter.HexToBytes(s) : value;
                     instance = Activator.CreateInstance(podClass, value);
                     if (instance == null)  throw new NullReferenceException("instance is null");
                     return instance;
                 }
                 if (podClass == typeof(Signature))
                 {
-                    value = value is string s ? Converter.HexToUint8(s) : value;
+                    value = value is string s ? Converter.HexToBytes(s) : value;
                     instance = Activator.CreateInstance(podClass, value);
                     if (instance == null)  throw new NullReferenceException("instance is null");
                     return instance;

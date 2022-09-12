@@ -11,7 +11,7 @@ using Address = CatSdk.Symbol.Address;
 namespace Test.Symbol;
 public class TransactionNonParserTest
 {
-    private readonly SymbolFacade Facade = new (Network.TestNet);
+    private readonly SymbolFacade Facade = new (Network.TestNet);    
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_single_1(){
 		var payload = "D0000000000000007654F445168FB9F77BC3A5E963DD3F77C0E9912A1C21FE5650C664F7F1F2F127A7FBEB7A29994FFF36A21234E4ED442D5B6236F4CCA37FB21D3A3A15CB02AF9B566803232ECF0E459D2454134E133B9376B9A55EAF8781A45B0BBE3813B0C3CD0000000001985041E0FEEEEFFEEEEFFEE0711EE7711EE77101000201000000009841E5B8E40781CF74DABF592817DE48711D778648DEAFB298F409274B52FABBFBCF7E7DF7E20DE1D0C3F657FB8595C1989059321905F681BCF47EA33BBF5E6F8298B5440854FDED";
@@ -24,13 +24,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ")),new UnresolvedAddress(Converter.StringToAddress("TD2ASJ2LKL5LX66PPZ67PYQN4HIMH5SX7OCZLQI"))}},
 			{"RestrictionDeletions", new[] {new UnresolvedAddress(Converter.StringToAddress("TCIFSMQZAX3IDPHUP2RTXP26N6BJRNKEBBKP33I"))}},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("566803232ecf0e459d2454134e133b9376b9a55eaf8781a45b0bbe3813b0c3cd"))},
-			{"Signature", new Signature(Converter.HexToUint8("7654F445168FB9F77BC3A5E963DD3F77C0E9912A1C21FE5650C664F7F1F2F127A7FBEB7A29994FFF36A21234E4ED442D5B6236F4CCA37FB21D3A3A15CB02AF9B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("566803232ecf0e459d2454134e133b9376b9a55eaf8781a45b0bbe3813b0c3cd"))},
+			{"Signature", new Signature(Converter.HexToBytes("7654F445168FB9F77BC3A5E963DD3F77C0E9912A1C21FE5650C664F7F1F2F127A7FBEB7A29994FFF36A21234E4ED442D5B6236F4CCA37FB21D3A3A15CB02AF9B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_single_2(){
@@ -46,13 +46,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {new UnresolvedAddress(Converter.StringToAddress("TCIFSMQZAX3IDPHUP2RTXP26N6BJRNKEBBKP33I"))}},
 			{"RestrictionDeletions", System.Array.Empty<UnresolvedAddress>()},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("c6a4f395e4f92a4a50dc582327d1961eb4a8d09c456bac06ca3a960e59b47fc2"))},
-			{"Signature", new Signature(Converter.HexToUint8("9C6E47C9C44E280591169EF500A0EE7902D0537B7AC4A3150738637FA76B2CE2F222DB667D37D9737AF0DC81996847EA4628F7583CADBB43BC4216B51EF7D2F4"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("c6a4f395e4f92a4a50dc582327d1961eb4a8d09c456bac06ca3a960e59b47fc2"))},
+			{"Signature", new Signature(Converter.HexToBytes("9C6E47C9C44E280591169EF500A0EE7902D0537B7AC4A3150738637FA76B2CE2F222DB667D37D9737AF0DC81996847EA4628F7583CADBB43BC4216B51EF7D2F4"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_agregate_1(){
@@ -73,18 +73,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8ea547c12b78537039bc5995d09e02731c17fd886a1379161124ab6323cdc8e8"))},
-			{"Signature", new Signature(Converter.HexToUint8("5BA55458518264117F13F8DA691B509FBFA3BAC5A6B127506DCE7B89CB92C692699937AB802C4FA695145697E236BE13869CAA10F88FD4307DCEAC637E4AECF6"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8ea547c12b78537039bc5995d09e02731c17fd886a1379161124ab6323cdc8e8"))},
+			{"Signature", new Signature(Converter.HexToBytes("5BA55458518264117F13F8DA691B509FBFA3BAC5A6B127506DCE7B89CB92C692699937AB802C4FA695145697E236BE13869CAA10F88FD4307DCEAC637E4AECF6"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("553D90AFA4B171840BCBA16DB6F82A767C98344D5F6D5F2B0B05A8902D01BD4D"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("553D90AFA4B171840BCBA16DB6F82A767C98344D5F6D5F2B0B05A8902D01BD4D"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountAddressRestrictionTransaction_account_address_restriction_agregate_2(){
@@ -107,48 +107,48 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("08cf6327864f5a0c086f376f1eea745a38e8f7da338a361f170930320405de41"))},
-			{"Signature", new Signature(Converter.HexToUint8("4A5F5DDBA86EB1FBB16D9E3523D6D546F5953843011B047945531BB2FB4E96B72AD213B8064516AF31E23EEAD047EDE8EA0CEB1FE452E5A0B59FA550D564E124"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("08cf6327864f5a0c086f376f1eea745a38e8f7da338a361f170930320405de41"))},
+			{"Signature", new Signature(Converter.HexToBytes("4A5F5DDBA86EB1FBB16D9E3523D6D546F5953843011B047945531BB2FB4E96B72AD213B8064516AF31E23EEAD047EDE8EA0CEB1FE452E5A0B59FA550D564E124"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("FFBAABB2E7655A0D6388DA5736FB9BA45EF6F08DB5D2659F427467FD80D6A341"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("FFBAABB2E7655A0D6388DA5736FB9BA45EF6F08DB5D2659F427467FD80D6A341"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_single_1(){
 		var payload = "A1000000000000009CB67E932354C553B34E2B8E6253B3E0C3A30E00D97D3F402B846975D681650CFB5BEF94415FDFE02EDEC9EA0F45D4728E65588F21BCC8A465E16D356D209964A087A6358B302A25EDBD5B990AA0BBBC04C9C13911C579C8538CE880E368A8AC0000000001984C41E0FEEEEFFEEEEFFEE0711EE7711EE771F6503F78FBF99544B906872DDB392F4BE707180D285E7919DBACEF2E9573B1E601";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.ACCOUNT_KEY_LINK},
-			{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("F6503F78FBF99544B906872DDB392F4BE707180D285E7919DBACEF2E9573B1E6"))},
+			{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("F6503F78FBF99544B906872DDB392F4BE707180D285E7919DBACEF2E9573B1E6"))},
 			{"LinkAction", LinkAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("a087a6358b302a25edbd5b990aa0bbbc04c9c13911c579c8538ce880e368a8ac"))},
-			{"Signature", new Signature(Converter.HexToUint8("9CB67E932354C553B34E2B8E6253B3E0C3A30E00D97D3F402B846975D681650CFB5BEF94415FDFE02EDEC9EA0F45D4728E65588F21BCC8A465E16D356D209964"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("a087a6358b302a25edbd5b990aa0bbbc04c9c13911c579c8538ce880e368a8ac"))},
+			{"Signature", new Signature(Converter.HexToBytes("9CB67E932354C553B34E2B8E6253B3E0C3A30E00D97D3F402B846975D681650CFB5BEF94415FDFE02EDEC9EA0F45D4728E65588F21BCC8A465E16D356D209964"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_single_2(){
 		var payload = "A100000000000000797C28A2076666369AA06111404F0B6861B820CB01BBCD2CD0863700A4E85E8EF93CF4F85A8BCAF8DBED970839C05C36B5A911D05D4B4C525950997FD8F6F9D75C818DD51BE7DDC35A4EAD66112ACB526F7027EAA79948AEC072F4F840B0B2190000000001984C41E0FEEEEFFEEEEFFEE0711EE7711EE7719801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B600";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.ACCOUNT_KEY_LINK},
-			{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+			{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 			{"LinkAction", LinkAction.UNLINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("5c818dd51be7ddc35a4ead66112acb526f7027eaa79948aec072f4f840b0b219"))},
-			{"Signature", new Signature(Converter.HexToUint8("797C28A2076666369AA06111404F0B6861B820CB01BBCD2CD0863700A4E85E8EF93CF4F85A8BCAF8DBED970839C05C36B5A911D05D4B4C525950997FD8F6F9D7"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("5c818dd51be7ddc35a4ead66112acb526f7027eaa79948aec072f4f840b0b219"))},
+			{"Signature", new Signature(Converter.HexToBytes("797C28A2076666369AA06111404F0B6861B820CB01BBCD2CD0863700A4E85E8EF93CF4F85A8BCAF8DBED970839C05C36B5A911D05D4B4C525950997FD8F6F9D7"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_agregate_1(){
@@ -159,23 +159,23 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.ACCOUNT_KEY_LINK},
-						{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("F6503F78FBF99544B906872DDB392F4BE707180D285E7919DBACEF2E9573B1E6"))},
+						{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("F6503F78FBF99544B906872DDB392F4BE707180D285E7919DBACEF2E9573B1E6"))},
 						{"LinkAction", LinkAction.LINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8e3d50eb3ef46492a8a57201bd108749c3dbf1ab3c8376fd484ea4de167697b4"))},
-			{"Signature", new Signature(Converter.HexToUint8("C55F4A7382CFD21C3C7ED7B390D9B324B2CCF6C1B30F8B19D179600EC634F5B2570B4B9DFEB5FC88B8EE77061DEF9C4306FBDB22049DA2EB8ECF0A71D9052695"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8e3d50eb3ef46492a8a57201bd108749c3dbf1ab3c8376fd484ea4de167697b4"))},
+			{"Signature", new Signature(Converter.HexToBytes("C55F4A7382CFD21C3C7ED7B390D9B324B2CCF6C1B30F8B19D179600EC634F5B2570B4B9DFEB5FC88B8EE77061DEF9C4306FBDB22049DA2EB8ECF0A71D9052695"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("5E870D460A2A239AE83466240C3ED08742134705FB55A85E3536527D4EA07210"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("5E870D460A2A239AE83466240C3ED08742134705FB55A85E3536527D4EA07210"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountKeyLinkTransaction_account_key_link_agregate_2(){
@@ -186,23 +186,23 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.ACCOUNT_KEY_LINK},
-						{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+						{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 						{"LinkAction", LinkAction.UNLINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("9871ae2f65fa020679d484f4580d5f10d7a782a29f6c233a937e8b2306db111f"))},
-			{"Signature", new Signature(Converter.HexToUint8("EAE6B4492EE5071763F8BB2F1CC6EF9A0674C12BC7F37D132E629C077F3AD91B17C756F6B80AC3080756F1284AE8347BBF5933E0000A4661150496DFD39CBCD3"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("9871ae2f65fa020679d484f4580d5f10d7a782a29f6c233a937e8b2306db111f"))},
+			{"Signature", new Signature(Converter.HexToBytes("EAE6B4492EE5071763F8BB2F1CC6EF9A0674C12BC7F37D132E629C077F3AD91B17C756F6B80AC3080756F1284AE8347BBF5933E0000A4661150496DFD39CBCD3"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("06C15A5AFC09E2EB3DE1B42E3B8E9674438C7D60995469ACDBED1D453F596269"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("06C15A5AFC09E2EB3DE1B42E3B8E9674438C7D60995469ACDBED1D453F596269"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_single_1(){
@@ -212,14 +212,14 @@ public class TransactionNonParserTest
 			{"TargetAddress", new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 			{"ScopedMetadataKey", 10},
 			{"ValueSizeDelta", 10},
-			{"Value", Converter.HexToUint8("313233424143")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("0eed4b70aa1ff889d236fa6d63a3aed04c8f9a25eda329fe3e82db57d09f005b"))},
-			{"Signature", new Signature(Converter.HexToUint8("67F3E60E1198E0D30A4BAE9C9AAFCC22836260CD161B22FEF201A9A19F9DB87BE4FED108E1665CD9F38787C87F3066B0E790F88DAA90C2C2DD0AB44DACB62AB1"))},
+			{"Value", Converter.HexToBytes("313233424143")},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("0eed4b70aa1ff889d236fa6d63a3aed04c8f9a25eda329fe3e82db57d09f005b"))},
+			{"Signature", new Signature(Converter.HexToBytes("67F3E60E1198E0D30A4BAE9C9AAFCC22836260CD161B22FEF201A9A19F9DB87BE4FED108E1665CD9F38787C87F3066B0E790F88DAA90C2C2DD0AB44DACB62AB1"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_single_2(){
@@ -229,14 +229,14 @@ public class TransactionNonParserTest
 			{"TargetAddress", new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 			{"ScopedMetadataKey", 11258607},
 			{"ValueSizeDelta", -6},
-			{"Value", Converter.HexToUint8("313233424143")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("c2db67a2355a1517533d84670edae85dbc434821c30fb18dabb90b1cd44958ea"))},
-			{"Signature", new Signature(Converter.HexToUint8("85A28E3DF1F1D5EC07CC0FC0EFBDEAE6388283BC2118730BD6CE7D0687B6CD397053308D4CAFD88C3918CBB77ED4756205C41C814B52CFD13A08E70DAC4118AD"))},
+			{"Value", Converter.HexToBytes("313233424143")},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("c2db67a2355a1517533d84670edae85dbc434821c30fb18dabb90b1cd44958ea"))},
+			{"Signature", new Signature(Converter.HexToBytes("85A28E3DF1F1D5EC07CC0FC0EFBDEAE6388283BC2118730BD6CE7D0687B6CD397053308D4CAFD88C3918CBB77ED4756205C41C814B52CFD13A08E70DAC4118AD"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_agregate_1(){
@@ -250,22 +250,22 @@ public class TransactionNonParserTest
 						{"TargetAddress", new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 						{"ScopedMetadataKey", 10},
 						{"ValueSizeDelta", 10},
-						{"Value", Converter.HexToUint8("313233424143")},
+						{"Value", Converter.HexToBytes("313233424143")},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("7f269e58b4b472c2f15858bc9f396eff3cd353330aa23da68e9ab44d3607b26d"))},
-			{"Signature", new Signature(Converter.HexToUint8("6368BDE2749BA4FCE5387508ECFC96B716DE25BC8D6678474ED208F6E1850F9B0966A102CF5A97EDF55A6315C5A89C4266692F70D6BB5B94360A099444BA7C59"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("7f269e58b4b472c2f15858bc9f396eff3cd353330aa23da68e9ab44d3607b26d"))},
+			{"Signature", new Signature(Converter.HexToBytes("6368BDE2749BA4FCE5387508ECFC96B716DE25BC8D6678474ED208F6E1850F9B0966A102CF5A97EDF55A6315C5A89C4266692F70D6BB5B94360A099444BA7C59"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("21CD7DF1DCA82BB7DEF6F46B360EDF56376CCE4C8B80D17F22AD39D5321D052C"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("21CD7DF1DCA82BB7DEF6F46B360EDF56376CCE4C8B80D17F22AD39D5321D052C"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMetadataTransaction_account_metadata_agregate_2(){
@@ -279,22 +279,22 @@ public class TransactionNonParserTest
 						{"TargetAddress", new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 						{"ScopedMetadataKey", 11258607},
 						{"ValueSizeDelta", -6},
-						{"Value", Converter.HexToUint8("313233424143")},
+						{"Value", Converter.HexToBytes("313233424143")},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("5fea9ffb109aa76cfcd26d5bc262d5f236de0b5ee4c15738b03339a378643f1c"))},
-			{"Signature", new Signature(Converter.HexToUint8("4630B67D74E40B8313535F2A7E3DDB161A6A5C151174005B7DB06A20A7B963B2604A0E02A243D832579CA72525240C4D5A7FA4DC38D5ADEB39BCCE8CBEF18839"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("5fea9ffb109aa76cfcd26d5bc262d5f236de0b5ee4c15738b03339a378643f1c"))},
+			{"Signature", new Signature(Converter.HexToBytes("4630B67D74E40B8313535F2A7E3DDB161A6A5C151174005B7DB06A20A7B963B2604A0E02A243D832579CA72525240C4D5A7FA4DC38D5ADEB39BCCE8CBEF18839"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("5AA2E82C4CDE5674CF0EA42BB6128CF177E5135126645C2BE70956F2018A08B4"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("5AA2E82C4CDE5674CF0EA42BB6128CF177E5135126645C2BE70956F2018A08B4"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_single_1(){
@@ -308,13 +308,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {new UnresolvedMosaicId(1000)}},
 			{"RestrictionDeletions", new[] {new UnresolvedMosaicId(2000)}},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("71b37310ed32a6e068e26aa303aaaa535bb304640a50e8a03e6bd945097d5771"))},
-			{"Signature", new Signature(Converter.HexToUint8("BB928C18C5271C21DD220E8964A5A0610248A05992BC9549DF7BAB1A348811037484D7CBF9F1868801E867704E1D25321EF7A3BA6B0D70EC41870492400A2F10"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("71b37310ed32a6e068e26aa303aaaa535bb304640a50e8a03e6bd945097d5771"))},
+			{"Signature", new Signature(Converter.HexToBytes("BB928C18C5271C21DD220E8964A5A0610248A05992BC9549DF7BAB1A348811037484D7CBF9F1868801E867704E1D25321EF7A3BA6B0D70EC41870492400A2F10"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_single_2(){
@@ -329,13 +329,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {new UnresolvedMosaicId(14624838436596993100)}},
 			{"RestrictionDeletions", System.Array.Empty<UnresolvedMosaicId>()},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("56da5b35651b942502db53d4ecefd4d81a261aaeadb3e147c90a8bdb3309a870"))},
-			{"Signature", new Signature(Converter.HexToUint8("18C22F49E6084339838A752F2B73FF33238B6FDD48401BB9B9F3FB95A0BCF2099971FD693F738FF806982F1F2C2C05E71A66DDB115E97B8BF6256617FF110D5B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("56da5b35651b942502db53d4ecefd4d81a261aaeadb3e147c90a8bdb3309a870"))},
+			{"Signature", new Signature(Converter.HexToBytes("18C22F49E6084339838A752F2B73FF33238B6FDD48401BB9B9F3FB95A0BCF2099971FD693F738FF806982F1F2C2C05E71A66DDB115E97B8BF6256617FF110D5B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_agregate_1(){
@@ -356,18 +356,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("938b215feedf03233966078a16c7067ecb9597edd73805a10477f6675460f301"))},
-			{"Signature", new Signature(Converter.HexToUint8("C119833243AF2DB66866954E335708583A736AA4A5EF66C6AD88C5E73ABADBC38F55C36CEEE423FEBFB82013072DD9F358F8DAE79807DEE037120D96F5F49ABF"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("938b215feedf03233966078a16c7067ecb9597edd73805a10477f6675460f301"))},
+			{"Signature", new Signature(Converter.HexToBytes("C119833243AF2DB66866954E335708583A736AA4A5EF66C6AD88C5E73ABADBC38F55C36CEEE423FEBFB82013072DD9F358F8DAE79807DEE037120D96F5F49ABF"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("C9B816E2B225F39322E72150DADA9F4A8C6F46C2A429F6DF4C89776A4CA8443B"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("C9B816E2B225F39322E72150DADA9F4A8C6F46C2A429F6DF4C89776A4CA8443B"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountMosaicRestrictionTransaction_account_mosaic_restriction_agregate_2(){
@@ -389,18 +389,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("15abfd18623964a28ee2fb47402b978752db4847c21f537c75d447de3552e529"))},
-			{"Signature", new Signature(Converter.HexToUint8("272857F7E7270CA35D9C3E91FB2BB811BF566BD1390F181A85B18F2F245082DB1BD91876B6917E35F00DEFB6C3E8D6ACB2E25BD8107CBA1F544F72CF92CED805"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("15abfd18623964a28ee2fb47402b978752db4847c21f537c75d447de3552e529"))},
+			{"Signature", new Signature(Converter.HexToBytes("272857F7E7270CA35D9C3E91FB2BB811BF566BD1390F181A85B18F2F245082DB1BD91876B6917E35F00DEFB6C3E8D6ACB2E25BD8107CBA1F544F72CF92CED805"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("3B8D31922E345C3F457E73D6DA388FA8F09E0C157AA9E77680A4EBBC3B070562"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("3B8D31922E345C3F457E73D6DA388FA8F09E0C157AA9E77680A4EBBC3B070562"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_single_1(){
@@ -415,13 +415,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {TransactionType.SECRET_PROOF}},
 			{"RestrictionDeletions", new[] {TransactionType.TRANSFER}},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("95533a34b5a3b788ab9675e249c017c0f781019a5232842fe5f023b5b3b423ef"))},
-			{"Signature", new Signature(Converter.HexToUint8("6CAAD213AD7DFB2FC620B8DBA38868739620B4EB02E7329140C320AB6489246466B946B96C2A611B2D6D016602E836DE9A210068BE5FD8AAB0DEB5B4D683008B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("95533a34b5a3b788ab9675e249c017c0f781019a5232842fe5f023b5b3b423ef"))},
+			{"Signature", new Signature(Converter.HexToBytes("6CAAD213AD7DFB2FC620B8DBA38868739620B4EB02E7329140C320AB6489246466B946B96C2A611B2D6D016602E836DE9A210068BE5FD8AAB0DEB5B4D683008B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_single_2(){
@@ -437,13 +437,13 @@ public class TransactionNonParserTest
 			},
 			{"RestrictionAdditions", new[] {TransactionType.ADDRESS_ALIAS}},
 			{"RestrictionDeletions", System.Array.Empty<TransactionType>()},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ebb0924d6ed67060d29d36d429a7157b6282e57538b087418ec98aec3550945c"))},
-			{"Signature", new Signature(Converter.HexToUint8("F93B7A8DA44377CF7EEFE45BE845A02F74967E359D731F778A92042CB57CCA63AF7439DD297C76014474C329EC7F8A8B826D0D79686F66C266BC1FC53EABAA7B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ebb0924d6ed67060d29d36d429a7157b6282e57538b087418ec98aec3550945c"))},
+			{"Signature", new Signature(Converter.HexToBytes("F93B7A8DA44377CF7EEFE45BE845A02F74967E359D731F778A92042CB57CCA63AF7439DD297C76014474C329EC7F8A8B826D0D79686F66C266BC1FC53EABAA7B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_agregate_1(){
@@ -465,18 +465,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("688ccd948f88270545c25a906159dc612f5e71a5b4d0c794619eee481b061693"))},
-			{"Signature", new Signature(Converter.HexToUint8("1C49EC4C54072EF05C203EB88603698F0F8B7B81385FBD63E938D3B444FA6914BCF8FDF91DA0B18DBDE56BEDB1EA99CCF97063B2432515F81E35D89918F88D07"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("688ccd948f88270545c25a906159dc612f5e71a5b4d0c794619eee481b061693"))},
+			{"Signature", new Signature(Converter.HexToBytes("1C49EC4C54072EF05C203EB88603698F0F8B7B81385FBD63E938D3B444FA6914BCF8FDF91DA0B18DBDE56BEDB1EA99CCF97063B2432515F81E35D89918F88D07"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("C257D6202832DE1D7C1632853DA071244EAE31867DD5AEBD2E3A2232B7772D2D"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("C257D6202832DE1D7C1632853DA071244EAE31867DD5AEBD2E3A2232B7772D2D"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AccountOperationRestrictionTransaction_account_operation_restriction_agregate_2(){
@@ -499,18 +499,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("9d604cd838f040d6f5e7a003e042b6d2f77aa802774806182c4225ec3d5df964"))},
-			{"Signature", new Signature(Converter.HexToUint8("613E560B81CF9DCA65945A1864D02750963F4BFC461C02C45781E61FAC57BEB9F444A0A25448AD3BC4BA85B9F584C3337390426B7DA92F3B461D7E927703064A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("9d604cd838f040d6f5e7a003e042b6d2f77aa802774806182c4225ec3d5df964"))},
+			{"Signature", new Signature(Converter.HexToBytes("613E560B81CF9DCA65945A1864D02750963F4BFC461C02C45781E61FAC57BEB9F444A0A25448AD3BC4BA85B9F584C3337390426B7DA92F3B461D7E927703064A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("85170A5F6579EC36FC651524D1F953744E635AEF2D890C3DD696C34F683A0391"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("85170A5F6579EC36FC651524D1F953744E635AEF2D890C3DD696C34F683A0391"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_single_1(){
@@ -520,13 +520,13 @@ public class TransactionNonParserTest
 			{"NamespaceId", new NamespaceId(9562080086528621131)},
 			{"Address", new Address(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 			{"AliasAction", AliasAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("37292f6a8e73e3e69e97d43a771236d237134e10590effc94a62bbe9fe504313"))},
-			{"Signature", new Signature(Converter.HexToUint8("F1805007C7C53639C81905125B4FE860308CA069E1AFD48C0F20E47840BA9DC8DAC573B1CCC25F9EAC3F44F590A31EE3E1B19FEF2D1707C7B9961ADEEDC60AD7"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("37292f6a8e73e3e69e97d43a771236d237134e10590effc94a62bbe9fe504313"))},
+			{"Signature", new Signature(Converter.HexToBytes("F1805007C7C53639C81905125B4FE860308CA069E1AFD48C0F20E47840BA9DC8DAC573B1CCC25F9EAC3F44F590A31EE3E1B19FEF2D1707C7B9961ADEEDC60AD7"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_single_2(){
@@ -536,13 +536,13 @@ public class TransactionNonParserTest
 			{"NamespaceId", new NamespaceId(9562080086528621131)},
 			{"Address", new Address(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
 			{"AliasAction", AliasAction.UNLINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("027c67119b47423c0e5958fa47b2859d5eb8112af23e90df9bb4f82c962f9f07"))},
-			{"Signature", new Signature(Converter.HexToUint8("C497946E9F368CE720ABB050A0EABE5F3D2C6B39B31A10B66A5F3CF06874D104C3216484EB30AAC2454BB9FBFB1C1C280C2890D4C5C3332F336B16C02748F485"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("027c67119b47423c0e5958fa47b2859d5eb8112af23e90df9bb4f82c962f9f07"))},
+			{"Signature", new Signature(Converter.HexToBytes("C497946E9F368CE720ABB050A0EABE5F3D2C6B39B31A10B66A5F3CF06874D104C3216484EB30AAC2454BB9FBFB1C1C280C2890D4C5C3332F336B16C02748F485"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_agregate_1(){
@@ -559,18 +559,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("0d0ed50c25e5448351ca3a9a87270baba9bacd76f7505bbcd50f6af26f7fd4d9"))},
-			{"Signature", new Signature(Converter.HexToUint8("189344E478C9FA0E51E3C3A29755A78B738FF6226B41A9AE796353B1225808F7625A98EC1C78B251901DBDABA34947A3B7ABA086DA775CB0853B9DC4D1A65B50"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("0d0ed50c25e5448351ca3a9a87270baba9bacd76f7505bbcd50f6af26f7fd4d9"))},
+			{"Signature", new Signature(Converter.HexToBytes("189344E478C9FA0E51E3C3A29755A78B738FF6226B41A9AE796353B1225808F7625A98EC1C78B251901DBDABA34947A3B7ABA086DA775CB0853B9DC4D1A65B50"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("CC226F4051790D1150EA87A77C6425DCC44CB90BB827C859F57CD2963147788F"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("CC226F4051790D1150EA87A77C6425DCC44CB90BB827C859F57CD2963147788F"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AddressAliasTransaction_address_alias_agregate_2(){
@@ -587,18 +587,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("133273b2ec77d61a427e5796f5439439702e2d0ab75898f3ff64fd66cee7182b"))},
-			{"Signature", new Signature(Converter.HexToUint8("96A0A266328CF077E13B54B829407327C6DADBA7A3B763716EA2E65E6F659503F638ECBA7D0A75A2DC7C72EE4FBB701B620DBCC35C42886CD08BEF31EB032C51"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("133273b2ec77d61a427e5796f5439439702e2d0ab75898f3ff64fd66cee7182b"))},
+			{"Signature", new Signature(Converter.HexToBytes("96A0A266328CF077E13B54B829407327C6DADBA7A3B763716EA2E65E6F659503F638ECBA7D0A75A2DC7C72EE4FBB701B620DBCC35C42886CD08BEF31EB032C51"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("7C624B5B7854988BC31B8B7CBE48B9BD388A6247A45AB5591D4832A2ADB5C17A"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("7C624B5B7854988BC31B8B7CBE48B9BD388A6247A45AB5591D4832A2ADB5C17A"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AggregateBondedTransaction_aggregate_bonded_agregate_1(){
@@ -627,26 +627,26 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("4ef667edafd0431979820fd58c90738d900e8f8c697e5aab3f2191265fc1e411"))},
-			{"Signature", new Signature(Converter.HexToUint8("D879F14B39E0DC97A04305A50B25E7BC5F9C49B93778908B94A8E5730CA5298DBF551091487240008059B3A917C0F356903361F9309B1FCF1A08235BAA959E7B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("4ef667edafd0431979820fd58c90738d900e8f8c697e5aab3f2191265fc1e411"))},
+			{"Signature", new Signature(Converter.HexToBytes("D879F14B39E0DC97A04305A50B25E7BC5F9C49B93778908B94A8E5730CA5298DBF551091487240008059B3A917C0F356903361F9309B1FCF1A08235BAA959E7B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 						new (){
-							SignerPublicKey = new PublicKey(Converter.HexToUint8("0cfd6af95ad553930bff95aa3ab140271879633d17e5aed09079a5384cac53be")),
-							Signature = new Signature(Converter.HexToUint8("1b2ca75b54ba680a93626f6f663bb6f50eb41246ef6fde467436e518edd6d603f4e8189b9ba475472c45195712ba8851ae0a2d3a8d5f7ef2b85b422b36e290bd")),
+							SignerPublicKey = new PublicKey(Converter.HexToBytes("0cfd6af95ad553930bff95aa3ab140271879633d17e5aed09079a5384cac53be")),
+							Signature = new Signature(Converter.HexToBytes("1b2ca75b54ba680a93626f6f663bb6f50eb41246ef6fde467436e518edd6d603f4e8189b9ba475472c45195712ba8851ae0a2d3a8d5f7ef2b85b422b36e290bd")),
 					},
 						new (){
-							SignerPublicKey = new PublicKey(Converter.HexToUint8("02d4de1c0d28b2801a1241f9cab2d347058ef42d448d5b2a940333d577f82192")),
-							Signature = new Signature(Converter.HexToUint8("89d617518342c76f1b0c5410b41879df09c9b6375202e56c3f9480e41dcd5c10986cea63d57207dcef08fb89cc396127af8e12f7dbc6df310ccd6fca024c2a77")),
+							SignerPublicKey = new PublicKey(Converter.HexToBytes("02d4de1c0d28b2801a1241f9cab2d347058ef42d448d5b2a940333d577f82192")),
+							Signature = new Signature(Converter.HexToBytes("89d617518342c76f1b0c5410b41879df09c9b6375202e56c3f9480e41dcd5c10986cea63d57207dcef08fb89cc396127af8e12f7dbc6df310ccd6fca024c2a77")),
 					},
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("3F2BE873F569828C88CD0DE37BB31C998FA0AAEB3308A1FFBF3D01CE49E8E9F7"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("3F2BE873F569828C88CD0DE37BB31C998FA0AAEB3308A1FFBF3D01CE49E8E9F7"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void AggregateCompleteTransaction_aggregate_complete_agregate_1(){
@@ -683,30 +683,30 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("95bca4bcaf9bebdfd56c11f2cfcf2a7cf99f778d8368942d2ce01f6a0d2b2a39"))},
-			{"Signature", new Signature(Converter.HexToUint8("20B4DFBFC5EEDD4C3B86F59C2825870373B2BB829871366713682C003936A586B1B34F892AA3FA11A31885CFFD2FA527F277C5B3B64D51716496EC408CD41206"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("95bca4bcaf9bebdfd56c11f2cfcf2a7cf99f778d8368942d2ce01f6a0d2b2a39"))},
+			{"Signature", new Signature(Converter.HexToBytes("20B4DFBFC5EEDD4C3B86F59C2825870373B2BB829871366713682C003936A586B1B34F892AA3FA11A31885CFFD2FA527F277C5B3B64D51716496EC408CD41206"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 						new (){
-							SignerPublicKey = new PublicKey(Converter.HexToUint8("1831d617f38ae2a7007993514e1cba0902e840666bf917fa8f80c8620a5a43b3")),
-							Signature = new Signature(Converter.HexToUint8("c4f091a5bcc67e9db082bb0a9cd3303faf3be1778e1472f5c365c547604d3dbcbf853e5cac37bf1ee26892da024bd8dfdbace83ba7a17a723a6c5fb155840bf3")),
+							SignerPublicKey = new PublicKey(Converter.HexToBytes("1831d617f38ae2a7007993514e1cba0902e840666bf917fa8f80c8620a5a43b3")),
+							Signature = new Signature(Converter.HexToBytes("c4f091a5bcc67e9db082bb0a9cd3303faf3be1778e1472f5c365c547604d3dbcbf853e5cac37bf1ee26892da024bd8dfdbace83ba7a17a723a6c5fb155840bf3")),
 					},
 						new (){
-							SignerPublicKey = new PublicKey(Converter.HexToUint8("8137fff8b72586a9ea7702340b0a12f1ec506c1d1b8cd848168b35111319b974")),
-							Signature = new Signature(Converter.HexToUint8("ef62a572ca8a2dff778f13d60605d1aa131fb3306300796e6c812916c7a2fbf839867b6bfc440e1c489051eb03a0208872f00fa5db7bf145d4c81d5771d6d690")),
+							SignerPublicKey = new PublicKey(Converter.HexToBytes("8137fff8b72586a9ea7702340b0a12f1ec506c1d1b8cd848168b35111319b974")),
+							Signature = new Signature(Converter.HexToBytes("ef62a572ca8a2dff778f13d60605d1aa131fb3306300796e6c812916c7a2fbf839867b6bfc440e1c489051eb03a0208872f00fa5db7bf145d4c81d5771d6d690")),
 					},
 						new (){
-							SignerPublicKey = new PublicKey(Converter.HexToUint8("478f12d7626a182eefadb4187473da9d30cc02c86f3f1b27e465f09cec46151d")),
-							Signature = new Signature(Converter.HexToUint8("f8e4a837cda558b1c1b459428c42f2fb48dc54272a0f7a72d5b05695253edbe6bdf753c3eb8b8a90acb578ed673a9e825a0e8ddf4ad4ca386433110a0590efd4")),
+							SignerPublicKey = new PublicKey(Converter.HexToBytes("478f12d7626a182eefadb4187473da9d30cc02c86f3f1b27e465f09cec46151d")),
+							Signature = new Signature(Converter.HexToBytes("f8e4a837cda558b1c1b459428c42f2fb48dc54272a0f7a72d5b05695253edbe6bdf753c3eb8b8a90acb578ed673a9e825a0e8ddf4ad4ca386433110a0590efd4")),
 					},
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("DCE7DC355A58AEDC834B89C2E3D42DD07DBB8C9167A046856CA56EBE4EEE5AC2"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("DCE7DC355A58AEDC834B89C2E3D42DD07DBB8C9167A046856CA56EBE4EEE5AC2"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void HashLockTransaction_hash_lock_single_1(){
@@ -720,14 +720,14 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Duration", 100},
-			{"Hash", new Hash256(Converter.HexToUint8("8498B38D89C1DC8A448EA5824938FF828926CD9F7747B1844B59B4B6807E878B"))},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3b585f9e63961013c96187babad6d6eb88a22a6367ee365006dc3636a09911e5"))},
-			{"Signature", new Signature(Converter.HexToUint8("4EEC1FF00D82F670451CFAB7246E120742141FBC80E6B189836D5CA4B81E6323BDCA20F653AD53C3903BEAE753142E92D7C1BAC35CA731A039051EF3D2618B20"))},
+			{"Hash", new Hash256(Converter.HexToBytes("8498B38D89C1DC8A448EA5824938FF828926CD9F7747B1844B59B4B6807E878B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3b585f9e63961013c96187babad6d6eb88a22a6367ee365006dc3636a09911e5"))},
+			{"Signature", new Signature(Converter.HexToBytes("4EEC1FF00D82F670451CFAB7246E120742141FBC80E6B189836D5CA4B81E6323BDCA20F653AD53C3903BEAE753142E92D7C1BAC35CA731A039051EF3D2618B20"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void HashLockTransaction_hash_lock_agregate_1(){
@@ -745,22 +745,22 @@ public class TransactionNonParserTest
 							}
 						},
 						{"Duration", 100},
-						{"Hash", new Hash256(Converter.HexToUint8("8498B38D89C1DC8A448EA5824938FF828926CD9F7747B1844B59B4B6807E878B"))},
+						{"Hash", new Hash256(Converter.HexToBytes("8498B38D89C1DC8A448EA5824938FF828926CD9F7747B1844B59B4B6807E878B"))},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("cf6cb0d1be502bcc2cd3f2a537aeb2965225d0b121301b5956fb3046a8bfbddf"))},
-			{"Signature", new Signature(Converter.HexToUint8("98A48A5D69354514BA8AD2FF59AACD69B4E8089242BC9F201251606FCEB1875C06B043A90CBCB3185FCCB718FCC9FD14A475889CE7B82B1C3DE514DFD73FBC0B"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("cf6cb0d1be502bcc2cd3f2a537aeb2965225d0b121301b5956fb3046a8bfbddf"))},
+			{"Signature", new Signature(Converter.HexToBytes("98A48A5D69354514BA8AD2FF59AACD69B4E8089242BC9F201251606FCEB1875C06B043A90CBCB3185FCCB718FCC9FD14A475889CE7B82B1C3DE514DFD73FBC0B"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("F0197674A946DD65165C9E7FFD0CAA15745F2E304BB9DD41ABAF2630112592D8"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("F0197674A946DD65165C9E7FFD0CAA15745F2E304BB9DD41ABAF2630112592D8"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAddressRestrictionTransaction_mosaic_address_restriction_single_1(){
@@ -772,13 +772,13 @@ public class TransactionNonParserTest
 			{"PreviousRestrictionValue", 9},
 			{"NewRestrictionValue", 8},
 			{"TargetAddress", new UnresolvedAddress(Converter.StringToAddress("TBA6LOHEA6A465G2X5MSQF66JBYR254GJDPK7MQ"))},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3741c0326ce3002d6ff29b25407cdf004ddba1056b486a08319b3a28705f8b3b"))},
-			{"Signature", new Signature(Converter.HexToUint8("C03CF9A7BB47D1509666DDDAADCE12AB79B3E25C7534A5A80A9BBBB4EF3DD049264A1C79E29DB6AF1D9AA4F42FC6F10B2ED8509DF3E5BA5E4E23915CB884C72A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3741c0326ce3002d6ff29b25407cdf004ddba1056b486a08319b3a28705f8b3b"))},
+			{"Signature", new Signature(Converter.HexToBytes("C03CF9A7BB47D1509666DDDAADCE12AB79B3E25C7534A5A80A9BBBB4EF3DD049264A1C79E29DB6AF1D9AA4F42FC6F10B2ED8509DF3E5BA5E4E23915CB884C72A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAddressRestrictionTransaction_mosaic_address_restriction_agregate_1(){
@@ -797,18 +797,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ad1468fca7ae2aa2901d16dd731d7006b0fb54790b1f06873a56bcb8641a8da5"))},
-			{"Signature", new Signature(Converter.HexToUint8("E64F1362921048323932E873B0321461F361957B7A208BFCEC1DB84E81FF24DFA3CD7DC5324C02EDA2E1FA9910488E31083B2306D4B3D2E93F6BC03A6F9EDCB2"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ad1468fca7ae2aa2901d16dd731d7006b0fb54790b1f06873a56bcb8641a8da5"))},
+			{"Signature", new Signature(Converter.HexToBytes("E64F1362921048323932E873B0321461F361957B7A208BFCEC1DB84E81FF24DFA3CD7DC5324C02EDA2E1FA9910488E31083B2306D4B3D2E93F6BC03A6F9EDCB2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("7B6ED24A1F78B4BEC3900FBFED34AC0D18ECD29D2EB179BD0C46291107EDDEEF"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("7B6ED24A1F78B4BEC3900FBFED34AC0D18ECD29D2EB179BD0C46291107EDDEEF"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_single_1(){
@@ -818,13 +818,13 @@ public class TransactionNonParserTest
 			{"NamespaceId", new NamespaceId(13182596108967839652)},
 			{"MosaicId", 10},
 			{"AliasAction", AliasAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ab930280952e4ff9467af35ad9943be1d4a4c7ab6fd9fa1f262ec93f71411ebe"))},
-			{"Signature", new Signature(Converter.HexToUint8("07F050AE2F1CD35854132FDD06E900045B652BC577466D963E525B761CDB3557AA6FFD2AAE80EAA537FAA9BFFC2E2793A022777739B71DAF2FD71ADE3F557C7C"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ab930280952e4ff9467af35ad9943be1d4a4c7ab6fd9fa1f262ec93f71411ebe"))},
+			{"Signature", new Signature(Converter.HexToBytes("07F050AE2F1CD35854132FDD06E900045B652BC577466D963E525B761CDB3557AA6FFD2AAE80EAA537FAA9BFFC2E2793A022777739B71DAF2FD71ADE3F557C7C"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_single_2(){
@@ -834,13 +834,13 @@ public class TransactionNonParserTest
 			{"NamespaceId", new NamespaceId(16233676262248077354)},
 			{"MosaicId", 14624838436596993100},
 			{"AliasAction", AliasAction.UNLINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8519bf4e6ee9f048f56960fc3f94f9d0c86e72bddeb89f9dec69a8553428ef70"))},
-			{"Signature", new Signature(Converter.HexToUint8("D174A00F267EE48794A878067FD7E829D406171B795CC24CC08A35976BB7868877A18AE4F99226AC6A56763EC04D85D0D6D28CB62FB01A4FA77890438474EBA7"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8519bf4e6ee9f048f56960fc3f94f9d0c86e72bddeb89f9dec69a8553428ef70"))},
+			{"Signature", new Signature(Converter.HexToBytes("D174A00F267EE48794A878067FD7E829D406171B795CC24CC08A35976BB7868877A18AE4F99226AC6A56763EC04D85D0D6D28CB62FB01A4FA77890438474EBA7"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_agregate_1(){
@@ -857,18 +857,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("35141026657c58ba09a6dd0cc178627635cc6d09d06ed2eafe32c83047dddce1"))},
-			{"Signature", new Signature(Converter.HexToUint8("7098CB56A25ABEF45673B8B9B17AC72798D74A5F6DD40AD7DD18E44F3CAE91B2184455903C2747FD306DEE874BBE054EAC7A57C2007D11ECFBE6814B745447D8"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("35141026657c58ba09a6dd0cc178627635cc6d09d06ed2eafe32c83047dddce1"))},
+			{"Signature", new Signature(Converter.HexToBytes("7098CB56A25ABEF45673B8B9B17AC72798D74A5F6DD40AD7DD18E44F3CAE91B2184455903C2747FD306DEE874BBE054EAC7A57C2007D11ECFBE6814B745447D8"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("2FDCAABBB776C8A409B39AB27525383DC06A271643372B03F622F886C08B44B6"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("2FDCAABBB776C8A409B39AB27525383DC06A271643372B03F622F886C08B44B6"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicAliasTransaction_mosaic_alias_agregate_2(){
@@ -885,18 +885,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("06f155625fb8165ab863bcc86fe1c5818b539855d0b87ff33982b1f0730c20d0"))},
-			{"Signature", new Signature(Converter.HexToUint8("266311F2974416C61F6858BF5ED4A250C11E433B468FDCD174E100DE9A2E051CDBDB40030DFFC1234AA062E248CA7FF44FD55602DC7013840CCE11C0BD641FE5"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("06f155625fb8165ab863bcc86fe1c5818b539855d0b87ff33982b1f0730c20d0"))},
+			{"Signature", new Signature(Converter.HexToBytes("266311F2974416C61F6858BF5ED4A250C11E433B468FDCD174E100DE9A2E051CDBDB40030DFFC1234AA062E248CA7FF44FD55602DC7013840CCE11C0BD641FE5"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("05270A1D4E45A3D4898353D52F890D573445F81914D96DBF5A9A7EA113564E34"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("05270A1D4E45A3D4898353D52F890D573445F81914D96DBF5A9A7EA113564E34"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_1(){
@@ -912,13 +912,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Divisibility", 4},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("aee04b25fdf56040d4ef1bef806f3a4e55c334e6022e27de823564baab952424"))},
-			{"Signature", new Signature(Converter.HexToUint8("B4C9702D8F19C4B01747DBA7D4350D70FB7BFF5F0C6B4F69E5380094AC366F0A1AD74466926E3EFB80DB9187F9F6FF565AE9708D3444A0688D60A25068DDF03E"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("aee04b25fdf56040d4ef1bef806f3a4e55c334e6022e27de823564baab952424"))},
+			{"Signature", new Signature(Converter.HexToBytes("B4C9702D8F19C4B01747DBA7D4350D70FB7BFF5F0C6B4F69E5380094AC366F0A1AD74466926E3EFB80DB9187F9F6FF565AE9708D3444A0688D60A25068DDF03E"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_2(){
@@ -933,13 +933,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Divisibility", 3},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("d36b5d35e666e136d82b9ee3cf26c02dc7b9ecd0c8c287b98c7e245989c5699d"))},
-			{"Signature", new Signature(Converter.HexToUint8("6097B234909F2414FFD30E785561BC9AA6542A5B45512324EA061B77173536E8BC2DBF3159827BC71B6A38557497D336374A84037B98A217724D35C4DBA34F0A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("d36b5d35e666e136d82b9ee3cf26c02dc7b9ecd0c8c287b98c7e245989c5699d"))},
+			{"Signature", new Signature(Converter.HexToBytes("6097B234909F2414FFD30E785561BC9AA6542A5B45512324EA061B77173536E8BC2DBF3159827BC71B6A38557497D336374A84037B98A217724D35C4DBA34F0A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_single_3(){
@@ -955,13 +955,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Divisibility", 2},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("82602ecac9835b208d88822ad0885ba87372cf660ac12a6f1eb6cdc19133a50c"))},
-			{"Signature", new Signature(Converter.HexToUint8("84159A5174591FE3BD1F924C8738F8DA7C7F1D49640C06651D610C1E7ED9D01C2385F093AFC0D00D3C9C6E343BBDAFC20BA152AA9FFBCF246278D297579FB4FD"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("82602ecac9835b208d88822ad0885ba87372cf660ac12a6f1eb6cdc19133a50c"))},
+			{"Signature", new Signature(Converter.HexToBytes("84159A5174591FE3BD1F924C8738F8DA7C7F1D49640C06651D610C1E7ED9D01C2385F093AFC0D00D3C9C6E343BBDAFC20BA152AA9FFBCF246278D297579FB4FD"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_1(){
@@ -984,18 +984,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ebb0c23fc368a59387abb9dbdc22ab304250de1319b876a078f50e48c9a4413b"))},
-			{"Signature", new Signature(Converter.HexToUint8("C43D84C2F819DC934A805FC7034626ECF39E32185FB87729A6C0C5E4E6008C6A41AB571A60C0DCCD36D252B8DD5625701A7E0073323D9110427CCD50EE7CF356"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ebb0c23fc368a59387abb9dbdc22ab304250de1319b876a078f50e48c9a4413b"))},
+			{"Signature", new Signature(Converter.HexToBytes("C43D84C2F819DC934A805FC7034626ECF39E32185FB87729A6C0C5E4E6008C6A41AB571A60C0DCCD36D252B8DD5625701A7E0073323D9110427CCD50EE7CF356"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("E22385E28D66F4A783AC56C45640070DB628B0A9192B1F773DED09C41123ADFA"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("E22385E28D66F4A783AC56C45640070DB628B0A9192B1F773DED09C41123ADFA"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_2(){
@@ -1017,18 +1017,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("77f34849afd8d7b031d7da77651bdcc6ea839d16ae9de1097d2797009e3c0327"))},
-			{"Signature", new Signature(Converter.HexToUint8("9BD3E3CFB3271D57AF352144E0567A29E6B0B5BC5982A77AC38E6B6D2CD9B4F4FFE472782BBB96170D1A6BA1D7D5D58BF2D249E4ED0D403723BD5B19904DCBFA"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("77f34849afd8d7b031d7da77651bdcc6ea839d16ae9de1097d2797009e3c0327"))},
+			{"Signature", new Signature(Converter.HexToBytes("9BD3E3CFB3271D57AF352144E0567A29E6B0B5BC5982A77AC38E6B6D2CD9B4F4FFE472782BBB96170D1A6BA1D7D5D58BF2D249E4ED0D403723BD5B19904DCBFA"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("9F08B173200F10F08F6FC4C6E1B37DAE1C3B425A98C8D1EB4B3BC44AF6B2906E"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("9F08B173200F10F08F6FC4C6E1B37DAE1C3B425A98C8D1EB4B3BC44AF6B2906E"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicDefinitionTransaction_mosaic_definition_agregate_3(){
@@ -1051,18 +1051,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("d79383b5996a558924fb0347793ada398ddea4f86f36ea440e74203536e30eb0"))},
-			{"Signature", new Signature(Converter.HexToUint8("70AAB3087604FF91579D5CCB42982610D7B8A09388AAADB96BDF2959E012FAB78D41282872A2C7188935992726804D301C5333D0C19B384921250F15AEA233DF"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("d79383b5996a558924fb0347793ada398ddea4f86f36ea440e74203536e30eb0"))},
+			{"Signature", new Signature(Converter.HexToBytes("70AAB3087604FF91579D5CCB42982610D7B8A09388AAADB96BDF2959E012FAB78D41282872A2C7188935992726804D301C5333D0C19B384921250F15AEA233DF"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("D1C267AFAC897195F41696647A89AC5E0B75A0910D0F2A3DD404F93113C35633"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("D1C267AFAC897195F41696647A89AC5E0B75A0910D0F2A3DD404F93113C35633"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_single_1(){
@@ -1076,13 +1076,13 @@ public class TransactionNonParserTest
 			{"NewRestrictionValue", 8},
 			{"PreviousRestrictionType", MosaicRestrictionType.EQ},
 			{"NewRestrictionType", MosaicRestrictionType.GE},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("c9c4a1dfc1cdf0865861fcc57e0b8072304a87b875756d965021fffed9f3a0e4"))},
-			{"Signature", new Signature(Converter.HexToUint8("81836193850CD2C52B08DC56F831371381801F8AE09FD9F819B653100D3617DD0C79CD9375580594467D465570AD59942410BF5361042F26B45F39AE4C4DFBC3"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("c9c4a1dfc1cdf0865861fcc57e0b8072304a87b875756d965021fffed9f3a0e4"))},
+			{"Signature", new Signature(Converter.HexToBytes("81836193850CD2C52B08DC56F831371381801F8AE09FD9F819B653100D3617DD0C79CD9375580594467D465570AD59942410BF5361042F26B45F39AE4C4DFBC3"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_single_2(){
@@ -1096,13 +1096,13 @@ public class TransactionNonParserTest
 			{"NewRestrictionValue", 0},
 			{"PreviousRestrictionType", MosaicRestrictionType.NONE},
 			{"NewRestrictionType", MosaicRestrictionType.GE},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("9fe0f98a3cc8c5fa247a9470596206fb24d9a80b307bed469b4d937754df3e93"))},
-			{"Signature", new Signature(Converter.HexToUint8("587D5D6458BA3DD9EC707D1C0D7C61BFA87751729B6BBF7FA21D1CDB5967F2175F7BFD67BE617F065898F2755668BAE8DED5CA52143B13E276F109E0774CC117"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("9fe0f98a3cc8c5fa247a9470596206fb24d9a80b307bed469b4d937754df3e93"))},
+			{"Signature", new Signature(Converter.HexToBytes("587D5D6458BA3DD9EC707D1C0D7C61BFA87751729B6BBF7FA21D1CDB5967F2175F7BFD67BE617F065898F2755668BAE8DED5CA52143B13E276F109E0774CC117"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_agregate_1(){
@@ -1123,18 +1123,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("7b4b99c49161d588f887afcf504c706a6b3de0fe76049b79ef17d4d1ecbb466d"))},
-			{"Signature", new Signature(Converter.HexToUint8("ED49CD41752059D5C3D90804E0A9FD847468F502A7376924C7E924B22AE3BEBD1CF6B8D9043C0350C3CF77B29B3105D821EFE2B8F6C45DDCB90F89573AE492E5"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("7b4b99c49161d588f887afcf504c706a6b3de0fe76049b79ef17d4d1ecbb466d"))},
+			{"Signature", new Signature(Converter.HexToBytes("ED49CD41752059D5C3D90804E0A9FD847468F502A7376924C7E924B22AE3BEBD1CF6B8D9043C0350C3CF77B29B3105D821EFE2B8F6C45DDCB90F89573AE492E5"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("94049515EBF52723CC7B217DE82D79D5ADFFF719C1934CB50AE91693FADEDC25"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("94049515EBF52723CC7B217DE82D79D5ADFFF719C1934CB50AE91693FADEDC25"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicGlobalRestrictionTransaction_mosaic_global_restriction_agregate_2(){
@@ -1155,18 +1155,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("bc3323e9afba93aa0f7e7c74cc7e1a7079179dc25c3a7df686381dfc10547bd3"))},
-			{"Signature", new Signature(Converter.HexToUint8("95D42CC1FB67978D29A348578A7F738FF35999E2F3D97E5F4F03AEA6961D62E06F012F118DE2EC8B5E7530439E24BC87003FFA6F0516D6038D447F92C3680E29"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("bc3323e9afba93aa0f7e7c74cc7e1a7079179dc25c3a7df686381dfc10547bd3"))},
+			{"Signature", new Signature(Converter.HexToBytes("95D42CC1FB67978D29A348578A7F738FF35999E2F3D97E5F4F03AEA6961D62E06F012F118DE2EC8B5E7530439E24BC87003FFA6F0516D6038D447F92C3680E29"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("8D93F6BF096B6D02432E54A73A39F70937971A10926195552EFC67396C9F33AB"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("8D93F6BF096B6D02432E54A73A39F70937971A10926195552EFC67396C9F33AB"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_single_1(){
@@ -1177,14 +1177,14 @@ public class TransactionNonParserTest
 			{"ScopedMetadataKey", 10},
 			{"TargetMosaicId", 1000},
 			{"ValueSizeDelta", 10},
-			{"Value", Converter.HexToUint8("313233414243")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("268060948aeb268498c6dd8d0646d5d34b03c4f4d071f64d4a1851041b416599"))},
-			{"Signature", new Signature(Converter.HexToUint8("23DA8E82ADE2DD61A17330CFA60771C0E7261B496BFD8390D53886145961E4F8CE9F2DDBD0172C4459D93235ADE419D07BD8F9908568A46C5DE115836C20C100"))},
+			{"Value", Converter.HexToBytes("313233414243")},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("268060948aeb268498c6dd8d0646d5d34b03c4f4d071f64d4a1851041b416599"))},
+			{"Signature", new Signature(Converter.HexToBytes("23DA8E82ADE2DD61A17330CFA60771C0E7261B496BFD8390D53886145961E4F8CE9F2DDBD0172C4459D93235ADE419D07BD8F9908568A46C5DE115836C20C100"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_single_2(){
@@ -1195,14 +1195,14 @@ public class TransactionNonParserTest
 			{"ScopedMetadataKey", 10},
 			{"TargetMosaicId", 1000},
 			{"ValueSizeDelta", -5},
-			{"Value", Converter.HexToUint8("313233414243")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("88785831f275aa3293a5e0e2c134a1a0da431c1846dd792c70eff4948a7282f2"))},
-			{"Signature", new Signature(Converter.HexToUint8("7A28BA2340BFAF54E34B73A7561B524AC0E7FED3E2EECA3CF5D13F41073810BEE8B1FF45A7381DF9B01B4A9D54C352087DE194A02677ECEF550BA51EF69230A2"))},
+			{"Value", Converter.HexToBytes("313233414243")},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("88785831f275aa3293a5e0e2c134a1a0da431c1846dd792c70eff4948a7282f2"))},
+			{"Signature", new Signature(Converter.HexToBytes("7A28BA2340BFAF54E34B73A7561B524AC0E7FED3E2EECA3CF5D13F41073810BEE8B1FF45A7381DF9B01B4A9D54C352087DE194A02677ECEF550BA51EF69230A2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_agregate_1(){
@@ -1217,22 +1217,22 @@ public class TransactionNonParserTest
 						{"ScopedMetadataKey", 10},
 						{"TargetMosaicId", 1000},
 						{"ValueSizeDelta", 10},
-						{"Value", Converter.HexToUint8("313233414243")},
+						{"Value", Converter.HexToBytes("313233414243")},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("d3fee6c469d14a8d1c11a51f5f4d73bb2d91bb1600ce344912b6ec6105fe4352"))},
-			{"Signature", new Signature(Converter.HexToUint8("5F849A0BFB869E272CE5BEBD41F6377193202FA7A63AF22054BD629F6DDEA3848B66D84C1064C475AEB23DC3BCEA60BEEBB925CAE43300BB21BC63834359AB90"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("d3fee6c469d14a8d1c11a51f5f4d73bb2d91bb1600ce344912b6ec6105fe4352"))},
+			{"Signature", new Signature(Converter.HexToBytes("5F849A0BFB869E272CE5BEBD41F6377193202FA7A63AF22054BD629F6DDEA3848B66D84C1064C475AEB23DC3BCEA60BEEBB925CAE43300BB21BC63834359AB90"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("E2553E2E3FC4A959406B0F1AF9ADB9FC67D558615D523FD24119A7915FD00468"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("E2553E2E3FC4A959406B0F1AF9ADB9FC67D558615D523FD24119A7915FD00468"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicMetadataTransaction_mosaic_metadata_agregate_2(){
@@ -1247,22 +1247,22 @@ public class TransactionNonParserTest
 						{"ScopedMetadataKey", 10},
 						{"TargetMosaicId", 1000},
 						{"ValueSizeDelta", -5},
-						{"Value", Converter.HexToUint8("313233414243")},
+						{"Value", Converter.HexToBytes("313233414243")},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("4aab5f92f1b859c549713a9a55bba890d7a58c80420c2e443bf73acbbdf4cd12"))},
-			{"Signature", new Signature(Converter.HexToUint8("ACA506E1C8B2DB62B73BBF1F87B254A33600DD67825593F425E05EC498BE311FE929811B8E70037BB786F4FC6048D916B46A511B30746F6089CC244886074E26"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("4aab5f92f1b859c549713a9a55bba890d7a58c80420c2e443bf73acbbdf4cd12"))},
+			{"Signature", new Signature(Converter.HexToBytes("ACA506E1C8B2DB62B73BBF1F87B254A33600DD67825593F425E05EC498BE311FE929811B8E70037BB786F4FC6048D916B46A511B30746F6089CC244886074E26"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("494C04ABA6F7275CDE4C6C829C99AC3C668EE50E46F6324020E0EADA8B08E518"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("494C04ABA6F7275CDE4C6C829C99AC3C668EE50E46F6324020E0EADA8B08E518"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_single_1(){
@@ -1272,13 +1272,13 @@ public class TransactionNonParserTest
 			{"MosaicId", 6300565133566699912},
 			{"Action", MosaicSupplyChangeAction.INCREASE},
 			{"Delta", 10},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("905f7936540c999ae9a07ef10d5dd8356552714dcf2a13b693127a9cdc449dfa"))},
-			{"Signature", new Signature(Converter.HexToUint8("84FEEF9899E6C7E30F68CF6307C9D2ABFC74802C4F971BE29293B6A28EC9CA4E4CA0AB618E96090C39E976E98E6048613EE26E5F90F5092AAB18C8838D4D0C9C"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("905f7936540c999ae9a07ef10d5dd8356552714dcf2a13b693127a9cdc449dfa"))},
+			{"Signature", new Signature(Converter.HexToBytes("84FEEF9899E6C7E30F68CF6307C9D2ABFC74802C4F971BE29293B6A28EC9CA4E4CA0AB618E96090C39E976E98E6048613EE26E5F90F5092AAB18C8838D4D0C9C"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_single_2(){
@@ -1288,13 +1288,13 @@ public class TransactionNonParserTest
 			{"MosaicId", 14624838436596993100},
 			{"Action", MosaicSupplyChangeAction.DECREASE},
 			{"Delta", 10},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3f0634c70130052870f43476c7237cf4f9e5ffcba4b2a47acc794969bc8020b2"))},
-			{"Signature", new Signature(Converter.HexToUint8("5DF7948C237F4203FB9193D24B9950212F1810F0803B8E06121FF86871048EBF3CDFA955E95A8651F6E6894795D9FE10DBDF2C51EEF135F17B18E218A070F1ED"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3f0634c70130052870f43476c7237cf4f9e5ffcba4b2a47acc794969bc8020b2"))},
+			{"Signature", new Signature(Converter.HexToBytes("5DF7948C237F4203FB9193D24B9950212F1810F0803B8E06121FF86871048EBF3CDFA955E95A8651F6E6894795D9FE10DBDF2C51EEF135F17B18E218A070F1ED"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_agregate_1(){
@@ -1311,18 +1311,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("4085474fff5c85622f822185ef2755fafb240b6264a9915bdf163f3179735db6"))},
-			{"Signature", new Signature(Converter.HexToUint8("95799A76EBBA045A99C5C59444EEF875B8D3BBC46790C1707D1BCB5E6EE74E6BA39C95E142FEF7C7BE595B8AB1A6EC17475FF5336F51C0D14D3E55B74F0222A2"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("4085474fff5c85622f822185ef2755fafb240b6264a9915bdf163f3179735db6"))},
+			{"Signature", new Signature(Converter.HexToBytes("95799A76EBBA045A99C5C59444EEF875B8D3BBC46790C1707D1BCB5E6EE74E6BA39C95E142FEF7C7BE595B8AB1A6EC17475FF5336F51C0D14D3E55B74F0222A2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("6FFAC840B2C866960FCBCF42AF16B113FFE309A0991DFC0E4F3772E7AFC2FB69"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("6FFAC840B2C866960FCBCF42AF16B113FFE309A0991DFC0E4F3772E7AFC2FB69"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MosaicSupplyChangeTransaction_mosaic_supply_change_agregate_2(){
@@ -1339,18 +1339,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("7f8619c1464c9ce85ee9fab592aed6f8984b3b282031ceabb47b7bba9d5dad81"))},
-			{"Signature", new Signature(Converter.HexToUint8("A09920E03279E34AFDB38DF71E2D647900097CC6A1962FAF674EC40E2139DA78C6F219E514CFFC2C68B90ED0A8D09D2782AD611723EAA6E4E2E5E9F0C1863B37"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("7f8619c1464c9ce85ee9fab592aed6f8984b3b282031ceabb47b7bba9d5dad81"))},
+			{"Signature", new Signature(Converter.HexToBytes("A09920E03279E34AFDB38DF71E2D647900097CC6A1962FAF674EC40E2139DA78C6F219E514CFFC2C68B90ED0A8D09D2782AD611723EAA6E4E2E5E9F0C1863B37"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("137E5D6F7F63CCB9E2B51A4C22481D2766E8A4FCD6A387E667A35723F2C68428"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("137E5D6F7F63CCB9E2B51A4C22481D2766E8A4FCD6A387E667A35723F2C68428"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MultisigAccountModificationTransaction_multisig_account_modification_single_1(){
@@ -1365,13 +1365,13 @@ public class TransactionNonParserTest
 			{"AddressDeletions", 	new UnresolvedAddress[]{
 				new (Converter.StringToAddress("TCIFSMQZAX3IDPHUP2RTXP26N6BJRNKEBBKP33I")),}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8f6838fbeeb8a165c50a27dc81443bebf09ead6b238bd979dadc0b5fd23c636c"))},
-			{"Signature", new Signature(Converter.HexToUint8("B2EEC3B339FAEFAF5705AF6D35B45F06B9CE66FE14CD78DEB6574A68A4910E4C4B82D12289A448B22DC22A9D9EC28D50A31FBB4B41A5D0BDB6F725CE69FA7512"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8f6838fbeeb8a165c50a27dc81443bebf09ead6b238bd979dadc0b5fd23c636c"))},
+			{"Signature", new Signature(Converter.HexToBytes("B2EEC3B339FAEFAF5705AF6D35B45F06B9CE66FE14CD78DEB6574A68A4910E4C4B82D12289A448B22DC22A9D9EC28D50A31FBB4B41A5D0BDB6F725CE69FA7512"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void MultisigAccountModificationTransaction_multisig_account_modification_agregate_1(){
@@ -1393,18 +1393,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ed38b8ad8240d993452c8877f623703dc49670265f7531938d93ed80193222f1"))},
-			{"Signature", new Signature(Converter.HexToUint8("B3B88CF40C85C1DC6CE38BDF3CF0ADE3FA0E60C2573A2C92045FA3F0E645FC26A150B82B2BA99026F54A2444357E9B8BB105F19824150A32B411D9906982A412"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ed38b8ad8240d993452c8877f623703dc49670265f7531938d93ed80193222f1"))},
+			{"Signature", new Signature(Converter.HexToBytes("B3B88CF40C85C1DC6CE38BDF3CF0ADE3FA0E60C2573A2C92045FA3F0E645FC26A150B82B2BA99026F54A2444357E9B8BB105F19824150A32B411D9906982A412"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("23CC3A9D303266D2E163A8B8AA1A991F3EC9012B7F7490C6870BB5F6ED9E4D8D"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("23CC3A9D303266D2E163A8B8AA1A991F3EC9012B7F7490C6870BB5F6ED9E4D8D"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_single_1(){
@@ -1416,13 +1416,13 @@ public class TransactionNonParserTest
 			{"TargetNamespaceId", 1000},
 			{"ValueSizeDelta", 10},
 			{"Value", Converter.Utf8ToBytes("ABC123")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("33ae27abc50b316be6672527138040a1eccfc18b77bda6fa02671f5b19338cc2"))},
-			{"Signature", new Signature(Converter.HexToUint8("DAA3292B635326B63711C38C1FD05B4418E500462CA662934E5457710A0DA61C8B3AFA6E606F8749ACAA3A1CD87A1BCB9E609BA5EE5802D7AB212E99A944B5D0"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("33ae27abc50b316be6672527138040a1eccfc18b77bda6fa02671f5b19338cc2"))},
+			{"Signature", new Signature(Converter.HexToBytes("DAA3292B635326B63711C38C1FD05B4418E500462CA662934E5457710A0DA61C8B3AFA6E606F8749ACAA3A1CD87A1BCB9E609BA5EE5802D7AB212E99A944B5D0"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_single_2(){
@@ -1434,13 +1434,13 @@ public class TransactionNonParserTest
 			{"TargetNamespaceId", 1000},
 			{"ValueSizeDelta", -3},
 			{"Value", Converter.Utf8ToBytes("ABC123")},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8c830b26b04b75013b84d69f271070f578d2fc5b49dc5fde129211f4f2fe2a80"))},
-			{"Signature", new Signature(Converter.HexToUint8("8D5E48731CF708EEC10A440F72B5E34F2C081849F8832C15193B45D354D2AEE75438D606891F786AA9929FF9065750933FB9048A461D1964146C0A9045111966"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8c830b26b04b75013b84d69f271070f578d2fc5b49dc5fde129211f4f2fe2a80"))},
+			{"Signature", new Signature(Converter.HexToBytes("8D5E48731CF708EEC10A440F72B5E34F2C081849F8832C15193B45D354D2AEE75438D606891F786AA9929FF9065750933FB9048A461D1964146C0A9045111966"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_agregate_1(){
@@ -1459,18 +1459,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("d664203fa69e5da56071a319f581bfa05402a405d230872e27983fd9038da12e"))},
-			{"Signature", new Signature(Converter.HexToUint8("DEC269D41673DE4A155C5029CB9B424AFF07E6FE825C6723A34022F72DC44BA51BE261D03077827B55BF86FA25F6D907D4D049ED2AC7ACC23567D25578F0AC8A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("d664203fa69e5da56071a319f581bfa05402a405d230872e27983fd9038da12e"))},
+			{"Signature", new Signature(Converter.HexToBytes("DEC269D41673DE4A155C5029CB9B424AFF07E6FE825C6723A34022F72DC44BA51BE261D03077827B55BF86FA25F6D907D4D049ED2AC7ACC23567D25578F0AC8A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("A716D958F0076204E3F1DDD9CCFB4087C8B934826E977A978914CF3D619494EE"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("A716D958F0076204E3F1DDD9CCFB4087C8B934826E977A978914CF3D619494EE"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceMetadataTransaction_namespace_metadata_agregate_2(){
@@ -1489,18 +1489,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("e62936690f5b7bb7d45133f723e2486e08fb65a38b23bdc87dbea70321e89b0e"))},
-			{"Signature", new Signature(Converter.HexToUint8("33AEBFA1816CEA80DBA0990B8800B55E334BFF3B73FFCDBF31233BC634E742DFDABEDD0CA2A1A41CDA50E7E23B939AC4B1ED89ADAB52CAD27B176BE6800726CB"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("e62936690f5b7bb7d45133f723e2486e08fb65a38b23bdc87dbea70321e89b0e"))},
+			{"Signature", new Signature(Converter.HexToBytes("33AEBFA1816CEA80DBA0990B8800B55E334BFF3B73FFCDBF31233BC634E742DFDABEDD0CA2A1A41CDA50E7E23B939AC4B1ED89ADAB52CAD27B176BE6800726CB"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("A92D6804B56AF5C4439906441DEE2EC265756E9D95914230483A4D1BF6283C1D"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("A92D6804B56AF5C4439906441DEE2EC265756E9D95914230483A4D1BF6283C1D"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_single_1(){
@@ -1511,13 +1511,13 @@ public class TransactionNonParserTest
 			{"Id", 13858666424160217470},
 			{"RegistrationType", NamespaceRegistrationType.ROOT},
 			{"Name", "newnamespace"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("fb36dbbd3944a969969707cc0fe8ddadb58f3fecc7256492d867a36bbca52ea8"))},
-			{"Signature", new Signature(Converter.HexToUint8("C8BE2E3FBBCB8B448B30416D079EAD7422BC2C6B27106B8A78EA0BD0FA4EB87750EAA3DC387EAAF9F0D0476194D19F974C320CCB306299BE0A04877C95B361D3"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("fb36dbbd3944a969969707cc0fe8ddadb58f3fecc7256492d867a36bbca52ea8"))},
+			{"Signature", new Signature(Converter.HexToBytes("C8BE2E3FBBCB8B448B30416D079EAD7422BC2C6B27106B8A78EA0BD0FA4EB87750EAA3DC387EAAF9F0D0476194D19F974C320CCB306299BE0A04877C95B361D3"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_single_2(){
@@ -1528,13 +1528,13 @@ public class TransactionNonParserTest
 			{"Id", 17411894141110456835},
 			{"RegistrationType", NamespaceRegistrationType.CHILD},
 			{"Name", "subnamespace"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3fe023cd43e2e67b5288951e4d627a73df3574d50323c47b47ef177734b093b0"))},
-			{"Signature", new Signature(Converter.HexToUint8("07F27699694E30640786112CA6184DED2A59C3ED7E14662A4FAF37A67D3E1D6A44C21B87B18A2D65D67A6EDF1B902811E8CCCEDB46730E2C93A9AA8235BE7B82"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3fe023cd43e2e67b5288951e4d627a73df3574d50323c47b47ef177734b093b0"))},
+			{"Signature", new Signature(Converter.HexToBytes("07F27699694E30640786112CA6184DED2A59C3ED7E14662A4FAF37A67D3E1D6A44C21B87B18A2D65D67A6EDF1B902811E8CCCEDB46730E2C93A9AA8235BE7B82"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_agregate_1(){
@@ -1552,18 +1552,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("a0b55786c71b261916a19a36e424621965ed901183dfaf4bd8cd5d7a8d4944f3"))},
-			{"Signature", new Signature(Converter.HexToUint8("866838970DB4BA212F5FB34AD8D48B28E42FFC10D1722A3EF20A3E93B829A97BEE4D7EBC0514C6465BCEB0BF9B15C8D2CF02CA5CD21245AEF3DEC6DFDBAFAC7D"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("a0b55786c71b261916a19a36e424621965ed901183dfaf4bd8cd5d7a8d4944f3"))},
+			{"Signature", new Signature(Converter.HexToBytes("866838970DB4BA212F5FB34AD8D48B28E42FFC10D1722A3EF20A3E93B829A97BEE4D7EBC0514C6465BCEB0BF9B15C8D2CF02CA5CD21245AEF3DEC6DFDBAFAC7D"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("64148373332A1284E316AC070194019D786C29F3B879A0AAFACEC2E393D0FCB5"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("64148373332A1284E316AC070194019D786C29F3B879A0AAFACEC2E393D0FCB5"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NamespaceRegistrationTransaction_namespace_registration_agregate_2(){
@@ -1581,33 +1581,33 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("b04569b66ea0486bfd3d8a5156a7b7946e5a46e8a9c5ea622c87429fd27ae841"))},
-			{"Signature", new Signature(Converter.HexToUint8("AD10FC0DF55C6054B7232F89189BE9B5523FECF674F573344422968F392871A2E43578F75C796AF886A37AB6A94BEFF86751DCD077F5DFBEB4A5D2742009B38F"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("b04569b66ea0486bfd3d8a5156a7b7946e5a46e8a9c5ea622c87429fd27ae841"))},
+			{"Signature", new Signature(Converter.HexToBytes("AD10FC0DF55C6054B7232F89189BE9B5523FECF674F573344422968F392871A2E43578F75C796AF886A37AB6A94BEFF86751DCD077F5DFBEB4A5D2742009B38F"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("9777CD6B81EED8832122E7D4692D5AC09D6144D30E3A8D1DF559FDB21C1B4FAC"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("9777CD6B81EED8832122E7D4692D5AC09D6144D30E3A8D1DF559FDB21C1B4FAC"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NodeKeyLinkTransaction_node_key_link_single_1(){
 		var payload = "A10000000000000091354287A29EB85733FE84D82BA7CA99B5E967BB0DECC95B16F2D8F8891BDAFED5225F6BC4CD0E3B4314B7D4B93256D53C97150A7E5974079FE02360C06DC6577BC443767F6B2BCE03EE8264CC010BFB0B8E1A526B1D705A263FFF5AC7B1CDA20000000001984C42E0FEEEEFFEEEEFFEE0711EE7711EE7719801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B601";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.NODE_KEY_LINK},
-			{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+			{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 			{"LinkAction", LinkAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("7bc443767f6b2bce03ee8264cc010bfb0b8e1a526b1d705a263fff5ac7b1cda2"))},
-			{"Signature", new Signature(Converter.HexToUint8("91354287A29EB85733FE84D82BA7CA99B5E967BB0DECC95B16F2D8F8891BDAFED5225F6BC4CD0E3B4314B7D4B93256D53C97150A7E5974079FE02360C06DC657"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("7bc443767f6b2bce03ee8264cc010bfb0b8e1a526b1d705a263fff5ac7b1cda2"))},
+			{"Signature", new Signature(Converter.HexToBytes("91354287A29EB85733FE84D82BA7CA99B5E967BB0DECC95B16F2D8F8891BDAFED5225F6BC4CD0E3B4314B7D4B93256D53C97150A7E5974079FE02360C06DC657"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void NodeKeyLinkTransaction_node_key_link_agregate_1(){
@@ -1618,23 +1618,23 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.NODE_KEY_LINK},
-						{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+						{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 						{"LinkAction", LinkAction.LINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("c14191902987c5f2f7c8125492d83e61d6caa4764987e9bb696e81cf31bea6db"))},
-			{"Signature", new Signature(Converter.HexToUint8("5B81A89676DB9BD32FDA0DEAA922B373E523ADB9D30206548109323A1326C27C734B4A55D3E055C7004D84C8E653E5DB6EA108BE32545D2DE005E5799358AC23"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("c14191902987c5f2f7c8125492d83e61d6caa4764987e9bb696e81cf31bea6db"))},
+			{"Signature", new Signature(Converter.HexToBytes("5B81A89676DB9BD32FDA0DEAA922B373E523ADB9D30206548109323A1326C27C734B4A55D3E055C7004D84C8E653E5DB6EA108BE32545D2DE005E5799358AC23"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("D1E0E4543AD54FB41747EAA74009AE05DB685DD0FB2B8CB6385327DCC71ED8B2"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("D1E0E4543AD54FB41747EAA74009AE05DB685DD0FB2B8CB6385327DCC71ED8B2"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_single_1(){
@@ -1651,13 +1651,13 @@ public class TransactionNonParserTest
 			},
 			{"Duration", 100},
 			{"HashAlgorithm", LockHashAlgorithm.SHA3_256},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("6ac894bd9a232ca3e220574714323dd7f8a813a6d337778e37205162205d63a8"))},
-			{"Signature", new Signature(Converter.HexToUint8("88EEDC72EFFC5FABD1B70E21A95ADE3E247617E799FD6EFFF52133DB3B8283F6A07D182A2CB5E6FE7A8F57C182B9B70D565267EC6087441C0147358722A77E35"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("6ac894bd9a232ca3e220574714323dd7f8a813a6d337778e37205162205d63a8"))},
+			{"Signature", new Signature(Converter.HexToBytes("88EEDC72EFFC5FABD1B70E21A95ADE3E247617E799FD6EFFF52133DB3B8283F6A07D182A2CB5E6FE7A8F57C182B9B70D565267EC6087441C0147358722A77E35"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_single_2(){
@@ -1674,13 +1674,13 @@ public class TransactionNonParserTest
 			{"Duration", 100},
 			{"Secret", "59CC35F8C8D91867717CE4290B40EA636E86CE5C000000000000000000000000"},
 			{"HashAlgorithm", LockHashAlgorithm.HASH_160},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("1387c5b37f10084cf883b919f420f3c5476a7ac9e01ea7c143d4594e50b6f35d"))},
-			{"Signature", new Signature(Converter.HexToUint8("2D117AC0C3468D187284F6EE085E7132F8480ACC85C3EA90784020E93C1529AE68F83646121035B66D34CFD4BC25D0CED2F2A19A449FF167BFAF30C350F9A0A3"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("1387c5b37f10084cf883b919f420f3c5476a7ac9e01ea7c143d4594e50b6f35d"))},
+			{"Signature", new Signature(Converter.HexToBytes("2D117AC0C3468D187284F6EE085E7132F8480ACC85C3EA90784020E93C1529AE68F83646121035B66D34CFD4BC25D0CED2F2A19A449FF167BFAF30C350F9A0A3"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_agregate_1(){
@@ -1704,18 +1704,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("4488b72a11af693af9a658032c43c044fe22a372fa5c14bc45ca110deaaa7811"))},
-			{"Signature", new Signature(Converter.HexToUint8("3A6A61FA611D81C24D5E7D397BF11DBC16CD7DED5B4F08595F5E3F67C7066B76289C974F8B8E4B715D24A656FFB96F6C9B08DE0571021E8438289BEDB41A8BD5"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("4488b72a11af693af9a658032c43c044fe22a372fa5c14bc45ca110deaaa7811"))},
+			{"Signature", new Signature(Converter.HexToBytes("3A6A61FA611D81C24D5E7D397BF11DBC16CD7DED5B4F08595F5E3F67C7066B76289C974F8B8E4B715D24A656FFB96F6C9B08DE0571021E8438289BEDB41A8BD5"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("36927A7B0987EB9A13129BA53AC0597E96F9D8F2C8306EA3F750518ACD15529A"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("36927A7B0987EB9A13129BA53AC0597E96F9D8F2C8306EA3F750518ACD15529A"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretLockTransaction_secret_lock_agregate_2(){
@@ -1739,18 +1739,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("d719a777219fdafab2d5275cf6ecfaf94ac728d34b933e87eb5a89b0bc9cce34"))},
-			{"Signature", new Signature(Converter.HexToUint8("7478FBA6FF9276657EB4946539A94E1BEB3C4B7C1EF26560FAC470396BEE33E18AD25BB852276BA462F012051D87086F18D1A0ABBAC5F9BEE109B0548ABB42AB"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("d719a777219fdafab2d5275cf6ecfaf94ac728d34b933e87eb5a89b0bc9cce34"))},
+			{"Signature", new Signature(Converter.HexToBytes("7478FBA6FF9276657EB4946539A94E1BEB3C4B7C1EF26560FAC470396BEE33E18AD25BB852276BA462F012051D87086F18D1A0ABBAC5F9BEE109B0548ABB42AB"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("81F7349CC9785016A1435572751389F02926573244D7F97E14F811D60627750A"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("81F7349CC9785016A1435572751389F02926573244D7F97E14F811D60627750A"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretProofTransaction_secret_proof_single_1(){
@@ -1761,13 +1761,13 @@ public class TransactionNonParserTest
 			{"Secret", "3FC8BA10229AB5778D05D9C4B7F56676A88BF9295C185ACFC0F961DB5408CAFE"},
 			{"HashAlgorithm", LockHashAlgorithm.SHA3_256},
 			{"Proof", "9A493664"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("a28af1afeb9d81f96578e02edc455a09aaf0e284598de4db1e31bfc5129d8599"))},
-			{"Signature", new Signature(Converter.HexToUint8("1D8D85E74C7E269B95D96516C9B6BF4AE84371C9E8518D6E3B023B840D9A8A8ADB2D5CE3188C9AF85BD1683B0407FB985D12F007817249F504B1E8B2A8DD615D"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("a28af1afeb9d81f96578e02edc455a09aaf0e284598de4db1e31bfc5129d8599"))},
+			{"Signature", new Signature(Converter.HexToBytes("1D8D85E74C7E269B95D96516C9B6BF4AE84371C9E8518D6E3B023B840D9A8A8ADB2D5CE3188C9AF85BD1683B0407FB985D12F007817249F504B1E8B2A8DD615D"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void SecretProofTransaction_secret_proof_agregate_1(){
@@ -1785,18 +1785,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("69c14438aa767c23fd624cca4365242ef5ecb5799bff5e33fcdf91d60c941152"))},
-			{"Signature", new Signature(Converter.HexToUint8("258457EEC327C7E4085A18B5C42A53D2E8B0822F5C69C53103DDDC953C6B374182E9719463461E2767BBCAA073395EFFCE269A66841A3A8701230EE5D87576C6"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("69c14438aa767c23fd624cca4365242ef5ecb5799bff5e33fcdf91d60c941152"))},
+			{"Signature", new Signature(Converter.HexToBytes("258457EEC327C7E4085A18B5C42A53D2E8B0822F5C69C53103DDDC953C6B374182E9719463461E2767BBCAA073395EFFCE269A66841A3A8701230EE5D87576C6"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("2082780E43D0C6AB646FF178295F5B7CE48B9DE845A3DA98EF595433BDA184E9"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("2082780E43D0C6AB646FF178295F5B7CE48B9DE845A3DA98EF595433BDA184E9"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_1(){
@@ -1812,13 +1812,13 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("887a295e3f01a57cbfa7a381776140a1f4084788ae6a82a004dff09fae5c0eb2"))},
-			{"Signature", new Signature(Converter.HexToUint8("4E90C6FEDB83592BBE7429296DE991AC9DFB92EFBF78401E30BC0E25A3F85C886E77C14CCABC20A97E7E0B0F971BDF2F155D095C38F09508AAE132D0538BADF5"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("887a295e3f01a57cbfa7a381776140a1f4084788ae6a82a004dff09fae5c0eb2"))},
+			{"Signature", new Signature(Converter.HexToBytes("4E90C6FEDB83592BBE7429296DE991AC9DFB92EFBF78401E30BC0E25A3F85C886E77C14CCABC20A97E7E0B0F971BDF2F155D095C38F09508AAE132D0538BADF5"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_2(){
@@ -1838,13 +1838,13 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("70c9af9ec2b998933fa45847bfb8679c4e525eda12e65d39eed47cf37ec04bc0"))},
-			{"Signature", new Signature(Converter.HexToUint8("3E536258F65B3C272AE874C3D7AE442C4DC6FA955BB3730CE03A829D9199C1B911ABB497BC08875A3BC1E50093B510B6424A95B2265E7FC66718B665DDC2CF7A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("70c9af9ec2b998933fa45847bfb8679c4e525eda12e65d39eed47cf37ec04bc0"))},
+			{"Signature", new Signature(Converter.HexToBytes("3E536258F65B3C272AE874C3D7AE442C4DC6FA955BB3730CE03A829D9199C1B911ABB497BC08875A3BC1E50093B510B6424A95B2265E7FC66718B665DDC2CF7A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_3(){
@@ -1868,13 +1868,13 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("836044703a8e43a8ca62e42ee4a7f598f581a3c9c07f7b58c9060247747ef408"))},
-			{"Signature", new Signature(Converter.HexToUint8("D47F4B3D13ECC1E44EE2FD11AE6EFF78DD2038F513841A16CF015219F66BBA4BC10D35C40A87BE0BC314587D12AF2C6081DAB4180207BD0FC106AC7F7BB879B4"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("836044703a8e43a8ca62e42ee4a7f598f581a3c9c07f7b58c9060247747ef408"))},
+			{"Signature", new Signature(Converter.HexToBytes("D47F4B3D13ECC1E44EE2FD11AE6EFF78DD2038F513841A16CF015219F66BBA4BC10D35C40A87BE0BC314587D12AF2C6081DAB4180207BD0FC106AC7F7BB879B4"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_4(){
@@ -1887,13 +1887,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Message", "D600000300504C5445000000FBAF93F7"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("b0fb3a07d93bef00f4bbf81c72c9489237660ffa44a419138db2d10193dd0102"))},
-			{"Signature", new Signature(Converter.HexToUint8("8E950BF18283168A861DA5202C91C76DBBA6E9E821E1ADB580658661869AC94947EF0393371ED3DFBBF00629AA84B339D453D21B42D3E57449188A8589EF6C98"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("b0fb3a07d93bef00f4bbf81c72c9489237660ffa44a419138db2d10193dd0102"))},
+			{"Signature", new Signature(Converter.HexToBytes("8E950BF18283168A861DA5202C91C76DBBA6E9E821E1ADB580658661869AC94947EF0393371ED3DFBBF00629AA84B339D453D21B42D3E57449188A8589EF6C98"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_5(){
@@ -1910,13 +1910,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Message", "It's some kind of magic, magic"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("f53893e4f447da7883ea91e9db22d55e74be9c753ee9f4c77649ca08b24731cc"))},
-			{"Signature", new Signature(Converter.HexToUint8("59665897092A934EBBFB0051ECF0986403E88DF2247D4241F3B4478913B889C0CC4620C6C36D97EF83F556A1FB7601F39EE6E7A42BFD9083902A094D2EB68B03"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("f53893e4f447da7883ea91e9db22d55e74be9c753ee9f4c77649ca08b24731cc"))},
+			{"Signature", new Signature(Converter.HexToBytes("59665897092A934EBBFB0051ECF0986403E88DF2247D4241F3B4478913B889C0CC4620C6C36D97EF83F556A1FB7601F39EE6E7A42BFD9083902A094D2EB68B03"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_single_6(){
@@ -1937,13 +1937,13 @@ public class TransactionNonParserTest
 				}
 			},
 			{"Message", "Hello 👋"},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("8533602bd6bd0b070088ae36332dafdcd96263215735c1faa40eb991ddf652dc"))},
-			{"Signature", new Signature(Converter.HexToUint8("D68D4835CDA357A4E288B7B08659546AAC9C4AB0938761B7038E89D2094E8A4B45C5D522CB148F000C1319B9E21DBA60E6B693A38F74E5F04E0A361D4067A900"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("8533602bd6bd0b070088ae36332dafdcd96263215735c1faa40eb991ddf652dc"))},
+			{"Signature", new Signature(Converter.HexToBytes("D68D4835CDA357A4E288B7B08659546AAC9C4AB0938761B7038E89D2094E8A4B45C5D522CB148F000C1319B9E21DBA60E6B693A38F74E5F04E0A361D4067A900"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_1(){
@@ -1966,18 +1966,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("adbd4c3db95fe697830c3675339d7a26a00f6afbeb21323b6f4b66937792d5ef"))},
-			{"Signature", new Signature(Converter.HexToUint8("0B3A52F17CB33DB5EB1096C93A1A7EA038121EE1AE8476984C6FAB60542D367DBFF6CD918DF3DAE3DE14DEBA467A9A0D60286EB4585089A5B3F4B7F53CAB2099"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("adbd4c3db95fe697830c3675339d7a26a00f6afbeb21323b6f4b66937792d5ef"))},
+			{"Signature", new Signature(Converter.HexToBytes("0B3A52F17CB33DB5EB1096C93A1A7EA038121EE1AE8476984C6FAB60542D367DBFF6CD918DF3DAE3DE14DEBA467A9A0D60286EB4585089A5B3F4B7F53CAB2099"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("708124B1E5E63878225B38A343BDB300A1A06150343BA85DFC608331265D0DA5"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("708124B1E5E63878225B38A343BDB300A1A06150343BA85DFC608331265D0DA5"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_2(){
@@ -2004,18 +2004,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3223990affc1122f1b520c9710017680f62a1aa8bfbe1b791db99a177a3b55ab"))},
-			{"Signature", new Signature(Converter.HexToUint8("376A90EAB19F665BE6D7BB16257B310ECFFDD8AFF0752F8E952397A983DBC2E5E87817E3EAFD8FFFE31DD82EF46E0006FC70B945A9F27F3EAECE1BFF03CC1F1F"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3223990affc1122f1b520c9710017680f62a1aa8bfbe1b791db99a177a3b55ab"))},
+			{"Signature", new Signature(Converter.HexToBytes("376A90EAB19F665BE6D7BB16257B310ECFFDD8AFF0752F8E952397A983DBC2E5E87817E3EAFD8FFFE31DD82EF46E0006FC70B945A9F27F3EAECE1BFF03CC1F1F"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("F34F69D90B202FC2752058059E3BC49A8CA4BE331D5F49C2C13B8F2A9A3BC331"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("F34F69D90B202FC2752058059E3BC49A8CA4BE331D5F49C2C13B8F2A9A3BC331"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_3(){
@@ -2046,18 +2046,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("99e22bafb76fbe813908808e350e8c2aa7ac28df756b195f77e0b24da32b7ea3"))},
-			{"Signature", new Signature(Converter.HexToUint8("CB7773B42D752093B17F827D8FE3B8FAE20B8C2A03124489B3396CD11AA4953E6B4FAF874A8B5335F95EB8DC0020D77DCB11F21E4E2DA51D1E1B36B51358FEDD"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("99e22bafb76fbe813908808e350e8c2aa7ac28df756b195f77e0b24da32b7ea3"))},
+			{"Signature", new Signature(Converter.HexToBytes("CB7773B42D752093B17F827D8FE3B8FAE20B8C2A03124489B3396CD11AA4953E6B4FAF874A8B5335F95EB8DC0020D77DCB11F21E4E2DA51D1E1B36B51358FEDD"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("611B90A6E05EE33D30D87DE5B58505B8B9807E54BB8B9229EAF95DBBD43819BC"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("611B90A6E05EE33D30D87DE5B58505B8B9807E54BB8B9229EAF95DBBD43819BC"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_4(){
@@ -2077,18 +2077,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("9fa8af6da4554e85e856d1de8d7e2f1179cdf360ea7fa0c6900fbf21b040a1cc"))},
-			{"Signature", new Signature(Converter.HexToUint8("C61AF3370499AD421AA4F2ADD3BEF24351ECD66D6C2C9B403E864EAA4152CEF539134A42E1E149E9E1E3CFCF84266721218FAB1912349B897365E03BFFD081FF"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("9fa8af6da4554e85e856d1de8d7e2f1179cdf360ea7fa0c6900fbf21b040a1cc"))},
+			{"Signature", new Signature(Converter.HexToBytes("C61AF3370499AD421AA4F2ADD3BEF24351ECD66D6C2C9B403E864EAA4152CEF539134A42E1E149E9E1E3CFCF84266721218FAB1912349B897365E03BFFD081FF"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("AB122F570B57922F4B25A37E13EC53E14BE4A6A3F38C06CE4AF510060633667D"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("AB122F570B57922F4B25A37E13EC53E14BE4A6A3F38C06CE4AF510060633667D"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_5(){
@@ -2112,18 +2112,18 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("a3e4c7fd792ca56dccf155760f1edac4f61799ef15e2075edcbabd39eda98c20"))},
-			{"Signature", new Signature(Converter.HexToUint8("59251925ABFA6E59B2985D82F1BCEDB8960E45CD3ECF29E3146ECEF08B3538D23801A814C0B80E69645E851172312D7FC4DC321419026057C9F9727ADBE7C422"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("a3e4c7fd792ca56dccf155760f1edac4f61799ef15e2075edcbabd39eda98c20"))},
+			{"Signature", new Signature(Converter.HexToBytes("59251925ABFA6E59B2985D82F1BCEDB8960E45CD3ECF29E3146ECEF08B3538D23801A814C0B80E69645E851172312D7FC4DC321419026057C9F9727ADBE7C422"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("9ACF4807E95D6989038C5FCFEA053C55077439DFB93C06C98237C73815CABE87"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("9ACF4807E95D6989038C5FCFEA053C55077439DFB93C06C98237C73815CABE87"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void TransferTransaction_transfer_agregate_6(){
@@ -2151,52 +2151,52 @@ public class TransactionNonParserTest
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("1a6b7c8938457541d0459b2c310ab37ed432877ac8992230437390bff0a4b981"))},
-			{"Signature", new Signature(Converter.HexToUint8("D52853B68AA29002EEB1DD2CFCF42B01F778A5F305AB19697D90378AE4629B7B01DBCBBC2B1B34159BDD10291D7856F6AF88C9EC913C6A42BA0977E2D63D8AF2"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("1a6b7c8938457541d0459b2c310ab37ed432877ac8992230437390bff0a4b981"))},
+			{"Signature", new Signature(Converter.HexToBytes("D52853B68AA29002EEB1DD2CFCF42B01F778A5F305AB19697D90378AE4629B7B01DBCBBC2B1B34159BDD10291D7856F6AF88C9EC913C6A42BA0977E2D63D8AF2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("754207E883B1237A94D2892613D382C17B0F0A2EC93042871724F6AE0D991ABA"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("754207E883B1237A94D2892613D382C17B0F0A2EC93042871724F6AE0D991ABA"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_single_1(){
 		var payload = "A9000000000000003713BC1FA44EB6881D7591B5027ED101F8068E00E5928A089E4FD0917955390438F5BD18452BBDA6CAEEB3393B3327845B41586EE462300CED2D52B88D385354CA3337340F09E9199180C3FD7602ADFD8D25851ACE3FA68BC4967823665908C00000000001984341E0FEEEEFFEEEEFFEE0711EE7711EE771C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75010000000300000001";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.VOTING_KEY_LINK},
-			{"LinkedPublicKey", new VotingPublicKey(Converter.HexToUint8("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
+			{"LinkedPublicKey", new VotingPublicKey(Converter.HexToBytes("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
 			{"StartEpoch", 1},
 			{"EndEpoch", 3},
 			{"LinkAction", LinkAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("ca3337340f09e9199180c3fd7602adfd8d25851ace3fa68bc4967823665908c0"))},
-			{"Signature", new Signature(Converter.HexToUint8("3713BC1FA44EB6881D7591B5027ED101F8068E00E5928A089E4FD0917955390438F5BD18452BBDA6CAEEB3393B3327845B41586EE462300CED2D52B88D385354"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("ca3337340f09e9199180c3fd7602adfd8d25851ace3fa68bc4967823665908c0"))},
+			{"Signature", new Signature(Converter.HexToBytes("3713BC1FA44EB6881D7591B5027ED101F8068E00E5928A089E4FD0917955390438F5BD18452BBDA6CAEEB3393B3327845B41586EE462300CED2D52B88D385354"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_single_2(){
 		var payload = "A90000000000000021EA88C03ECAAF8ECC3D1D8F3D1F4634C49EA9B874D300409D35C2B7285911F9DF8A1F0BCA3569C0DD8212D0BD46B3F3338E4D0B089C21162FF307308B141C91A5B35541AFF2FC8B1F13438BC4101B701BE74092179B7D9D87CC603DD53CE1D20000000001984341E0FEEEEFFEEEEFFEE0711EE7711EE7719801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6CD0000001001000000";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.VOTING_KEY_LINK},
-			{"LinkedPublicKey", new VotingPublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+			{"LinkedPublicKey", new VotingPublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 			{"StartEpoch", 205},
 			{"EndEpoch", 272},
 			{"LinkAction", LinkAction.UNLINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("a5b35541aff2fc8b1f13438bc4101b701be74092179b7d9d87cc603dd53ce1d2"))},
-			{"Signature", new Signature(Converter.HexToUint8("21EA88C03ECAAF8ECC3D1D8F3D1F4634C49EA9B874D300409D35C2B7285911F9DF8A1F0BCA3569C0DD8212D0BD46B3F3338E4D0B089C21162FF307308B141C91"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("a5b35541aff2fc8b1f13438bc4101b701be74092179b7d9d87cc603dd53ce1d2"))},
+			{"Signature", new Signature(Converter.HexToBytes("21EA88C03ECAAF8ECC3D1D8F3D1F4634C49EA9B874D300409D35C2B7285911F9DF8A1F0BCA3569C0DD8212D0BD46B3F3338E4D0B089C21162FF307308B141C91"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_agregate_1(){
@@ -2207,25 +2207,25 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.VOTING_KEY_LINK},
-						{"LinkedPublicKey", new VotingPublicKey(Converter.HexToUint8("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
+						{"LinkedPublicKey", new VotingPublicKey(Converter.HexToBytes("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
 						{"StartEpoch", 1},
 						{"EndEpoch", 3},
 						{"LinkAction", LinkAction.LINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("47c7a52276283594cc00ac8595f375f6a623b366317120b24ab3829d27019908"))},
-			{"Signature", new Signature(Converter.HexToUint8("B9D6354C8741D011D985CF783664C60908ABAA4B6C388DBEDD16FD47990BBD5D4B6F9914C1EEA76D16EB3894BEED1F6C466827C548C7C7D39815B49CF3CA8233"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("47c7a52276283594cc00ac8595f375f6a623b366317120b24ab3829d27019908"))},
+			{"Signature", new Signature(Converter.HexToBytes("B9D6354C8741D011D985CF783664C60908ABAA4B6C388DBEDD16FD47990BBD5D4B6F9914C1EEA76D16EB3894BEED1F6C466827C548C7C7D39815B49CF3CA8233"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("56C4DAA441CE9528C6F0F1431E6FDD78AD33943E568964DF3AADAA9023B97F26"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("56C4DAA441CE9528C6F0F1431E6FDD78AD33943E568964DF3AADAA9023B97F26"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VotingKeyLinkTransaction_voting_key_link_agregate_2(){
@@ -2236,55 +2236,55 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.VOTING_KEY_LINK},
-						{"LinkedPublicKey", new VotingPublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+						{"LinkedPublicKey", new VotingPublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 						{"StartEpoch", 205},
 						{"EndEpoch", 272},
 						{"LinkAction", LinkAction.UNLINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("45a6e1071988810f796a1a86718b5311a59342b1f89cbff6304ed1b734018112"))},
-			{"Signature", new Signature(Converter.HexToUint8("327705C0055DD5DACB8EDC5592E022602570A35171DF2466BE10067D60915805A71D9F8D7E42101B143BAF50732319DAD3BFD59DC475C584193F0E45C2B7CAF4"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("45a6e1071988810f796a1a86718b5311a59342b1f89cbff6304ed1b734018112"))},
+			{"Signature", new Signature(Converter.HexToBytes("327705C0055DD5DACB8EDC5592E022602570A35171DF2466BE10067D60915805A71D9F8D7E42101B143BAF50732319DAD3BFD59DC475C584193F0E45C2B7CAF4"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("7BEFAC9DE1ED91FF6A7F9252CBDF9825C5DEF3D65EBC9CE6D07475854D69978C"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("7BEFAC9DE1ED91FF6A7F9252CBDF9825C5DEF3D65EBC9CE6D07475854D69978C"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_single_1(){
 		var payload = "A1000000000000002A721E43FC2BC7AFFB4A40D4F48003CAB9C5EC6A64BFF54F318488822C5DF77E1D61EC1D174CC07905E3A6FA84F896DB5F7DB3B09CF67C49E660DB1C7FF60C4AE068C742B4D0D25A563AB2FE20795D26DCBDDCC420725CC20F372C7BFB8A30730000000001984342E0FEEEEFFEEEEFFEE0711EE7711EE7719801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B601";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.VRF_KEY_LINK},
-			{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+			{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 			{"LinkAction", LinkAction.LINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("e068c742b4d0d25a563ab2fe20795d26dcbddcc420725cc20f372c7bfb8a3073"))},
-			{"Signature", new Signature(Converter.HexToUint8("2A721E43FC2BC7AFFB4A40D4F48003CAB9C5EC6A64BFF54F318488822C5DF77E1D61EC1D174CC07905E3A6FA84F896DB5F7DB3B09CF67C49E660DB1C7FF60C4A"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("e068c742b4d0d25a563ab2fe20795d26dcbddcc420725cc20f372c7bfb8a3073"))},
+			{"Signature", new Signature(Converter.HexToBytes("2A721E43FC2BC7AFFB4A40D4F48003CAB9C5EC6A64BFF54F318488822C5DF77E1D61EC1D174CC07905E3A6FA84F896DB5F7DB3B09CF67C49E660DB1C7FF60C4A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_single_2(){
 		var payload = "A1000000000000007F2B972A5E01DD836AEB60B855A4DE17B8094EB995D6180CBA1E4C623A8BAFA48A3D160977A9E4AB817A895E69B7CDEDA72F75BFC4EDA5CD3A0C10F6E15A15D33ACAA7E2C6482811C6D6166C69DE3C127056CCB509959AE70F85C2066A3E14AF0000000001984342E0FEEEEFFEEEEFFEE0711EE7711EE771C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA7500";
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", TransactionType.VRF_KEY_LINK},
-			{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
+			{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
 			{"LinkAction", LinkAction.UNLINK},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("3acaa7e2c6482811c6d6166c69de3c127056ccb509959ae70f85c2066a3e14af"))},
-			{"Signature", new Signature(Converter.HexToUint8("7F2B972A5E01DD836AEB60B855A4DE17B8094EB995D6180CBA1E4C623A8BAFA48A3D160977A9E4AB817A895E69B7CDEDA72F75BFC4EDA5CD3A0C10F6E15A15D3"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("3acaa7e2c6482811c6d6166c69de3c127056ccb509959ae70f85c2066a3e14af"))},
+			{"Signature", new Signature(Converter.HexToBytes("7F2B972A5E01DD836AEB60B855A4DE17B8094EB995D6180CBA1E4C623A8BAFA48A3D160977A9E4AB817A895E69B7CDEDA72F75BFC4EDA5CD3A0C10F6E15A15D3"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_agregate_1(){
@@ -2295,23 +2295,23 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.VRF_KEY_LINK},
-						{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
+						{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("9801508C58666C746F471538E43002B85B1CD542F9874B2861183919BA8787B6"))},
 						{"LinkAction", LinkAction.LINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("f03004ab9cf4b96bceaf72d3b989a7b64a9fa5c0096306af90da7f7dd9f63770"))},
-			{"Signature", new Signature(Converter.HexToUint8("CE67986C51340239E7551B5CA36F8D4854ED789657BA01DEFB0A5D1E0084A0C46A9BA354321B3985A1931294214379A24D44DC7982C0E037D3F627544EE60544"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("f03004ab9cf4b96bceaf72d3b989a7b64a9fa5c0096306af90da7f7dd9f63770"))},
+			{"Signature", new Signature(Converter.HexToBytes("CE67986C51340239E7551B5CA36F8D4854ED789657BA01DEFB0A5D1E0084A0C46A9BA354321B3985A1931294214379A24D44DC7982C0E037D3F627544EE60544"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("DFED773D9A8101C3DEE6A0F1B8F2D2414FAA3EA509980ED2A6A68DD1F11C32B5"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("DFED773D9A8101C3DEE6A0F1B8F2D2414FAA3EA509980ED2A6A68DD1F11C32B5"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
 	public void VrfKeyLinkTransaction_vrf_key_link_agregate_2(){
@@ -2322,22 +2322,22 @@ public class TransactionNonParserTest
 				new Dictionary<string, object>[]{
 					new(){
 						{"Type", TransactionType.VRF_KEY_LINK},
-						{"LinkedPublicKey", new PublicKey(Converter.HexToUint8("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
+						{"LinkedPublicKey", new PublicKey(Converter.HexToBytes("C614558647D02037384A2FECA80ACE95B235D9B9D90035FA46102FE79ECCBA75"))},
 						{"LinkAction", LinkAction.UNLINK},
 					},
 				}
 			},
-			{"SignerPublicKey", new PublicKey(Converter.HexToUint8("9c05a605874deadd328492a434c69e604409ba03c4f7b6703c22bfacce3b0702"))},
-			{"Signature", new Signature(Converter.HexToUint8("64DFCED70EB485D95BDE479429BE3EA39C298FC4FEE74F841D58DEE7D9C3FD8243D284B336B7988DB606EF9CFFF7DDECB6B03DB1B7EB4D7EA6C862A393DE30F2"))},
+			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("9c05a605874deadd328492a434c69e604409ba03c4f7b6703c22bfacce3b0702"))},
+			{"Signature", new Signature(Converter.HexToBytes("64DFCED70EB485D95BDE479429BE3EA39C298FC4FEE74F841D58DEE7D9C3FD8243D284B336B7988DB606EF9CFFF7DDECB6B03DB1B7EB4D7EA6C862A393DE30F2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Deadline", new Timestamp(8207562320463688160)},
 			{"Cosignatures", 
 				new Cosignature[]{
 				}
 			},
-			{"TransactionsHash", new Hash256(Converter.HexToUint8("20DBC70A82354FC46E727F9925707398981300E40BE3778FF9EFBE86D722AF59"))},
+			{"TransactionsHash", new Hash256(Converter.HexToBytes("20DBC70A82354FC46E727F9925707398981300E40BE3778FF9EFBE86D722AF59"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
-		Assert.AreEqual(payload, Converter.Uint8ToHex(tx.Serialize()));
+		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 }

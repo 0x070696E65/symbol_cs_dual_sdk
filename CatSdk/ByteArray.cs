@@ -21,13 +21,13 @@ public abstract class ByteArray
     
     protected ByteArray(int fixedSize, string hexstring)
     {
-        var rawBytes = Converter.HexToUint8(hexstring);
+        var rawBytes = Converter.HexToBytes(hexstring);
         if (fixedSize != rawBytes.Length) throw new Exception($"bytes was size {rawBytes.Length} but must be {fixedSize}");
         bytes = rawBytes;
     }
 
     public override string ToString()
     {
-        return Converter.Uint8ToHex(bytes);
+        return Converter.BytesToHex(bytes);
     }
 }

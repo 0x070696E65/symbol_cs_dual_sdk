@@ -19,7 +19,7 @@ public static class Converter
         }                
     };
     
-    public static byte[] HexToUint8(string hexString)
+    public static byte[] HexToBytes(string hexString)
     {
         var bs = new List<byte>();
         for (var i = 0; i < hexString.Length / 2; i++)
@@ -29,7 +29,7 @@ public static class Converter
         return bs.ToArray();
     }
     
-    public static string Uint8ToHex(byte[] bytes)
+    public static string BytesToHex(byte[] bytes)
     {
         var str = BitConverter.ToString(bytes.ToArray());
         str = str.Replace("-", string.Empty);
@@ -60,7 +60,7 @@ public static class Converter
     {
         if (_constants["sizes"]["addressDecoded"] != decoded.Length)
         {
-            throw new Exception(Uint8ToHex(decoded) + " does not represent a valid decoded address");
+            throw new Exception(BytesToHex(decoded) + " does not represent a valid decoded address");
         }
 
         var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
@@ -85,7 +85,7 @@ public static class Converter
     }
     
     public static string HexToUtf8(string input) {
-        return Encoding.UTF8.GetString(Converter.HexToUint8(input));
+        return Encoding.UTF8.GetString(Converter.HexToBytes(input));
     }
 
     public static byte[] Utf8ToPlainMessage(string input)

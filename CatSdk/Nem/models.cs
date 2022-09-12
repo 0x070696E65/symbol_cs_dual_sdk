@@ -867,7 +867,7 @@ public class NamespaceId : IStruct {
 
 	public override string ToString() {
 		var result = "(";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		result += ")";
 		return result;
 	}
@@ -924,7 +924,7 @@ public class MosaicId : IStruct {
 	public override string ToString() {
 		var result = "(";
 		result += $"namespaceId: {NamespaceId}, ";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		result += ")";
 		return result;
 	}
@@ -1227,8 +1227,8 @@ public class MosaicProperty : IStruct {
 
 	public override string ToString() {
 		var result = "(";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
-		result += $"value: hex({Converter.Uint8ToHex(Value)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
+		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
 	}
@@ -1391,7 +1391,7 @@ public class MosaicDefinition : IStruct {
 		var result = "(";
 		result += $"ownerPublicKey: {OwnerPublicKey}, ";
 		result += $"id: {Id}, ";
-		result += $"description: hex({Converter.Uint8ToHex(Description)}), ";
+		result += $"description: hex({Converter.BytesToHex(Description)}), ";
 		result += $"properties: [{string.Join(",", Properties.Select(e => e.ToString()))}], ";
 		result += $"levySize: {Converter.ToString(LevySize)}, ";
 		if (0.Value != LevySize.Value)
@@ -3390,9 +3390,9 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"rentalFeeSink: {RentalFeeSink}, ";
 		result += $"rentalFee: {RentalFee}, ";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		if (parentName)
-			result += $"parentName: hex({Converter.Uint8ToHex(ParentName)}), ";
+			result += $"parentName: hex({Converter.BytesToHex(ParentName)}), ";
 
 		result += ")";
 		return result;
@@ -3568,9 +3568,9 @@ public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"rentalFeeSink: {RentalFeeSink}, ";
 		result += $"rentalFee: {RentalFee}, ";
-		result += $"name: hex({Converter.Uint8ToHex(Name)}), ";
+		result += $"name: hex({Converter.BytesToHex(Name)}), ";
 		if (parentName)
-			result += $"parentName: hex({Converter.Uint8ToHex(ParentName)}), ";
+			result += $"parentName: hex({Converter.BytesToHex(ParentName)}), ";
 
 		result += ")";
 		return result;
@@ -3682,7 +3682,7 @@ public class Message : IStruct {
 	public override string ToString() {
 		var result = "(";
 		result += $"messageType: {MessageType}, ";
-		result += $"message: hex({Converter.Uint8ToHex(Message)}), ";
+		result += $"message: hex({Converter.BytesToHex(Message)}), ";
 		result += ")";
 		return result;
 	}
@@ -4450,7 +4450,7 @@ public class TransactionFactory {
 	}
 
 	public static ITransaction Deserialize(string payload) {
-		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
@@ -4494,7 +4494,7 @@ public class NonVerifiableTransactionFactory {
 	}
 
 	public static None Deserialize(string payload) {
-		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}

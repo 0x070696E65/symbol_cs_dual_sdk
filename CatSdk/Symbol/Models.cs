@@ -8301,10 +8301,10 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 }
 
 public class TransactionFactory {
-	public static IBaseTransaction Deserialize(BinaryReader br) {
+	public static ITransaction Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = Transaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
 		{
 			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.Deserialize},
 			{NodeKeyLinkTransaction.TRANSACTION_TYPE, NodeKeyLinkTransaction.Deserialize},
@@ -8336,14 +8336,14 @@ public class TransactionFactory {
 		return mapping[parent.Type](br);
 	}
 
-	public static IBaseTransaction Deserialize(string payload) {
+	public static ITransaction Deserialize(string payload) {
 		using var ms = new MemoryStream(Converter.HexToUint8(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
 
-	public static IBaseTransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+	public static ITransaction CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, ITransaction>
 		{
 			{AccountKeyLinkTransaction.TRANSACTION_TYPE, new AccountKeyLinkTransaction()},
 			{NodeKeyLinkTransaction.TRANSACTION_TYPE, new NodeKeyLinkTransaction()},

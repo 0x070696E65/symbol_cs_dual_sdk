@@ -51,7 +51,7 @@ public class RuleBasedTransactionFactory
             case "ScopedMetadataKey":
                 return Convert.ToUInt64(value);
             case "ValueSizeDelta":
-                if (Math.Sign(value) < 0) value = (ushort)((value << 16) >> 16);
+                if (Math.Sign(value) < 0) value = (ushort)(value - 0xFFFF0000);
                     return Convert.ToUInt16(value);
             default:
                 throw new Exception("key is invalid string");

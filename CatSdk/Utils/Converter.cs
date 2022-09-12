@@ -65,10 +65,6 @@ public static class Converter
 
         var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
         Array.Copy(decoded, padded, decoded.Length);
-        /*foreach (var VARIABLE in padded)
-        {
-            Console.WriteLine(VARIABLE);
-        }*/
         return Base32.Encode(padded)[.._constants["sizes"]["addressEncoded"]];
     }
     
@@ -100,6 +96,21 @@ public static class Converter
         zero.CopyTo(newArr, 0);
         message.CopyTo(newArr, 1);
         return newArr;
+    }
+    
+    public static string ToHex<T>(T value, byte i = 0)
+    {
+        return i switch
+        {
+            0 => $"{value:X}",
+            2 => $"{value:X2}",
+            4 => $"{value:X4}",
+            8 => $"{value:X8}",
+            16 => $"{value:X16}",
+            32 => $"{value:X32}",
+            64 => $"{value:X64}",
+            _ => throw new Exception("i is not excepted value")
+        };
     }
     
     public static string ToString<T>(T value)

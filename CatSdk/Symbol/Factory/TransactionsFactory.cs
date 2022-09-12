@@ -5,7 +5,7 @@ namespace CatSdk.Symbol.Factory;
 public class TransactionsFactory
 {
     private readonly RuleBasedTransactionFactory Factory;
-    private readonly Network Network;
+    public readonly Network Network;
     public TransactionsFactory(Network network, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
         Factory = BuildRules(typeRuleOverrides);

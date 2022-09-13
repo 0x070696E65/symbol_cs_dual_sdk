@@ -91,9 +91,9 @@ namespace CatSdk.Crypto
          * @param {Uint8Array} salt - A salt
          * @return {string} - The encoded message
          */
-        private static string _Encode(byte[] senderPrivateKey, string recipientPub, string msg, byte[] iv)
+        private static string _Encode(byte[] senderPrivateKey, byte[] recipientPub, string msg, byte[] iv)
         {
-            var encKey = CatapultCrypto.DeriveSharedKey(senderPrivateKey, Converter.HexToBytes(recipientPub));
+            var encKey = CatapultCrypto.DeriveSharedKey(senderPrivateKey, recipientPub);
             var cipher = Encrypt(msg, encKey, iv);
             return Converter.BytesToHex(cipher);
         }
@@ -107,11 +107,28 @@ namespace CatSdk.Crypto
          * @param {boolean} isHexString - Is payload string a hexadecimal string (default = false)
          * @return {string} - The encoded message
          */
+        public static string Encode(string senderPrivateKey, string recipientPub, string msg, bool isHexString = false)
+        {
+            var iv = RandomBytes(12);
+            return _Encode(Converter.HexToBytes(senderPrivateKey), Converter.HexToBytes(recipientPub), isHexString ? msg : Converter.Utf8ToHex(msg), iv);
+        }
+        
         public static string Encode(byte[] senderPrivateKey, string recipientPub, string msg, bool isHexString = false)
         {
             var iv = RandomBytes(12);
-            var encoded = _Encode(senderPrivateKey, recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
-            return encoded;
+            return _Encode(senderPrivateKey, Converter.HexToBytes(recipientPub), isHexString ? msg : Converter.Utf8ToHex(msg), iv);
+        }
+        
+        public static string Encode(string senderPrivateKey, byte[] recipientPub, string msg, bool isHexString = false)
+        {
+            var iv = RandomBytes(12);
+            return _Encode(Converter.HexToBytes(senderPrivateKey), recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
+        }
+        
+        public static string Encode(byte[] senderPrivateKey, byte[] recipientPub, string msg, bool isHexString = false)
+        {
+            var iv = RandomBytes(12);
+            return _Encode(senderPrivateKey, recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
         
         /**
@@ -123,8 +140,8 @@ namespace CatSdk.Crypto
          * @param {Uint8Array} tagAndIv - 16-bytes AES auth tag and 12-byte AES initialization vector
          * @return {string} - The decoded payload as hex
          */
-        public static string? _Decode(byte[] recipientPrivateKey, string senderPublic, byte[] payload) {
-            var encKey = CatapultCrypto.DeriveSharedKey(recipientPrivateKey, Converter.HexToBytes(senderPublic));
+        public static string? _Decode(byte[] recipientPrivateKey, byte[] senderPublic, byte[] payload) {
+            var encKey = CatapultCrypto.DeriveSharedKey(recipientPrivateKey, senderPublic);
             var cipher = Decrypt(payload, encKey);
             return cipher == null ? null : Converter.BytesToHex(cipher);
         }
@@ -137,10 +154,24 @@ namespace CatSdk.Crypto
          * @param {string} payload - An encrypted message payload
          * @return {string} - The decoded payload as hex
          */
+        public static string? Decode(string recipientPrivateKey, string senderPublic, string payload) {
+            var decoded = _Decode(Converter.HexToBytes(recipientPrivateKey), Converter.HexToBytes(senderPublic), Converter.HexToBytes(payload));
+            return decoded != null ? Converter.HexToUtf8(decoded) : null;
+        }
+        
         public static string? Decode(byte[] recipientPrivateKey, string senderPublic, string payload) {
-            var encKey = CatapultCrypto.DeriveSharedKey(recipientPrivateKey, Converter.HexToBytes(senderPublic));
-            var cipher = Decrypt(Converter.HexToBytes(payload), encKey);
-            return cipher == null ? null : Converter.BytesToHex(cipher);
+            var decoded = _Decode(recipientPrivateKey, Converter.HexToBytes(senderPublic), Converter.HexToBytes(payload));
+            return decoded != null ? Converter.HexToUtf8(decoded) : null;
+        }
+        
+        public static string? Decode(string recipientPrivateKey, byte[] senderPublic, string payload) {
+            var decoded = _Decode(Converter.HexToBytes(recipientPrivateKey), senderPublic, Converter.HexToBytes(payload));
+            return decoded != null ? Converter.HexToUtf8(decoded) : null;
+        }
+        
+        public static string? Decode(byte[] recipientPrivateKey, byte[] senderPublic, string payload) {
+            var decoded = _Decode(recipientPrivateKey, senderPublic, Converter.HexToBytes(payload));
+            return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
         
         private static Aes CreateAesManaged(string key, string iv)

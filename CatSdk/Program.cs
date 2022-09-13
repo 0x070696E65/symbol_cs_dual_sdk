@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using CatSdk.Crypto;
 using CatSdk.CryptoTypes;
 using CatSdk.Facade;
 using CatSdk.Symbol;
@@ -9,25 +10,18 @@ using Signature = CatSdk.Symbol.Signature;
 using Hash256 = CatSdk.Symbol.Hash256;
 var Facade = new SymbolFacade(Network.MainNet);
 
-var privateKey = new PrivateKey("ABF4CF55A2B3F742D7543D9CC17F50447B969E6E06F5EA9195D428AB12B7318D");
-var keyPair = new KeyPair(privateKey);
+var privateKeyAlice = new PrivateKey("14D1D35E7CD97AD165A451548152139A20901715D41A5DE970948E786F9887B3");
+var aliceKeyPair = new KeyPair(privateKeyAlice);
 
-var descriptor = new Dictionary<string, object>(){
-    {"Type", "transfer_transaction"},
-    {"RecipientAddress", "TCIFSMQZAX3IDPHUP2RTXP26N6BJRNKEBBKP33I"},
-    {"Mosaics",
-        Array.Empty<Mosaic>()
-    },
-    {"SignerPublicKey", "887a295e3f01a57cbfa7a381776140a1f4084788ae6a82a004dff09fae5c0eb2"},
-    {"Fee", 0},
-    {"Deadline", 0},
-};
-var tx = Facade.TransactionFactory.Create(descriptor);
-var signed = Facade.SignTransaction(keyPair, tx);
-//var signedTx = Facade.TransactionFactory.AttachSignatureTransaction(tx, tx);
-((ITransaction)tx).Signature = new Signature(signed.bytes);
+var privateKeyBob = new PrivateKey("DD45058E85CEEA02B7261A0322F3E7DABB41010F30CD4F249A557FED37896DAC");
+var bobKeyPair = new KeyPair(privateKeyBob);
 
-Console.WriteLine(Converter.BytesToHex(Facade.HashTransaction((ITransaction)tx).bytes));
+var privatekeyCarol = new PrivateKey("7BACE57B2B33F665857A8A9B3F6D06A568DD245C5A8E3ADBF17955CC3A0E225C");
+var carolKeyPair = new KeyPair(privatekeyCarol);
 
-//A62C2D9E7BBDFC754F00342A9892B50B03910B446F9F73D662EF5549996C40ED
-//57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6
+const string text = "text";
+var str = Crypto.Encode(aliceKeyPair.PrivateKey.bytes, bobKeyPair.PublicKey.bytes, text);
+Console.WriteLine(str);
+
+var dec = Crypto.Decode(carolKeyPair.PrivateKey.bytes, aliceKeyPair.PublicKey.bytes, str);
+Console.WriteLine(dec);

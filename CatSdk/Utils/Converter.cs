@@ -98,6 +98,16 @@ public static class Converter
         return newArr;
     }
     
+    public static byte[] Utf8ToEncryptoMessage(string input)
+    {
+        var message = Encoding.UTF8.GetBytes(input);
+        var zero = new byte[] {0};
+        var newArr = new byte[message.Length + 1];
+        zero.CopyTo(newArr, 0);
+        message.CopyTo(newArr, 1);
+        return newArr;
+    }
+    
     public static string ToHex<T>(T value, byte i = 0)
     {
         return i switch

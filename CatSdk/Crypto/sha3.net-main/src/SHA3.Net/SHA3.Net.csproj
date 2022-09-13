@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
+        <Version>2.0.0</Version>
+        <Authors>https://github.com/dariogriffo</Authors>
+        <Company>https://github.com/dariogriffo</Company>
+        <Product>SHA3.Net</Product>
+        <Copyright>https://github.com/dariogriffo</Copyright>
+        <Description>SHA3 wrapper of the BouncyCastle implementation, implementing System.Security.Cryptography.HashAlgorithm</Description>
+        <PackageProjectUrl>https://github.com/dariogriffo/sha3.net</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/dariogriffo/sha3.net</RepositoryUrl>
+        <Product>SHA3.Net</Product>
+        <DebugSymbols>true</DebugSymbols>
+        <EmbedAllSources>true</EmbedAllSources>
+        <DebugType>portable</DebugType>
+        <IncludeSymbols>true</IncludeSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageIcon>images\icon.png</PackageIcon>
+        <PackageTags>SHA3</PackageTags>
+        <PackageReleaseNotes>https://github.com/dariogriffo/sha3.net/blob/main/RELEASE_NOTES.md</PackageReleaseNotes>
+        <PackageLicenseFile>license\license.txt</PackageLicenseFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="licenses\license.txt" Pack="true" PackagePath="license" />
+        <None Include="licenses\BouncyCastle.LICENSE" Pack="true" PackagePath="license" />
+        <None Include="images\icon.png" Pack="true" PackagePath="images" />
+    </ItemGroup>
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+</Project>

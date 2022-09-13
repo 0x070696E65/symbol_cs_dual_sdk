@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0XroMd6wor01CxAXdO7He6dN+JzCaiQ4gcCD3ANKXjVrKbcIUmvW1Rrixje3GBRsz91bQlCbBmgIGSxtvvAEIA==",
+  "dgSpecHash": "Fo0d7AVJBl8fzPvqqJNLdcD57FdkmANgVd/4lsBFhSw3nToOIApH0zyjIY5Vqcjhmqu+Sn28JehMaSdZquDJ4g==",
   "success": true,
   "projectFilePath": "/Users/matsukawatoshiya/programs/NewSdk/Test/Test.csproj",
   "expectedPackageFiles": [
-    "/Users/matsukawatoshiya/.nuget/packages/bouncycastle/1.8.9/bouncycastle.1.8.9.nupkg.sha512",
+    "/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/bouncycastle.netcoresdk.1.9.6.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/coverlet.collector/3.1.0/coverlet.collector.3.1.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.codecoverage/16.11.0/microsoft.codecoverage.16.11.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",
@@ -52,16 +52,5 @@
     "/Users/matsukawatoshiya/.nuget/packages/system.xml.readerwriter/4.0.11/system.xml.readerwriter.4.0.11.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/system.xml.xdocument/4.0.11/system.xml.xdocument.4.0.11.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

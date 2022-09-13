@@ -1,24 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "nLCti6VVy+CYavGvCOamfc0V8A+qZjV6Rwi4DlniNQJ7KLkeVfWgyBShKo9TZ8dJbLhtIKTlSTrBrvSO9w8tgg==",
+  "dgSpecHash": "BzJDUMMN7mSG2S3HdvtDPxN5h/3n5tbFKHmXsvJ70z1tCCK03eBdU7YZr3vFihTPVJHb9zbO/Wop43IKllxTYQ==",
   "success": true,
   "projectFilePath": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj",
   "expectedPackageFiles": [
-    "/Users/matsukawatoshiya/.nuget/packages/bouncycastle/1.8.9/bouncycastle.1.8.9.nupkg.sha512",
+    "/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/bouncycastle.netcoresdk.1.9.6.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/nunit/3.13.2/nunit.3.13.2.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

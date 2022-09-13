@@ -38,9 +38,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "BouncyCastle": {
+            "BouncyCastle.NetCoreSdk": {
               "target": "Package",
-              "version": "[1.8.9, )"
+              "version": "[1.9.6, )"
             },
             "NUnit": {
               "target": "Package",

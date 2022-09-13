@@ -2,13 +2,13 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "BouncyCastle/1.8.9": {
+      "BouncyCastle.NetCoreSdk/1.9.6": {
         "type": "package",
         "compile": {
-          "lib/BouncyCastle.Crypto.dll": {}
+          "lib/net6.0/BouncyCastle.Crypto.dll": {}
         },
         "runtime": {
-          "lib/BouncyCastle.Crypto.dll": {}
+          "lib/net6.0/BouncyCastle.Crypto.dll": {}
         }
       },
       "coverlet.collector/3.1.0": {
@@ -896,7 +896,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "BouncyCastle": "1.8.9",
+          "BouncyCastle.NetCoreSdk": "1.9.6",
           "NUnit": "3.13.2"
         },
         "compile": {
@@ -909,17 +909,20 @@
     }
   },
   "libraries": {
-    "BouncyCastle/1.8.9": {
-      "sha512": "axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
+    "BouncyCastle.NetCoreSdk/1.9.6": {
+      "sha512": "pt9GQPsEKfYwSNzdsZEb1tUz/dTOBu03UIekvMLkjgFsYOp384Y/PA1RwQuslv6MZEG45mgv38Gw05Q8KUtu1Q==",
       "type": "package",
-      "path": "bouncycastle/1.8.9",
+      "path": "bouncycastle.netcoresdk/1.9.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "License.txt",
         "README.md",
-        "bouncycastle.1.8.9.nupkg.sha512",
-        "bouncycastle.nuspec",
-        "lib/BouncyCastle.Crypto.dll"
+        "bouncycastle.netcoresdk.1.9.6.nupkg.sha512",
+        "bouncycastle.netcoresdk.nuspec",
+        "lib/net481/BouncyCastle.Crypto.dll",
+        "lib/net6.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.1/BouncyCastle.Crypto.dll"
       ]
     },
     "coverlet.collector/3.1.0": {
@@ -3972,17 +3975,5 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.104/RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "BouncyCastle",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  }
 }

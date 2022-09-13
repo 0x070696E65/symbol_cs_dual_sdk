@@ -3,8 +3,8 @@ namespace CatSdk;
 
 public class TestTransaction
 {
-    public Func<BinaryReader, ITransaction> func;
-    public string value;
+    public Func<BinaryReader, ITransaction>? func;
+    public string? value;
 }
 
 public static class Transactions

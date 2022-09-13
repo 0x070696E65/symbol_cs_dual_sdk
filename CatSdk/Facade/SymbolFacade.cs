@@ -1,6 +1,5 @@
 using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
-using SHA3.Net;
 using Org.BouncyCastle.Crypto.Digests;
 using Hash256 = CatSdk.CryptoTypes.Hash256;
 using PublicKey = CatSdk.CryptoTypes.PublicKey;

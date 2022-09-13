@@ -61,7 +61,7 @@ class FactoryFormatter(AbstractTypeFormatter):
 	def return_class(self):
 		if self.abstract.name == "Transaction":
 			return "ITransaction"
-		elif self.abstract.name == "EmbeddedTransaction":
+		elif self.abstract.name == "EmbeddedTransaction" or self.abstract.name == "NonVerifiableTransaction":
 			return "IBaseTransaction"
 
 	def get_ctor_descriptor(self):
@@ -83,7 +83,8 @@ class FactoryFormatter(AbstractTypeFormatter):
 		field_types = self.factory_descriptor.discriminator_types
 
 		values = ', '.join(map(lambda value_type: self.map_to_value(name, *value_type), zip(field_values, field_types)))
-		return f'{{{values}, {name}.Deserialize}}'
+		return f'{{{name}.TRANSACTION_TYPE, {name}.Deserialize}}'
+		#return f'{{{values}, {name}.Deserialize}}'
 
 	def get_deserialize_descriptor(self):
 		body = 'var position = br.BaseStream.Position;\n'

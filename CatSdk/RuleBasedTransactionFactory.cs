@@ -1,6 +1,18 @@
 using System.Text;
+using CatSdk.Nem;
 using CatSdk.Symbol;
 using CatSdk.Utils;
+using Address = CatSdk.Symbol.Address;
+using Amount = CatSdk.Symbol.Amount;
+using Hash256 = CatSdk.Symbol.Hash256;
+using Height = CatSdk.Symbol.Height;
+using IBaseTransaction = CatSdk.Symbol.IBaseTransaction;
+using MosaicId = CatSdk.Symbol.MosaicId;
+using NamespaceId = CatSdk.Symbol.NamespaceId;
+using PublicKey = CatSdk.Symbol.PublicKey;
+using Signature = CatSdk.Symbol.Signature;
+using Timestamp = CatSdk.Symbol.Timestamp;
+using TransactionType = CatSdk.Symbol.TransactionType;
 
 namespace CatSdk;
 

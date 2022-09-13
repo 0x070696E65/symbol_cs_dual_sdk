@@ -18,11 +18,11 @@
           "Test.dll": {}
         }
       },
-      "BouncyCastle/1.8.9": {
+      "BouncyCastle.NetCoreSdk/1.9.6": {
         "runtime": {
-          "lib/BouncyCastle.Crypto.dll": {
-            "assemblyVersion": "1.8.9.0",
-            "fileVersion": "1.8.20343.1"
+          "lib/net6.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.9.6.0",
+            "fileVersion": "1.9.6.0"
           }
         }
       },
@@ -661,7 +661,7 @@
       },
       "CatSdk/1.0.0": {
         "dependencies": {
-          "BouncyCastle": "1.8.9",
+          "BouncyCastle.NetCoreSdk": "1.9.6",
           "NUnit": "3.13.2"
         },
         "runtime": {
@@ -676,12 +676,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "BouncyCastle/1.8.9": {
+    "BouncyCastle.NetCoreSdk/1.9.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
-      "path": "bouncycastle/1.8.9",
-      "hashPath": "bouncycastle.1.8.9.nupkg.sha512"
+      "sha512": "sha512-pt9GQPsEKfYwSNzdsZEb1tUz/dTOBu03UIekvMLkjgFsYOp384Y/PA1RwQuslv6MZEG45mgv38Gw05Q8KUtu1Q==",
+      "path": "bouncycastle.netcoresdk/1.9.6",
+      "hashPath": "bouncycastle.netcoresdk.1.9.6.nupkg.sha512"
     },
     "coverlet.collector/3.1.0": {
       "type": "package",

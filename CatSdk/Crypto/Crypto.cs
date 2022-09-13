@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
 using System.Text;
-using CatSdk.Symbol;
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;

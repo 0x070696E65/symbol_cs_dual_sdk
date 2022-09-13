@@ -1,6 +1,6 @@
 using CatSdk.Utils;
 namespace CatSdk.Nem;
-/*
+
 public class Amount : BaseValue, ISerializer {
 	private const byte SIZE = 8;
 
@@ -361,7 +361,7 @@ public class Transaction : ITransaction {
 	}
 }
 
-public class NonVerifiableTransaction : ITransaction {
+public class NonVerifiableTransaction : IBaseTransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int SignerPublicKeySize;
 
@@ -684,7 +684,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableAccountKeyLinkTransaction : ITransaction {
+public class NonVerifiableAccountKeyLinkTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
@@ -848,7 +848,7 @@ public class NamespaceId : IStruct {
 
 	public static NamespaceId Deserialize(BinaryReader br) {
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 
 		var instance = new NamespaceId()
 		{
@@ -902,7 +902,7 @@ public class MosaicId : IStruct {
 	public static MosaicId Deserialize(BinaryReader br) {
 		var namespaceId = NamespaceId.Deserialize(br);
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 
 		var instance = new MosaicId()
 		{
@@ -959,7 +959,7 @@ public class Mosaic : IStruct {
 	public static Mosaic Deserialize(BinaryReader br) {
 		var mosaicIdSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var mosaicId = MosaicId.Deserialize(br);
 		var amount = Amount.Deserialize(br);
 
 		var instance = new Mosaic()
@@ -1012,7 +1012,7 @@ public class SizePrefixedMosaic : IStruct {
 	public static SizePrefixedMosaic Deserialize(BinaryReader br) {
 		var mosaicSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaic = Mosaic.Deserialize(view.window(mosaicSize));
+		var mosaic = Mosaic.Deserialize(br);
 
 		var instance = new SizePrefixedMosaic()
 		{
@@ -1138,7 +1138,7 @@ public class MosaicLevy : IStruct {
 		var recipientAddress = Address.Deserialize(br);
 		var mosaicIdSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var mosaicId = MosaicId.Deserialize(br);
 		var fee = Amount.Deserialize(br);
 
 		var instance = new MosaicLevy()
@@ -1203,9 +1203,9 @@ public class MosaicProperty : IStruct {
 
 	public static MosaicProperty Deserialize(BinaryReader br) {
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 		var valueSize = br.ReadUInt32();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new MosaicProperty()
 		{
@@ -1258,7 +1258,7 @@ public class SizePrefixedMosaicProperty : IStruct {
 	public static SizePrefixedMosaicProperty Deserialize(BinaryReader br) {
 		var propertySize = br.ReadUInt32();
 		// marking sizeof field
-		var property = MosaicProperty.Deserialize(view.window(propertySize));
+		var property = MosaicProperty.Deserialize(br);
 
 		var instance = new SizePrefixedMosaicProperty()
 		{
@@ -1328,7 +1328,7 @@ public class MosaicDefinition : IStruct {
 			size += 4;
 			size += ArrayHelpers.Size(Properties);
 			size += 4;
-			if (0.Value != LevySize.Value)
+			if (0 != LevySize)
 				size += Levy.Size;
 
 			return size;
@@ -1342,18 +1342,16 @@ public class MosaicDefinition : IStruct {
 		var ownerPublicKey = PublicKey.Deserialize(br);
 		var idSize = br.ReadUInt32();
 		// marking sizeof field
-		var id = MosaicId.Deserialize(view.window(idSize));
+		var id = MosaicId.Deserialize(br);
 		var descriptionSize = br.ReadUInt32();
-		var description = br.ReadBytes(descriptionSize);
+		var description = br.ReadBytes((int)descriptionSize);
 		var propertiesCount = br.ReadUInt32();
-		var properties = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaicProperty.Deserialize, propertiesCount);
+		var properties = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaicProperty.Deserialize, (byte)propertiesCount);
 		var levySize = br.ReadUInt32();
 		var levy = new MosaicLevy();
-		if (0.Value != levySize.Value) {
+		if (0 != levySize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				levy = MosaicLevy.Deserialize(tempBr);
+				levy = MosaicLevy.Deserialize(br);
 			}
 		}
 
@@ -1381,7 +1379,7 @@ public class MosaicDefinition : IStruct {
 		bw.Write(BitConverter.GetBytes((uint)(uint)Properties.Length));  // bound: properties_count
 		ArrayHelpers.WriteArray(bw, Properties);
 		bw.Write(BitConverter.GetBytes((uint)(uint)LevySize)); 
-		if (0.Value != LevySize.Value)
+		if (0 != LevySize)
 			bw.Write(Levy.Serialize()); 
 
 		return ms.ToArray();
@@ -1394,7 +1392,7 @@ public class MosaicDefinition : IStruct {
 		result += $"description: hex({Converter.BytesToHex(Description)}), ";
 		result += $"properties: [{string.Join(",", Properties.Select(e => e.ToString()))}], ";
 		result += $"levySize: {Converter.ToString(LevySize)}, ";
-		if (0.Value != LevySize.Value)
+		if (0 != LevySize)
 			result += $"levy: {Levy}, ";
 
 		result += ")";
@@ -1508,7 +1506,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		var deadline = Timestamp.Deserialize(br);
 		var mosaicDefinitionSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicDefinition = MosaicDefinition.Deserialize(view.window(mosaicDefinitionSize));
+		var mosaicDefinition = MosaicDefinition.Deserialize(br);
 		var rentalFeeSinkSize = br.ReadUInt32();
 		if (40 != rentalFeeSinkSize)
 			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
@@ -1572,7 +1570,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMosaicDefinitionTransaction : ITransaction {
+public class NonVerifiableMosaicDefinitionTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
@@ -1666,7 +1664,7 @@ public class NonVerifiableMosaicDefinitionTransaction : ITransaction {
 		var deadline = Timestamp.Deserialize(br);
 		var mosaicDefinitionSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicDefinition = MosaicDefinition.Deserialize(view.window(mosaicDefinitionSize));
+		var mosaicDefinition = MosaicDefinition.Deserialize(br);
 		var rentalFeeSinkSize = br.ReadUInt32();
 		if (40 != rentalFeeSinkSize)
 			throw new Exception($"Invalid value of reserved field ({rentalFeeSinkSize})");
@@ -1883,7 +1881,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		var deadline = Timestamp.Deserialize(br);
 		var mosaicIdSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var mosaicId = MosaicId.Deserialize(br);
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 		var delta = Amount.Deserialize(br);
 
@@ -1943,7 +1941,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMosaicSupplyChangeTransaction : ITransaction {
+public class NonVerifiableMosaicSupplyChangeTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
@@ -2034,7 +2032,7 @@ public class NonVerifiableMosaicSupplyChangeTransaction : ITransaction {
 		var deadline = Timestamp.Deserialize(br);
 		var mosaicIdSize = br.ReadUInt32();
 		// marking sizeof field
-		var mosaicId = MosaicId.Deserialize(view.window(mosaicIdSize));
+		var mosaicId = MosaicId.Deserialize(br);
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 		var delta = Amount.Deserialize(br);
 
@@ -2229,7 +2227,7 @@ public class SizePrefixedMultisigAccountModification : IStruct {
 	public static SizePrefixedMultisigAccountModification Deserialize(BinaryReader br) {
 		var modificationSize = br.ReadUInt32();
 		// marking sizeof field
-		var modification = MultisigAccountModification.Deserialize(view.window(modificationSize));
+		var modification = MultisigAccountModification.Deserialize(br);
 
 		var instance = new SizePrefixedMultisigAccountModification()
 		{
@@ -2346,7 +2344,7 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 		var fee = Amount.Deserialize(br);
 		var deadline = Timestamp.Deserialize(br);
 		var modificationsCount = br.ReadUInt32();
-		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, (byte)modificationsCount);
 
 		var instance = new MultisigAccountModificationTransactionV1()
 		{
@@ -2398,7 +2396,7 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 	}
 }
 
-public class NonVerifiableMultisigAccountModificationTransactionV1 : ITransaction {
+public class NonVerifiableMultisigAccountModificationTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -2478,7 +2476,7 @@ public class NonVerifiableMultisigAccountModificationTransactionV1 : ITransactio
 		var fee = Amount.Deserialize(br);
 		var deadline = Timestamp.Deserialize(br);
 		var modificationsCount = br.ReadUInt32();
-		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, (byte)modificationsCount);
 
 		var instance = new NonVerifiableMultisigAccountModificationTransactionV1()
 		{
@@ -2625,7 +2623,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		var fee = Amount.Deserialize(br);
 		var deadline = Timestamp.Deserialize(br);
 		var modificationsCount = br.ReadUInt32();
-		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, (byte)modificationsCount);
 		var minApprovalDeltaSize = br.ReadUInt32();
 		if (4 != minApprovalDeltaSize)
 			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
@@ -2685,7 +2683,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMultisigAccountModificationTransaction : ITransaction {
+public class NonVerifiableMultisigAccountModificationTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -2772,7 +2770,7 @@ public class NonVerifiableMultisigAccountModificationTransaction : ITransaction 
 		var fee = Amount.Deserialize(br);
 		var deadline = Timestamp.Deserialize(br);
 		var modificationsCount = br.ReadUInt32();
-		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, modificationsCount);
+		var modifications = ArrayHelpers.ReadArrayCount(br, SizePrefixedMultisigAccountModification.Deserialize, (byte)modificationsCount);
 		var minApprovalDeltaSize = br.ReadUInt32();
 		if (4 != minApprovalDeltaSize)
 			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
@@ -2828,7 +2826,7 @@ public class NonVerifiableMultisigAccountModificationTransaction : ITransaction 
 	}
 }
 
-public class Cosignature : IStruct {
+public class Cosignature : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_COSIGNATURE;
@@ -3023,7 +3021,7 @@ public class SizePrefixedCosignature : IStruct {
 	public static SizePrefixedCosignature Deserialize(BinaryReader br) {
 		var cosignatureSize = br.ReadUInt32();
 		// marking sizeof field
-		var cosignature = Cosignature.Deserialize(view.window(cosignatureSize));
+		var cosignature = Cosignature.Deserialize(br);
 
 		var instance = new SizePrefixedCosignature()
 		{
@@ -3147,9 +3145,9 @@ public class MultisigTransaction : ITransaction {
 		var deadline = Timestamp.Deserialize(br);
 		var innerTransactionSize = br.ReadUInt32();
 		// marking sizeof field
-		var innerTransaction = NonVerifiableTransactionFactory.Deserialize(view.window(innerTransactionSize));
+		var innerTransaction = (NonVerifiableTransaction)NonVerifiableTransactionFactory.Deserialize(br);
 		var cosignaturesCount = br.ReadUInt32();
-		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignature.Deserialize, cosignaturesCount);
+		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignature.Deserialize, (byte)cosignaturesCount);
 
 		var instance = new MultisigTransaction()
 		{
@@ -3292,7 +3290,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 			size += 4;
 			size += (uint)Name.Length;
 			size += 4;
-			if (parentName)
+			if (ParentName.Length > 0)
 				size += (uint)ParentName.Length;
 
 			return size;
@@ -3323,14 +3321,12 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		var rentalFeeSink = Address.Deserialize(br);
 		var rentalFee = Amount.Deserialize(br);
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 		var parentNameSize = br.ReadUInt32();
-		var parentName = new byte[]();
-		if (4294967295.Value != parentNameSize.Value) {
+		var parentName = new byte[]{};
+		if (4294967295 != parentNameSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				parentName = tempBr.ReadBytes(parentNameSize);
+				parentName = br.ReadBytes((int)parentNameSize);
 			}
 		}
 
@@ -3371,8 +3367,8 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		bw.Write(RentalFee.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
 		bw.Write(Name); 
-		bw.Write(BitConverter.GetBytes((uint)(ParentName ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
-		if (parentName)
+		bw.Write(BitConverter.GetBytes((uint)(ParentName.Length > 0 ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
+		if (ParentName.Length > 0)
 			bw.Write(ParentName); 
 
 		return ms.ToArray();
@@ -3391,7 +3387,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		result += $"rentalFeeSink: {RentalFeeSink}, ";
 		result += $"rentalFee: {RentalFee}, ";
 		result += $"name: hex({Converter.BytesToHex(Name)}), ";
-		if (parentName)
+		if (ParentName.Length > 0)
 			result += $"parentName: hex({Converter.BytesToHex(ParentName)}), ";
 
 		result += ")";
@@ -3399,7 +3395,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
+public class NonVerifiableNamespaceRegistrationTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
@@ -3478,7 +3474,7 @@ public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
 			size += 4;
 			size += (uint)Name.Length;
 			size += 4;
-			if (parentName)
+			if (ParentName.Length > 0)
 				size += (uint)ParentName.Length;
 
 			return size;
@@ -3505,14 +3501,12 @@ public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
 		var rentalFeeSink = Address.Deserialize(br);
 		var rentalFee = Amount.Deserialize(br);
 		var nameSize = br.ReadUInt32();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 		var parentNameSize = br.ReadUInt32();
-		var parentName = new byte[]();
-		if (4294967295.Value != parentNameSize.Value) {
+		var parentName = new byte[]{};
+		if (4294967295 != parentNameSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				parentName = tempBr.ReadBytes(parentNameSize);
+				parentName = br.ReadBytes((int)parentNameSize);
 			}
 		}
 
@@ -3550,8 +3544,8 @@ public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
 		bw.Write(RentalFee.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Name.Length));  // bound: name_size
 		bw.Write(Name); 
-		bw.Write(BitConverter.GetBytes((uint)(ParentName ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
-		if (parentName)
+		bw.Write(BitConverter.GetBytes((uint)(ParentName.Length > 0 ? (uint)ParentName.Length : 4294967295)));  // bound: parent_name_size
+		if (ParentName.Length > 0)
 			bw.Write(ParentName); 
 
 		return ms.ToArray();
@@ -3569,7 +3563,7 @@ public class NonVerifiableNamespaceRegistrationTransaction : ITransaction {
 		result += $"rentalFeeSink: {RentalFeeSink}, ";
 		result += $"rentalFee: {RentalFee}, ";
 		result += $"name: hex({Converter.BytesToHex(Name)}), ";
-		if (parentName)
+		if (ParentName.Length > 0)
 			result += $"parentName: hex({Converter.BytesToHex(ParentName)}), ";
 
 		result += ")";
@@ -3640,19 +3634,19 @@ public class Message : IStruct {
 
 	public Message() {
 		MessageType = MessageType.PLAIN;
-		Message = Array.Empty<byte>();
+		MessageField = Array.Empty<byte>();
 	}
 
 	public MessageType MessageType { get; set; }
 
-	public byte[] Message { get; set; }
+	public byte[] MessageField { get; set; }
 
 	public uint Size {
 		get {
 			uint size = 0;
 			size += MessageType.Size;
 			size += 4;
-			size += (uint)Message.Length;
+			size += (uint)MessageField.Length;
 			return size;
 		}
 	}
@@ -3660,12 +3654,12 @@ public class Message : IStruct {
 	public static Message Deserialize(BinaryReader br) {
 		var messageType = MessageType.Deserialize(br);
 		var messageSize = br.ReadUInt32();
-		var message = br.ReadBytes(messageSize);
+		var message = br.ReadBytes((int)messageSize);
 
 		var instance = new Message()
 		{
 			MessageType = messageType,
-			Message = message
+			MessageField = message
 		};
 		return instance;
 	}
@@ -3674,15 +3668,15 @@ public class Message : IStruct {
 		using var ms = new MemoryStream();
 		using var bw = new BinaryWriter(ms);
 		bw.Write(MessageType.Serialize()); 
-		bw.Write(BitConverter.GetBytes((uint)(uint)Message.Length));  // bound: message_size
-		bw.Write(Message); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageField.Length));  // bound: message_size
+		bw.Write(MessageField); 
 		return ms.ToArray();
 	}
 
 	public override string ToString() {
 		var result = "(";
 		result += $"messageType: {MessageType}, ";
-		result += $"message: hex({Converter.BytesToHex(Message)}), ";
+		result += $"message: hex({Converter.BytesToHex(MessageField)}), ";
 		result += ")";
 		return result;
 	}
@@ -3772,7 +3766,7 @@ public class TransferTransactionV1 : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0.Value != MessageEnvelopeSize.Value)
+			if (0 != MessageEnvelopeSize)
 				size += Message.Size;
 
 			return size;
@@ -3804,11 +3798,9 @@ public class TransferTransactionV1 : ITransaction {
 		var amount = Amount.Deserialize(br);
 		var messageEnvelopeSize = br.ReadUInt32();
 		var message = new Message();
-		if (0.Value != messageEnvelopeSize.Value) {
+		if (0 != messageEnvelopeSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				message = Message.Deserialize(tempBr);
+				message = Message.Deserialize(br);
 			}
 		}
 
@@ -3848,7 +3840,7 @@ public class TransferTransactionV1 : ITransaction {
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			bw.Write(Message.Serialize()); 
 
 		return ms.ToArray();
@@ -3867,7 +3859,7 @@ public class TransferTransactionV1 : ITransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
 		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			result += $"message: {Message}, ";
 
 		result += ")";
@@ -3875,7 +3867,7 @@ public class TransferTransactionV1 : ITransaction {
 	}
 }
 
-public class NonVerifiableTransferTransactionV1 : ITransaction {
+public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -3951,7 +3943,7 @@ public class NonVerifiableTransferTransactionV1 : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0.Value != MessageEnvelopeSize.Value)
+			if (0 != MessageEnvelopeSize)
 				size += Message.Size;
 
 			return size;
@@ -3979,11 +3971,9 @@ public class NonVerifiableTransferTransactionV1 : ITransaction {
 		var amount = Amount.Deserialize(br);
 		var messageEnvelopeSize = br.ReadUInt32();
 		var message = new Message();
-		if (0.Value != messageEnvelopeSize.Value) {
+		if (0 != messageEnvelopeSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				message = Message.Deserialize(tempBr);
+				message = Message.Deserialize(br);
 			}
 		}
 
@@ -4020,7 +4010,7 @@ public class NonVerifiableTransferTransactionV1 : ITransaction {
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			bw.Write(Message.Serialize()); 
 
 		return ms.ToArray();
@@ -4038,7 +4028,7 @@ public class NonVerifiableTransferTransactionV1 : ITransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
 		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			result += $"message: {Message}, ";
 
 		result += ")";
@@ -4134,7 +4124,7 @@ public class TransferTransaction : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0.Value != MessageEnvelopeSize.Value)
+			if (0 != MessageEnvelopeSize)
 				size += Message.Size;
 
 			size += 4;
@@ -4168,15 +4158,13 @@ public class TransferTransaction : ITransaction {
 		var amount = Amount.Deserialize(br);
 		var messageEnvelopeSize = br.ReadUInt32();
 		var message = new Message();
-		if (0.Value != messageEnvelopeSize.Value) {
+		if (0 != messageEnvelopeSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				message = Message.Deserialize(tempBr);
+				message = Message.Deserialize(br);
 			}
 		}
 		var mosaicsCount = br.ReadUInt32();
-		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, mosaicsCount);
+		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, (byte)mosaicsCount);
 
 		var instance = new TransferTransaction()
 		{
@@ -4215,7 +4203,7 @@ public class TransferTransaction : ITransaction {
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			bw.Write(Message.Serialize()); 
 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
@@ -4236,7 +4224,7 @@ public class TransferTransaction : ITransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
 		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			result += $"message: {Message}, ";
 
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
@@ -4245,7 +4233,7 @@ public class TransferTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableTransferTransaction : ITransaction {
+public class NonVerifiableTransferTransaction : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -4325,7 +4313,7 @@ public class NonVerifiableTransferTransaction : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0.Value != MessageEnvelopeSize.Value)
+			if (0 != MessageEnvelopeSize)
 				size += Message.Size;
 
 			size += 4;
@@ -4355,15 +4343,13 @@ public class NonVerifiableTransferTransaction : ITransaction {
 		var amount = Amount.Deserialize(br);
 		var messageEnvelopeSize = br.ReadUInt32();
 		var message = new Message();
-		if (0.Value != messageEnvelopeSize.Value) {
+		if (0 != messageEnvelopeSize) {
 			{
-				var tempMs = new MemoryStream(durationTemporary.Serialize());
-				var tempBr = new BinaryReader(tempMs);
-				message = Message.Deserialize(tempBr);
+				message = Message.Deserialize(br);
 			}
 		}
 		var mosaicsCount = br.ReadUInt32();
-		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, mosaicsCount);
+		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, (byte)mosaicsCount);
 
 		var instance = new NonVerifiableTransferTransaction()
 		{
@@ -4399,7 +4385,7 @@ public class NonVerifiableTransferTransaction : ITransaction {
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			bw.Write(Message.Serialize()); 
 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
@@ -4419,7 +4405,7 @@ public class NonVerifiableTransferTransaction : ITransaction {
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
 		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0.Value != MessageEnvelopeSize.Value)
+		if (0 != MessageEnvelopeSize)
 			result += $"message: {Message}, ";
 
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
@@ -4434,16 +4420,16 @@ public class TransactionFactory {
 		var parent = Transaction.Deserialize(br);
 		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
 		{
-			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.TRANSACTION_VERSION, AccountKeyLinkTransaction.Deserialize},
-			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.TRANSACTION_VERSION, MosaicDefinitionTransaction.Deserialize},
-			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, MosaicSupplyChangeTransaction.TRANSACTION_VERSION, MosaicSupplyChangeTransaction.Deserialize},
-			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.TRANSACTION_VERSION, MultisigAccountModificationTransactionV1.Deserialize},
-			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, MultisigAccountModificationTransaction.TRANSACTION_VERSION, MultisigAccountModificationTransaction.Deserialize},
-			{Cosignature.TRANSACTION_TYPE, Cosignature.TRANSACTION_VERSION, Cosignature.Deserialize},
-			{MultisigTransaction.TRANSACTION_TYPE, MultisigTransaction.TRANSACTION_VERSION, MultisigTransaction.Deserialize},
-			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, NamespaceRegistrationTransaction.TRANSACTION_VERSION, NamespaceRegistrationTransaction.Deserialize},
-			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.TRANSACTION_VERSION, TransferTransactionV1.Deserialize},
-			{TransferTransaction.TRANSACTION_TYPE, TransferTransaction.TRANSACTION_VERSION, TransferTransaction.Deserialize}
+			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.Deserialize},
+			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.Deserialize},
+			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, MosaicSupplyChangeTransaction.Deserialize},
+			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.Deserialize},
+			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, MultisigAccountModificationTransaction.Deserialize},
+			{Cosignature.TRANSACTION_TYPE, Cosignature.Deserialize},
+			{MultisigTransaction.TRANSACTION_TYPE, MultisigTransaction.Deserialize},
+			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, NamespaceRegistrationTransaction.Deserialize},
+			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.Deserialize},
+			{TransferTransaction.TRANSACTION_TYPE, TransferTransaction.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
@@ -4475,32 +4461,32 @@ public class TransactionFactory {
 }
 
 public class NonVerifiableTransactionFactory {
-	public static None Deserialize(BinaryReader br) {
+	public static IBaseTransaction Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = NonVerifiableTransaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, None>>
+		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
 		{
-			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransaction.TRANSACTION_VERSION, NonVerifiableAccountKeyLinkTransaction.Deserialize},
-			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransaction.TRANSACTION_VERSION, NonVerifiableMosaicDefinitionTransaction.Deserialize},
-			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_VERSION, NonVerifiableMosaicSupplyChangeTransaction.Deserialize},
-			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_VERSION, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
-			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_VERSION, NonVerifiableMultisigAccountModificationTransaction.Deserialize},
-			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_VERSION, NonVerifiableNamespaceRegistrationTransaction.Deserialize},
-			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.TRANSACTION_VERSION, NonVerifiableTransferTransactionV1.Deserialize},
-			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, NonVerifiableTransferTransaction.TRANSACTION_VERSION, NonVerifiableTransferTransaction.Deserialize}
+			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransaction.Deserialize},
+			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransaction.Deserialize},
+			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransaction.Deserialize},
+			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
+			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransaction.Deserialize},
+			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransaction.Deserialize},
+			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.Deserialize},
+			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, NonVerifiableTransferTransaction.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
 	}
 
-	public static None Deserialize(string payload) {
+	public static IBaseTransaction Deserialize(string payload) {
 		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
 		using var br = new BinaryReader(ms);
 		return Deserialize(br);
 	}
 
-	public static None CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, None>
+	public static IBaseTransaction CreateByName(TransactionType entityName) {
+		var mapping = new Dictionary<TransactionType, IBaseTransaction>
 		{
 			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, new NonVerifiableAccountKeyLinkTransaction()},
 			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicDefinitionTransaction()},
@@ -4515,4 +4501,3 @@ public class NonVerifiableTransactionFactory {
 		return mapping[entityName];
 	}
 }
-*/

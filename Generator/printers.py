@@ -10,8 +10,6 @@ def js_bool(value):
 class Printer:
 	def __init__(self, descriptor, name):
 		self.descriptor = descriptor
-		# printer.name is 'fixed' field name
-		# self.name = fix_name(lang_field_name(name or underline_name(self.descriptor.name)))
 		self.name = fix_name(lang_field_name(name or underline_name(self.descriptor.name)))
 
 class IntPrinter(Printer):
@@ -33,12 +31,16 @@ class IntPrinter(Printer):
 		bit = {1: '8', 2: '16', 4: '32', 8: '64'}
 		return bit[data_size]
 
-	def load(self, buffer_name='br.ReadBytes(Size)'):
+	def load(self, buffer_load_name=''):
 		bit_size = self.get_bit_size(self.get_size())
 		if bit_size == '8':
 			return f'br.ReadByte()'
 		else:
 			return f'br.ReadUInt{bit_size}()'
+
+	def size_load(self):
+		bit_size = self.get_bit_size(self.get_size())
+		return f'(int)br.ReadUInt{bit_size}()'
 
 	def advancement_size(self):
 		return self.get_size()
@@ -114,7 +116,7 @@ class TypedArrayPrinter(Printer):
 		args = [
 			'br',
 			f'{element_type}.Deserialize',
-			lang_field_name(str(self.descriptor.size)),
+			f'(byte){lang_field_name(str(self.descriptor.size))}',
 		]
 		#if self.descriptor.field_type.sort_key:
 		#	accessor = f'e => e.{lang_field_name(self.descriptor.field_type.sort_key)}.value'
@@ -176,17 +178,20 @@ class ArrayPrinter(Printer):
 	def get_default_value(self):
 		return 'Array.Empty<byte>()'
 
-	def get_size(self):
+	def get_size(self, message=False):
 		size = self.descriptor.size
 		if isinstance(size, str):
-			return f'(uint){self.name[:1].upper() + self.name[1:]}.Length'
+			if message:
+				return f'(uint){pascal_name(self.name).replace("Message", "MessageField")}.Length'
+			else:
+				return f'(uint){pascal_name(self.name)}.Length'
 		return size
 
 	def load(self, buffer_name='br.ReadBytes'):
 		if not isinstance(self.descriptor.size, str):
 			return f'{buffer_name}({self.advancement_size()})'
 		else:
-			return f'{buffer_name}.ReadBytes({self.advancement_size()})'
+			return f'{buffer_name}.ReadBytes((int){self.advancement_size()})'
 
 	def advancement_size(self):
 		# like get_size() but without self prefix, as this refers to local method field
@@ -238,7 +243,7 @@ class BuiltinPrinter(Printer):
 			# HACK: factories use this printers as well, ignore them
 			if 'parent' != self.name:
 				factory_name = self.get_type() + 'Factory'
-				return f'{factory_name}.Deserialize({buffer_name})'
+				return f'({self.get_type()}){factory_name}.Deserialize({buffer_name})'
 
 		return f'{self.get_type()}.Deserialize({buffer_name})'
 

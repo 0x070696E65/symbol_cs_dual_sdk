@@ -1,10 +1,11 @@
 from itertools import filterfalse
+from Generator.printers import Printer, ArrayPrinter
 
 from catparser.DisplayType import DisplayType
 
 from .AbstractTypeFormatter import AbstractTypeFormatter, MethodDescriptor
 from .format import indent
-from .name_formatting import fix_size_name, lang_field_name
+from .name_formatting import fix_size_name, lang_field_name, pascal_name
 
 
 def is_reserved(field):
@@ -68,10 +69,11 @@ class StructFormatter(AbstractTypeFormatter):
 	def typename(self):
 		return self.struct.name
 
-	@staticmethod
-	def field_name(field, object_name='this'):
-		name = field.extensions.printer.name
-		return name[:1].upper() + name[1:]
+	def field_name(self, field, object_name='this'):
+		name = pascal_name(field.extensions.printer.name)
+		if "Message" == name and "Message" == self.typename:
+			name = "MessageField"
+		return name
 
 	@staticmethod
 	def generate_class_field(field):
@@ -102,12 +104,16 @@ class StructFormatter(AbstractTypeFormatter):
 	def get_base_class(self):
 		base_transaction = ''
 		if 'Transaction' in self.typename:
-			if 'Embedded' in self.typename:
+			if 'Embedded' in self.typename or 'NonVerifiable' in self.typename:
 				base_transaction = 'IBaseTransaction'
 			else:
 				base_transaction = 'ITransaction'
 		else:
-			base_transaction = 'IStruct'
+			for i in self.get_fields():
+				if "TransactionType" in i:
+					base_transaction = 'ITransaction'
+				else:
+					base_transaction = 'IStruct'
 		return base_transaction if self._is_struct else None
 
 	def get_fields(self):
@@ -189,16 +195,22 @@ class StructFormatter(AbstractTypeFormatter):
 
 		# HACK: instead of handling dumb magic value in namespace parent_name, generate slightly simpler condition
 		if prefix_field and DisplayType.UNSET != field.display_type:
-			return f'if ({lang_field_name(field.extensions.printer.name)})'
+			return f'if ({pascal_name(field.extensions.printer.name)}.Length > 0)'
 
 		display_condition_field_name = lang_field_name(condition_field_name)
 		if conditional.operation in ['not in', 'in']:
 			return f'if ({condition_operator}{display_condition_field_name}.has({yoda_value}))'
 		
 		if prefix_field:
-			return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]}.Value)'
+			if yoda_value.isdecimal():
+				return f'if ({yoda_value} {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]})'
+			else:
+				return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]}.Value)'
 		else :
-			return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name}.Value)'
+			if yoda_value.isdecimal():
+				return f'if ({yoda_value} {condition_operator} {display_condition_field_name})'
+			else:
+				return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name}.Value)'
 		#return f'if ({yoda_value} {condition_operator} {display_condition_field_name})'
 
 	def generate_deserialize_field(self, field, arg_buffer_name=None):
@@ -214,9 +226,10 @@ class StructFormatter(AbstractTypeFormatter):
 		size_fields = field.extensions.size_fields
 		if size_fields:
 			assert len(size_fields) == 1, f'unexpected number of size_fields associated with {field.name}'
-			buffer_load_name = f'view.window({lang_field_name(size_fields[0].name)})'
+			buffer_load_name = f'br'
 
 		use_custom_buffer_name = arg_buffer_name or size_fields
+
 		load = field.extensions.printer.load(buffer_load_name) if use_custom_buffer_name else field.extensions.printer.load('br')
 		const_field = 'var ' if not condition else ''
 		deserialize = f'{const_field}{field_name} = {load};\n'
@@ -234,17 +247,27 @@ class StructFormatter(AbstractTypeFormatter):
 			additional_statements += '// marking sizeof field\n'
 
 		if field.is_conditional:
-			load = field.extensions.printer.load('tempBr')
-			deserialize = '{\n'
-			deserialize += indent('var tempMs = new MemoryStream(durationTemporary.Serialize());')
-			deserialize += indent('var tempBr = new BinaryReader(tempMs);')
-			deserialize += indent(f'{const_field}{field_name} = {load};\n')
-			deserialize += '}\n'
+			if DisplayType.INTEGER == field.extensions.type_model.display_type:
+				load = field.extensions.printer.load('tempBr')
+				deserialize = '{\n'
+				deserialize += indent('var tempMs = new MemoryStream(durationTemporary.Serialize());')
+				deserialize += indent('var tempBr = new BinaryReader(tempMs);')
+				deserialize += indent(f'{const_field}{field_name} = {load};\n')
+				deserialize += '}\n'
+			else:
+				load = field.extensions.printer.load('br')
+				deserialize = '{\n'
+				deserialize += indent(f'{const_field}{field_name} = {load};\n')
+				deserialize += '}\n'
+				
 
 		deserialize_field = deserialize + additional_statements
 
 		if condition:
-			condition = f'var {field.extensions.printer.name} = new {field.extensions.printer.get_type()}();\n' + condition
+			if field.extensions.printer.get_type() == "byte[]":
+				condition = f'var {field.extensions.printer.name} = new {field.extensions.printer.get_type()}{{}};\n' + condition
+			else:
+				condition = f'var {field.extensions.printer.name} = new {field.extensions.printer.get_type()}();\n' + condition
 
 		return indent_if_conditional(condition, deserialize_field)
 
@@ -317,7 +340,7 @@ class StructFormatter(AbstractTypeFormatter):
 					# HACK: create inline if condition (for NEM namespace purposes)
 					if bound_condition:
 						condition_value = bound_field.value.value
-						field_value = f'({bound_field_name} ? {field_value} : {condition_value})'
+						field_value = f'({bound_field_name}.Length > 0 ? {field_value} : {condition_value})'
 				else:
 					field_value = bound_field.extensions.printer.get_size()
 			elif field.is_size_reference:
@@ -356,7 +379,13 @@ class StructFormatter(AbstractTypeFormatter):
 
 	def generate_size_field(self, field):
 		condition = self.generate_condition(field, True)
-		size_field = field.extensions.printer.get_size()
+		if self.typename == "Message" and field.extensions.printer.name == "message":
+			size_field = field.extensions.printer.get_size(True)
+		else:
+			size_field = field.extensions.printer.get_size()
+
+		#if "Message" == self.typename:
+		#	size_field.replace("Message", "MessageField")
 
 		return indent_if_conditional(condition, f'size += {size_field};\n')
 

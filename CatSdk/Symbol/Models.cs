@@ -3025,7 +3025,7 @@ public class SecretProofTransaction : ITransaction {
 		var secret = Hash256.Deserialize(br);
 		var proofSize = br.ReadUInt16();
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
-		var proof = br.ReadBytes(proofSize);
+		var proof = br.ReadBytes((int)proofSize);
 
 		var instance = new SecretProofTransaction()
 		{
@@ -3165,7 +3165,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 		var secret = Hash256.Deserialize(br);
 		var proofSize = br.ReadUInt16();
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
-		var proof = br.ReadBytes(proofSize);
+		var proof = br.ReadBytes((int)proofSize);
 
 		var instance = new EmbeddedSecretProofTransaction()
 		{
@@ -3312,7 +3312,7 @@ public class AccountMetadataTransaction : ITransaction {
 		var scopedMetadataKey = br.ReadUInt64();
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new AccountMetadataTransaction()
 		{
@@ -3450,7 +3450,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 		var scopedMetadataKey = br.ReadUInt64();
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new EmbeddedAccountMetadataTransaction()
 		{
@@ -3603,7 +3603,7 @@ public class MosaicMetadataTransaction : ITransaction {
 		var targetMosaicId = UnresolvedMosaicId.Deserialize(br);
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new MosaicMetadataTransaction()
 		{
@@ -3750,7 +3750,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 		var targetMosaicId = UnresolvedMosaicId.Deserialize(br);
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new EmbeddedMosaicMetadataTransaction()
 		{
@@ -4029,7 +4029,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 		var targetNamespaceId = NamespaceId.Deserialize(br);
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new NamespaceMetadataTransaction()
 		{
@@ -4176,7 +4176,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 		var targetNamespaceId = NamespaceId.Deserialize(br);
 		var valueSizeDelta = br.ReadUInt16();
 		var valueSize = br.ReadUInt16();
-		var value = br.ReadBytes(valueSize);
+		var value = br.ReadBytes((int)valueSize);
 
 		var instance = new EmbeddedNamespaceMetadataTransaction()
 		{
@@ -5266,8 +5266,8 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		var multisigAccountModificationTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != multisigAccountModificationTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({multisigAccountModificationTransactionBodyReserved_1})");
-		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, addressAdditionsCount);
-		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, addressDeletionsCount);
+		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressAdditionsCount);
+		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressDeletionsCount);
 
 		var instance = new MultisigAccountModificationTransaction()
 		{
@@ -5414,8 +5414,8 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 		var multisigAccountModificationTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != multisigAccountModificationTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({multisigAccountModificationTransactionBodyReserved_1})");
-		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, addressAdditionsCount);
-		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, addressDeletionsCount);
+		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressAdditionsCount);
+		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressDeletionsCount);
 
 		var instance = new EmbeddedMultisigAccountModificationTransaction()
 		{
@@ -6122,7 +6122,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 			}
 		}
 		var nameSize = br.ReadByte();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 
 		var instance = new NamespaceRegistrationTransaction()
 		{
@@ -6299,7 +6299,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 			}
 		}
 		var nameSize = br.ReadByte();
-		var name = br.ReadBytes(nameSize);
+		var name = br.ReadBytes((int)nameSize);
 
 		var instance = new EmbeddedNamespaceRegistrationTransaction()
 		{
@@ -6513,8 +6513,8 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new AccountAddressRestrictionTransaction()
 		{
@@ -6654,8 +6654,8 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new EmbeddedAccountAddressRestrictionTransaction()
 		{
@@ -6804,8 +6804,8 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new AccountMosaicRestrictionTransaction()
 		{
@@ -6945,8 +6945,8 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new EmbeddedAccountMosaicRestrictionTransaction()
 		{
@@ -7095,8 +7095,8 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new AccountOperationRestrictionTransaction()
 		{
@@ -7236,8 +7236,8 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 		var accountRestrictionTransactionBodyReserved_1 = br.ReadUInt32();
 		if (0 != accountRestrictionTransactionBodyReserved_1)
 			throw new Exception($"Invalid value of reserved field ({accountRestrictionTransactionBodyReserved_1})");
-		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, restrictionAdditionsCount);
-		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, restrictionDeletionsCount);
+		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionAdditionsCount);
+		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionDeletionsCount);
 
 		var instance = new EmbeddedAccountOperationRestrictionTransaction()
 		{
@@ -8102,8 +8102,8 @@ public class TransferTransaction : ITransaction {
 		var transferTransactionBodyReserved_2 = br.ReadUInt32();
 		if (0 != transferTransactionBodyReserved_2)
 			throw new Exception($"Invalid value of reserved field ({transferTransactionBodyReserved_2})");
-		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, mosaicsCount);
-		var message = br.ReadBytes(messageSize);
+		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, (byte)mosaicsCount);
+		var message = br.ReadBytes((int)messageSize);
 
 		var instance = new TransferTransaction()
 		{
@@ -8250,8 +8250,8 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 		var transferTransactionBodyReserved_2 = br.ReadUInt32();
 		if (0 != transferTransactionBodyReserved_2)
 			throw new Exception($"Invalid value of reserved field ({transferTransactionBodyReserved_2})");
-		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, mosaicsCount);
-		var message = br.ReadBytes(messageSize);
+		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, (byte)mosaicsCount);
+		var message = br.ReadBytes((int)messageSize);
 
 		var instance = new EmbeddedTransferTransaction()
 		{

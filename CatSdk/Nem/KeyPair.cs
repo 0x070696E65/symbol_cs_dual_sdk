@@ -2,7 +2,7 @@ using CatSdk.CryptoTypes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
 
-namespace CatSdk.Symbol;
+namespace CatSdk.Nem;
 public class KeyPair
 {
     public KeyPair(PrivateKey privateKey)

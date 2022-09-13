@@ -1,8 +1,13 @@
 using System.Text;
 using CatSdk.Facade;
-using CatSdk.Symbol;
+using CatSdk.Nem;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
+using Cosignature = CatSdk.Symbol.Cosignature;
+using NetworkType = CatSdk.Symbol.NetworkType;
+using PublicKey = CatSdk.Symbol.PublicKey;
+using Signature = CatSdk.Symbol.Signature;
+using TransactionType = CatSdk.Symbol.TransactionType;
 
 namespace CatSdk;
 public class TransactionDescriptorProcessor

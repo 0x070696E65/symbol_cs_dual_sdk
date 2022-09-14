@@ -4,7 +4,6 @@ using CatSdk.Utils;
 namespace CatSdk.Nem.Factory;
 public class TransactionsFactory
 {
-    /*
     private readonly RuleBasedTransactionFactory Factory;
     public readonly Network Network;
     public TransactionsFactory(Network network, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
@@ -17,41 +16,54 @@ public class TransactionsFactory
     {
         var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
         transactionDescriptor.Add("Network", networkType);
-        var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
-        if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
+        var transaction = Factory.CreateNemFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
+        return transaction;
+        if (transaction.Type == TransactionType.TRANSFER)
         {
-            var namespaceRegistrationTransaction = (NamespaceRegistrationTransaction) transaction;
-            var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
-            namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
-            return namespaceRegistrationTransaction; 
         }
-
-        if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-        var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
-        var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-        mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-        return mosaicDefinitionTransaction;
     }
     
-    public IBaseTransaction CreateEmbedded(Dictionary<string, object> transactionDescriptor)
+    /*
+	 * Converts a transaction to a non-verifiable transaction.
+	 * @param {object} transaction Transaction object.
+	 * @returns {object} Non-verifiable transaction object.
+	 */
+    public IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
     {
-        var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
-        transactionDescriptor.Add("Network", networkType);
-        var transaction = Factory.CreateFromFactory(EmbeddedTransactionFactory.CreateByName, transactionDescriptor);
-        if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
-        {
-            var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransaction) transaction;
-            var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
-            namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId); 
-            return namespaceRegistrationTransaction;
-        }
+        var nonVerifiableClassName = transaction.GetType().GetConstructors().ToList().Select((ctor) => ctor.Name).First();
+        nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
 
-        if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-        var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
-        var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-        mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-        return mosaicDefinitionTransaction;
+        var type = Factory.Module.Find(t => t.Name == nonVerifiableClassName);
+        if (type == null) throw new NullReferenceException("transaction type is invalid");
+        {
+            var inst = (IBaseTransaction)Activator.CreateInstance(type)!;
+            var pInfos = inst.GetType().GetProperties();
+            var tInfos = transaction.GetType().GetProperties();
+            
+            foreach (var propertyInfo in pInfos)
+            {
+                var tInfo = tInfos.ToList().Find(t => t.Name == propertyInfo.Name);
+                var value = tInfo?.GetValue(transaction);
+                propertyInfo.SetValue(inst, value);
+            }
+            return inst;
+        }
     }
+    /*
+    static toNonVerifiableTransaction(transaction) {
+        let nonVerifiableClassName = transaction.constructor.name;
+        if (0 !== nonVerifiableClassName.indexOf('NonVerifiable'))
+            nonVerifiableClassName = `NonVerifiable${nonVerifiableClassName}`;
+
+        const NonVerifiableClass = nc[nonVerifiableClassName];
+        const nonVerifiableTransaction = new NonVerifiableClass();
+        Object.getOwnPropertyNames(transaction).forEach(key => {
+            nonVerifiableTransaction[key] = transaction[key];
+        });
+
+        return nonVerifiableTransaction;
+    }
+     */
     
     public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
@@ -66,7 +78,7 @@ public class TransactionsFactory
         return transaction;
     }
     
-    private static Address? SymbolTypeConverter(object value)
+    private static Address? NemTypeConverter(object value)
     {
         if (value.GetType() != typeof(Address)) return null;
         var castValue = (ByteArray)value;
@@ -81,7 +93,9 @@ public class TransactionsFactory
             .OrderBy(o => o.Name)
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
-        var factory = new RuleBasedTransactionFactory(types, SymbolTypeConverter, typeRuleOverrides);
+        var factory = new RuleBasedTransactionFactory(types, NemTypeConverter, typeRuleOverrides);
+        
+        /*
         factory.Autodetect();
 
         var flagsMapping = new Dictionary<string, Type>()
@@ -137,7 +151,7 @@ public class TransactionsFactory
         {
             factory.AddArrayParser(key, arrayParserMapping[key]);
         }
+        */
         return factory;
     }
-   */
 }

@@ -18,7 +18,7 @@ namespace CatSdk;
 
 public class RuleBasedTransactionFactory
 {
-    private readonly List<Type> Module;
+    public readonly List<Type> Module;
     private readonly Dictionary<string, Func<object, object>> Rules;
     private readonly Func<object, object?>? TypeConverter;
     private readonly Dictionary<Type, Func<object, object>>? TypeRuleOverrides;
@@ -44,6 +44,17 @@ public class RuleBasedTransactionFactory
     {
         var processor = CreateProcessor(descriptor);
         var entityType = (TransactionType)processor.LookupValue("Type")!;
+        var entity = factory(entityType);
+        var allTypeHints = BuildTypeHintsMap(entity);
+        processor.SetTypeHints(allTypeHints);
+        processor.CopyTo(entity, new []{"Type"});
+        return entity;
+    }
+    
+    public T CreateNemFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : CatSdk.Nem.IBaseTransaction
+    {
+        var processor = CreateProcessor(descriptor);
+        var entityType = (string)processor.LookupValue("Type")!;
         var entity = factory(entityType);
         var allTypeHints = BuildTypeHintsMap(entity);
         processor.SetTypeHints(allTypeHints);

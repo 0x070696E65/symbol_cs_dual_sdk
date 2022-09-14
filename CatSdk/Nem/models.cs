@@ -4441,20 +4441,24 @@ public class TransactionFactory {
 		return Deserialize(br);
 	}
 
-	public static ITransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, ITransaction>
-		{
-			{AccountKeyLinkTransaction.TRANSACTION_TYPE, new AccountKeyLinkTransaction()},
-			{MosaicDefinitionTransaction.TRANSACTION_TYPE, new MosaicDefinitionTransaction()},
-			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, new MosaicSupplyChangeTransaction()},
-			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, new MultisigAccountModificationTransactionV1()},
-			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, new MultisigAccountModificationTransaction()},
-			{Cosignature.TRANSACTION_TYPE, new Cosignature()},
-			{MultisigTransaction.TRANSACTION_TYPE, new MultisigTransaction()},
-			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, new NamespaceRegistrationTransaction()},
-			{TransferTransactionV1.TRANSACTION_TYPE, new TransferTransactionV1()},
-			{TransferTransaction.TRANSACTION_TYPE, new TransferTransaction()}
+	public static string ToKey(IEnumerable<object> values)
+	{
+		return values.Sum(Convert.ToInt32).ToString();
+	}
 
+	public static ITransaction CreateByName(string entityName) {
+		var mapping = new Dictionary<string, ITransaction>
+		{
+			{ToKey(new List<object>(){AccountKeyLinkTransaction.TRANSACTION_TYPE.Value, AccountKeyLinkTransaction.TRANSACTION_VERSION}), new AccountKeyLinkTransaction()},
+			{ToKey(new List<object>(){MosaicDefinitionTransaction.TRANSACTION_TYPE.Value, MosaicDefinitionTransaction.TRANSACTION_VERSION}), new MosaicDefinitionTransaction()},
+			{ToKey(new List<object>(){MosaicSupplyChangeTransaction.TRANSACTION_TYPE.Value, MosaicSupplyChangeTransaction.TRANSACTION_VERSION}), new MosaicSupplyChangeTransaction()},
+			{ToKey(new List<object>(){MultisigAccountModificationTransactionV1.TRANSACTION_TYPE.Value, MultisigAccountModificationTransactionV1.TRANSACTION_VERSION}), new MultisigAccountModificationTransactionV1()},
+			{ToKey(new List<object>(){MultisigAccountModificationTransaction.TRANSACTION_TYPE.Value, MultisigAccountModificationTransaction.TRANSACTION_VERSION}), new MultisigAccountModificationTransaction()},
+			{ToKey(new List<object>(){Cosignature.TRANSACTION_TYPE.Value, Cosignature.TRANSACTION_VERSION}), new Cosignature()},
+			{ToKey(new List<object>(){MultisigTransaction.TRANSACTION_TYPE.Value, MultisigTransaction.TRANSACTION_VERSION}), new MultisigTransaction()},
+			{ToKey(new List<object>(){NamespaceRegistrationTransaction.TRANSACTION_TYPE.Value, NamespaceRegistrationTransaction.TRANSACTION_VERSION}), new NamespaceRegistrationTransaction()},
+			{ToKey(new List<object>(){TransferTransactionV1.TRANSACTION_TYPE.Value, TransferTransactionV1.TRANSACTION_VERSION}), new TransferTransactionV1()},
+			{ToKey(new List<object>(){TransferTransaction.TRANSACTION_TYPE.Value, TransferTransaction.TRANSACTION_VERSION}), new TransferTransaction()},
 		};
 		return mapping[entityName];
 	}

@@ -8,7 +8,6 @@ using Signature = CatSdk.CryptoTypes.Signature;
 namespace CatSdk.Facade;
 public class NemFacade
 {
-    /*
     public Network Network;
     public TransactionsFactory TransactionFactory;
     
@@ -32,7 +31,6 @@ public class NemFacade
     public Signature SignTransaction(KeyPair keyPair, IBaseTransaction transaction)
     {
         var nonVerifiableTransaction = TransactionFactory.ToNonVerifiableTransaction(transaction);
-        return keyPair.Sign(nonVerifiableTransaction);
+        return keyPair.Sign(nonVerifiableTransaction.Serialize());
     }
-    */
 }

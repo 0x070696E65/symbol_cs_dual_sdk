@@ -192,9 +192,6 @@ def type_check(key, value, txType):
         return to_flags(value, "MosaicFlags")
     if key == "restriction_flags":
         return to_flags(value, "AccountRestrictionFlags")
-
-    if key == "link_action":
-        return to_enum(value, "LinkAction")
     if key == "link_action":
         return to_enum(value, "LinkAction")
     if key == "alias_action":

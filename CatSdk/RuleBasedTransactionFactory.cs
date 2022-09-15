@@ -34,8 +34,8 @@ public class RuleBasedTransactionFactory
     private static object? TypeConverterFactory(IEnumerable<Type> module, Func<object, object?>? customTypeConverter, object? value)
     {
         if (value != null && customTypeConverter?.Invoke(value) != null) return customTypeConverter(value);
-        var type = module.Select(_ => value?.GetType()).First();
         if (value is not ByteArray byteArray) return value;
+        var type = module.Select(_ => value.GetType()).First();
         if (type == null) throw new NullReferenceException("type is null");
         return Activator.CreateInstance(type, byteArray.bytes);
     }
@@ -54,7 +54,7 @@ public class RuleBasedTransactionFactory
     public T CreateNemFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : CatSdk.Nem.IBaseTransaction
     {
         var processor = CreateProcessor(descriptor);
-        var entityType = (string)processor.LookupValue("Type")!;
+        var entityType = (string)processor.LookupNemValue("Type")!;
         var entity = factory(entityType);
         var allTypeHints = BuildTypeHintsMap(entity);
         processor.SetTypeHints(allTypeHints);
@@ -106,7 +106,7 @@ public class RuleBasedTransactionFactory
         return Convert.ToUInt64(value);
     }
     
-    public void AddPodParser(string name, Type podClass)
+    public void AddPodParser(string name, Type podClass, string chainName = "")
     {
         if (TypeRuleOverrides != null && TypeRuleOverrides.ContainsKey(podClass))
         {
@@ -117,75 +117,151 @@ public class RuleBasedTransactionFactory
         {
             if (value == null) throw new NullReferenceException("value is null");
             var valueType = value.GetType();
-            if (valueType == podClass
+
+            if (chainName != "Nem")
+            {
+                if (valueType == podClass
                 || valueType == typeof(UnresolvedAddress))
-            {
-                return value;
-            }
-            {
-                object? instance;
-                if (
-                    podClass == typeof(Amount)
-                    || podClass == typeof(BlockDuration)
-                    || podClass == typeof(Difficulty)
-                    || podClass == typeof(Height)
-                    || podClass == typeof(Importance)
-                    || podClass == typeof(ImportanceHeight)
-                    || podClass == typeof(UnresolvedMosaicId)
-                    || podClass == typeof(MosaicId)
-                    || podClass == typeof(Timestamp)
-                    || podClass == typeof(NamespaceId)
-                    || podClass == typeof(MosaicRestrictionKey)
+                {
+                    return value;
+                }
+                {
+                    object? instance;
+                    if (
+                        podClass == typeof(Amount)
+                        || podClass == typeof(BlockDuration)
+                        || podClass == typeof(Difficulty)
+                        || podClass == typeof(Height)
+                        || podClass == typeof(Importance)
+                        || podClass == typeof(ImportanceHeight)
+                        || podClass == typeof(UnresolvedMosaicId)
+                        || podClass == typeof(MosaicId)
+                        || podClass == typeof(Timestamp)
+                        || podClass == typeof(NamespaceId)
+                        || podClass == typeof(MosaicRestrictionKey)
                     )
-                {
-                    instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
+                    {
+                        instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (
+                        podClass == typeof(Hash256)
+                        || podClass == typeof(PublicKey)
+                        || podClass == typeof(VotingPublicKey)
+                    )
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Address))
+                    {
+                        value = value is string s ? Converter.StringToAddress(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(UnresolvedAddress))
+                    {
+                        value = value is string s ? Converter.StringToAddress(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Signature))
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Signature))
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    {
+                        instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
                 }
-                if (
-                    podClass == typeof(Hash256)
-                    || podClass == typeof(PublicKey)
-                    || podClass == typeof(VotingPublicKey)
-                   )
+            }
+            else
+            {
+                if (valueType == podClass)
                 {
-                    value = value is string s ? Converter.HexToBytes(s) : value;
-                    instance = Activator.CreateInstance(podClass, value);
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                if (podClass == typeof(Address))
-                {
-                    value = value is string s ? Converter.StringToAddress(s) : value;
-                    instance = Activator.CreateInstance(podClass, value);
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                if (podClass == typeof(UnresolvedAddress))
-                {
-                    value = value is string s ? Converter.StringToAddress(s) : value;
-                    instance = Activator.CreateInstance(podClass, value);
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                if (podClass == typeof(Signature))
-                {
-                    value = value is string s ? Converter.HexToBytes(s) : value;
-                    instance = Activator.CreateInstance(podClass, value);
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                if (podClass == typeof(Signature))
-                {
-                    value = value is string s ? Converter.HexToBytes(s) : value;
-                    instance = Activator.CreateInstance(podClass, value);
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
+                    return value;
                 }
                 {
-                    instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
+                    object? instance;
+                    if (
+                        podClass == typeof(Amount)
+                        || podClass == typeof(BlockDuration)
+                        || podClass == typeof(Difficulty)
+                        || podClass == typeof(Height)
+                        || podClass == typeof(Importance)
+                        || podClass == typeof(ImportanceHeight)
+                        || podClass == typeof(UnresolvedMosaicId)
+                        || podClass == typeof(MosaicId)
+                        || podClass == typeof(Timestamp)
+                        || podClass == typeof(NamespaceId)
+                        || podClass == typeof(MosaicRestrictionKey)
+                    )
+                    {
+                        instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (
+                        podClass == typeof(Hash256)
+                        || podClass == typeof(PublicKey)
+                        || podClass == typeof(VotingPublicKey)
+                    )
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Address))
+                    {
+                        value = value is string s ? Converter.StringToAddress(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(UnresolvedAddress))
+                    {
+                        value = value is string s ? Converter.StringToAddress(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Signature))
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    if (podClass == typeof(Signature))
+                    {
+                        value = value is string s ? Converter.HexToBytes(s) : value;
+                        instance = Activator.CreateInstance(podClass, value);
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                    {
+                        instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
+                        if (instance == null)  throw new NullReferenceException("instance is null");
+                        return instance;
+                    }
+                }   
             }
         };
     }
@@ -416,9 +492,8 @@ public class RuleBasedTransactionFactory
     private static Dictionary<string, string> BuildTypeHintsMap(IStruct structValue) {
         var typeHints = new Dictionary<string, string>();
         var rawTypeHints = structValue.TypeHints;
-        foreach (var keyValuePair in rawTypeHints)
+        foreach (var (key, hint) in rawTypeHints)
         {
-            var hint = keyValuePair.Value;
             string? ruleName = null;
             if (hint.IndexOf("array[", StringComparison.Ordinal) == 0)
             {
@@ -438,7 +513,7 @@ public class RuleBasedTransactionFactory
 
             if (ruleName != null)
             {
-                typeHints[keyValuePair.Key] = ruleName;
+                typeHints[key] = ruleName;
             }
         }
         return typeHints;

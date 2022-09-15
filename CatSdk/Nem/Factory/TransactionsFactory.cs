@@ -28,8 +28,12 @@ public class TransactionsFactory
 	 * @param {object} transaction Transaction object.
 	 * @returns {object} Non-verifiable transaction object.
 	 */
-    public IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
+    public IBaseTransaction ToNonVerifiableTransaction(Dictionary<string, object> transactionDescriptor)
     {
+        var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
+        transactionDescriptor.Add("Network", networkType);
+        var transaction = Factory.CreateNemFromFactory(NonVerifiableTransactionFactory.CreateByName, transactionDescriptor);
+        
         var nonVerifiableClassName = transaction.GetType().GetConstructors().ToList().Select((ctor) => ctor.Name).First();
         nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
 
@@ -49,22 +53,7 @@ public class TransactionsFactory
             return inst;
         }
     }
-    /*
-    static toNonVerifiableTransaction(transaction) {
-        let nonVerifiableClassName = transaction.constructor.name;
-        if (0 !== nonVerifiableClassName.indexOf('NonVerifiable'))
-            nonVerifiableClassName = `NonVerifiable${nonVerifiableClassName}`;
 
-        const NonVerifiableClass = nc[nonVerifiableClassName];
-        const nonVerifiableTransaction = new NonVerifiableClass();
-        Object.getOwnPropertyNames(transaction).forEach(key => {
-            nonVerifiableTransaction[key] = transaction[key];
-        });
-
-        return nonVerifiableTransaction;
-    }
-     */
-    
     public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         var transactionBuffer = transaction.Serialize();
@@ -89,33 +78,21 @@ public class TransactionsFactory
     {
         var assm = Assembly.GetExecutingAssembly();
         var types = assm.GetTypes()
-            .Where(p => p.Namespace == "CatSdk.Symbol")
+            .Where(p => p.Namespace == "CatSdk.Nem")
             .OrderBy(o => o.Name)
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
         var factory = new RuleBasedTransactionFactory(types, NemTypeConverter, typeRuleOverrides);
         
-        /*
         factory.Autodetect();
-
-        var flagsMapping = new Dictionary<string, Type>()
-        {
-            {"MosaicFlags", typeof(MosaicFlags)},
-            {"AccountRestrictionFlags", typeof(AccountRestrictionFlags)},
-        };
-        foreach (var key in flagsMapping.Keys)
-        {
-            factory.AddFlagsParser(key, flagsMapping[key]);
-        }
         
         var enumsMapping = new Dictionary<string, Type>()
         {
-            {"AliasAction", typeof(AliasAction)},
             {"LinkAction", typeof(LinkAction)},
-            {"LockHashAlgorithm", typeof(LockHashAlgorithm)},
-            {"MosaicRestrictionType", typeof(MosaicRestrictionType)},
+            {"MessageType", typeof(MessageType)},
             {"MosaicSupplyChangeAction", typeof(MosaicSupplyChangeAction)},
-            {"NamespaceRegistrationType", typeof(NamespaceRegistrationType)},
+            {"MosaicTransferFeeType", typeof(MosaicTransferFeeType)},
+            {"MultisigAccountModificationType", typeof(MultisigAccountModificationType)},
             {"NetworkType", typeof(NetworkType)},
             {"TransactionType", typeof(TransactionType)},
         };
@@ -124,34 +101,47 @@ public class TransactionsFactory
             factory.AddEnumParser(key, enumsMapping[key]);
         }
         
-        factory.AddStructParser("UnresolvedMosaic", typeof(UnresolvedMosaic));
+        var structsMapping = new Dictionary<string, Type>()
+        {
+            {"Message", typeof(Message)},
+            {"NamespaceId", typeof(NamespaceId)},
+            {"MosaicId", typeof(MosaicId)},
+            {"Mosaic", typeof(Mosaic)},
+            {"SizePrefixedMosaic", typeof(SizePrefixedMosaic)},
+            {"MosaicLevy", typeof(MosaicLevy)},
+            {"MosaicProperty", typeof(MosaicProperty)},
+            {"SizePrefixedMosaicProperty", typeof(SizePrefixedMosaicProperty)},
+            {"MosaicDefinition", typeof(MosaicDefinition)},
+            {"MultisigAccountModification", typeof(MultisigAccountModification)},
+            {"SizePrefixedMultisigAccountModification", typeof(SizePrefixedMultisigAccountModification)},
+        };
+        
+        foreach (var key in structsMapping.Keys)
+        {
+            factory.AddStructParser(key, structsMapping[key]);
+        }
         
         var sdkTypeMapping = new Dictionary<string, Type>()
         {
-            {"UnresolvedAddress", typeof(UnresolvedAddress)},
             {"Address", typeof(Address)},
             {"Hash256", typeof(Hash256)},
             {"PublicKey", typeof(PublicKey)},
-            {"VotingPublicKey", typeof(VotingPublicKey)},
-            {"Signature", typeof(Signature)},
         };
         foreach (var key in sdkTypeMapping.Keys)
         {
-            factory.AddPodParser(key, sdkTypeMapping[key]);
+            factory.AddPodParser(key, sdkTypeMapping[key], "Nem");
         }
         
         var arrayParserMapping = new Dictionary<string, Type>()
         {
-            {"UnresolvedMosaicId", typeof(UnresolvedMosaicId)},
-            {"TransactionType", typeof(TransactionType)},
-            {"UnresolvedAddress", typeof(UnresolvedAddress)},
-            {"struct:UnresolvedMosaic", typeof(UnresolvedMosaic)},
+            {"struct:SizePrefixedMosaic", typeof(SizePrefixedMosaic)},
+            {"struct:SizePrefixedMosaicProperty", typeof(SizePrefixedMosaicProperty)},
+            {"struct:SizePrefixedMultisigAccountModification", typeof(SizePrefixedMultisigAccountModification)},
         };
         foreach (var key in arrayParserMapping.Keys)
         {
             factory.AddArrayParser(key, arrayParserMapping[key]);
         }
-        */
         return factory;
     }
 }

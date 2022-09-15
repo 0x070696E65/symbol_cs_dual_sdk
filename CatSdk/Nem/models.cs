@@ -4449,16 +4449,16 @@ public class TransactionFactory {
 	public static ITransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, ITransaction>
 		{
-			{ToKey(new List<object>(){AccountKeyLinkTransaction.TRANSACTION_TYPE.Value, AccountKeyLinkTransaction.TRANSACTION_VERSION}), new AccountKeyLinkTransaction()},
-			{ToKey(new List<object>(){MosaicDefinitionTransaction.TRANSACTION_TYPE.Value, MosaicDefinitionTransaction.TRANSACTION_VERSION}), new MosaicDefinitionTransaction()},
-			{ToKey(new List<object>(){MosaicSupplyChangeTransaction.TRANSACTION_TYPE.Value, MosaicSupplyChangeTransaction.TRANSACTION_VERSION}), new MosaicSupplyChangeTransaction()},
-			{ToKey(new List<object>(){MultisigAccountModificationTransactionV1.TRANSACTION_TYPE.Value, MultisigAccountModificationTransactionV1.TRANSACTION_VERSION}), new MultisigAccountModificationTransactionV1()},
-			{ToKey(new List<object>(){MultisigAccountModificationTransaction.TRANSACTION_TYPE.Value, MultisigAccountModificationTransaction.TRANSACTION_VERSION}), new MultisigAccountModificationTransaction()},
-			{ToKey(new List<object>(){Cosignature.TRANSACTION_TYPE.Value, Cosignature.TRANSACTION_VERSION}), new Cosignature()},
-			{ToKey(new List<object>(){MultisigTransaction.TRANSACTION_TYPE.Value, MultisigTransaction.TRANSACTION_VERSION}), new MultisigTransaction()},
-			{ToKey(new List<object>(){NamespaceRegistrationTransaction.TRANSACTION_TYPE.Value, NamespaceRegistrationTransaction.TRANSACTION_VERSION}), new NamespaceRegistrationTransaction()},
-			{ToKey(new List<object>(){TransferTransactionV1.TRANSACTION_TYPE.Value, TransferTransactionV1.TRANSACTION_VERSION}), new TransferTransactionV1()},
-			{ToKey(new List<object>(){TransferTransaction.TRANSACTION_TYPE.Value, TransferTransaction.TRANSACTION_VERSION}), new TransferTransaction()},
+			{"account_key_link_transaction", new AccountKeyLinkTransaction()},
+			{"mosaic_definition_transaction", new MosaicDefinitionTransaction()},
+			{"mosaic_supply_change_transaction", new MosaicSupplyChangeTransaction()},
+			{"multisig_account_modification_transaction_v1", new MultisigAccountModificationTransactionV1()},
+			{"multisig_account_modification_transaction", new MultisigAccountModificationTransaction()},
+			{"cosignature", new Cosignature()},
+			{"multisig_transaction", new MultisigTransaction()},
+			{"namespace_registration_transaction", new NamespaceRegistrationTransaction()},
+			{"transfer_transaction_v1", new TransferTransactionV1()},
+			{"transfer_transaction", new TransferTransaction()},
 		};
 		return mapping[entityName];
 	}
@@ -4489,17 +4489,17 @@ public class NonVerifiableTransactionFactory {
 		return Deserialize(br);
 	}
 
-	public static IBaseTransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+	public static IBaseTransaction CreateByName(string entityName) {
+		var mapping = new Dictionary<string, IBaseTransaction>
 		{
-			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, new NonVerifiableAccountKeyLinkTransaction()},
-			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicDefinitionTransaction()},
-			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, new NonVerifiableMosaicSupplyChangeTransaction()},
-			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, new NonVerifiableMultisigAccountModificationTransactionV1()},
-			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, new NonVerifiableMultisigAccountModificationTransaction()},
-			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, new NonVerifiableNamespaceRegistrationTransaction()},
-			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, new NonVerifiableTransferTransactionV1()},
-			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, new NonVerifiableTransferTransaction()}
+			{"non_verifiable_account_key_link_transaction", new NonVerifiableAccountKeyLinkTransaction()},
+			{"non_verifiable_mosaic_definition_transaction", new NonVerifiableMosaicDefinitionTransaction()},
+			{"non_verifiable_mosaic_supply_change_transaction", new NonVerifiableMosaicSupplyChangeTransaction()},
+			{"non_verifiable_multisig_account_modification_transaction_v1", new NonVerifiableMultisigAccountModificationTransactionV1()},
+			{"non_verifiable_multisig_account_modification_transaction", new NonVerifiableMultisigAccountModificationTransaction()},
+			{"non_verifiable_namespace_registration_transaction", new NonVerifiableNamespaceRegistrationTransaction()},
+			{"non_verifiable_transfer_transaction_v1", new NonVerifiableTransferTransactionV1()},
+			{"non_verifiable_transfer_transaction", new NonVerifiableTransferTransaction()}
 
 		};
 		return mapping[entityName];

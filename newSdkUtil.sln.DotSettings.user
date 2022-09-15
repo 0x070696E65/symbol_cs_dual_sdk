@@ -16,6 +16,8 @@
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.MosaicIdTest.AddressTest0&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.MosaicIdTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.SignTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.TransactionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.TransactionNonParserTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

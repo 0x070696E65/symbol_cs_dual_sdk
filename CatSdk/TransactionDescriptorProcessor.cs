@@ -1,6 +1,5 @@
 using System.Text;
 using CatSdk.Facade;
-using CatSdk.Nem;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 using Cosignature = CatSdk.Symbol.Cosignature;
@@ -15,7 +14,7 @@ public class TransactionDescriptorProcessor
     private readonly Dictionary<string, object> TransactionDescriptor;
     private readonly Dictionary<string, Func<object, object>> TypeParsingRules;
     private readonly Func<object, object?>? TypeConverter;
-    private Dictionary<string, string>? TypeHints;
+    public Dictionary<string, string>? TypeHints;
     public TransactionDescriptorProcessor(Dictionary<string, object> transactionDescriptor, Dictionary<string, Func<object, object>> typeParsingRules, Func<object, object?>? typeConverter = null)
     {
         TransactionDescriptor = transactionDescriptor;
@@ -52,6 +51,43 @@ public class TransactionDescriptorProcessor
                     : Network.TestNet;
                 var facade = new SymbolFacade(netWorkType);
                 var innerTransactions = ((Dictionary<string, object>[]) value).ToList().Select((tx) => facade.TransactionFactory.CreateEmbedded(tx)).ToArray();
+                return TypeConverter?.Invoke(innerTransactions);
+            }
+            case "Cosignatures":
+            {
+                var cosignatures = ((Dictionary<string, object>[]) value).ToList().Select((cosignatureDic) =>
+                {
+                    var signerPublicKey = new PublicKey(Converter.HexToBytes((string)cosignatureDic["SignerPublicKey"]));
+                    var signature = new Signature(Converter.HexToBytes((string)cosignatureDic["Signature"]));
+                    return new Cosignature
+                    {
+                        SignerPublicKey = signerPublicKey,
+                        Signature = signature
+                    };
+                }).ToArray();
+                return TypeConverter?.Invoke(cosignatures);
+            }
+            default:
+                return TypeConverter?.Invoke(value);
+        }
+    }
+    
+    public object? LookupNemValue(string key)
+    {
+        var value = LookupValueAndApplyTypeHints(key);
+        if (value.GetType() != typeof(Dictionary<string, object>[]))
+        {
+            return TypeConverter?.Invoke(value);
+        }
+        switch (key)
+        {
+            case "InnerTransaction":
+            {
+                var netWorkType = (CatSdk.Nem.NetworkType) TransactionDescriptor["Network"] == Nem.NetworkType.MAINNET
+                    ? Nem.Factory.Network.MainNet
+                    : Nem.Factory.Network.TestNet;
+                var facade = new NemFacade(netWorkType);
+                var innerTransactions = ((Dictionary<string, object>[]) value).ToList().Select((tx) => facade.TransactionFactory.ToNonVerifiableTransaction(tx)).ToArray();
                 return TypeConverter?.Invoke(innerTransactions);
             }
             case "Cosignatures":

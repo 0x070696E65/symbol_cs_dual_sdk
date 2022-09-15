@@ -6,14 +6,14 @@ using CatSdk.Facade;
 using CatSdk.Nem;
 using CatSdk.Nem.Factory;
 using CatSdk.Utils;
-using PublicKey = CatSdk.Symbol.PublicKey;
-using Signature = CatSdk.Symbol.Signature;
+using PublicKey = CatSdk.Nem.PublicKey;
+using Signature = CatSdk.Nem.Signature;
 using Hash256 = CatSdk.Symbol.Hash256;
-var Facade = new NemFacade(Network.MainNet);
+var Facade = new NemFacade(Network.TestNet);
 
 var descriptor = new Dictionary<string, object>()
 {
-    {"Type", TransactionType.ACCOUNT_KEY_LINK},
+    {"Type", "account_key_link_transaction"},
     {"LinkAction", LinkAction.LINK},
     {"RemotePublicKey", new PublicKey(Converter.HexToBytes("6269E26026CECEFE640C3E0DE050CB9B3CFD279A0713CF00E16EDEF5D6C10EB9"))},
     {"SignerPublicKey", new PublicKey(Converter.HexToBytes("a087a6358b302a25edbd5b990aa0bbbc04c9c13911c579c8538ce880e368a8ac"))},

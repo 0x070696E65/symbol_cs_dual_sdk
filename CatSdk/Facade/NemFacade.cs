@@ -28,9 +28,9 @@ public class NemFacade
         return new Hash256(hash);
     }
 
-    public Signature SignTransaction(KeyPair keyPair, IBaseTransaction transaction)
+    /*public Signature SignTransaction(KeyPair keyPair, IBaseTransaction transaction)
     {
         var nonVerifiableTransaction = TransactionFactory.ToNonVerifiableTransaction(transaction);
         return keyPair.Sign(nonVerifiableTransaction.Serialize());
-    }
+    }*/
 }

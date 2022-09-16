@@ -57,7 +57,7 @@ def type_check(key, value, txType):
         return indent(a)
     if key == "value":
         if value.isdecimal():
-            return value
+            return f'"{value}"'
         else:
             return f'"{value}"'
     if key == "restriction_additions" or key == "restriction_deletions":

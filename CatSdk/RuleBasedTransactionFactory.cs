@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using CatSdk.Nem;
 using CatSdk.Symbol;
@@ -40,10 +43,10 @@ public class RuleBasedTransactionFactory
         return Activator.CreateInstance(type, byteArray.bytes);
     }
 
-    public T CreateFromFactory<T>(Func<TransactionType, T> factory, Dictionary<string, object> descriptor) where T : IBaseTransaction
+    public T CreateFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : IBaseTransaction
     {
         var processor = CreateProcessor(descriptor);
-        var entityType = (TransactionType)processor.LookupValue("Type")!;
+        var entityType = (string)processor.LookupValue("Type")!;
         var entity = factory(entityType);
         var allTypeHints = BuildTypeHintsMap(entity);
         processor.SetTypeHints(allTypeHints);
@@ -62,10 +65,12 @@ public class RuleBasedTransactionFactory
         return entity;
     }
 
-    private TransactionDescriptorProcessor CreateProcessor(Dictionary<string, object> descriptor) {
+    private TransactionDescriptorProcessor CreateProcessor(Dictionary<string, object> descriptor)
+    {
         return new TransactionDescriptorProcessor(descriptor, Rules, TypeConverter);
     }
 
+    /*
     public static object KeyParser(string key, int value)
     {
         switch (key)
@@ -105,378 +110,203 @@ public class RuleBasedTransactionFactory
     {
         return Convert.ToUInt64(value);
     }
+    */
     
-    public void AddPodParser(string name, Type podClass, string chainName = "")
+    public void AddPodParser(string name)
     {
+        var podClass = Module.Find(m => m.Name == name);
+        if (podClass == null) throw new NullReferenceException("pod class is null");
+        var type = podClass.GetConstructors()[0].GetParameters()[0].ParameterType;
+        
         if (TypeRuleOverrides != null && TypeRuleOverrides.ContainsKey(podClass))
         {
             Rules[name] = TypeRuleOverrides[podClass];
             return;
         }
+        
         Rules[name] = value =>
         {
             if (value == null) throw new NullReferenceException("value is null");
             var valueType = value.GetType();
-
-            if (chainName != "Nem")
+            if (valueType == podClass) return value;
+            object? instance = null;
+            if (type == typeof(byte)) instance = Activator.CreateInstance(podClass, Convert.ToByte(value));
+            else if (type == typeof(ushort)) instance = Activator.CreateInstance(podClass, Convert.ToUInt16(value));
+            else if (type == typeof(uint)) instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
+            else if (type == typeof(ulong)) instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
+            else if (type == typeof(byte[]))
             {
-                if (valueType == podClass
-                || valueType == typeof(UnresolvedAddress))
-                {
-                    return value;
-                }
-                {
-                    object? instance;
-                    if (
-                        podClass == typeof(Amount)
-                        || podClass == typeof(BlockDuration)
-                        || podClass == typeof(Difficulty)
-                        || podClass == typeof(Height)
-                        || podClass == typeof(Importance)
-                        || podClass == typeof(ImportanceHeight)
-                        || podClass == typeof(UnresolvedMosaicId)
-                        || podClass == typeof(MosaicId)
-                        || podClass == typeof(Timestamp)
-                        || podClass == typeof(NamespaceId)
-                        || podClass == typeof(MosaicRestrictionKey)
-                    )
-                    {
-                        instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (
-                        podClass == typeof(Hash256)
-                        || podClass == typeof(PublicKey)
-                        || podClass == typeof(VotingPublicKey)
-                    )
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Address))
-                    {
-                        value = value is string s ? Converter.StringToAddress(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(UnresolvedAddress))
-                    {
-                        value = value is string s ? Converter.StringToAddress(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Signature))
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Signature))
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    {
-                        instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                }
+                value = value is string s ? Converter.IsHexString(s) ? Converter.HexToBytes(s) : Converter.StringToAddress(s) : value;
+                instance = Activator.CreateInstance(podClass, value);
             }
-            else
-            {
-                if (valueType == podClass)
-                {
-                    return value;
-                }
-                {
-                    object? instance;
-                    if (
-                        podClass == typeof(Amount)
-                        || podClass == typeof(BlockDuration)
-                        || podClass == typeof(Difficulty)
-                        || podClass == typeof(Height)
-                        || podClass == typeof(Importance)
-                        || podClass == typeof(ImportanceHeight)
-                        || podClass == typeof(UnresolvedMosaicId)
-                        || podClass == typeof(MosaicId)
-                        || podClass == typeof(Timestamp)
-                        || podClass == typeof(NamespaceId)
-                        || podClass == typeof(MosaicRestrictionKey)
-                    )
-                    {
-                        instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (
-                        podClass == typeof(Hash256)
-                        || podClass == typeof(PublicKey)
-                        || podClass == typeof(VotingPublicKey)
-                    )
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Address))
-                    {
-                        value = value is string s ? Converter.StringToAddress(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(UnresolvedAddress))
-                    {
-                        value = value is string s ? Converter.StringToAddress(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Signature))
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    if (podClass == typeof(Signature))
-                    {
-                        value = value is string s ? Converter.HexToBytes(s) : value;
-                        instance = Activator.CreateInstance(podClass, value);
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    {
-                        instance = Activator.CreateInstance(podClass, Convert.ToUInt32(value));
-                        if (instance == null)  throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                }   
-            }
+            if (instance == null) throw new NullReferenceException("instance is null");
+            return instance;
         };
     }
 
-    public void AddArrayParser(string name, Type type)
+    public void AddArrayParser(string name)
     {
         var elementRule = Rules[name];
         var elementName = name.Replace("struct:", "");
+        var arrayClass = Module.Find(m => m.Name == elementName);
+        if (arrayClass == null) throw new NullReferenceException("array class is null");
+
         Rules[$"array[{elementName}]"] = values =>
         {
-            if (type == typeof(UnresolvedMosaicId))
+            IList tInst;
+            if (values is object[] objects)
             {
-                if (values.GetType() == typeof(UnresolvedMosaicId[])) return values;
-                if (values.GetType() == typeof(ulong[]))
+                var o = objects.Select((v) => elementRule(v));
+                tInst = Array.CreateInstance(arrayClass, objects.Length);
+                var enumerable = o as object[] ?? o.ToArray();
+                for (var i = 0; i < enumerable.Length; i++)
                 {
-                    var result = ((ulong[]) values).ToList().Select((value) => elementRule(new UnresolvedMosaicId(value))).ToArray();
-                    return result.Cast<UnresolvedMosaicId>().ToArray();
+                    tInst[i] = enumerable[i];
                 }
-                if (values.GetType() == typeof(int[]))
+                return tInst;
+            }
+            if (values is int[] int32)
+            {
+                var o = int32.Select((v) => elementRule(v));
+                tInst = Array.CreateInstance(arrayClass, int32.Length);
+                var enumerable = o as object[] ?? o.ToArray();
+                for (var i = 0; i < enumerable.Length; i++)
                 {
-                    var result = ((uint[]) values).ToList().Select((value) => elementRule(new UnresolvedMosaicId(value))).ToArray();
-                    return result.Cast<UnresolvedMosaicId>().ToArray();   
+                    tInst[i] = enumerable[i];
                 }
-            }
-            
-            var list = ((object[]) values).ToList();
-            if (type == typeof(UnresolvedMosaic))
-            {
-                if (values.GetType() == typeof(UnresolvedMosaic[])) return values;
-                
-                var result = list.Select((value) =>
-                {
-                    if (value.GetType() != typeof(Dictionary<string, object>)) return elementRule(value);
-                    var d = (Dictionary<string, object>) value;
-                    return elementRule(new UnresolvedMosaic
-                    {
-                        MosaicId = new UnresolvedMosaicId(Convert.ToUInt64(d["MosaicId"])),
-                        Amount = new Amount(Convert.ToUInt64(d["Amount"]))
-                    });
-                }).ToArray();
-                
-                return result.Cast<UnresolvedMosaic>().ToArray();
-            }
-            if (type == typeof(UnresolvedAddress))
-            {
-                if (values.GetType() == typeof(UnresolvedAddress[])) return values;
-                
-                var result = list.Select((value) =>
-                {
-                    if (value.GetType() == typeof(UnresolvedAddress)) return elementRule(value);
-                    if (value is not string s) throw new Exception("value is invalid type");
-                    var unresolvedAddress = new UnresolvedAddress(Converter.StringToAddress(s));
-                    return elementRule(unresolvedAddress);
-                }).ToArray();
-                return result.Cast<UnresolvedAddress>().ToArray();
+                return tInst;
             }
 
-            if (type == typeof(TransactionType))
+            if (values is ulong[] uint64)
             {
-                if (values.GetType() == typeof(TransactionType[])) return values;
-                
-                var result = list.Select((value) =>
+                var o = uint64.Select((v) => elementRule(v));
+                tInst = Array.CreateInstance(arrayClass, uint64.Length);
+                var enumerable = o as object[] ?? o.ToArray();
+                for (var i = 0; i < enumerable.Length; i++)
                 {
-                    if (value.GetType() == typeof(TransactionType)) return elementRule(value);
-                    if (value is not string s) throw new Exception("value is invalid type");
-                    var stringToEnum = BuildEnumStringToValueMap(type);
-                    var enumInt = NameToEnumValue(stringToEnum, typeof(TransactionType), s);
-                    var transactionType = new TransactionType((ushort)enumInt);
-                    return elementRule(transactionType);
-
-                }).ToArray();
-                return result.Cast<TransactionType>().ToArray();
+                    tInst[i] = enumerable[i];
+                }
+                return tInst;
             }
-            return type == typeof(Dictionary<string, object>) ? list.Select((value) => elementRule((Dictionary<string, object>)value)).ToArray() : list.Select((value) => elementRule(value)).ToArray();
-        };
-    }
-
-    public void AddFlagsParser(string name, Type flagsClass)
-    {
-        Rules[name] = flags =>
-        {
-            object? instance;
-            switch (flags)
-            {
-                case AccountRestrictionFlags[] array:
-                    var accountRestrictionFlagsSum = array.ToList().Select((flag) => (int)flag.Value).Sum();
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(accountRestrictionFlagsSum));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                case MosaicFlags[] array:
-                    var mosaicFlagsSum = array.ToList().Select((flag) => (int)flag.Value).Sum();
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToByte(mosaicFlagsSum));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                case int when flagsClass == typeof(MosaicFlags):
-                {
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToByte(flags));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                case int when flagsClass == typeof(AccountRestrictionFlags):
-                {
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(flags));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                case string s when flagsClass == typeof(MosaicFlags):
-                {
-                    var stringToEnum = BuildEnumStringToValueMap(flagsClass);
-                    var enumTotalInt = s.Split(" ").ToList().Select(flagName =>
-                    {
-                        if (stringToEnum == null) throw new Exception("");
-                        if (stringToEnum.Values == null) throw new Exception("");
-                        return NameToEnumValue(stringToEnum, typeof(MosaicFlags), flagName);
-                    }).Sum();
-                    
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToByte(enumTotalInt));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                case string s when flagsClass == typeof(AccountRestrictionFlags):
-                {
-                    var stringToEnum = BuildEnumStringToValueMap(flagsClass);
-                    var enumTotalInt = s.Split(" ").ToList().Select(flagName =>
-                    {
-                        if (stringToEnum == null) throw new Exception("");
-                        if (stringToEnum.Values == null) throw new Exception("");
-                        return NameToEnumValue(stringToEnum, typeof(MosaicFlags), flagName);
-                    }).Sum();
-                    
-                    instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(enumTotalInt));
-                    if (instance == null)  throw new NullReferenceException("instance is null");
-                    return instance;
-                }
-                default:
-                    throw new Exception("flags is invalid type. ex) not int or string");
-            }
+            throw new Exception("value is invalid type");
         };
     }
     
-    public void AddEnumParser(string name, Type flagsClass)
+    public void AddFlagsParser(string name)
     {
+        var flagClass = Module.Find(m => m.Name == name);
+        if (flagClass == null) throw new NullReferenceException("flag class is null");
+        var type = flagClass.GetConstructors()[0].GetParameters()[0].ParameterType;
+        var stringToEnum = BuildEnumStringToValueMap(flagClass);
+        
+        Rules[name] = flags =>
+        {
+            int flagsInt;
+            switch (flags)
+            {
+                case string s:
+                    flagsInt = s.Split(" ").ToList().Select(flagName =>
+                    {
+                        if (stringToEnum == null) throw new Exception("");
+                        if (stringToEnum.Values == null) throw new Exception("");
+                        return NameToEnumValue(stringToEnum, typeof(MosaicFlags), flagName);
+                    }).Sum();
+                    break;
+                case int i:
+                    flagsInt = i;
+                    break;
+                case IEnum<byte>[] array:
+                    flagsInt = array.ToList().Select(flag => (int)flag.Value).Sum();
+                    break;
+                case IEnum<ushort>[] array:
+                    flagsInt = array.ToList().Select(flag => (int)flag.Value).Sum();
+                    break;
+                default:
+                    return flags;
+            }
+
+            object? instance = null;
+            if (type == typeof(byte))
+            {
+                instance = Activator.CreateInstance(flagClass, Convert.ToByte(flagsInt));
+            }
+            else if (type == typeof(ushort))
+            {
+                instance = Activator.CreateInstance(flagClass, Convert.ToUInt16(flagsInt));
+            }
+            if (instance == null) throw new NullReferenceException("instance is null");
+            return instance;
+        };
+        
+    }
+    
+    public void AddEnumParser(string name)
+    {
+        var enumClass = Module.Find(m => m.Name == name);
+        if (enumClass == null) throw new NullReferenceException("enum class is null");
+        var type = enumClass.GetConstructors()[0].GetParameters()[0].ParameterType;
+        var stringToEnum = BuildEnumStringToValueMap(enumClass);
+        
         Rules[name] = enumValue =>
         {
-            var valueType = enumValue.GetType();
-            if (valueType == flagsClass) return enumValue;
-
-            object? instance;
-            if (flagsClass == typeof(TransactionType))
+            int enumInt;
+            switch (enumValue)
             {
-                switch (enumValue)
-                {
-                    case int:
-                    {
-                        instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(enumValue));
-                        if (instance == null) throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    case string value:
-                    {
-                        var stringToEnum = BuildEnumStringToValueMap(flagsClass);
-                        var enumInt = NameToEnumValue(stringToEnum, typeof(MosaicFlags), value);
-                        instance = Activator.CreateInstance(flagsClass, Convert.ToUInt16(enumInt));
-                        if (instance == null) throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                }
+                case string s:
+                    enumInt = NameToEnumValue(stringToEnum, enumClass, s);
+                    break;
+                case int i:
+                    enumInt = i;
+                    break;
+                default:
+                    return enumValue;
             }
+            
+            object? instance = null;
+            if (type == typeof(byte))
             {
-                switch (enumValue)
-                {
-                    case int:
-                    {
-                        instance = Activator.CreateInstance(flagsClass, Convert.ToByte(enumValue));
-                        if (instance == null) throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                    case string value:
-                    {
-                        var stringToEnum = BuildEnumStringToValueMap(flagsClass);
-                        var enumInt = NameToEnumValue(stringToEnum, typeof(MosaicFlags), value);
-                        instance = Activator.CreateInstance(flagsClass, Convert.ToByte(enumInt));
-                        if (instance == null) throw new NullReferenceException("instance is null");
-                        return instance;
-                    }
-                }
+                instance = Activator.CreateInstance(enumClass, Convert.ToByte(enumInt));
             }
-            throw new Exception("enumValue is invalid type. ex) not int or string");
+            else if (type == typeof(ushort))
+            {
+                instance = Activator.CreateInstance(enumClass, Convert.ToUInt16(enumInt));
+            }
+            if (instance == null) throw new NullReferenceException("instance is null");
+            return instance;
         };
     }
 
-    public void AddStructParser(string name, Type structClass)
+    public void AddStructParser(string name)
     {
+        var structClass = Module.Find(m => m.Name == name);
+        if (structClass == null) throw new NullReferenceException("enum class is null");
         Rules[$"struct:{name}"] = structDescriptor =>
         {
             TransactionDescriptorProcessor structProcessor;
-            if (structDescriptor.GetType() == typeof(UnresolvedMosaic))
+            if (structDescriptor.GetType() == typeof(Dictionary<string, object>))
             {
-                var temp = (UnresolvedMosaic)structDescriptor;
-                var dic = new Dictionary<string, object>()
-                {
-                    {"MosaicId", temp.MosaicId},
-                    {"Amount", temp.Amount},
-                };
-                structProcessor = CreateProcessor(dic);
-            } else {
                 structProcessor = CreateProcessor((Dictionary<string, object>)structDescriptor);
             }
-            var instance = Activator.CreateInstance(structClass);
-            if (instance == null) throw new NullReferenceException("structValue instance is null");
-            var structValue = (UnresolvedMosaic) instance;
+            else
+            {
+                var dic = new Dictionary<string, object>();
+                foreach (var propertyInfo in structDescriptor.GetType().GetProperties())
+                {
+                    foreach (var pi in structClass.GetProperties())
+                    {
+                        if (pi.PropertyType.FullName != propertyInfo.PropertyType.FullName || !propertyInfo.CanWrite)
+                            continue;
+                        var value = propertyInfo.GetValue(structDescriptor);
+                        dic[propertyInfo.Name] = value ?? throw new Exception("");
+                    }
+                }
+                structProcessor = CreateProcessor(dic);
+            }
+            var structValue = Activator.CreateInstance(structClass);
             if (structValue == null) throw new NullReferenceException("structValue is null");
-            var allTypeHints = BuildTypeHintsMap(structValue);
+            var allTypeHints = BuildTypeHintsMap((IStruct)structValue);
             structProcessor.SetTypeHints(allTypeHints);
-            structProcessor.CopyTo(structValue);
+            structProcessor.CopyTo((IStruct)structValue);
             return structValue;
         };
     }
@@ -485,7 +315,7 @@ public class RuleBasedTransactionFactory
     {
         foreach (var cls in Module.Where(cls => cls.BaseType == typeof(BaseValue) && typeof(BaseValue) != cls))
         {
-            AddPodParser(cls.Name, cls);
+            AddPodParser(cls.Name);
         }
     }
     
@@ -539,8 +369,9 @@ public class RuleBasedTransactionFactory
         return result;
     }
     
-    private static int NameToEnumValue(Dictionary<string, int> mapping, Type enumType, string enumValueName){
+    private static int NameToEnumValue(IReadOnlyDictionary<string, int> mapping, Type enumType, string enumValueName){
         if(!mapping.ContainsKey(enumValueName)) throw new ArgumentOutOfRangeException($"unknown value {enumValueName} for type {enumType}");
         return mapping[enumValueName];
     }
 }
+

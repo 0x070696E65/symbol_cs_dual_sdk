@@ -4441,11 +4441,6 @@ public class TransactionFactory {
 		return Deserialize(br);
 	}
 
-	public static string ToKey(IEnumerable<object> values)
-	{
-		return values.Sum(Convert.ToInt32).ToString();
-	}
-
 	public static ITransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, ITransaction>
 		{
@@ -4458,7 +4453,8 @@ public class TransactionFactory {
 			{"multisig_transaction", new MultisigTransaction()},
 			{"namespace_registration_transaction", new NamespaceRegistrationTransaction()},
 			{"transfer_transaction_v1", new TransferTransactionV1()},
-			{"transfer_transaction", new TransferTransaction()},
+			{"transfer_transaction", new TransferTransaction()}
+
 		};
 		return mapping[entityName];
 	}

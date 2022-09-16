@@ -30,14 +30,17 @@ public class TransactionDescriptorProcessor
         if (TypeHints == null) return value;
         if (!TypeHints.ContainsKey(key)) return value;
         var typeHint = TypeHints?[key];
-        if (typeHint != null && TypeParsingRules.ContainsKey(typeHint)) value = TypeParsingRules[typeHint](value);
+        if (typeHint != null && TypeParsingRules.ContainsKey(typeHint))
+        {
+            value = TypeParsingRules[typeHint](value);
+        }
         return value;
     }
 
     public object? LookupValue(string key)
     {
         var value = LookupValueAndApplyTypeHints(key);
-        value = ValueParser(key, value);
+        //value = ValueParser(key, value);
         if (value.GetType() != typeof(Dictionary<string, object>[]))
         {
             return TypeConverter?.Invoke(value);
@@ -117,7 +120,21 @@ public class TransactionDescriptorProcessor
             var p = transaction.GetType().GetProperty(key);
             if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {key}");
             var value = LookupValue(key);
-            if (value is string s) value = Converter.IsHexString(s) ? Converter.HexToBytes(s) : Encoding.UTF8.GetBytes(s);
+            
+            if (value is int i && Math.Sign(i) < 0) value = (ushort) (i - 0xFFFF0000);
+            if (p.PropertyType == typeof(byte)) value = Convert.ToByte(value);
+            if (p.PropertyType == typeof(ushort)) value = Convert.ToUInt16(value);
+            if (p.PropertyType == typeof(uint)) value = Convert.ToUInt32(value);
+            if (p.PropertyType == typeof(ulong)) value = Convert.ToUInt64(value);
+            if (p.PropertyType == typeof(byte[]) && value is string s)
+            {
+                value = Converter.IsHexString(s) ? Encoding.UTF8.GetBytes(Converter.HexToUtf8(s)) : Encoding.UTF8.GetBytes(s);
+                
+                //value = Converter.IsHexString((string)value) ? Converter.HexToBytes((string)value) : Encoding.UTF8.GetBytes(value);
+            }
+            //if (p.PropertyType == typeof(byte[]) && value is int int32) value = Converter.HexToBytes(int32.ToString());
+            //if (p.PropertyType == typeof(byte[]) && value is long int64) value = Converter.HexToBytes(int64.ToString());
+
             p.SetValue(transaction, value);
         }
     }
@@ -127,11 +144,11 @@ public class TransactionDescriptorProcessor
         TypeHints = typeHint ?? null;
     }
 
+    /*
     private static object ValueParser(string key, object value)
     {
         return key switch
         {
-            "Type" when value is string s => StringToTransactionType(s),
             "ScopedMetadataKey" or "ValueSizeDelta" when value is int i =>
                 RuleBasedTransactionFactory.KeyParser(key, i),
             "RestrictionKey" or "NewRestrictionValue" or "PreviousRestrictionValue" when value is int i =>
@@ -148,37 +165,5 @@ public class TransactionDescriptorProcessor
             _ => value
         };
     }
-    
-    private static TransactionType StringToTransactionType(string type)
-    {
-        return type switch
-        {
-            "account_key_link_transaction" => TransactionType.ACCOUNT_KEY_LINK,
-            "node_key_link_transaction" => TransactionType.NODE_KEY_LINK,
-            "aggregate_complete_transaction" => TransactionType.AGGREGATE_COMPLETE,
-            "aggregate_bonded_transaction" => TransactionType.AGGREGATE_BONDED,
-            "voting_key_link_transaction" => TransactionType.VOTING_KEY_LINK,
-            "vrf_key_link_transaction" => TransactionType.VRF_KEY_LINK,
-            "hash_lock_transaction" => TransactionType.HASH_LOCK,
-            "secret_lock_transaction" => TransactionType.SECRET_LOCK,
-            "secret_proof_transaction" => TransactionType.SECRET_PROOF,
-            "account_metadata_transaction" => TransactionType.ACCOUNT_METADATA,
-            "mosaic_metadata_transaction" => TransactionType.MOSAIC_METADATA,
-            "namespace_metadata_transaction" => TransactionType.NAMESPACE_METADATA,
-            "mosaic_definition_transaction" => TransactionType.MOSAIC_DEFINITION,
-            "mosaic_supply_change_transaction" => TransactionType.MOSAIC_SUPPLY_CHANGE,
-            "mosaic_supply_revocation_transaction" => TransactionType.MOSAIC_SUPPLY_REVOCATION,
-            "multisig_account_modification_transaction" => TransactionType.MULTISIG_ACCOUNT_MODIFICATION,
-            "address_alias_transaction" => TransactionType.ADDRESS_ALIAS,
-            "mosaic_alias_transaction" => TransactionType.MOSAIC_ALIAS,
-            "namespace_registration_transaction" => TransactionType.NAMESPACE_REGISTRATION,
-            "account_address_restriction_transaction" => TransactionType.ACCOUNT_ADDRESS_RESTRICTION,
-            "account_mosaic_restriction_transaction" => TransactionType.ACCOUNT_MOSAIC_RESTRICTION,
-            "account_operation_restriction_transaction" => TransactionType.ACCOUNT_OPERATION_RESTRICTION,
-            "mosaic_address_restriction_transaction" => TransactionType.MOSAIC_ADDRESS_RESTRICTION,
-            "mosaic_global_restriction_transaction" => TransactionType.MOSAIC_GLOBAL_RESTRICTION,
-            "transfer_transaction" => TransactionType.TRANSFER,
-            _ => throw new Exception("this is invalid transaction type of string")
-        };
-    }
+    */
 }

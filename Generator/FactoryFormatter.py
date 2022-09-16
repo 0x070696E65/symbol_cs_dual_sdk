@@ -31,7 +31,7 @@ class FactoryClassFormatter(ClassFormatter):
 		method_descriptor = self.provider.get_create_by_name_descriptor()
 		method_descriptor.method_name = f'public static {self.provider.return_class} CreateByName'
 		method_descriptor.arguments = [
-			'TransactionType entityName'
+			'string entityName'
 		]
 		return self.generate_method(method_descriptor)
 
@@ -113,12 +113,12 @@ class FactoryFormatter(AbstractTypeFormatter):
 
 	def get_create_by_name_descriptor(self):
 		body = ''
-		body += f'var mapping = new Dictionary<TransactionType, {self.return_class}>\n{{\n'
+		body += f'var mapping = new Dictionary<string, {self.return_class}>\n{{\n'
 		body += indent(
 			',\n'.join(
 				map(
-					# lambda child: f'{{"{skip_embedded(underline_name(child.name))}", new {child.name}()}}',
-					lambda child: f'{{{skip_embedded(child.name)}.TRANSACTION_TYPE, new {child.name}()}}',
+					lambda child: f'{{"{skip_embedded(underline_name(child.name))}", new {child.name}()}}',
+					#lambda child: f'{{{skip_embedded(child.name)}.TRANSACTION_TYPE, new {child.name}()}}',
 					{} if not self.factory_descriptor else self.factory_descriptor.children
 				)
 			)

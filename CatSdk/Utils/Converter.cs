@@ -138,6 +138,6 @@ public static class Converter
     
     public static bool IsHexString(string s)
     {
-        return !string.IsNullOrEmpty(s) && s.All(c => Uri.IsHexDigit(c));
+        return !string.IsNullOrEmpty(s) && s.All(Uri.IsHexDigit);
     }
 }

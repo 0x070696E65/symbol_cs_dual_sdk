@@ -86,61 +86,62 @@ public class TransactionsFactory
         
         factory.Autodetect();
         
-        var enumsMapping = new Dictionary<string, Type>()
+        var enumsMapping = new Dictionary<string, byte>
         {
-            {"LinkAction", typeof(LinkAction)},
-            {"MessageType", typeof(MessageType)},
-            {"MosaicSupplyChangeAction", typeof(MosaicSupplyChangeAction)},
-            {"MosaicTransferFeeType", typeof(MosaicTransferFeeType)},
-            {"MultisigAccountModificationType", typeof(MultisigAccountModificationType)},
-            {"NetworkType", typeof(NetworkType)},
-            {"TransactionType", typeof(TransactionType)},
+            {"LinkAction", 1},
+            {"MessageType",1},
+            {"MosaicSupplyChangeAction",1},
+            {"MosaicTransferFeeType",1},
+            {"MultisigAccountModificationType",1},
+            {"NetworkType",1},
+            {"TransactionType",2}
         };
         foreach (var key in enumsMapping.Keys)
         {
-            factory.AddEnumParser(key, enumsMapping[key]);
+            factory.AddEnumParser(key);
         }
         
-        var structsMapping = new Dictionary<string, Type>()
+        var structsMapping = new []
         {
-            {"Message", typeof(Message)},
-            {"NamespaceId", typeof(NamespaceId)},
-            {"MosaicId", typeof(MosaicId)},
-            {"Mosaic", typeof(Mosaic)},
-            {"SizePrefixedMosaic", typeof(SizePrefixedMosaic)},
-            {"MosaicLevy", typeof(MosaicLevy)},
-            {"MosaicProperty", typeof(MosaicProperty)},
-            {"SizePrefixedMosaicProperty", typeof(SizePrefixedMosaicProperty)},
-            {"MosaicDefinition", typeof(MosaicDefinition)},
-            {"MultisigAccountModification", typeof(MultisigAccountModification)},
-            {"SizePrefixedMultisigAccountModification", typeof(SizePrefixedMultisigAccountModification)},
+            "Message",
+            "NamespaceId",
+            "MosaicId",
+            "Mosaic",
+            "SizePrefixedMosaic",
+            "MosaicLevy",
+            "MosaicProperty",
+            "SizePrefixedMosaicProperty",
+            "MosaicDefinition",
+            "MultisigAccountModification",
+            "SizePrefixedMultisigAccountModification",
         };
         
-        foreach (var key in structsMapping.Keys)
+        foreach (var key in structsMapping)
         {
-            factory.AddStructParser(key, structsMapping[key]);
+            factory.AddStructParser(key);
         }
         
-        var sdkTypeMapping = new Dictionary<string, Type>()
+        var sdkTypeMapping = new []
         {
-            {"Address", typeof(Address)},
-            {"Hash256", typeof(Hash256)},
-            {"PublicKey", typeof(PublicKey)},
+            "Address",
+            "Hash256",
+            "PublicKey",
         };
-        foreach (var key in sdkTypeMapping.Keys)
+        foreach (var key in sdkTypeMapping)
         {
-            factory.AddPodParser(key, sdkTypeMapping[key], "Nem");
+            factory.AddPodParser(key);
         }
         
-        var arrayParserMapping = new Dictionary<string, Type>()
+        
+        var arrayParserMapping = new []
         {
-            {"struct:SizePrefixedMosaic", typeof(SizePrefixedMosaic)},
-            {"struct:SizePrefixedMosaicProperty", typeof(SizePrefixedMosaicProperty)},
-            {"struct:SizePrefixedMultisigAccountModification", typeof(SizePrefixedMultisigAccountModification)},
+            "struct:SizePrefixedMosaic",
+            "struct:SizePrefixedMosaicProperty",
+            "struct:SizePrefixedMultisigAccountModification",
         };
-        foreach (var key in arrayParserMapping.Keys)
+        foreach (var key in arrayParserMapping)
         {
-            factory.AddArrayParser(key, arrayParserMapping[key]);
+            factory.AddArrayParser(key);
         }
         return factory;
     }

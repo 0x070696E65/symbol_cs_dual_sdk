@@ -8342,34 +8342,34 @@ public class TransactionFactory {
 		return Deserialize(br);
 	}
 
-	public static ITransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, ITransaction>
+	public static ITransaction CreateByName(string entityName) {
+		var mapping = new Dictionary<string, ITransaction>
 		{
-			{AccountKeyLinkTransaction.TRANSACTION_TYPE, new AccountKeyLinkTransaction()},
-			{NodeKeyLinkTransaction.TRANSACTION_TYPE, new NodeKeyLinkTransaction()},
-			{AggregateCompleteTransaction.TRANSACTION_TYPE, new AggregateCompleteTransaction()},
-			{AggregateBondedTransaction.TRANSACTION_TYPE, new AggregateBondedTransaction()},
-			{VotingKeyLinkTransaction.TRANSACTION_TYPE, new VotingKeyLinkTransaction()},
-			{VrfKeyLinkTransaction.TRANSACTION_TYPE, new VrfKeyLinkTransaction()},
-			{HashLockTransaction.TRANSACTION_TYPE, new HashLockTransaction()},
-			{SecretLockTransaction.TRANSACTION_TYPE, new SecretLockTransaction()},
-			{SecretProofTransaction.TRANSACTION_TYPE, new SecretProofTransaction()},
-			{AccountMetadataTransaction.TRANSACTION_TYPE, new AccountMetadataTransaction()},
-			{MosaicMetadataTransaction.TRANSACTION_TYPE, new MosaicMetadataTransaction()},
-			{NamespaceMetadataTransaction.TRANSACTION_TYPE, new NamespaceMetadataTransaction()},
-			{MosaicDefinitionTransaction.TRANSACTION_TYPE, new MosaicDefinitionTransaction()},
-			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, new MosaicSupplyChangeTransaction()},
-			{MosaicSupplyRevocationTransaction.TRANSACTION_TYPE, new MosaicSupplyRevocationTransaction()},
-			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, new MultisigAccountModificationTransaction()},
-			{AddressAliasTransaction.TRANSACTION_TYPE, new AddressAliasTransaction()},
-			{MosaicAliasTransaction.TRANSACTION_TYPE, new MosaicAliasTransaction()},
-			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, new NamespaceRegistrationTransaction()},
-			{AccountAddressRestrictionTransaction.TRANSACTION_TYPE, new AccountAddressRestrictionTransaction()},
-			{AccountMosaicRestrictionTransaction.TRANSACTION_TYPE, new AccountMosaicRestrictionTransaction()},
-			{AccountOperationRestrictionTransaction.TRANSACTION_TYPE, new AccountOperationRestrictionTransaction()},
-			{MosaicAddressRestrictionTransaction.TRANSACTION_TYPE, new MosaicAddressRestrictionTransaction()},
-			{MosaicGlobalRestrictionTransaction.TRANSACTION_TYPE, new MosaicGlobalRestrictionTransaction()},
-			{TransferTransaction.TRANSACTION_TYPE, new TransferTransaction()}
+			{"account_key_link_transaction", new AccountKeyLinkTransaction()},
+			{"node_key_link_transaction", new NodeKeyLinkTransaction()},
+			{"aggregate_complete_transaction", new AggregateCompleteTransaction()},
+			{"aggregate_bonded_transaction", new AggregateBondedTransaction()},
+			{"voting_key_link_transaction", new VotingKeyLinkTransaction()},
+			{"vrf_key_link_transaction", new VrfKeyLinkTransaction()},
+			{"hash_lock_transaction", new HashLockTransaction()},
+			{"secret_lock_transaction", new SecretLockTransaction()},
+			{"secret_proof_transaction", new SecretProofTransaction()},
+			{"account_metadata_transaction", new AccountMetadataTransaction()},
+			{"mosaic_metadata_transaction", new MosaicMetadataTransaction()},
+			{"namespace_metadata_transaction", new NamespaceMetadataTransaction()},
+			{"mosaic_definition_transaction", new MosaicDefinitionTransaction()},
+			{"mosaic_supply_change_transaction", new MosaicSupplyChangeTransaction()},
+			{"mosaic_supply_revocation_transaction", new MosaicSupplyRevocationTransaction()},
+			{"multisig_account_modification_transaction", new MultisigAccountModificationTransaction()},
+			{"address_alias_transaction", new AddressAliasTransaction()},
+			{"mosaic_alias_transaction", new MosaicAliasTransaction()},
+			{"namespace_registration_transaction", new NamespaceRegistrationTransaction()},
+			{"account_address_restriction_transaction", new AccountAddressRestrictionTransaction()},
+			{"account_mosaic_restriction_transaction", new AccountMosaicRestrictionTransaction()},
+			{"account_operation_restriction_transaction", new AccountOperationRestrictionTransaction()},
+			{"mosaic_address_restriction_transaction", new MosaicAddressRestrictionTransaction()},
+			{"mosaic_global_restriction_transaction", new MosaicGlobalRestrictionTransaction()},
+			{"transfer_transaction", new TransferTransaction()}
 
 		};
 		return mapping[entityName];
@@ -8416,32 +8416,32 @@ public class EmbeddedTransactionFactory {
 		return Deserialize(br);
 	}
 
-	public static IBaseTransaction CreateByName(TransactionType entityName) {
-		var mapping = new Dictionary<TransactionType, IBaseTransaction>
+	public static IBaseTransaction CreateByName(string entityName) {
+		var mapping = new Dictionary<string, IBaseTransaction>
 		{
-			{EmbeddedAccountKeyLinkTransaction.TRANSACTION_TYPE, new EmbeddedAccountKeyLinkTransaction()},
-			{EmbeddedNodeKeyLinkTransaction.TRANSACTION_TYPE, new EmbeddedNodeKeyLinkTransaction()},
-			{EmbeddedVotingKeyLinkTransaction.TRANSACTION_TYPE, new EmbeddedVotingKeyLinkTransaction()},
-			{EmbeddedVrfKeyLinkTransaction.TRANSACTION_TYPE, new EmbeddedVrfKeyLinkTransaction()},
-			{EmbeddedHashLockTransaction.TRANSACTION_TYPE, new EmbeddedHashLockTransaction()},
-			{EmbeddedSecretLockTransaction.TRANSACTION_TYPE, new EmbeddedSecretLockTransaction()},
-			{EmbeddedSecretProofTransaction.TRANSACTION_TYPE, new EmbeddedSecretProofTransaction()},
-			{EmbeddedAccountMetadataTransaction.TRANSACTION_TYPE, new EmbeddedAccountMetadataTransaction()},
-			{EmbeddedMosaicMetadataTransaction.TRANSACTION_TYPE, new EmbeddedMosaicMetadataTransaction()},
-			{EmbeddedNamespaceMetadataTransaction.TRANSACTION_TYPE, new EmbeddedNamespaceMetadataTransaction()},
-			{EmbeddedMosaicDefinitionTransaction.TRANSACTION_TYPE, new EmbeddedMosaicDefinitionTransaction()},
-			{EmbeddedMosaicSupplyChangeTransaction.TRANSACTION_TYPE, new EmbeddedMosaicSupplyChangeTransaction()},
-			{EmbeddedMosaicSupplyRevocationTransaction.TRANSACTION_TYPE, new EmbeddedMosaicSupplyRevocationTransaction()},
-			{EmbeddedMultisigAccountModificationTransaction.TRANSACTION_TYPE, new EmbeddedMultisigAccountModificationTransaction()},
-			{EmbeddedAddressAliasTransaction.TRANSACTION_TYPE, new EmbeddedAddressAliasTransaction()},
-			{EmbeddedMosaicAliasTransaction.TRANSACTION_TYPE, new EmbeddedMosaicAliasTransaction()},
-			{EmbeddedNamespaceRegistrationTransaction.TRANSACTION_TYPE, new EmbeddedNamespaceRegistrationTransaction()},
-			{EmbeddedAccountAddressRestrictionTransaction.TRANSACTION_TYPE, new EmbeddedAccountAddressRestrictionTransaction()},
-			{EmbeddedAccountMosaicRestrictionTransaction.TRANSACTION_TYPE, new EmbeddedAccountMosaicRestrictionTransaction()},
-			{EmbeddedAccountOperationRestrictionTransaction.TRANSACTION_TYPE, new EmbeddedAccountOperationRestrictionTransaction()},
-			{EmbeddedMosaicAddressRestrictionTransaction.TRANSACTION_TYPE, new EmbeddedMosaicAddressRestrictionTransaction()},
-			{EmbeddedMosaicGlobalRestrictionTransaction.TRANSACTION_TYPE, new EmbeddedMosaicGlobalRestrictionTransaction()},
-			{EmbeddedTransferTransaction.TRANSACTION_TYPE, new EmbeddedTransferTransaction()}
+			{"account_key_link_transaction", new EmbeddedAccountKeyLinkTransaction()},
+			{"node_key_link_transaction", new EmbeddedNodeKeyLinkTransaction()},
+			{"voting_key_link_transaction", new EmbeddedVotingKeyLinkTransaction()},
+			{"vrf_key_link_transaction", new EmbeddedVrfKeyLinkTransaction()},
+			{"hash_lock_transaction", new EmbeddedHashLockTransaction()},
+			{"secret_lock_transaction", new EmbeddedSecretLockTransaction()},
+			{"secret_proof_transaction", new EmbeddedSecretProofTransaction()},
+			{"account_metadata_transaction", new EmbeddedAccountMetadataTransaction()},
+			{"mosaic_metadata_transaction", new EmbeddedMosaicMetadataTransaction()},
+			{"namespace_metadata_transaction", new EmbeddedNamespaceMetadataTransaction()},
+			{"mosaic_definition_transaction", new EmbeddedMosaicDefinitionTransaction()},
+			{"mosaic_supply_change_transaction", new EmbeddedMosaicSupplyChangeTransaction()},
+			{"mosaic_supply_revocation_transaction", new EmbeddedMosaicSupplyRevocationTransaction()},
+			{"multisig_account_modification_transaction", new EmbeddedMultisigAccountModificationTransaction()},
+			{"address_alias_transaction", new EmbeddedAddressAliasTransaction()},
+			{"mosaic_alias_transaction", new EmbeddedMosaicAliasTransaction()},
+			{"namespace_registration_transaction", new EmbeddedNamespaceRegistrationTransaction()},
+			{"account_address_restriction_transaction", new EmbeddedAccountAddressRestrictionTransaction()},
+			{"account_mosaic_restriction_transaction", new EmbeddedAccountMosaicRestrictionTransaction()},
+			{"account_operation_restriction_transaction", new EmbeddedAccountOperationRestrictionTransaction()},
+			{"mosaic_address_restriction_transaction", new EmbeddedMosaicAddressRestrictionTransaction()},
+			{"mosaic_global_restriction_transaction", new EmbeddedMosaicGlobalRestrictionTransaction()},
+			{"transfer_transaction", new EmbeddedTransferTransaction()}
 
 		};
 		return mapping[entityName];

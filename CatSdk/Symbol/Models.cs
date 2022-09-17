@@ -3061,7 +3061,7 @@ public class SecretProofTransaction : ITransaction {
 		bw.Write(Secret.Serialize()); 
 		bw.Write(BitConverter.GetBytes((ushort)(ushort)Proof.Length));  // bound: proof_size
 		bw.Write(HashAlgorithm.Serialize()); 
-		bw.Write(Proof); 
+		bw.Write(Proof);
 		return ms.ToArray();
 	}
 

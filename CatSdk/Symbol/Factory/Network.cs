@@ -10,7 +10,7 @@ public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
     }
 }
-public class Network : Network<Address>
+public class Network : BaseNetwork<Address>
 {
     public Hash256? GenerationHashSeed { get; set; }
 

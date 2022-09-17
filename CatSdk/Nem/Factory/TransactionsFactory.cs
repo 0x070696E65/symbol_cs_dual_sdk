@@ -16,7 +16,7 @@ public class TransactionsFactory
     {
         var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
         transactionDescriptor.Add("Network", networkType);
-        var transaction = Factory.CreateNemFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
+        var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
         return transaction;
         if (transaction.Type == TransactionType.TRANSFER)
         {
@@ -32,7 +32,7 @@ public class TransactionsFactory
     {
         var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
         transactionDescriptor.Add("Network", networkType);
-        var transaction = Factory.CreateNemFromFactory(NonVerifiableTransactionFactory.CreateByName, transactionDescriptor);
+        var transaction = Factory.CreateFromFactory(NonVerifiableTransactionFactory.CreateByName, transactionDescriptor);
         
         var nonVerifiableClassName = transaction.GetType().GetConstructors().ToList().Select((ctor) => ctor.Name).First();
         nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
@@ -121,15 +121,15 @@ public class TransactionsFactory
             factory.AddStructParser(key);
         }
         
-        var sdkTypeMapping = new []
+        var sdkTypeMapping = new Dictionary<string, Type>()
         {
-            "Address",
-            "Hash256",
-            "PublicKey",
+            {"Address", typeof(Address)},
+            {"Hash256", typeof(Hash256)},
+            {"PublicKey", typeof(PublicKey)},
         };
-        foreach (var key in sdkTypeMapping)
+        foreach (var key in sdkTypeMapping.Keys)
         {
-            factory.AddPodParser(key);
+            factory.AddPodParser(key, sdkTypeMapping[key]);
         }
         
         

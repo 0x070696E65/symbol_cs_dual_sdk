@@ -1,5 +1,4 @@
 using Org.BouncyCastle.Crypto.Digests;
-
 namespace CatSdk.Symbol;
 
 public static class IdGenerator

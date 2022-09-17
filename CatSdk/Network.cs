@@ -1,7 +1,7 @@
 namespace CatSdk;
 using Org.BouncyCastle.Crypto.Digests;
 using Utils;
-public class Network<T>
+public class BaseNetwork<T>
 {
 	public string Name;
 	public byte Identifier;
@@ -11,7 +11,7 @@ public class Network<T>
 	public Type AddressClass;
 	public Type NetworkTimestampClass;
 
-	public Network(string name, byte identifier, NetworkTimestampDatetimeConverter datetimeConverter, KeccakDigest addressHasher, Func<byte[], byte[], T> createAddress, Type addressClass, Type networkTimestampClass)
+	public BaseNetwork(string name, byte identifier, NetworkTimestampDatetimeConverter datetimeConverter, KeccakDigest addressHasher, Func<byte[], byte[], T> createAddress, Type addressClass, Type networkTimestampClass)
 	{
 		Name = name;
 		Identifier = identifier;

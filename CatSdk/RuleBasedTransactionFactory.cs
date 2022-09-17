@@ -1,21 +1,5 @@
 using System.Collections;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using CatSdk.Nem;
-using CatSdk.Symbol;
 using CatSdk.Utils;
-using Address = CatSdk.Symbol.Address;
-using Amount = CatSdk.Symbol.Amount;
-using Hash256 = CatSdk.Symbol.Hash256;
-using Height = CatSdk.Symbol.Height;
-using IBaseTransaction = CatSdk.Symbol.IBaseTransaction;
-using MosaicId = CatSdk.Symbol.MosaicId;
-using NamespaceId = CatSdk.Symbol.NamespaceId;
-using PublicKey = CatSdk.Symbol.PublicKey;
-using Signature = CatSdk.Symbol.Signature;
-using Timestamp = CatSdk.Symbol.Timestamp;
-using TransactionType = CatSdk.Symbol.TransactionType;
 
 namespace CatSdk;
 
@@ -43,7 +27,7 @@ public class RuleBasedTransactionFactory
         return Activator.CreateInstance(type, byteArray.bytes);
     }
 
-    public T CreateFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : IBaseTransaction
+    public T CreateFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : IStruct
     {
         var processor = CreateProcessor(descriptor);
         var entityType = (string)processor.LookupValue("Type")!;
@@ -54,67 +38,14 @@ public class RuleBasedTransactionFactory
         return entity;
     }
     
-    public T CreateNemFromFactory<T>(Func<string, T> factory, Dictionary<string, object> descriptor) where T : CatSdk.Nem.IBaseTransaction
-    {
-        var processor = CreateProcessor(descriptor);
-        var entityType = (string)processor.LookupNemValue("Type")!;
-        var entity = factory(entityType);
-        var allTypeHints = BuildTypeHintsMap(entity);
-        processor.SetTypeHints(allTypeHints);
-        processor.CopyTo(entity, new []{"Type"});
-        return entity;
-    }
-
     private TransactionDescriptorProcessor CreateProcessor(Dictionary<string, object> descriptor)
     {
         return new TransactionDescriptorProcessor(descriptor, Rules, TypeConverter);
     }
-
-    /*
-    public static object KeyParser(string key, int value)
-    {
-        switch (key)
-        {
-            case "ScopedMetadataKey":
-                return Convert.ToUInt64(value);
-            case "ValueSizeDelta":
-                if (Math.Sign(value) < 0) value = (ushort)(value - 0xFFFF0000);
-                    return Convert.ToUInt16(value);
-            default:
-                throw new Exception("key is invalid string");
-        }
-    }
-
-    public static byte[] StringParser(string value)
-    {
-        return Encoding.UTF8.GetBytes(value);
-    }
     
-    public static object ByteParser(int value)
+    public void AddPodParser(string name, Type podClass)
     {
-        return Convert.ToByte(value);
-    }
-    
-    public static object ByteParser(long value)
-    {
-        return Convert.ToByte(value);
-    }
-    
-    
-    public static object IntParser(int value)
-    {
-        return Convert.ToUInt64(value);
-    }
-    
-    public static object IntParser(long value)
-    {
-        return Convert.ToUInt64(value);
-    }
-    */
-    
-    public void AddPodParser(string name)
-    {
-        var podClass = Module.Find(m => m.Name == name);
+        //var podClass = Module.Find(m => m.Name == name);
         if (podClass == null) throw new NullReferenceException("pod class is null");
         var type = podClass.GetConstructors()[0].GetParameters()[0].ParameterType;
         
@@ -123,7 +54,7 @@ public class RuleBasedTransactionFactory
             Rules[name] = TypeRuleOverrides[podClass];
             return;
         }
-        
+
         Rules[name] = value =>
         {
             if (value == null) throw new NullReferenceException("value is null");
@@ -153,6 +84,20 @@ public class RuleBasedTransactionFactory
 
         Rules[$"array[{elementName}]"] = values =>
         {
+            /*
+            if (values is object[] objects)
+            {
+                return objects.Select((v) => elementRule.Invoke(v)).ToArray();
+            }
+            if (values is int[] int32)
+            {
+                return int32.Select((v) => elementRule.Invoke(v)).ToArray();
+            }
+            if (values is ulong[] uint64)
+            {
+                return uint64.Select((v) => elementRule.Invoke(v)).ToArray();
+            }
+            */
             IList tInst;
             if (values is object[] objects)
             {
@@ -176,7 +121,6 @@ public class RuleBasedTransactionFactory
                 }
                 return tInst;
             }
-
             if (values is ulong[] uint64)
             {
                 var o = uint64.Select((v) => elementRule(v));
@@ -209,7 +153,7 @@ public class RuleBasedTransactionFactory
                     {
                         if (stringToEnum == null) throw new Exception("");
                         if (stringToEnum.Values == null) throw new Exception("");
-                        return NameToEnumValue(stringToEnum, typeof(MosaicFlags), flagName);
+                        return NameToEnumValue(stringToEnum, flagClass, flagName);
                     }).Sum();
                     break;
                 case int i:
@@ -279,7 +223,7 @@ public class RuleBasedTransactionFactory
     public void AddStructParser(string name)
     {
         var structClass = Module.Find(m => m.Name == name);
-        if (structClass == null) throw new NullReferenceException("enum class is null");
+        if (structClass == null) throw new NullReferenceException("struct class is null");
         Rules[$"struct:{name}"] = structDescriptor =>
         {
             TransactionDescriptorProcessor structProcessor;
@@ -315,7 +259,7 @@ public class RuleBasedTransactionFactory
     {
         foreach (var cls in Module.Where(cls => cls.BaseType == typeof(BaseValue) && typeof(BaseValue) != cls))
         {
-            AddPodParser(cls.Name);
+            AddPodParser(cls.Name, cls);
         }
     }
     

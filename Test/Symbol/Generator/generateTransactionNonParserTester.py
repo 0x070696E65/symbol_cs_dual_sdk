@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import re
 from typing import Iterator
+import string
 
 f = open('../models/transactions.json', 'r')
 j = json.load(f)
@@ -90,13 +91,12 @@ def indent(text, i = 1):
     return output
 
 def innner(key, value, txType):
-    t2 = f'\n'
-    t2 += f'new Dictionary<string, object>[]{{\n'
+    t2 = f'new []{{\n'
     for i in range(len(value)):
-        t3 = f'new(){{\n'
+        t3 = f'Facade.TransactionFactory.CreateEmbedded(new Dictionary<string, object>() {{\n'
         for key in value[i]:
             t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[i][key], txType)}}},\n')
-        t3 += f'}},\n'
+        t3 += f'}}),\n'
         t2 += indent(t3)
     t = t2
     t += f'}}\n'
@@ -145,6 +145,10 @@ def type_check(key, value, txType):
         return f'new Amount({value})'
     if key == "deadline":
         return f'new Timestamp({value})'
+    if key == "message" or key == "name":
+        if(all(c in string.hexdigits for c in value)):
+            return f'"{value}"'
+        return f'Converter.Utf8ToBytes("{value}")'
     if key == "transactions":
         return innner(key, value, txType)
     if key == "mosaics":
@@ -221,14 +225,13 @@ def type_check(key, value, txType):
 
 with open(Path('../') / 'TransactionNonParserTest.cs', 'w', encoding='utf8', newline='\n') as output_file:
     result = """
-using System;
+using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
 using CatSdk.Facade;
 using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
-using Address = CatSdk.Symbol.Address;
 
 namespace Test.Symbol;
 public class TransactionNonParserTest

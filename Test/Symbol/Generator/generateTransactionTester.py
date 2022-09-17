@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import re
 from typing import Iterator
+import string
 
 f = open('../models/transactions.json', 'r')
 j = json.load(f)
@@ -27,10 +28,37 @@ def indent(text, i = 1):
     return output
 
 def innner(key, value, txType):
+    t2 = f'new []{{\n'
+    for i in range(len(value)):
+        t3 = f'Facade.TransactionFactory.CreateEmbedded(new Dictionary<string, object>() {{\n'
+        for key in value[i]:
+            t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[i][key], txType)}}},\n')
+        t3 += f'}}),\n'
+        t2 += indent(t3)
+    t = t2
+    t += f'}}\n'
+    return indent(t)
+
+def to_cosignature_array(key, value, txType):
     t2 = f'\n'
     t2 += f'new Dictionary<string, object>[]{{\n'
     for i in range(len(value)):
-        t3 = f'new(){{\n'
+        t3 = ''
+        t3 += indent(f'new (){{\n')
+        for key in value[i]:
+            t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[i][key], txType)}}},\n')
+        t3 += f'}},\n'
+        t2 += indent(t3)
+    t = t2
+    t += f'}}\n'
+    return indent(t)
+
+def to_mosaic_array(key, value, txType):
+    t2 = f'\n'
+    t2 += f'new Dictionary<string, object>[]{{\n'
+    for i in range(len(value)):
+        t3 = ''
+        t3 += indent(f'new (){{\n')
         for key in value[i]:
             t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[i][key], txType)}}},\n')
         t3 += f'}},\n'
@@ -40,8 +68,21 @@ def innner(key, value, txType):
     return indent(t)
 
 def type_check(key, value, txType):
-    if key == "transactions" or key == "cosignatures" or key == "mosaics":
+    if key == "value":
+        if value.isdecimal():
+            return f'Converter.HexToBytes("{value}")'
+        else:
+            return f'Converter.Utf8ToBytes("{value}")'
+    if key == "message" or key == "name":
+        if(all(c in string.hexdigits for c in value)):
+            return f'"{value}"'
+        return f'Converter.Utf8ToBytes("{value}")'
+    if key == "transactions":
         return innner(key, value, txType)
+    if key == "cosignatures":
+        return to_cosignature_array(key, value, txType)
+    if key == "mosaics":
+        return to_mosaic_array(key, value, txType)
     if key == "mosaic":
         m = f'\n'
         m += f'new Dictionary<string, object>(){{\n'
@@ -83,6 +124,7 @@ def type_check(key, value, txType):
 with open(Path('../') / 'TransactionTest.cs', 'w', encoding='utf8', newline='\n') as output_file:
     result = """
 using System.Collections.Generic;
+using System.Text;
 using NUnit.Framework;
 using CatSdk.Facade;
 using CatSdk.Symbol.Factory;

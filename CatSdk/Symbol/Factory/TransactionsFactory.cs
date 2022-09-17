@@ -68,11 +68,11 @@ public class TransactionsFactory
         return transaction;
     }
     
-    private static Address? SymbolTypeConverter(object value)
+    private static UnresolvedAddress? SymbolTypeConverter(object value)
     {
         if (value.GetType() != typeof(Address)) return null;
         var castValue = (ByteArray)value;
-        return new Address(castValue.bytes);
+        return new UnresolvedAddress(castValue.bytes);
     }
     
     private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
@@ -83,7 +83,8 @@ public class TransactionsFactory
             .OrderBy(o => o.Name)
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
-        var factory = new RuleBasedTransactionFactory(types, SymbolTypeConverter, typeRuleOverrides);
+        //var factory = new RuleBasedTransactionFactory(types, SymbolTypeConverter, typeRuleOverrides);
+        var factory = new RuleBasedTransactionFactory(types, null, typeRuleOverrides);
         factory.Autodetect();
 
         var flagsMapping = new []
@@ -113,22 +114,24 @@ public class TransactionsFactory
         }
         
         factory.AddStructParser("UnresolvedMosaic");
+        factory.AddStructParser("Cosignature");
         
-        var sdkTypeMapping = new []
+        var sdkTypeMapping = new Dictionary<string, Type>()
         {
-            "UnresolvedAddress",
-            "Address",
-            "Hash256",
-            "PublicKey",
-            "VotingPublicKey",
-            "Signature",
+            {"UnresolvedAddress", typeof(UnresolvedAddress)},
+            {"Address", typeof(Address)},
+            {"Hash256", typeof(Hash256)},
+            {"PublicKey", typeof(PublicKey)},
+            {"VotingPublicKey", typeof(VotingPublicKey)},
+            {"Signature", typeof(Signature)},
         };
-        foreach (var key in sdkTypeMapping)
+        foreach (var key in sdkTypeMapping.Keys)
         {
-            factory.AddPodParser(key);
+            factory.AddPodParser(key, sdkTypeMapping[key]);
         }
         var arrayParserMapping = new []
         {
+            "struct:Cosignature",
             "UnresolvedMosaicId",
             "TransactionType",
             "UnresolvedAddress",

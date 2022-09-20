@@ -147,7 +147,7 @@ public static class NaclCatapult
             }
         }
 
-        private static void M(long[] o, long[] a, long[] b)
+        public static void M(long[] o, long[] a, long[] b)
         {
             long v;
             long c;
@@ -660,7 +660,7 @@ public static class NaclCatapult
             }
         }
         
-        private static void Set25519(long[] r, long[] a)
+        public static void Set25519(long[] r, long[] a)
         {
             for (var i = 0; i < 16; i++) {
                 r[i] = a[i] | 0;

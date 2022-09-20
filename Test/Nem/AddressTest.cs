@@ -1,19 +1,19 @@
 
 using CatSdk.Facade;
-using CatSdk.Symbol.Factory;
+using CatSdk.Nem.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Nem;
 public class AddressTest
 {
-    private readonly SymbolFacade MainFacade = new (Network.MainNet);
-    private readonly SymbolFacade TestFacade = new (Network.TestNet);
+    private readonly NemFacade MainFacade = new (Network.MainNet);
+    private readonly NemFacade TestFacade = new (Network.TestNet);
 	[Test]
 	public void AddressTest0(){
-		const string publicKey = "2E834140FD66CF87B254A693A2C7862C819217B676D3943267156625E816EC6F";
-		const string addressPublic = "NATNE7Q5BITMUTRRN6IB4I7FLSDRDWZA34SQ33Y";
-		const string addressPublicTest = "TATNE7Q5BITMUTRRN6IB4I7FLSDRDWZA37JGO5Q";
+		const string publicKey = "C5F54BA980FCBB657DBAAA42700539B207873E134D2375EFEAB5F1AB52F87844";
+		const string addressPublic = "NDD2CT6LQLIYQ56KIXI3ENTM6EK3D44P5JFXJ4R4";
+		const string addressPublicTest = "TDD2CT6LQLIYQ56KIXI3ENTM6EK3D44P5KZPFMK2";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -21,9 +21,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest1(){
-		const string publicKey = "4875FD2E32875D1BC6567745F1509F0F890A1BF8EE59FA74452FA4183A270E03";
-		const string addressPublic = "NDR6EW2WBHJQDYMNGFX2UBZHMMZC5PGL2YCZOQQ";
-		const string addressPublicTest = "TDR6EW2WBHJQDYMNGFX2UBZHMMZC5PGL2YBO3KA";
+		const string publicKey = "96EB2A145211B1B7AB5F0D4B14F8ABC8D695C7AEE31A3CFC2D4881313C68EEA3";
+		const string addressPublic = "NABHFGE5ORQD3LE4O6B7JUFN47ECOFBFASC3SCAC";
+		const string addressPublicTest = "TABHFGE5ORQD3LE4O6B7JUFN47ECOFBFATE53N2I";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -31,9 +31,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest2(){
-		const string publicKey = "9F780097FB6A1F287ED2736A597B8EA7F08D20F1ECDB9935DE6694ECF1C58900";
-		const string addressPublic = "NCOXVZMAZJTT4I3F7EAZYGNGR77D6WPTRH6SYIQ";
-		const string addressPublicTest = "TCOXVZMAZJTT4I3F7EAZYGNGR77D6WPTRE3VIBQ";
+		const string publicKey = "2D8425E4CA2D8926346C7A7CA39826ACD881A8639E81BD68820409C6E30D142A";
+		const string addressPublic = "NAVOZX4HDVOAR4W6K4WJHWPD3MOFU27DFHC7KZOZ";
+		const string addressPublicTest = "TAVOZX4HDVOAR4W6K4WJHWPD3MOFU27DFEJDR2PR";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -41,9 +41,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest3(){
-		const string publicKey = "0815926E003CDD5AF0113C0E067262307A42CD1E697F53B683F7E5F9F57D72C9";
-		const string addressPublic = "NDZ4373ASEGJ7S7GQTKF26TIIMC7HK5EWFDDCHA";
-		const string addressPublicTest = "TDZ4373ASEGJ7S7GQTKF26TIIMC7HK5EWEPHRSI";
+		const string publicKey = "4FEED486777ED38E44C489C7C4E93A830E4C4A907FA19A174E630EF0F6ED0409";
+		const string addressPublic = "NBZ6JK5YOCU6UPSSZ5D3G27UHAPHTY5HDQMGE6TT";
+		const string addressPublicTest = "TBZ6JK5YOCU6UPSSZ5D3G27UHAPHTY5HDQCDS5YA";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -51,9 +51,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest4(){
-		const string publicKey = "3683B3E45E76870CFE076E47C2B34CE8E3EAEC26C8AA7C1ED752E3E840AF8A27";
-		const string addressPublic = "NDI5I7Z3BRBAAHTZHGONGOXX742CW4W5QAZ4BMQ";
-		const string addressPublicTest = "TDI5I7Z3BRBAAHTZHGONGOXX742CW4W5QCY5ZUA";
+		const string publicKey = "83EE32E4E145024D29BCA54F71FA335A98B3E68283F1A3099C4D4AE113B53E54";
+		const string addressPublic = "NCQW2P5DNZ5BBXQVGS367DQ4AHC3RXOEVGRCLY6V";
+		const string addressPublicTest = "TCQW2P5DNZ5BBXQVGS367DQ4AHC3RXOEVFZOQCJ6";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -61,9 +61,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest5(){
-		const string publicKey = "4F593111964B37A9CAC59D2A70BC959AE9269589B75FBD640145EB0038960540";
-		const string addressPublic = "NAA6RO4ZAPEDGTCVADE3G4C7SWAE3DBQ4SCMOAI";
-		const string addressPublicTest = "TAA6RO4ZAPEDGTCVADE3G4C7SWAE3DBQ4RTFBQY";
+		const string publicKey = "6D34C04F3A0E42F0C3C6F50E475AE018CFA2F56DF58C481AD4300424A6270CBB";
+		const string addressPublic = "NA5IG3XFXZHIPJ5QLKX2FBJPEZYPMBPPK2ZRC3EH";
+		const string addressPublicTest = "TA5IG3XFXZHIPJ5QLKX2FBJPEZYPMBPPKYOTH5YB";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -71,9 +71,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest6(){
-		const string publicKey = "E7E4F02AC46A7DF3262BA9560C5161943B62953D175EAD37FA5DC7139EE16AA5";
-		const string addressPublic = "NBEOZ72O73OYXFDLID5KGBMP67MROHONPQHVKAI";
-		const string addressPublicTest = "TBEOZ72O73OYXFDLID5KGBMP67MROHONPR72UPQ";
+		const string publicKey = "A8FEFD72A3B833DC7C7ED7D57ED86906DAC22F88F1F4331873EB2DA3152A3E77";
+		const string addressPublic = "NAABHVFJDBM74XMJJ52R7QN2MTTG2ZUXPQS62QZ7";
+		const string addressPublicTest = "TAABHVFJDBM74XMJJ52R7QN2MTTG2ZUXPQ3F2EPH";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -81,9 +81,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest7(){
-		const string publicKey = "5FB83A2717B6A615C92250D2B333BFFE974CEED13B6E668E4DB203A819574FF6";
-		const string addressPublic = "NAMJCSC2BEW52LVAULFRRJJTSRHLI7ABRG2X5RI";
-		const string addressPublicTest = "TAMJCSC2BEW52LVAULFRRJJTSRHLI7ABRHFJZ5I";
+		const string publicKey = "C92F761E6D83D20068FD46FE4BD5B97F4C6BA05D23180679B718D1F3E4FB066E";
+		const string addressPublic = "NCLK3OLMHR3F2E3KSBUIZ4K5PNWUDN37MLSJBJZP";
+		const string addressPublicTest = "TCLK3OLMHR3F2E3KSBUIZ4K5PNWUDN37MIBR5TMD";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -91,9 +91,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest8(){
-		const string publicKey = "2F62010232E8529C8D3AC0C66A0E638847B310DFAB85A05E7988BEB8117C9948";
-		const string addressPublic = "NCOVTFVVDZGNURZFU4IJLJR37X5TXNWMTSEHR6I";
-		const string addressPublicTest = "TCOVTFVVDZGNURZFU4IJLJR37X5TXNWMTTXN3DI";
+		const string publicKey = "EAF16A4833E59370A04CCD5C63395058DE34877B48C17174C71DB5ED37B537ED";
+		const string addressPublic = "ND3AHW4VTI5R5QE5V44KIGPRU5FBJ5AFUCJXOY5H";
+		const string addressPublicTest = "TD3AHW4VTI5R5QE5V44KIGPRU5FBJ5AFUCOCH2F6";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -101,9 +101,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest9(){
-		const string publicKey = "E3B88D841947C5B8717476D78B3C980B9AD84835D9FA25418F4ED0F03D558631";
-		const string addressPublic = "NDTHQOO4RGNIWRNFFWK7Q72YQWFZ3MA42MN7UUI";
-		const string addressPublicTest = "TDTHQOO4RGNIWRNFFWK7Q72YQWFZ3MA42MUJ7AI";
+		const string publicKey = "0F74A2F537CD9C986DF018994DDE75BDEEE05E35EB9FE27ADF506CA8475064F7";
+		const string addressPublic = "NCTZ4YAP43ONK3UYTASQVNDMBO24ZHJE65F3QPYE";
+		const string addressPublicTest = "TCTZ4YAP43ONK3UYTASQVNDMBO24ZHJE6463O47W";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -111,9 +111,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest10(){
-		const string publicKey = "9D1E51DB71BDE7A997C8197D8F45EC5F89067BD2729BEE19919B450587880E8F";
-		const string addressPublic = "NCPBOKP4CAIRPTHMLQ77BAD36JYLRIF7KPUW2RQ";
-		const string addressPublicTest = "TCPBOKP4CAIRPTHMLQ77BAD36JYLRIF7KOA7LIY";
+		const string publicKey = "2EBFF201255F6CF948C78F528658B99A7C13AC791942FA22D59AF610558111F5";
+		const string addressPublic = "NDQ2TMCMXBSFPZQPE2YKH6XLC24HD6LUMN6Z4GIC";
+		const string addressPublicTest = "TDQ2TMCMXBSFPZQPE2YKH6XLC24HD6LUMPY4ZMGO";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -121,9 +121,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest11(){
-		const string publicKey = "E7274B578319382FBE3E27353D44038711488171565A8F3E109F601DD9EBA527";
-		const string addressPublic = "NDCXOEKHZABQC3KK6QL72CADWOEH3UPNDDH72RA";
-		const string addressPublicTest = "TDCXOEKHZABQC3KK6QL72CADWOEH3UPNDCC7QTQ";
+		const string publicKey = "419ED11D48730E4AE2C93F0EA4DF853B8D578713A36DAB227517CF965861AF4E";
+		const string addressPublic = "NA32IDDW2C53BDSBJNFL3Z6UU3J5CJZJMCZDXCF4";
+		const string addressPublicTest = "TA32IDDW2C53BDSBJNFL3Z6UU3J5CJZJMCFK5INY";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -131,9 +131,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest12(){
-		const string publicKey = "AC4472BA44AA9085BC7B391DD83199D126A2B84417C7A40EAF547F63B60B2939";
-		const string addressPublic = "NBR45GPME33WO3JRPYKQDZZSBXDPCEZOGDJ2S4I";
-		const string addressPublicTest = "TBR45GPME33WO3JRPYKQDZZSBXDPCEZOGC6PLJY";
+		const string publicKey = "A160E6F9112233A7CE94202ED7A4443E1DAC444B5095F9FECBB965FBA3F92CAC";
+		const string addressPublic = "NADUCEQLC3FTGB25GTA5HOUTB53CBVQNVOIP7NTJ";
+		const string addressPublicTest = "TADUCEQLC3FTGB25GTA5HOUTB53CBVQNVOWQQSXC";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -141,9 +141,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest13(){
-		const string publicKey = "4D9764D8F80CF1E58F9E96B3EA80BDFDD6CE356A71C2D9DD10F8ED766AA83B27";
-		const string addressPublic = "NCPB6J2ZA6HLWKCKBGKHKLSYISEK3U2XPT5JY6Q";
-		const string addressPublicTest = "TCPB6J2ZA6HLWKCKBGKHKLSYISEK3U2XPRQOGXQ";
+		const string publicKey = "FBB91B16DF828E21A9802980A44FC757C588BC1382A4CEA429D6FA2AE0333F56";
+		const string addressPublic = "NBAF3BFLLPWH33MYE6VUPP5T6DQBZBKIDEQKZQOE";
+		const string addressPublicTest = "TBAF3BFLLPWH33MYE6VUPP5T6DQBZBKIDGA56VWB";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -151,9 +151,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest14(){
-		const string publicKey = "5A5F08F39C14E05DDDA74B373856F0C54DFF146FD7F0BF055D42D64E74C2A7B2";
-		const string addressPublic = "NAFAQOHQ7HWZW6Y6YYQBY5XCSMTZSHZGPGJRRWY";
-		const string addressPublicTest = "TAFAQOHQ7HWZW6Y6YYQBY5XCSMTZSHZGPHHPVOY";
+		const string publicKey = "2232F24DDA0F2DED3ECD831210D4E8521A096B50CADD5A34F3F7083374E1EC12";
+		const string addressPublic = "NBOGTK2I2ATOGGD7ZFJHROG5MWL7XCKAUKSWIVSA";
+		const string addressPublicTest = "TBOGTK2I2ATOGGD7ZFJHROG5MWL7XCKAUKIJSRTQ";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -161,9 +161,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest15(){
-		const string publicKey = "DD64DBD277E3CDCBF3B02E2CFE1A2130EFA6BC87100C09D798EA75C6CCAFDBB1";
-		const string addressPublic = "NDUQREDKKSZVGMUPQYLHNSEMUTIUZTSC3CKTYTA";
-		const string addressPublicTest = "TDUQREDKKSZVGMUPQYLHNSEMUTIUZTSC3CLO4RI";
+		const string publicKey = "C334C6C0DAD5AAA2A0D0FB4C6032CB6A0EDD96BF61125B5EA9062D5A00EE0EEE";
+		const string addressPublic = "NCLERTEFYXKLK7RA4MVACEFMXMK3P7QMWTM7FBW2";
+		const string addressPublicTest = "TCLERTEFYXKLK7RA4MVACEFMXMK3P7QMWT6VIJME";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -171,9 +171,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest16(){
-		const string publicKey = "25E2D163E5FDD2DD26E0338A91698977EEE23159F28888EA0A3E07B038B91B48";
-		const string addressPublic = "NAHNSCCWQZAGUISMCVTKC7S67A364VX4FG4NCUY";
-		const string addressPublicTest = "TAHNSCCWQZAGUISMCVTKC7S67A364VX4FGJMSKY";
+		const string publicKey = "518C4DE412EFA93DE06A55947D11F697639443916EC8FCF04EBC3E6D17D0BD93";
+		const string addressPublic = "NB5V4BPIJHXVONO7UGMJDPFARMFA73BOBNOOYCOV";
+		const string addressPublicTest = "TB5V4BPIJHXVONO7UGMJDPFARMFA73BOBPC7ZUD4";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -181,9 +181,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest17(){
-		const string publicKey = "079928075E0D4C60359D7835C74A60D68C4F6A0FE8F30C2B0F4899C94FE02B10";
-		const string addressPublic = "NAILZRTYAU53SAHF56HLJDF6SRWB3BJ67FCZJFA";
-		const string addressPublicTest = "TAILZRTYAU53SAHF56HLJDF6SRWB3BJ67HSSLHA";
+		const string publicKey = "B3D16F4EAD9DE67C290144DA535A0ED2504B03C05E5F1CEB8C7863762F786857";
+		const string addressPublic = "NC4PBAO5TPCAVQKBVOC4F6DMZP3CFSQBU46PSKBD";
+		const string addressPublicTest = "TC4PBAO5TPCAVQKBVOC4F6DMZP3CFSQBU4MRJ3UN";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -191,9 +191,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest18(){
-		const string publicKey = "9E1AF2C84DA9E788D7AEFA151350BCFD53BE28621642D26459834658FF9C68BF";
-		const string addressPublic = "NCSELP7QXBTQ3NFTNH642ZM5JMZZU2CEO5VTWRI";
-		const string addressPublicTest = "TCSELP7QXBTQ3NFTNH642ZM5JMZZU2CEO5SDIAI";
+		const string publicKey = "7E7716E4CEBCEB731D6F1FD28676F34888E9A0000FCFA1471DB1C616C2DDF559";
+		const string addressPublic = "NCFW2LPXIWLBWAQN2QVIWEOD7IVDO3HQBD2OU56K";
+		const string addressPublicTest = "TCFW2LPXIWLBWAQN2QVIWEOD7IVDO3HQBD7CFIUG";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -201,9 +201,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest19(){
-		const string publicKey = "E3FF86D60D6966D02951E46FAF13EAFA52E891B961C51C54C329BEAF2F912439";
-		const string addressPublic = "NAMW26EN6Y2LIFAU43C6TGDVGZEYXK35DXRHG5A";
-		const string addressPublicTest = "TAMW26EN6Y2LIFAU43C6TGDVGZEYXK35DVN7NVA";
+		const string publicKey = "114171230AD6F8522A000CDC73FBC5C733B30BB71F2B146CCBDF34499F79A810";
+		const string addressPublic = "NCUKWDY3J3THKQHAKOK5ALF6ANJQABZHCH7VN6DP";
+		const string addressPublicTest = "TCUKWDY3J3THKQHAKOK5ALF6ANJQABZHCFN6NTQ3";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -211,9 +211,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest20(){
-		const string publicKey = "F81CE75785431C495C1935306A26E655150E6B9E6C9ADE4955CD80B7EA0FC960";
-		const string addressPublic = "NDWZAL6QCD2ANX3DAFDUK4TXZQDLXWEDQGLS6KI";
-		const string addressPublicTest = "TDWZAL6QCD2ANX3DAFDUK4TXZQDLXWEDQGZD2OY";
+		const string publicKey = "45805BBFDB19429A966594E9B9952103DB3D2BA22F05D1C1A2E761076A5E01ED";
+		const string addressPublic = "NCFYU27SUDN6CKMS5QTYJW4FG6T7M3VTZWYT73J5";
+		const string addressPublicTest = "TCFYU27SUDN6CKMS5QTYJW4FG6T7M3VTZVHCD2LC";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -221,9 +221,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest21(){
-		const string publicKey = "EC9DD943155CADF561513057DAC971FC55771D6564CC2283594700594D93D37B";
-		const string addressPublic = "NBL6EEPN3KEDP37YGNYOUQO3DOTPOBBUATPB5PY";
-		const string addressPublicTest = "TBL6EEPN3KEDP37YGNYOUQO3DOTPOBBUASYEFEA";
+		const string publicKey = "259B1AF615E30F99B9CD424EE0E18E24A2721560A9E02CD7A21AC13FBDDC967E";
+		const string addressPublic = "NDBESMFCE3VQ5JIBL2U2DZLOKB4EWSKMX357J72A";
+		const string addressPublicTest = "TDBESMFCE3VQ5JIBL2U2DZLOKB4EWSKMXZ4LWA7L";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -231,9 +231,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest22(){
-		const string publicKey = "91C607BF2128EE5ADE40BA1BECBD043E9893B368B7C66BB5D74929E6567C9392";
-		const string addressPublic = "NA6J57H2L22WYAVSCJIGXIYTWHAF7ZECFVEWSSI";
-		const string addressPublicTest = "TA6J57H2L22WYAVSCJIGXIYTWHAF7ZECFUYM5FI";
+		const string publicKey = "F2A4D7F476F3EE9A961CDEF405DD7504B38D64D14C4E17B7AB71E71C8FB3B4E7";
+		const string addressPublic = "NCNRRYOUAVHXA2LZHJPONSPZQ36QYSSESUEVKJLO";
+		const string addressPublicTest = "TCNRRYOUAVHXA2LZHJPONSPZQ36QYSSESW66QRCG";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -241,9 +241,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest23(){
-		const string publicKey = "0DBE76A80979C4DD2081A06E88370FB9EE4425D9047D4875B373DE0EE0A96555";
-		const string addressPublic = "NCOI6JDF7FLFVNFJSJFF2MMYLIRAH4IHPZ6CXMA";
-		const string addressPublicTest = "TCOI6JDF7FLFVNFJSJFF2MMYLIRAH4IHPZFYQWA";
+		const string publicKey = "3490D4F6C9AA283B67AE4A9B2E65346462237705D98433351FEBFF457956D89F";
+		const string addressPublic = "NDESTDJAZ42BQVFM7O7LITP22FE5Z7VR6FNU7BZ6";
+		const string addressPublicTest = "TDESTDJAZ42BQVFM7O7LITP22FE5Z7VR6G6XCGXP";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -251,9 +251,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest24(){
-		const string publicKey = "A71E8A545903D2A4CEB865233BBDE665BB1E2FAEACB0CE5489AD3E047C11277D";
-		const string addressPublic = "NCGLAJ47YWB7ZW7PBLLUVAONWOBMYNSQKDSUFRI";
-		const string addressPublicTest = "TCGLAJ47YWB7ZW7PBLLUVAONWOBMYNSQKAITBAI";
+		const string publicKey = "EA3A5D45CB356E72771009253A385B6267BBDDE1863CBCC687793508F5B659C3";
+		const string addressPublic = "NCLP3JRVI2S7LTZJYEUVUTWXI54QJ5ZBJLTFP3QN";
+		const string addressPublicTest = "TCLP3JRVI2S7LTZJYEUVUTWXI54QJ5ZBJLGM5BZE";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -261,9 +261,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest25(){
-		const string publicKey = "1E1AB199992E1C7792EB164FD4ADAD2E512D50033C13D439318DD96DB7F1A2A5";
-		const string addressPublic = "ND664WXAYTBBB3OVKW7IAH3F7NOXUNM5UBH24XY";
-		const string addressPublicTest = "TD664WXAYTBBB3OVKW7IAH3F7NOXUNM5UAIALJI";
+		const string publicKey = "F8D82B7C69C7B7FB7DBD3CC11591E6B0163E0F4C17644F3B935E0D8A096C7CE1";
+		const string addressPublic = "NDLGVZZU5V2VVEJ6BIZDQI6HYEPSMJ5LJFUF7U46";
+		const string addressPublicTest = "TDLGVZZU5V2VVEJ6BIZDQI6HYEPSMJ5LJE4GH4JS";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -271,9 +271,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest26(){
-		const string publicKey = "5D2BCEF32570E7A127C384F27E66EA77855112EFC055A23BCB66904E1B8398DD";
-		const string addressPublic = "NCNL6IS7FGXRBCMH45AQIWWUGUVBPSNF23R2ZNA";
-		const string addressPublicTest = "TCNL6IS7FGXRBCMH45AQIWWUGUVBPSNF22OJPLA";
+		const string publicKey = "7FAA6F65050C5AC97F6FD907555764232CF69307C123C0A197A8B8A2715FE8A9";
+		const string addressPublic = "NAOSK7KRU3XOD2UCBMTUIBXV4CSPRLKY756UMG24";
+		const string addressPublicTest = "TAOSK7KRU3XOD2UCBMTUIBXV4CSPRLKY77XK3R73";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -281,9 +281,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest27(){
-		const string publicKey = "BDABE8C6D9B4FE4296B35BAF3DC590379A040CEF319C41F13D6A300305171F38";
-		const string addressPublic = "NAJXTIHLM6GKENYTR7IIIAXAJFMBWQQ3GGU56MI";
-		const string addressPublicTest = "TAJXTIHLM6GKENYTR7IIIAXAJFMBWQQ3GEGK7BQ";
+		const string publicKey = "6726D4CFA270165CE4C10CA6FFA15035679889A976FE5925A58ED642EC90AD35";
+		const string addressPublic = "NBYB5MIVLX4YKD7TTSJMF2ZROJMAWVT64KUFU4VB";
+		const string addressPublicTest = "TBYB5MIVLX4YKD7TTSJMF2ZROJMAWVT64JW54ORN";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -291,9 +291,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest28(){
-		const string publicKey = "E8B4CE09320311A6B82A8FF172CE12EF0D6832247FFC8D8CD2C6FB038E5F0335";
-		const string addressPublic = "NBBVQXDKPBZBYCAIWO7ECZFNTT35XUYGNBXZP7I";
-		const string addressPublicTest = "TBBVQXDKPBZBYCAIWO7ECZFNTT35XUYGNBCDQNY";
+		const string publicKey = "9F68BD343B565D2333EE1E507541411868C4D15727F6D7451E31F2FC20084268";
+		const string addressPublic = "NBADKGYLJAFLZ4GQE4RSKSCQZFBAV5TP7ARRQ3XO";
+		const string addressPublicTest = "TBADKGYLJAFLZ4GQE4RSKSCQZFBAV5TP7B6YX3OT";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -301,9 +301,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest29(){
-		const string publicKey = "7165B55E7214A2AC1A934ACE35242DA84E09E8BC5949882F1F63E020C7DADD1B";
-		const string addressPublic = "NDBXZRBCBI6GL4PK5WXTPNWETRCX7WVBM6KRISI";
-		const string addressPublicTest = "TDBXZRBCBI6GL4PK5WXTPNWETRCX7WVBM7AEF2A";
+		const string publicKey = "D556956E4AE43D4146335820819018C2F0723E4D5C03B18FFFFA8FC1096B832D";
+		const string addressPublic = "NCZRJTC75YILMUCCEPNHSLFLOGPMR3CQUJS2ZXFL";
+		const string addressPublicTest = "TCZRJTC75YILMUCCEPNHSLFLOGPMR3CQUIB6IQ33";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -311,9 +311,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest30(){
-		const string publicKey = "753A13EF3F79131364094622C55B535736A6EA1A5F316D65372C98EF675F946E";
-		const string addressPublic = "NCJTDZXF244HUB2CHROFOENCZC7AACNULZBE3SY";
-		const string addressPublicTest = "TCJTDZXF244HUB2CHROFOENCZC7AACNULZ5SH6Q";
+		const string publicKey = "06B4E42DF71524D7EF443DEC4EB95F701990799C796F695C2933F856465F8CB4";
+		const string addressPublic = "ND7JJ3NWV5JGMRA46MJLT7JO5K354YMVWG45CSP5";
+		const string addressPublicTest = "TD7JJ3NWV5JGMRA46MJLT7JO5K354YMVWF3ERFEE";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -321,9 +321,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest31(){
-		const string publicKey = "FEE9A5DD6F1E8BC4A78948B08EF9F69E9556BD9CCC26DBEA33B5073341917359";
-		const string addressPublic = "NA566D26ZPMT4SRNOY6WEZREDKGBIMAZIQNCH7Q";
-		const string addressPublicTest = "TA566D26ZPMT4SRNOY6WEZREDKGBIMAZIQUPTFY";
+		const string publicKey = "3BDEFE140C710AE70EC227396CFF553DB8310DAD36CDCFC6904FA02B917F75B9";
+		const string addressPublic = "NAN346HPWBUYNN7HFPPUJOPUSIC4F44QPLD26JQ6";
+		const string addressPublicTest = "TAN346HPWBUYNN7HFPPUJOPUSIC4F44QPI5APOHI";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -331,9 +331,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest32(){
-		const string publicKey = "5FC13702DC01EA201D8F32DD9B1C83574B13BDC77B76EAFD25E6E492EAA287F7";
-		const string addressPublic = "NBVUW2BRCJ7BBQG4NBLIPVXQHFFNWXFJ3DAD36Y";
-		const string addressPublicTest = "TBVUW2BRCJ7BBQG4NBLIPVXQHFFNWXFJ3DUR6DY";
+		const string publicKey = "A8B5BE9454477CF3A8F811D27582E3DAC210A44AE6F839F11849FA6DB5A4B1B0";
+		const string addressPublic = "NABEJ57HBE27RU47EBR3CWPDSVOW3QI5J2EW4YYL";
+		const string addressPublicTest = "TABEJ57HBE27RU47EBR3CWPDSVOW3QI5JYK3CONO";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -341,9 +341,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest33(){
-		const string publicKey = "A7DDE6DF318376DEB9A5604C4F3974BA47BA94750E5BD356FD1734B2616BE53C";
-		const string addressPublic = "NBPEPAIZYAG6Q7EDJOO5JQ7UTNIEC7ENDLIDONA";
-		const string addressPublicTest = "TBPEPAIZYAG6Q7EDJOO5JQ7UTNIEC7ENDJ2XWRA";
+		const string publicKey = "F25E35D046714A74079F60EA83C8011C746768A77E5D7CEDF8EDFEC17379FBD5";
+		const string addressPublic = "NAWCD4PWVZQSXPXTRPC3MX5ODGGQ4GBTCSV4L5QY";
+		const string addressPublicTest = "TAWCD4PWVZQSXPXTRPC3MX5ODGGQ4GBTCSMD5YWH";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -351,9 +351,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest34(){
-		const string publicKey = "67779DE5F1592429243D3818A9728C29F747C6666E473D72696EEF2430BE44EE";
-		const string addressPublic = "NCSMWHUYHZCWC6P7WI4AE66377H7H5LNDDYGO5I";
-		const string addressPublicTest = "TCSMWHUYHZCWC6P7WI4AE66377H7H5LNDCQFASY";
+		const string publicKey = "66D5EE2F7A9A29CC9F17B9B89EF829311698AF97CC76B3B480EE9E50BB3E666B";
+		const string addressPublic = "NBB6U5PPRFMTG2Y4JIXLN75RM2XRX2GVHECVZVP2";
+		const string addressPublicTest = "TBB6U5PPRFMTG2Y4JIXLN75RM2XRX2GVHEYCNUA7";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -361,9 +361,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest35(){
-		const string publicKey = "CE38700FC21DCA03F8ED98C154B109CC7A8C949CC3CF5E55B3163E0E37CA2255";
-		const string addressPublic = "NCZDUM4PB4DEDZNYSESA7GB4IGADEOF4V2M6SII";
-		const string addressPublicTest = "TCZDUM4PB4DEDZNYSESA7GB4IGADEOF4V22SISA";
+		const string publicKey = "2E6A2F37B6C1B30B3695E9019DFFE12D41FCB94937C41A91009230E6AAC8A387";
+		const string addressPublic = "NADZTPHU4NOR4RDM2TTRDGJ3CMSP7WX7SX5XGJLW";
+		const string addressPublicTest = "TADZTPHU4NOR4RDM2TTRDGJ3CMSP7WX7SUW26EH4";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -371,9 +371,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest36(){
-		const string publicKey = "0D84E9693C3D682475DD6700319A9ABD400F006BA9A39A0D5B135FF96A2D33D1";
-		const string addressPublic = "NDDEMCLGPI7TK5LZIKWQYX3QJQ5S2AUDH7LSKTA";
-		const string addressPublicTest = "TDDEMCLGPI7TK5LZIKWQYX3QJQ5S2AUDH4TUZVA";
+		const string publicKey = "8B69D79F0F4B8D990EE1BC0A748D6257445A3F14C8BE716375A6770D510C2177";
+		const string addressPublic = "NAME6JRX3Y6DN2TPORXO5C7TLRFD7EH4ERGU25VT";
+		const string addressPublicTest = "TAME6JRX3Y6DN2TPORXO5C7TLRFD7EH4ETH6LXA6";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -381,9 +381,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest37(){
-		const string publicKey = "A9B1C508CB2FF7FBC7E159EA578DC5414423020034297C092D63ECBC0EE25794";
-		const string addressPublic = "NBJ7HD7OO2GP6WJ5ILXSCHXSQILUF375V5Q6E3I";
-		const string addressPublicTest = "TBJ7HD7OO2GP6WJ5ILXSCHXSQILUF375V6O3DGA";
+		const string publicKey = "29F98A5CD53748837221ACA6FCB0A81A3843DB7C58543AA56771D0671701384D";
+		const string addressPublic = "NDT7V4JBORZJITRIWJAWHLVQELKVHCEIEVFKA5YM";
+		const string addressPublicTest = "TDT7V4JBORZJITRIWJAWHLVQELKVHCEIEUO4CFSG";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -391,9 +391,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest38(){
-		const string publicKey = "0A3FDE6333489A55B96C9249FF132CCEAC099CD0DD78825147C232FA3895EF2E";
-		const string addressPublic = "NCOGCHZGX43EJR2TE247SAXTHHVO6FWGYVOPROA";
-		const string addressPublicTest = "TCOGCHZGX43EJR2TE247SAXTHHVO6FWGYXQZZJQ";
+		const string publicKey = "846781656FFFF388FA0A3E269CC6FA47111C35F4239F7D3B31F4186CF3E685AC";
+		const string addressPublic = "NB4BJOXS345QEQ6VPGTMMOXAIXJ3PL765HHSS3WJ";
+		const string addressPublicTest = "TB4BJOXS345QEQ6VPGTMMOXAIXJ3PL765GGV4LDT";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -401,9 +401,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest39(){
-		const string publicKey = "F54ABDE55F127E1F3C17AC08356D022708D0B08C478D365F044EA562760F6A23";
-		const string addressPublic = "NBT26QBLS3NBYBA7UWTWVUKGLS4YE2XL7U6QTGI";
-		const string addressPublicTest = "TBT26QBLS3NBYBA7UWTWVUKGLS4YE2XL7XDPBZY";
+		const string publicKey = "9D12D7E8AEBCB5B051CC7A5E294DD1F155D41203AB9B49C16DA7025CD07C8BFF";
+		const string addressPublic = "NAYSINTQORROCA2SL7Y4E7HYXDZC6UEV4SVQHOEQ";
+		const string addressPublicTest = "TAYSINTQORROCA2SL7Y4E7HYXDZC6UEV4STJK2PL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -411,9 +411,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest40(){
-		const string publicKey = "B5E57A064530A0EE26B2BCF3204094FF353650AAF678E3B28444B9127CEF6A1A";
-		const string addressPublic = "NBBPUUZO4GOSMSVQ7SFYQRXA7YIWMUUSDXF547I";
-		const string addressPublicTest = "TBBPUUZO4GOSMSVQ7SFYQRXA7YIWMUUSDUFVNWI";
+		const string publicKey = "8BF389B6002627096A3EF7E2A887E3A9CF75D5CEC129EE868A9AEF003F905CDA";
+		const string addressPublic = "NB74OGBUWV7WXCUVQRTZDMTCKEHOZPUJYRGM5ABN";
+		const string addressPublicTest = "TB74OGBUWV7WXCUVQRTZDMTCKEHOZPUJYS3KFNIL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -421,9 +421,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest41(){
-		const string publicKey = "7DEB408A8C0DD9BC4BE52F7A3BD77FD19208607D408719B53783255812AAF85E";
-		const string addressPublic = "NCP2ANFQEQ3N3ABAUVXR27K4DBDSJDRT2SNXW3Y";
-		const string addressPublicTest = "TCP2ANFQEQ3N3ABAUVXR27K4DBDSJDRT2S2G7VA";
+		const string publicKey = "93A007AC04D2A3C23E18C47EF2DB530611DBF7AB3F46B9A5AE7E679811149D5D";
+		const string addressPublic = "NDUDMB5ZDM2RIKTUY5UPZPJDJGE5K3BCI6VWEQSW";
+		const string addressPublicTest = "TDUDMB5ZDM2RIKTUY5UPZPJDJGE5K3BCI6D3G32K";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -431,9 +431,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest42(){
-		const string publicKey = "8A4A955D608990E88E16F8A2B0D930721051335990F78E395ADB94737DDABD4A";
-		const string addressPublic = "NCMLUZMDNAGNM5G6FVMYWBZZCTJIB762HAXWSCI";
-		const string addressPublicTest = "TCMLUZMDNAGNM5G6FVMYWBZZCTJIB762HAIFHZQ";
+		const string publicKey = "DC6BBF9B99DBB3F0C78B5D8A05C64CF8A1C57DF717E45B3C0141BE6B8813F59D";
+		const string addressPublic = "NCBL3M4KSBTF3SLPRKJEJPNQ7WIIZ5YG7N6QGKIH";
+		const string addressPublicTest = "TCBL3M4KSBTF3SLPRKJEJPNQ7WIIZ5YG7OTXRTLX";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -441,9 +441,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest43(){
-		const string publicKey = "58C850F60AB1CEBE91CAB1FB84F6BA7C508B104F1B33DC0FCA78349046F193AE";
-		const string addressPublic = "NANTVW3F7XGWWOJEGMRJSGBLDO7TPS4OMGSH4BI";
-		const string addressPublicTest = "TANTVW3F7XGWWOJEGMRJSGBLDO7TPS4OME7CO3Y";
+		const string publicKey = "E9AA7F6098BA2724AF5242896A011799EF68FDC8D32C9E7BDBFB302B8EE08624";
+		const string addressPublic = "NAY6MZJXKAYUK3FQ6A63S4WCGCU7AL6ESNWMRUAE";
+		const string addressPublicTest = "TAY6MZJXKAYUK3FQ6A63S4WCGCU7AL6ESOGHKC4M";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -451,9 +451,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest44(){
-		const string publicKey = "3AA00A4C6513FDBA24FBCFABB198DD55F3313DE07497BDA1FD5B68FDB5719B45";
-		const string addressPublic = "NDXYBWTF6HYRIKIYEKQWP5MY6X7KXSJZIUF4IMQ";
-		const string addressPublicTest = "TDXYBWTF6HYRIKIYEKQWP5MY6X7KXSJZIV4KYNA";
+		const string publicKey = "74823277F456E17E0F23D1DD6CB4BF6CA7400D4A2773C2D6038D15908D34AEB8";
+		const string addressPublic = "NCYWGHHWFBM7S7P5G77HK45OAEWZFSNZG7IYQVWB";
+		const string addressPublicTest = "TCYWGHHWFBM7S7P5G77HK45OAEWZFSNZG5RYN6YL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -461,9 +461,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest45(){
-		const string publicKey = "8A547404FDD238364A8ABD69DF08DFA8A06131CDA7ACB280D85CA4543BC363D4";
-		const string addressPublic = "NABYZLVAZIYT3UQBQ4ZOFFZ7TRWHL5S2WYUIW5A";
-		const string addressPublicTest = "TABYZLVAZIYT3UQBQ4ZOFFZ7TRWHL5S2WZXVGLQ";
+		const string publicKey = "D85DA973EAD32FCFBF530CE3439376B6C9AD586A5E50DF02CE59AB6306C1F2DE";
+		const string addressPublic = "NBKRNTCH2IMIX4R4IQ6DLCQMP6WH36K65BWFP4XE";
+		const string addressPublicTest = "TBKRNTCH2IMIX4R4IQ6DLCQMP6WH36K65CDWY7TO";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -471,9 +471,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest46(){
-		const string publicKey = "46CB0DE73999493172B10BA860A50357A8BD155695CDEB47698643DF5D2CA822";
-		const string addressPublic = "NAXJ6XG3IK5WTVCNEP3YPXGRK2DA6KAICCM7UMA";
-		const string addressPublicTest = "TAXJ6XG3IK5WTVCNEP3YPXGRK2DA6KAICCUWDWA";
+		const string publicKey = "4B0613DBC252DD4B2AE64EDDB6D129A5DF8D101B0E1F89D52DD0F86B597EB8BA";
+		const string addressPublic = "NA552MN4NV4BZMYPZN57SXC37UPGWYRL7EYAPLSX";
+		const string addressPublicTest = "TA552MN4NV4BZMYPZN57SXC37UPGWYRL7GYBAO5J";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -481,9 +481,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest47(){
-		const string publicKey = "8F7E1DD1D6AD9BD9E4D31B07662AC1FE61A33C36B5C2ED4CD63FACF2AA8EC5CA";
-		const string addressPublic = "NDO55HCRRU4TTIWIGCO4YFQO5AWNEYXCTNOXWDQ";
-		const string addressPublicTest = "TDO55HCRRU4TTIWIGCO4YFQO5AWNEYXCTONQWHQ";
+		const string publicKey = "4C99395D0B568DF09965A751EBF8B27B892C7E4369BD44DA6088FA4247224A23";
+		const string addressPublic = "NDGSAMNUPE6QDSF47GCQLVU2BDDVWSONBEH4DVUF";
+		const string addressPublicTest = "TDGSAMNUPE6QDSF47GCQLVU2BDDVWSONBEPOD4UT";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -491,9 +491,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest48(){
-		const string publicKey = "336F5E8760B1F776B018F925859FC5FF9F36AB8A35C85F46644C2D332F66C3D9";
-		const string addressPublic = "NBD5S554WDLNSB2OWYCSUBJNAP4O5W4DNPHELZY";
-		const string addressPublicTest = "TBD5S554WDLNSB2OWYCSUBJNAP4O5W4DNOACGUY";
+		const string publicKey = "5473F2A2959545FC666BAB2CDC9819EE31D4E9B35E8671E60F09608ECF716F44";
+		const string addressPublic = "NDV6S7KBE4AFNE5TP5CZZDL3CG64WBTCUQWUTBTE";
+		const string addressPublicTest = "TDV6S7KBE4AFNE5TP5CZZDL3CG64WBTCUR4NQVSC";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -501,9 +501,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest49(){
-		const string publicKey = "9496F9AB5E7A67471B17AA03C08E713C1269D977BE8ED89E8E146C58E3D5D627";
-		const string addressPublic = "NDTFG5VTWIFOKVBOC2Z3V4AV7ILYLP3ZT2CK5OQ";
-		const string addressPublicTest = "TDTFG5VTWIFOKVBOC2Z3V4AV7ILYLP3ZT3GU7MA";
+		const string publicKey = "CAA4ED99B20B2DF6ACFADF8CD96249C64A543E96672F18347D36DA9F2706DAAE";
+		const string addressPublic = "NBQ6YHOHHNN6XLGM3KNGFVONAKGPAVXBGTBDERCL";
+		const string addressPublicTest = "TBQ6YHOHHNN6XLGM3KNGFVONAKGPAVXBGQAWL32N";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -511,9 +511,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest50(){
-		const string publicKey = "EA0CFA0172516CDEDAFE699F36FCAE0FE83D214A42AF1C59BCC71F8CF99A082E";
-		const string addressPublic = "NAYAFZG5ZQ5VQ4CO6WCQRHH5WO3UAVUL4KOGXHA";
-		const string addressPublicTest = "TAYAFZG5ZQ5VQ4CO6WCQRHH5WO3UAVUL4KDU3AQ";
+		const string publicKey = "20E88DCED65AA9F79824414B6BD1E4818E55291368E5685BFB2584F209530019";
+		const string addressPublic = "NC65FTL2VVWKR4MAHN3T5I2RFQS5GEYJQRNIEWNR";
+		const string addressPublicTest = "TC65FTL2VVWKR4MAHN3T5I2RFQS5GEYJQRJCP2DA";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -521,9 +521,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest51(){
-		const string publicKey = "87BA32C5948ABB5201C147BCE9670B2742FCF736AC6194B0F34F9765B503C9FF";
-		const string addressPublic = "NDXEUSXXKAKHE5UKWW7IPWTMOJPFJE4RCWLLOQI";
-		const string addressPublicTest = "TDXEUSXXKAKHE5UKWW7IPWTMOJPFJE4RCXJBSKY";
+		const string publicKey = "635E447622429E5A29B95D06D3C06933A93258ECFAE8C194E828AC41256B4FDB";
+		const string addressPublic = "NAAEBHZTU7IBFMW74UVMGQCDLSJEEGUKF2QZQAKZ";
+		const string addressPublicTest = "TAAEBHZTU7IBFMW74UVMGQCDLSJEEGUKFZ7LPCDC";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -531,9 +531,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest52(){
-		const string publicKey = "00084077DBEFAF96F323517413246C5987E9ADEE5515505797F8EC98F4FADC40";
-		const string addressPublic = "NBYI2HV466HRSZXV4NHPXTLHXLB5BSYHT67XWPI";
-		const string addressPublicTest = "TBYI2HV466HRSZXV4NHPXTLHXLB5BSYHT6CXMBI";
+		const string publicKey = "81AE7A3865B751C106AD25F5E061FC388320F74007CCB8C0CFB056838B73DD8D";
+		const string addressPublic = "NCPEHY3JOEISNA5M2CCO7P25G6PD5J76XESK5G2U";
+		const string addressPublicTest = "TCPEHY3JOEISNA5M2CCO7P25G6PD5J76XEAFQDEQ";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -541,9 +541,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest53(){
-		const string publicKey = "9AE768899590E452E56271AF5ECAD1D87D30B312FE3CEE112BCDD1C328102960";
-		const string addressPublic = "NAGHS7PQOVWDOX3V6LA5WRJXPURSFRDG25Z7XIY";
-		const string addressPublicTest = "TAGHS7PQOVWDOX3V6LA5WRJXPURSFRDG26JQDAY";
+		const string publicKey = "C5D57D018E10194EBEC1D17ABA6F2CCEE5C89346256AB7239C0C99AA878CCC05";
+		const string addressPublic = "NDHUHVEZJVKIHW3VBKXEV5UP4QEAZXRJL3IME5HH";
+		const string addressPublicTest = "TDHUHVEZJVKIHW3VBKXEV5UP4QEAZXRJL2AY4EGY";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -551,9 +551,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest54(){
-		const string publicKey = "B05C89CAEC584724ABECA5F0AB84BB677945A4E1D937D09A7904AC0423FF9EFF";
-		const string addressPublic = "NAQFT5NB4L6LXMS4FGKZ3PPHCRTSO7QH5YNKR2Q";
-		const string addressPublicTest = "TAQFT5NB4L6LXMS4FGKZ3PPHCRTSO7QH5YHSHRQ";
+		const string publicKey = "CEB8C611DDDF3010C39DA7D037C1C329605E138155CE54EE13CE839F33AF01BA";
+		const string addressPublic = "NBCBJ7XIDZJZO4GML56VBRA5LYQKR7JFKOGAPW2O";
+		const string addressPublicTest = "TBCBJ7XIDZJZO4GML56VBRA5LYQKR7JFKMDUI7IK";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -561,9 +561,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest55(){
-		const string publicKey = "D61CB8A4C94C10B38540335027AAB2C61436E11C51F74935672D0D89B6002E78";
-		const string addressPublic = "NDY5JAQLSW3CFGQM5B4SI7FMYFV6TET6N6Q44AI";
-		const string addressPublicTest = "TDY5JAQLSW3CFGQM5B4SI7FMYFV6TET6N75O5JQ";
+		const string publicKey = "04B3096BEB55E71F9F0894AEF76755FA42DB3FE203FAF53F43669840F1D6E98A";
+		const string addressPublic = "NBLBELHQ4KKUQR3TT4VUDXQJJCS72C2SYV2KAICT";
+		const string addressPublicTest = "TBLBELHQ4KKUQR3TT4VUDXQJJCS72C2SYURRU3FM";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -571,9 +571,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest56(){
-		const string publicKey = "70ED05BDC639E70CC191A4A19333319A7EB52AB5AC808FF315B48F4D598AE3FE";
-		const string addressPublic = "NABS3YC5IHCPIO3ZVG4J6NMURUFWA3Z2ZKSFSXI";
-		const string addressPublicTest = "TABS3YC5IHCPIO3ZVG4J6NMURUFWA3Z2ZKABLIY";
+		const string publicKey = "8EFE7BF9BF22CC16EA8D2AD69A28AEDF96E013A537EF67D7F67ED8347A70E101";
+		const string addressPublic = "NCNBFLUZYLUJL4JTM6JGRJVVGM6BSGUQO3YBBXPR";
+		const string addressPublicTest = "TCNBFLUZYLUJL4JTM6JGRJVVGM6BSGUQO3Y44C7K";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -581,9 +581,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest57(){
-		const string publicKey = "74A9B0FD8F67F98085571CEFB7C618FA5CAF4AFB88641825E46214A74CCBA870";
-		const string addressPublic = "NB3V2CXYTHU62Z55HCI2KEFRBQ6RYLXUSTCLPYQ";
-		const string addressPublicTest = "TB3V2CXYTHU62Z55HCI2KEFRBQ6RYLXUSRPRSUI";
+		const string publicKey = "94F69C18DD6CBF4FC5315CF8AC81EC2D1904612E516509FAC4CFB2AFDC391BE4";
+		const string addressPublic = "NAMLW7L5U7BOWT6U2XQLZGJJX6NLHLFG4Y576UD7";
+		const string addressPublicTest = "TAMLW7L5U7BOWT6U2XQLZGJJX6NLHLFG43JC2USM";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -591,9 +591,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest58(){
-		const string publicKey = "720C805FEF9E0EDCC15DC9B73F3D125BA4AA989BB13FB612700F348533128238";
-		const string addressPublic = "NDHHZKKJ2PS4WF6TMBGXGUYNVGLMU5Q5EV2RXBA";
-		const string addressPublicTest = "TDHHZKKJ2PS4WF6TMBGXGUYNVGLMU5Q5EWW267I";
+		const string publicKey = "73630D4DAD66BD21554E664771BE3B977F0EFB465B350E9BAC71A7D88C53BEC7";
+		const string addressPublic = "NCWSBPHCQST6GG3CFKM57K6NFH4OWKYHQEIWSC7E";
+		const string addressPublicTest = "TCWSBPHCQST6GG3CFKM57K6NFH4OWKYHQEDAAKPF";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -601,9 +601,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest59(){
-		const string publicKey = "BC0BDA1293549E2C1EC3AD2B92695BD8C0F4E9FDDA0C1A7908A446218803634F";
-		const string addressPublic = "NDPOGIVO57Y5WEP4NPI6QMPVP3GYF7UK2ZOKVVA";
-		const string addressPublicTest = "TDPOGIVO57Y5WEP4NPI6QMPVP3GYF7UK22ENOYA";
+		const string publicKey = "6EF9EEA4D5F7488D7EBDB2D8E988FD5E500FB2E86A8D066E9000D7DF8F2E553E";
+		const string addressPublic = "NBBCBRW7ZZGHEC6WCZXIPCXHCIQM577UCGBJGHL4";
+		const string addressPublicTest = "TBBCBRW7ZZGHEC6WCZXIPCXHCIQM577UCFQXNLSF";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -611,9 +611,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest60(){
-		const string publicKey = "5EC2A8B19099B5DF682C824115D29837DB3269F4C500114FAA9BB942EC2EA5DA";
-		const string addressPublic = "NB3CMFBJHF7W6MNPU3FJBQPTU6BQXBTTJAETMAY";
-		const string addressPublicTest = "TB3CMFBJHF7W6MNPU3FJBQPTU6BQXBTTJANUJCA";
+		const string publicKey = "378DD0C80D407CEBF6646386F23F6B1DC1A93FCCE72C0DBBF4961152B5F96135";
+		const string addressPublic = "NBAU5GIWGVD7XF7QG66NB7FMWCLMXGPGO6IYXROH";
+		const string addressPublicTest = "TBAU5GIWGVD7XF7QG66NB7FMWCLMXGPGO6WBQLWI";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -621,9 +621,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest61(){
-		const string publicKey = "8AAA835DB08F9F0EE3E3827F19AE715AAB68F021C7F81809FEDE026EAEA9396D";
-		const string addressPublic = "NAFNNSOGYDZCQA7WGPQM46JOMJSEMNPHIND7LAY";
-		const string addressPublicTest = "TAFNNSOGYDZCQA7WGPQM46JOMJSEMNPHIONUQZA";
+		const string publicKey = "AE89210A00582BE6234AB161ECBFE833B5CF002B130790B246D172B017842C57";
+		const string addressPublic = "NB3ROQY6QKAHBKDBBGITRGW65NJCKNM7P535TMLR";
+		const string addressPublicTest = "TB3ROQY6QKAHBKDBBGITRGW65NJCKNM7P4V5FCNU";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -631,9 +631,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest62(){
-		const string publicKey = "B32DAFA0B390BA6C865B3925FB131660D8A93BC46B763CE93200602BEAB9A103";
-		const string addressPublic = "NC57RKW5VYKLA75EVQVQUB6L65RR4YDUEDTI7OQ";
-		const string addressPublicTest = "TC57RKW5VYKLA75EVQVQUB6L65RR4YDUECZE4IY";
+		const string publicKey = "6E692FA360E2EB870D0C5CEF7CA48B3638BE5FB669DEAD7498A6EA3DF00DEB5A";
+		const string addressPublic = "NAEZGTDJAWBL6NSHZQRPYGJQHWYQJM6UEOGH74UU";
+		const string addressPublicTest = "TAEZGTDJAWBL6NSHZQRPYGJQHWYQJM6UEPBZ4FVH";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -641,9 +641,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest63(){
-		const string publicKey = "8F6D0FEAAB357BE092DF4004BFF33131DC3D9AC060130E266EDC549FAF01935C";
-		const string addressPublic = "NBG6ZR6B7SUGLHKUPWW7GUWX4DDURETEAQ3A27A";
-		const string addressPublicTest = "TBG6ZR6B7SUGLHKUPWW7GUWX4DDURETEAQKVYHY";
+		const string publicKey = "72E1850D494669F6D66B373C756950A85327F8F907A7B34FFF5F19BDD5B396EA";
+		const string addressPublic = "NBRE3BR76OYSBUY4LIXQBINL5TWUCTZ6N6X4665K";
+		const string addressPublicTest = "TBRE3BR76OYSBUY4LIXQBINL5TWUCTZ6N4METFSV";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -651,9 +651,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest64(){
-		const string publicKey = "7AAF72D71F4EA2A05BBD378999B2640EE3AB2B393A5E5BA5636B79DA5AEA70B0";
-		const string addressPublic = "NALERCPSTMKJDCPYMSUCBFENMPJRHC6TTROJINI";
-		const string addressPublicTest = "TALERCPSTMKJDCPYMSUCBFENMPJRHC6TTQOPAFI";
+		const string publicKey = "4534662EB281B0B10749BE7F48DEDE1214FEEA33E10277E9DBB36A78377C27E6";
+		const string addressPublic = "ND4HSLNH6NTPBFD7FUNOFNKBHGHSIDH7HOK6QXBW";
+		const string addressPublicTest = "TD4HSLNH6NTPBFD7FUNOFNKBHGHSIDH7HMDRLFY5";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -661,9 +661,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest65(){
-		const string publicKey = "55852179F31592896ED404AD3ECB67C17BA249B5ADFE5F6000595D03D143DD59";
-		const string addressPublic = "NDMUVBO45KGR44KJNMN7WZCM2P2HROTDE4ZEQIY";
-		const string addressPublicTest = "TDMUVBO45KGR44KJNMN7WZCM2P2HROTDE6WCPJQ";
+		const string publicKey = "5987B772E5F920F478CD7145B138550CFBE98C61480A465732154B2E006A62BB";
+		const string addressPublic = "NAVVBJMAJXUJW3KC53K6RNIZMDR4ZPEGVTJCCGWA";
+		const string addressPublicTest = "TAVVBJMAJXUJW3KC53K6RNIZMDR4ZPEGVQSEJENA";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -671,9 +671,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest66(){
-		const string publicKey = "A5FD3CB43E14510191632B93839AB438D81D4D2FF0340038DD7976BCD22881EE";
-		const string addressPublic = "NCCRI2IIHT4CJTL6IHRWZU4VEQEC65FD6UDV3DY";
-		const string addressPublicTest = "TCCRI2IIHT4CJTL6IHRWZU4VEQEC65FD6U36M3I";
+		const string publicKey = "717AF33A5B7563A9F89628689337095104B60536FF27158A5E5C83579912091C";
+		const string addressPublic = "NAAZMTDTLQKJOWSNRXQLYIO6JGSFCPH5FKBLFNHQ";
+		const string addressPublicTest = "TAAZMTDTLQKJOWSNRXQLYIO6JGSFCPH5FLQPADLD";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -681,9 +681,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest67(){
-		const string publicKey = "944703F34D243B95F2E8867156FEEF59B814833F1CB385EED49D9DB1ECB66E38";
-		const string addressPublic = "NCBURPEQGQHFTWJVPENSRRZRDMLRT35PPIPLF5A";
-		const string addressPublicTest = "TCBURPEQGQHFTWJVPENSRRZRDMLRT35PPILX27Q";
+		const string publicKey = "92B3BE33317D31B75FCB4D66D38834B3A22785774D8BD9D024C76C52EE74D0F3";
+		const string addressPublic = "NBUUXDLE7NNG6H55OQ2MYFEFI726L2GX3PLUNB5Z";
+		const string addressPublicTest = "TBUUXDLE7NNG6H55OQ2MYFEFI726L2GX3MB7IVY5";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -691,9 +691,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest68(){
-		const string publicKey = "5D48594D696F64623F71F80EB11EDEF6F0526FE07BBC9D4CB34E463F777BC37D";
-		const string addressPublic = "NCITMNC4BXHGK6LDAQTKMLZ3SMBCGK3ZTPADGPY";
-		const string addressPublicTest = "TCITMNC4BXHGK6LDAQTKMLZ3SMBCGK3ZTN3NWMA";
+		const string publicKey = "13B18C4AC2F57D8A8B2E2CB86FC6EE6E3B240202D96AC858116A568F2879C32C";
+		const string addressPublic = "NAWUXZATK2REXNYJUYRDFYYRS4PCYOGR4WOZ3Q34";
+		const string addressPublicTest = "TAWUXZATK2REXNYJUYRDFYYRS4PCYOGR4W2QZ7VY";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -701,9 +701,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest69(){
-		const string publicKey = "AE3D90A7DC53C642F75502988A649756D0E1C3C1F2418DFF380D0CA72A6BC029";
-		const string addressPublic = "NA4PVM52XLUGA6MRALODLM4ZT75754GNSJYSWBI";
-		const string addressPublicTest = "TA4PVM52XLUGA6MRALODLM4ZT75754GNSKN4FXA";
+		const string publicKey = "42554B1120BF811430C46C287383C49E4120D651D04BA6C3D27247A792C9BB8E";
+		const string addressPublic = "NAQQ6MEBR2E3R733OU6WLGZ6RHO2LOX64T3A2TUV";
+		const string addressPublicTest = "TAQQ6MEBR2E3R733OU6WLGZ6RHO2LOX64QE37ZZA";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -711,9 +711,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest70(){
-		const string publicKey = "E4CA2EE5722E0ACF9111A97DF9D0418345905A70D7CF2C7A4959CB96CDCC572B";
-		const string addressPublic = "NCVDXDVZUHLBFU4KL4HCLVIEHYGSAW4ZJ3NPSBA";
-		const string addressPublicTest = "TCVDXDVZUHLBFU4KL4HCLVIEHYGSAW4ZJ2IKNYA";
+		const string publicKey = "19A017A739D57C8C3EFE8C70F659D5DA3836C7623BD12C2C6C938D963FEBC3A7";
+		const string addressPublic = "NCFEEAVSZAPFP6GRWTO63GXERCB4OCYT3LWRMP37";
+		const string addressPublicTest = "TCFEEAVSZAPFP6GRWTO63GXERCB4OCYT3LDM3LOO";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -721,9 +721,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest71(){
-		const string publicKey = "E909826693D76A847FAB7361C3EF1D6DA2911A52205894D4EEBE811EBADC8B49";
-		const string addressPublic = "NCTKAOMZ43Y6K6QKZE7V3I7YJRLE7MBWXHNRHFY";
-		const string addressPublicTest = "TCTKAOMZ43Y6K6QKZE7V3I7YJRLE7MBWXG5ATMA";
+		const string publicKey = "D278BD0429CEF8C98A6F2578A0B5C22473F6E4075F6F78CF97FF308EFC6EB8EE";
+		const string addressPublic = "NBS4OD7T77R5SOQGZ5A7CBW5XHEGSH32WY2KA634";
+		const string addressPublicTest = "TBS4OD7T77R5SOQGZ5A7CBW5XHEGSH32WZKRW5HI";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -731,9 +731,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest72(){
-		const string publicKey = "6C0B0E2F470D28BBD5E06CC94C0993B2CB9DE7593F5B98841BEBEE7C0E377528";
-		const string addressPublic = "NB2Z3G2E3QJVUCLSD43MSWF7WHY2PSLY66USF4A";
-		const string addressPublicTest = "TB2Z3G2E3QJVUCLSD43MSWF7WHY2PSLY64NYGCQ";
+		const string publicKey = "37D53D4C441ADAAD6C58CAECABEF0C94C619EB498002942C95C5250E0C0C1FD6";
+		const string addressPublic = "NDDP2HPLQOQAPZAF54ISMWXCXQXBQVHS3ZBCIIYA";
+		const string addressPublicTest = "TDDP2HPLQOQAPZAF54ISMWXCXQXBQVHS32CSSXJK";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -741,9 +741,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest73(){
-		const string publicKey = "304A1C5C09B12E617F36F67A0B098D6EE736F5A9912740C30D90BB846E78B3EB";
-		const string addressPublic = "NDHXJF3M2YRGOSMJBVJLCR7VLHNC5P3WSAIVLZY";
-		const string addressPublicTest = "TDHXJF3M2YRGOSMJBVJLCR7VLHNC5P3WSBHFTRQ";
+		const string publicKey = "82BD01F5161E282AFCDBD9E826CACCB09AE7AB04FF5C7056E11472EC83E73162";
+		const string addressPublic = "ND3VXKFTTIEKYV63DJENJEHN2UWVFS7YJ3ZH5NWZ";
+		const string addressPublicTest = "TD3VXKFTTIEKYV63DJENJEHN2UWVFS7YJ3L3OJCV";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -751,9 +751,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest74(){
-		const string publicKey = "5407AA5484C94D604A066EB87753DF8383C5938DF65BFCED1B94F554CC7BB70E";
-		const string addressPublic = "NB5XRUM5I6W6EO65US67YY4YC6O7JPGMLTUIW2Q";
-		const string addressPublicTest = "TB5XRUM5I6W6EO65US67YY4YC6O7JPGMLQWEJKY";
+		const string publicKey = "70FF48C3BA2D3C5B3689BB37208742947BE6E2E4F733CB46B4C0805B8FEDE3AF";
+		const string addressPublic = "NDGCIXMC6PJMZU77X4XVP7VCRSWIYSJBP7327O77";
+		const string addressPublicTest = "TDGCIXMC6PJMZU77X4XVP7VCRSWIYSJBP6TOMXDL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -761,9 +761,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest75(){
-		const string publicKey = "D467711AF6C44E79D9A7A0CFC41161310BD82BC9BA41674A5D6F2BC6EF4A6A53";
-		const string addressPublic = "NAJVWOFJEYF3EMTBJUE6DUR6Z7AUIYGPGOZ7J7Q";
-		const string addressPublicTest = "TAJVWOFJEYF3EMTBJUE6DUR6Z7AUIYGPGP5YKNQ";
+		const string publicKey = "9C2761EB63CAB8BEA09AB0C5764A3AB51FA5B033FBF3803E3C419FF26E57B94F";
+		const string addressPublic = "NAHYFYC56TI3RNFX7WCF6FUANIHHM7VWWTJ4HS4Y";
+		const string addressPublicTest = "TAHYFYC56TI3RNFX7WCF6FUANIHHM7VWWRXENIIL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -771,9 +771,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest76(){
-		const string publicKey = "5DECBBE27F7E02516C9136A3F46C92F43168C03EFD315E623F78E240DFFA5CB6";
-		const string addressPublic = "NDQPZZPQISGAVLZOFLUQ7LFSLNGHEOO755R2AJA";
-		const string addressPublicTest = "TDQPZZPQISGAVLZOFLUQ7LFSLNGHEOO755ZFHNA";
+		const string publicKey = "91819FC4315B9F596661ADF1243369B540752A3BDFC84ED1B6F5DFD6A6BA52D2";
+		const string addressPublic = "NDAJP6EOIZVWFKBXFVAZITHH5ELM6JALGJGCYISR";
+		const string addressPublicTest = "TDAJP6EOIZVWFKBXFVAZITHH5ELM6JALGKH6BYEC";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -781,9 +781,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest77(){
-		const string publicKey = "F6AC6800032D29059CDF3B46C8D6B299902F29EDC98C12AC7C8DCDABD49D575E";
-		const string addressPublic = "NCKPOQHRHQRHJ4OQAZIIKUSV5AHSWOBPQH6AOVA";
-		const string addressPublicTest = "TCKPOQHRHQRHJ4OQAZIIKUSV5AHSWOBPQHEWDEQ";
+		const string publicKey = "EDD43646F677EBCA32BBB9E66C3A87BDEB6AAB77AF515E879EDC5CEFFF6FA5BE";
+		const string addressPublic = "NBNZHYHHZS7P4I4UK3XN37WBGD2AEYDV6ZRPSBEQ";
+		const string addressPublicTest = "TBNZHYHHZS7P4I4UK3XN37WBGD2AEYDV62LUXXEE";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -791,9 +791,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest78(){
-		const string publicKey = "4BDCC3997CF3C9C002E6CD042B8C47C2BFBDBC21883D1B67487A268C51A833AB";
-		const string addressPublic = "NBAEHLDWRDEG4QQZHC27WHP5XEAXB6RG46JXXAY";
-		const string addressPublicTest = "TBAEHLDWRDEG4QQZHC27WHP5XEAXB6RG47CR2WQ";
+		const string publicKey = "B8BC4A02489CE1F25F30C9C931F40EC808E7D0D5079B8445AFD8039A3EC85B8D";
+		const string addressPublic = "NB47BK5CPZU5C4BN7XTSS3MBSAYXWZG5KVQDTQGP";
+		const string addressPublicTest = "TB47BK5CPZU5C4BN7XTSS3MBSAYXWZG5KWXTAWE6";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -801,9 +801,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest79(){
-		const string publicKey = "C17B6BD6F540B23744F089B89873C27549BAD8994320D38F6E675CA2253992F5";
-		const string addressPublic = "NBD2W342RHREXWWFA5ODT7L6UDTCAMR3EMLDNOI";
-		const string addressPublicTest = "TBD2W342RHREXWWFA5ODT7L6UDTCAMR3EPCC6UA";
+		const string publicKey = "35FB191592199A1E8D0F827A9729DBE36A149C01B9B8290DFA65E30F3333F07A";
+		const string addressPublic = "NDZT6AOU5ASUEMFEMCIJPRTMB33LL62QV7XWGCGV";
+		const string addressPublicTest = "TDZT6AOU5ASUEMFEMCIJPRTMB33LL62QV6DNE6S2";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -811,9 +811,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest80(){
-		const string publicKey = "68E72F2A32C0010340EE6F5FC2568C4F6F8604F77551C047344C09AFF5A5F3F7";
-		const string addressPublic = "NBR4Z353Q7OKJH6NWBYNO6FERR2TYWFEBX3IQ6I";
-		const string addressPublicTest = "TBR4Z353Q7OKJH6NWBYNO6FERR2TYWFEBXRN6WI";
+		const string publicKey = "54C876736017EE2BC5970CB9B94229C3FD3E0201AEAF183134D3D4E8A6EEF73B";
+		const string addressPublic = "NBQCADWFAH2JLV5STAQSYZ3RIQARC2LHSSVI6HY6";
+		const string addressPublicTest = "TBQCADWFAH2JLV5STAQSYZ3RIQARC2LHSQEGO34V";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -821,9 +821,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest81(){
-		const string publicKey = "B0D26474AA9F8D667EFBD486F8AE0470E7A180145F49014476401B6EA6CA5A48";
-		const string addressPublic = "NCDPIJNTU7JDM3PUKMTTQGOHU2FMOVIHMHBDSPY";
-		const string addressPublicTest = "TCDPIJNTU7JDM3PUKMTTQGOHU2FMOVIHMEHR4NA";
+		const string publicKey = "8EEB4AEFB49BB75BBC2AC979E9A90DBEF7C82A57F9A756454488E9071F52DF3A";
+		const string addressPublic = "NDV27AJKLMES76WV6RY2B4E23SE2PEZCYY7OJFTS";
+		const string addressPublicTest = "TDV27AJKLMES76WV6RY2B4E23SE2PEZCY2Q5KMSA";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -831,9 +831,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest82(){
-		const string publicKey = "D75944FEE125B1001663BC1FB122983508D25EA1A064DCB7C4F00A1512478F76";
-		const string addressPublic = "NAJB4IBG3XJ7QAO4AG5BKK6GCKY2CWW6JRE5F6A";
-		const string addressPublicTest = "TAJB4IBG3XJ7QAO4AG5BKK6GCKY2CWW6JQ7UFOI";
+		const string publicKey = "8F61F18CC2297DC364F2A34E9CD255923B2CBE21004201A337BED4A7B71BED27";
+		const string addressPublic = "NC4PSRKCXJHIFSQAWCHNAMF7ZO7UDPWSVDJ472YR";
+		const string addressPublicTest = "TC4PSRKCXJHIFSQAWCHNAMF7ZO7UDPWSVCOWXKCD";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -841,9 +841,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest83(){
-		const string publicKey = "C78A06F01DD4A4DF1D17FF3252F319CC37E1781AD23DD6E29F2B4EA594F0295E";
-		const string addressPublic = "NB5UOTL4MCWZQ3VXCBN42NH57G7JSS3VIKBXQYY";
-		const string addressPublicTest = "TB5UOTL4MCWZQ3VXCBN42NH57G7JSS3VIL6Z72A";
+		const string publicKey = "A6623C70B5924EEE7E12DEA59947020FA7D881F6B8089B36935DB9F1247EFC77";
+		const string addressPublic = "ND2SDSMSKFOXBDVY4HGONO77PRYFLLE724RZDGHM";
+		const string addressPublicTest = "TD2SDSMSKFOXBDVY4HGONO77PRYFLLE725LU6LW2";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -851,9 +851,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest84(){
-		const string publicKey = "2A3085C19701086E08B762E5B63D46F0686E02D376E7B59634B4C636B9EE6139";
-		const string addressPublic = "NCF2KRNZCTZJI2EBKZOFHZVKPKEFYWIW4MUKYCQ";
-		const string addressPublicTest = "TCF2KRNZCTZJI2EBKZOFHZVKPKEFYWIW4NKUGEY";
+		const string publicKey = "D4714F69C3704B1B0B2DA350C6534BC74B20CF473F2EAF7B745A6A5A9ED59300";
+		const string addressPublic = "NC5TE6IPSV4STHWNLBG5FP7M7T5ZVQNAKOYY6DW2";
+		const string addressPublicTest = "TC5TE6IPSV4STHWNLBG5FP7M7T5ZVQNAKPO5Z7C4";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -861,9 +861,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest85(){
-		const string publicKey = "5E0D1CF2353BC177257A87CE0824EAF729954EA89DB2D212F582D371D4B093D9";
-		const string addressPublic = "NAVDUF6TARTRZ3XSIJSJ3DYUIVYOAH7Z2BA6NRQ";
-		const string addressPublicTest = "TAVDUF6TARTRZ3XSIJSJ3DYUIVYOAH7Z2AIX5GQ";
+		const string publicKey = "1FB915EB23EFCF1445AD94736D65A350743C2B200F7C71AB90242832B435E378";
+		const string addressPublic = "NBP6AR2Q6742W57UA62CZ5GDHLHDLWI3ACTCDLD2";
+		const string addressPublicTest = "TBP6AR2Q6742W57UA62CZ5GDHLHDLWI3ABVN2WDM";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -871,9 +871,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest86(){
-		const string publicKey = "2E9683E77D6E3649A757334167C005EBEB18FAE4B627B531A6AE209964CB9924";
-		const string addressPublic = "ND6FFODEM6CTNANQLK4W4CECOC2HVZSAMTT2DHY";
-		const string addressPublicTest = "TD6FFODEM6CTNANQLK4W4CECOC2HVZSAMSSQWNY";
+		const string publicKey = "8C03CA739E667154333939F1BC72C13E2BD424027FDEEA00EC5D53AE5C4E8381";
+		const string addressPublic = "NBEOXMTQDLFJQER4BMR4O3HS2YGCQ7YPNZK44JOV";
+		const string addressPublicTest = "TBEOXMTQDLFJQER4BMR4O3HS2YGCQ7YPNYUQJVT2";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -881,9 +881,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest87(){
-		const string publicKey = "DD644DAC7D463191072CE4CE1F66F22D9FBD49A5627131635D5A4A21F7E46293";
-		const string addressPublic = "NCDMF3PHSGQ6YYZULHF3ODOTYPNJQ22UR3BFDGA";
-		const string addressPublicTest = "TCDMF3PHSGQ6YYZULHF3ODOTYPNJQ22URZKS53I";
+		const string publicKey = "D39AD162F80C8F46388FC0F6554FAEDACD103A542EF182C3E769F98CF1DBCD4E";
+		const string addressPublic = "ND6F7B2QSCXRJIECHAVBDWOC4X4GZMDW2RTRL7BW";
+		const string addressPublicTest = "TD6F7B2QSCXRJIECHAVBDWOC4X4GZMDW2SOUX4MF";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -891,9 +891,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest88(){
-		const string publicKey = "DD12B744C6D609B73D6E5530F09531B7F550419711EDDC30BE9BF4757FD83E4F";
-		const string addressPublic = "NBOQCRJD7KM4GWPZ3KCQRBXFCO5UZD2G33UPQVY";
-		const string addressPublicTest = "TBOQCRJD7KM4GWPZ3KCQRBXFCO5UZD2G33R4MOI";
+		const string publicKey = "B03868BD563619A306A51E357DDE3F5EE3AB7F0C92054F9B91E2A15BC64778A5";
+		const string addressPublic = "NBW52U3YKMF3BQTZMMDCPQ7IAN7Q3XKW75PZ5BQI";
+		const string addressPublicTest = "TBW52U3YKMF3BQTZMMDCPQ7IAN7Q3XKW7644W6RM";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -901,9 +901,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest89(){
-		const string publicKey = "83C65CE6D8EAFC8598BB551807998634C8392393018AC9F7233171EBF87665D0";
-		const string addressPublic = "NBRHLGGLXMLTTACLLZPJHVS6CSXTSMEFMEGOLJQ";
-		const string addressPublicTest = "TBRHLGGLXMLTTACLLZPJHVS6CSXTSMEFMFUZUYY";
+		const string publicKey = "58194AE528AC47A580BA0B22A7EBC5D0C39FA61BC5B31F75D7CBF744FF2806CD";
+		const string addressPublic = "NDA42LD56DVS76OP6VBQGPIDM5QNC5O7OXTKVOHH";
+		const string addressPublicTest = "TDA42LD56DVS76OP6VBQGPIDM5QNC5O7OVLLW6FZ";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -911,9 +911,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest90(){
-		const string publicKey = "49CB996AEF0E981BA2E7C085E98827ACBB3516DF0A33098EBD3BEF3F13FC2DE6";
-		const string addressPublic = "NCYPSUT5VUWWQ47VCAUWM2V5XQ4FC5WGAA7ST6I";
-		const string addressPublicTest = "TCYPSUT5VUWWQ47VCAUWM2V5XQ4FC5WGABSCN6I";
+		const string publicKey = "B913FA2AA54D1E6D069B0B00E17CC400B918D9B58C7BE7065894363D63637E32";
+		const string addressPublic = "NB7R3E4EHQSTBHQC6NNZ6UE4ZVVPW4BURMUEZHOH";
+		const string addressPublicTest = "TB7R3E4EHQSTBHQC6NNZ6UE4ZVVPW4BURNNXCG34";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -921,9 +921,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest91(){
-		const string publicKey = "CA3709EB28ED7A4269373575DD4AB5EC0A8E833AC1365377268B4F304F84E417";
-		const string addressPublic = "NDQH6CT4BQDV4OQ32FWJGZWMPTMVXBIPCCU4HWQ";
-		const string addressPublicTest = "TDQH6CT4BQDV4OQ32FWJGZWMPTMVXBIPCDEIMJA";
+		const string publicKey = "BFDB6844940A6384B87CFBAC23FEA0D14E9546C61C402C001A6019275964ACEA";
+		const string addressPublic = "NCGWXEBJSZT2FVFM3Q5MOXZH4P7NOVM7LORBNNM4";
+		const string addressPublicTest = "TCGWXEBJSZT2FVFM3Q5MOXZH4P7NOVM7LMT3IE2R";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -931,9 +931,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest92(){
-		const string publicKey = "FA4C8249A845001CB31D4DD46F431C881C7115E448F7F76E21F1191F189A6D99";
-		const string addressPublic = "NARTSZRFXJDOYK7CS4CQ6ZL3UVFSCO5XVDXMLBY";
-		const string addressPublicTest = "TARTSZRFXJDOYK7CS4CQ6ZL3UVFSCO5XVCEJNVY";
+		const string publicKey = "8EE9C6705F62D6A313F7107D714C774E58842C78CE8456032F82ED2AD53A7619";
+		const string addressPublic = "NA63NOWQR6C3PGVLO3MWNVTIMKLWI5JJIMVLZQ4E";
+		const string addressPublicTest = "TA63NOWQR6C3PGVLO3MWNVTIMKLWI5JJINX26DMQ";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -941,9 +941,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest93(){
-		const string publicKey = "C6EA81E39EBD78E9991BC01D24290834B86F1D5BB10E9E95A1A1FD68EC1DC981";
-		const string addressPublic = "NDCI7ZJTP4X7Y5FND3QSTTSZWAQ2AAMH2PBNQOI";
-		const string addressPublicTest = "TDCI7ZJTP4X7Y5FND3QSTTSZWAQ2AAMH2NGE3CI";
+		const string publicKey = "A4D2AAB0D41B05505C68B247C0F33B0BF4E69C470313D13A9D9562CDCC1A65C5";
+		const string addressPublic = "NANANV6GBTTYMSKUPIGLM42HVQ3BR6IJ27YMAVXZ";
+		const string addressPublicTest = "TANANV6GBTTYMSKUPIGLM42HVQ3BR6IJ27IZB6ON";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -951,9 +951,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest94(){
-		const string publicKey = "69CD731BF0B50DA4C92CC6456DD038F1AE888E1D8E03C2E0F67562D013F6C497";
-		const string addressPublic = "NDAZENKNG2EHHFQLHRQABHCKQ32L3INAEVVO2VQ";
-		const string addressPublicTest = "TDAZENKNG2EHHFQLHRQABHCKQ32L3INAEWHLIAQ";
+		const string publicKey = "34F6C1C312BBAE520F3B1C9AC3FA82F8B4627F63BC5FC448E8AE8BF7668A16A1";
+		const string addressPublic = "NCOG4OAXYF4ZMSA7Y5KK2FRIE7SMDX7V2RVQCXCL";
+		const string addressPublicTest = "TCOG4OAXYF4ZMSA7Y5KK2FRIE7SMDX7V2TOBR4XW";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -961,9 +961,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest95(){
-		const string publicKey = "4ED2853CEFD48B6DE9FE845D438BD749B1AD7EA468AA90E03824C5B54617E0D5";
-		const string addressPublic = "NCHISSQVWOQDCEXCLYM6DBFPONAHFKU5R35NM7Q";
-		const string addressPublicTest = "TCHISSQVWOQDCEXCLYM6DBFPONAHFKU5R2GR77Y";
+		const string publicKey = "9B08C8E9792CF4475E30D69FF81D51F6D2C25B20ACF4FFCC825718B0D95D987A";
+		const string addressPublic = "ND6VXNWHPB27CJLCHFZHIVMSGJPATEOOWZ3AKUWH";
+		const string addressPublicTest = "TD6VXNWHPB27CJLCHFZHIVMSGJPATEOOWYEENKOQ";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -971,9 +971,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest96(){
-		const string publicKey = "941F12508F9349902CF74922F359DB46C025FB8C18DB02BAE2D49A89A72150CC";
-		const string addressPublic = "NAOFXANOKDU32AFZGML5AWBGTAHRCGV3DUW4OPQ";
-		const string addressPublicTest = "TAOFXANOKDU32AFZGML5AWBGTAHRCGV3DXEOY4A";
+		const string publicKey = "4F7F8B5368C079066D4473D9D29809AA9D305A4E9DEB580DC44E0D87FF99832E";
+		const string addressPublic = "NAXSRIAGQWLZCG6P6W4VRL5DN4SOW7TXM3GAOWGQ";
+		const string addressPublicTest = "TAXSRIAGQWLZCG6P6W4VRL5DN4SOW7TXMZ3G7UFF";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -981,9 +981,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest97(){
-		const string publicKey = "CAA5007ECE8A0FD64AC2E3E608F365641B3A5EB7BCC692538435B99999445195";
-		const string addressPublic = "NATMPLPQ5OGUBBGIMUCDV5JRKSLC6S57ANFENLY";
-		const string addressPublicTest = "TATMPLPQ5OGUBBGIMUCDV5JRKSLC6S57APVIK3I";
+		const string publicKey = "2556E669D10695653C62E319636250A0F1A64513029E7D7899B302338AF374C4";
+		const string addressPublic = "NA5E5XWJCS3S3RPDUCHXPE7C7VE4PUW4VLUTYDGT";
+		const string addressPublicTest = "TA5E5XWJCS3S3RPDUCHXPE7C7VE4PUW4VJ7VJANL";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -991,9 +991,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest98(){
-		const string publicKey = "2A55B2208801CF27DC653119318129803EB14217F0A2A0152293EFCECF68F05A";
-		const string addressPublic = "NDLUPDKVRN4UR5J2A25Z3NJBZB7GP36XFBTDZTY";
-		const string addressPublicTest = "TDLUPDKVRN4UR5J2A25Z3NJBZB7GP36XFDSJTVQ";
+		const string publicKey = "0F1722EF86DD54D30192F6B60822D1B52C9DBD014A720DA641528E20CEC72CD0";
+		const string addressPublic = "NC7ZWGCSHD3TA2KESMFMRZZPQFEMSI6BNXMCPB6Z";
+		const string addressPublicTest = "TC7ZWGCSHD3TA2KESMFMRZZPQFEMSI6BNVNON5B7";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -1001,9 +1001,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest99(){
-		const string publicKey = "41978CA2D3D1FC82C295A3D1ED97C462A910DF939C6135E410C6F177A65D51C0";
-		const string addressPublic = "NCE34LT6XVFFKZJQGQC32JW5DSFMAA3YKSZCRHI";
-		const string addressPublicTest = "TCE34LT6XVFFKZJQGQC32JW5DSFMAA3YKSL32YI";
+		const string publicKey = "D984038FDE5FA6274A2B3E485F060832894E44664F0C58097C8866290A7ACAB2";
+		const string addressPublic = "NACOURFE7GRWUXMJ57FYLQCDBUH6SJRRDC2J5YBB";
+		const string addressPublicTest = "TACOURFE7GRWUXMJ57FYLQCDBUH6SJRRDBPSO3VO";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);
@@ -1011,9 +1011,9 @@ public class AddressTest
 	}
 	[Test]
 	public void AddressTest100(){
-		const string publicKey = "561D099C7804B68A20F4F97C13FE1177900D5B7A25F44B287EFCC8E6CFA152D4";
-		const string addressPublic = "NBJZHSEDD4DB3TD3L4PFWSFNHYBVSI7YF6SSE4Q";
-		const string addressPublicTest = "TBJZHSEDD4DB3TD3L4PFWSFNHYBVSI7YF5RZ4RA";
+		const string publicKey = "DD57802D5A89FB10A653B81E2FDD43C128D55CB77D2078CFD574EC52905658C8";
+		const string addressPublic = "NCYTWYHTWT3EQLWT6UYBG23NMVDUXUL6H2CYDNHB";
+		const string addressPublicTest = "TCYTWYHTWT3EQLWT6UYBG23NMVDUXUL6HYH5FLL2";
 		var mainAddress = MainFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		var testAddress = TestFacade.Network.PublicKeyToAddress(publicKey).ToString();
 		Assert.AreEqual(addressPublic, mainAddress);

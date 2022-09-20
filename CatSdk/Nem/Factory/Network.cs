@@ -1,4 +1,5 @@
 using System.Numerics;
+using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Nem.Factory;
@@ -9,7 +10,7 @@ public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
     }
 }
-public class Network : BaseNetwork<Address>
+public class Network : BaseNetwork<NemAddress>
 {
     public Hash256? GenerationHashSeed { get; set; }
 
@@ -36,28 +37,25 @@ public class Network : BaseNetwork<Address>
         GenerationHashSeed = generationHashSeed;
     }
 
-    private static Address CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)
+    private static NemAddress CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)
     {
         var newBytes = new byte[addressWithoutChecksum.Length + checksum.Length];
         addressWithoutChecksum.CopyTo(newBytes, 0);
         checksum.CopyTo(newBytes, addressWithoutChecksum.Length);
-        return new Address(newBytes);
+        return new NemAddress(newBytes);
     }
 }
-/*
-public class Address : ByteArray
+
+public class NemAddress : ByteArray
 {
-    private const byte SIZE = 24;
+    private const byte SIZE = 25;
     private const byte ENCODED_SIZE = 39;
 
-    private static byte[] StrToAddress(string address)
+    public override string ToString()
     {
-        var rawBytes = Base32.Decode(address + "A");
-        Array.Resize(ref rawBytes, rawBytes.Length - 1);
-        return rawBytes;
+        return Base32.Encode(bytes);
     }
-    public Address(string address) : base(SIZE, StrToAddress(address)) { }
-    public Address(ByteArray address) : base(SIZE, address.bytes) { }
-    public Address(byte[] address) : base(SIZE, address) { }
+    public NemAddress(string address) : base(SIZE, Base32.Decode(address)) { }
+    public NemAddress(ByteArray address) : base(SIZE, address.bytes) { }
+    public NemAddress(byte[] address) : base(SIZE, address) { }
 }
-*/

@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import re
 from typing import Iterator
+import string
 
 f = open('../models/transactions.json', 'r')
 j = json.load(f)
@@ -39,14 +40,13 @@ def indent(text, i = 1):
 
 def innner(key, value, txType):
     t2 = f'\n'
-    t2 += f'new Dictionary<string, object>[]{{\n'
-    t3 = f'new(){{\n'
+    t2 += f'TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {{\n'
+    t3 = ''
     for key in value:
         t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[key], txType)}}},\n')
-    t3 += f'}},\n'
     t2 += indent(t3)
     t = t2
-    t += f'}}\n'
+    t += f'}}))\n'
     return indent(t)
 
 def to_mosaic_definition(value):
@@ -64,7 +64,17 @@ def to_mosaic_definition(value):
         t3 += indent(f'Value = Converter.HexToBytes("{value["properties"][i]["property_"]["value"]}")}}\n', 3)
         t3 += indent(f'}},\n', 2)
         t2 += indent(t3)
-    t2 += indent(f'}}}}\n', 2)
+    t2 += indent(f'}},\n', 2)
+    t2 += indent(f'LevySize = {value["levy_size"]},\n')
+    if "levy" in value:
+        t2 += indent(f'Levy = {{\n')
+        t2 += indent(f'TransferFeeType = MosaicTransferFeeType.{value["levy"]["transfer_fee_type"].upper()},\n', 2)
+        t2 += indent(f'RecipientAddress = new Address(Converter.Utf8ToBytes("{value["levy"]["recipient_address"]}")),\n', 2)
+        t2 += indent(f'MosaicId = {{\n', 2)
+        t2 += indent(f'NamespaceId = new NamespaceId {{Name = Converter.HexToBytes("{value["levy"]["mosaic_id"]["namespace_id"]["name"]}"),}},\n', 3)
+        t2 += indent(f'Name = Converter.HexToBytes("{value["levy"]["mosaic_id"]["name"]}"),}},\n', 3)
+        t2 += indent(f'Fee = new Amount({value["levy"]["fee"]})}},\n', 2)
+    t2 += indent(f'}}\n', 2)
     return t2
 
 def to_mosaic_array(value):
@@ -88,8 +98,12 @@ def to_cosignature_array(value):
     for i in range(len(value)):
         t3 = ''
         t3 += indent(f'new (){{\n')
-        t3 += indent(f'SignerPublicKey = new PublicKey(Converter.HexToBytes("{str(value[i]["cosignature"]["signer_public_key"])}")),',2)
-        t3 += indent(f'Signature = new Signature(Converter.HexToBytes("{str(value[i]["cosignature"]["signature"])}")),',2)
+        t3 += indent(f'MultisigTransactionHash = new Hash256(Converter.HexToBytes("{value[i]["cosignature"]["multisig_transaction_hash"]}")),',2)
+        t3 += indent(f'MultisigAccountAddress = new Address(Converter.Utf8ToBytes("{value[i]["cosignature"]["multisig_account_address"]}")),',2)
+        t3 += indent(f'SignerPublicKey = new PublicKey(Converter.HexToBytes("{value[i]["cosignature"]["signer_public_key"]}")),',2)
+        t3 += indent(f'Signature = new Signature(Converter.HexToBytes("{value[i]["cosignature"]["signature"]}")),',2)
+        t3 += indent(f'Fee = new Amount({value[i]["cosignature"]["fee"]}),',2)
+        t3 += indent(f'Timestamp = new Timestamp({value[i]["cosignature"]["timestamp"]}),',2)
         t3 += f'}},\n'
         t2 += indent(t3)
     t = t2
@@ -105,7 +119,10 @@ def to_mosaic_id(value):
 def to_message(value):
     t = indent(f'new Message(){{\n')
     t += indent(f'MessageType = MessageType.{value["message_type"].upper()},',2)
-    t += indent(f'MessageField = Converter.HexToBytes("{value["message"]}"),}}',2)
+    if(all(c in string.hexdigits for c in value["message"])):
+        t += indent(f'MessageField = Converter.HexToBytes("{value["message"]}"),}}',2)
+    else:
+        t += indent(f'MessageField = Converter.Utf8ToBytes("{value["message"]}"),}}',2)
     return t
 
 def to_modifications(value):
@@ -136,8 +153,10 @@ def type_check(key, value, txType):
         return to_mosaic_definition(value)
     if key == "multisig_account_address":
         return f'new Address(Converter.Utf8ToBytes("{value}"))'
-    if key == "multisig_transaction_hash" or key == "rental_fee_sink":
+    if key == "multisig_transaction_hash":
         return f'new Hash256(Converter.HexToBytes("{value}"))'
+    if key == "rental_fee_sink":
+        return f'new Address(Converter.Utf8ToBytes("{value}"))'
     if key == "cosignatures":
         if len(value) == 0:
             return 'System.Array.Empty<Cosignature>()'

@@ -399,7 +399,11 @@ class StructFormatter(AbstractTypeFormatter):
 		return MethodDescriptor(body=body)
 
 	def create_getter_setter_descriptor(self, field):
-		class_name = 'IBaseTransaction[]' if field.extensions.printer.get_type() == 'EmbeddedTransaction[]' else field.extensions.printer.get_type()
+		class_name = field.extensions.printer.get_type()
+		if field.extensions.printer.get_type() == 'NonVerifiableTransaction':
+			class_name = 'IBaseTransaction'
+		elif field.extensions.printer.get_type() == 'EmbeddedTransaction[]':
+			class_name = 'IBaseTransaction[]'
 		method_descriptor = MethodDescriptor(
 			method_name=f'public {class_name} {self.field_name(field)} {{ get; set; }}',
 			note='getter_setter',

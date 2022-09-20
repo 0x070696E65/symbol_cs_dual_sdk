@@ -5,7 +5,7 @@ public static class IdGenerator
 {
     private const ulong NAMESPACE_FLAG = (ulong) 1 << 63;
 
-    public static ulong GenerateMosaicId(Address ownerAddress, ulong nonce)
+    public static ulong GenerateMosaicId<T>(T ownerAddress, ulong nonce) where T: ByteArray
     {
         var hasher = new Sha3Digest(256);
         var arr = new byte[32];

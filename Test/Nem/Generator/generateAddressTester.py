@@ -17,15 +17,15 @@ def indent(text, i = 1):
 with open(Path('../') / 'AddressTest.cs', 'w', encoding='utf8', newline='\n') as output_file:
     result = """
 using CatSdk.Facade;
-using CatSdk.Symbol.Factory;
+using CatSdk.Nem.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Nem;
 public class AddressTest
 {
-    private readonly SymbolFacade MainFacade = new (Network.MainNet);
-    private readonly SymbolFacade TestFacade = new (Network.TestNet);
+    private readonly NemFacade MainFacade = new (Network.MainNet);
+    private readonly NemFacade TestFacade = new (Network.TestNet);
 """
     for i, c in enumerate(j):
         body = f'[Test]\n'

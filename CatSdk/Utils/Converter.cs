@@ -11,8 +11,10 @@ public static class Converter
             "sizes",
             new Dictionary<string, byte>{
                 {"ripemd160", 20},
-                {"addressDecoded", 24}, 
-                {"addressEncoded", 39}, 
+                {"symbolAddressDecoded", 24},
+                {"nemAddressDecoded", 40},
+                {"symbolAddressEncoded", 39},
+                {"nemAddressEncoded", 40},
                 {"key", 32}, 
                 {"checksum", 3},
             }
@@ -42,13 +44,17 @@ public static class Converter
          * @returns {Uint8Array} The decoded address corresponding to the input.
          */
     public static byte[] StringToAddress(string encoded){
-        if (_constants["sizes"]["addressEncoded"] != encoded.Length) {
-            throw new Exception(encoded + " does not represent a valid encoded address");
+        if (_constants["sizes"]["symbolAddressEncoded"] == encoded.Length)
+        {
+            var bytes = Base32.Decode(encoded + "A");
+            Array.Resize(ref bytes, _constants["sizes"]["symbolAddressDecoded"]);
+            return bytes;   
         }
-
-        var bytes = Base32.Decode(encoded + "A");
-        Array.Resize(ref bytes, _constants["sizes"]["addressDecoded"]);
-        return bytes;
+        if (_constants["sizes"]["nemAddressEncoded"] == encoded.Length)
+        {
+            return Base32.Decode(encoded);
+        }
+        throw new Exception(encoded + " does not represent a valid encoded address");
     }
     
     /*
@@ -58,14 +64,17 @@ public static class Converter
      */
     public static string AddressToString(byte[] decoded)
     {
-        if (_constants["sizes"]["addressDecoded"] != decoded.Length)
+        if (_constants["sizes"]["symbolAddressDecoded"] != decoded.Length)
         {
-            throw new Exception(BytesToHex(decoded) + " does not represent a valid decoded address");
+            var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
+            Array.Copy(decoded, padded, decoded.Length);
+            return Base32.Encode(padded)[.._constants["sizes"]["symbolAddressEncoded"]];   
         }
-
-        var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
-        Array.Copy(decoded, padded, decoded.Length);
-        return Base32.Encode(padded)[.._constants["sizes"]["addressEncoded"]];
+        if (_constants["sizes"]["nemAddressDecoded"] != decoded.Length)
+        {
+            return Base32.Encode(decoded);
+        }
+        throw new Exception(BytesToHex(decoded) + " does not represent a valid decoded address");
     }
     
     /**

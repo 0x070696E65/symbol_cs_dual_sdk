@@ -75,6 +75,13 @@ public class TransactionsFactory
         return new UnresolvedAddress(castValue.bytes);
     }
     
+    public static byte[] RawAddressToBytes(string rawAddress)
+    {
+        var rawBytes = Base32.Decode(rawAddress + "A");
+        Array.Resize(ref rawBytes, rawBytes.Length - 1);
+        return rawBytes;
+    }
+    
     private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
     {
         var assm = Assembly.GetExecutingAssembly();
@@ -84,7 +91,7 @@ public class TransactionsFactory
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
         //var factory = new RuleBasedTransactionFactory(types, SymbolTypeConverter, typeRuleOverrides);
-        var factory = new RuleBasedTransactionFactory(types, null, typeRuleOverrides);
+        var factory = new RuleBasedTransactionFactory(types, RawAddressToBytes, null, typeRuleOverrides);
         factory.Autodetect();
 
         var flagsMapping = new []

@@ -1,29 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4cee6cb0_002Dd9d7_002D4393_002D9943_002D24b802f70c0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;TestProject1&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
+  &lt;Assembly Path="/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/lib/net6.0/BouncyCastle.Crypto.dll" /&gt;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=87c990d0_002Dc45a_002D4aa3_002D9ca9_002D613de7bcb653/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TransactionNonParserTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.CatbufferTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountAddressRestrictionTransaction_account_address_restriction_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountAddressRestrictionTransaction_account_address_restriction_single_2&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.HashLockTransaction_hash_lock_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.MultisigAccountModificationTransaction_multisig_account_modification_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.NamespaceMetadataTransaction_namespace_metadata_single_2&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountMetadataTransaction_account_metadata_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest.AccountKeyLinkTransaction_account_key_link_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.KeysTest.KeyTest1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.AddressTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.MosaicIdTest.AddressTest0&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.MosaicIdTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.SignTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.TransactionTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.TransactionNonParserTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ed3d225a_002D7f52_002D44ae_002D8b29_002D5b7caeffe3da/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TransactionTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionNonParserTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.TransactionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.AddressTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.AddressTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Symbol.SignTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::net6.0::Test.Nem.SignTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	</wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

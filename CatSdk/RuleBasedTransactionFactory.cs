@@ -1,4 +1,5 @@
 using System.Collections;
+using CatSdk.Nem;
 using CatSdk.Utils;
 
 namespace CatSdk;
@@ -9,13 +10,15 @@ public class RuleBasedTransactionFactory
     private readonly Dictionary<string, Func<object, object>> Rules;
     private readonly Func<object, object?>? TypeConverter;
     private readonly Dictionary<Type, Func<object, object>>? TypeRuleOverrides;
+    private readonly Func<string, byte[]> RawAddressToBytes;
 
-    public RuleBasedTransactionFactory(List<Type> module, Func<object, object?>? typeConverter = null, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
+    public RuleBasedTransactionFactory(List<Type> module, Func<string, byte[]> rawAddressToBytes, Func<object, object?>? typeConverter = null, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
         Module = module;
         TypeConverter = value => TypeConverterFactory(module, typeConverter, value);
         TypeRuleOverrides = typeRuleOverrides;
         Rules = new Dictionary<string, Func<object, object>>();
+        RawAddressToBytes = rawAddressToBytes;
     }
 
     private static object? TypeConverterFactory(IEnumerable<Type> module, Func<object, object?>? customTypeConverter, object? value)
@@ -45,7 +48,6 @@ public class RuleBasedTransactionFactory
     
     public void AddPodParser(string name, Type podClass)
     {
-        //var podClass = Module.Find(m => m.Name == name);
         if (podClass == null) throw new NullReferenceException("pod class is null");
         var type = podClass.GetConstructors()[0].GetParameters()[0].ParameterType;
         
@@ -67,7 +69,7 @@ public class RuleBasedTransactionFactory
             else if (type == typeof(ulong)) instance = Activator.CreateInstance(podClass, Convert.ToUInt64(value));
             else if (type == typeof(byte[]))
             {
-                value = value is string s ? Converter.IsHexString(s) ? Converter.HexToBytes(s) : Converter.StringToAddress(s) : value;
+                value = value is string s ? Converter.IsHexString(s) ? Converter.HexToBytes(s) : RawAddressToBytes(s) : value;
                 instance = Activator.CreateInstance(podClass, value);
             }
             if (instance == null) throw new NullReferenceException("instance is null");
@@ -81,58 +83,48 @@ public class RuleBasedTransactionFactory
         var elementName = name.Replace("struct:", "");
         var arrayClass = Module.Find(m => m.Name == elementName);
         if (arrayClass == null) throw new NullReferenceException("array class is null");
-
+        
         Rules[$"array[{elementName}]"] = values =>
         {
-            /*
-            if (values is object[] objects)
-            {
-                return objects.Select((v) => elementRule.Invoke(v)).ToArray();
-            }
-            if (values is int[] int32)
-            {
-                return int32.Select((v) => elementRule.Invoke(v)).ToArray();
-            }
-            if (values is ulong[] uint64)
-            {
-                return uint64.Select((v) => elementRule.Invoke(v)).ToArray();
-            }
-            */
             IList tInst;
-            if (values is object[] objects)
+            switch (values)
             {
-                var o = objects.Select((v) => elementRule(v));
-                tInst = Array.CreateInstance(arrayClass, objects.Length);
-                var enumerable = o as object[] ?? o.ToArray();
-                for (var i = 0; i < enumerable.Length; i++)
+                case object[] objects:
                 {
-                    tInst[i] = enumerable[i];
+                    var o = objects.Select((v) => elementRule(v));
+                    tInst = Array.CreateInstance(arrayClass, objects.Length);
+                    var enumerable = o as object[] ?? o.ToArray();
+                    for (var i = 0; i < enumerable.Length; i++)
+                    {
+                        tInst[i] = enumerable[i];
+                    }
+                    return tInst;
                 }
-                return tInst;
-            }
-            if (values is int[] int32)
-            {
-                var o = int32.Select((v) => elementRule(v));
-                tInst = Array.CreateInstance(arrayClass, int32.Length);
-                var enumerable = o as object[] ?? o.ToArray();
-                for (var i = 0; i < enumerable.Length; i++)
+                case int[] int32:
                 {
-                    tInst[i] = enumerable[i];
+                    var o = int32.Select((v) => elementRule(v));
+                    tInst = Array.CreateInstance(arrayClass, int32.Length);
+                    var enumerable = o as object[] ?? o.ToArray();
+                    for (var i = 0; i < enumerable.Length; i++)
+                    {
+                        tInst[i] = enumerable[i];
+                    }
+                    return tInst;
                 }
-                return tInst;
-            }
-            if (values is ulong[] uint64)
-            {
-                var o = uint64.Select((v) => elementRule(v));
-                tInst = Array.CreateInstance(arrayClass, uint64.Length);
-                var enumerable = o as object[] ?? o.ToArray();
-                for (var i = 0; i < enumerable.Length; i++)
+                case ulong[] uint64:
                 {
-                    tInst[i] = enumerable[i];
+                    var o = uint64.Select((v) => elementRule(v));
+                    tInst = Array.CreateInstance(arrayClass, uint64.Length);
+                    var enumerable = o as object[] ?? o.ToArray();
+                    for (var i = 0; i < enumerable.Length; i++)
+                    {
+                        tInst[i] = enumerable[i];
+                    }
+                    return tInst;
                 }
-                return tInst;
+                default:
+                    throw new Exception("value is invalid type");
             }
-            throw new Exception("value is invalid type");
         };
     }
     
@@ -234,24 +226,33 @@ public class RuleBasedTransactionFactory
             else
             {
                 var dic = new Dictionary<string, object>();
-                foreach (var propertyInfo in structDescriptor.GetType().GetProperties())
+                foreach (var pi in structClass.GetProperties())
                 {
-                    foreach (var pi in structClass.GetProperties())
+                    if (pi.PropertyType == structDescriptor.GetType())
                     {
-                        if (pi.PropertyType.FullName != propertyInfo.PropertyType.FullName || !propertyInfo.CanWrite)
-                            continue;
-                        var value = propertyInfo.GetValue(structDescriptor);
-                        dic[propertyInfo.Name] = value ?? throw new Exception("");
+                        dic[pi.PropertyType.Name] = structDescriptor;
+                    }
+                    else
+                    {
+                        foreach (var propertyInfo in structDescriptor.GetType().GetProperties())
+                        {
+                            if (pi.PropertyType.FullName != propertyInfo.PropertyType.FullName || !propertyInfo.CanWrite)
+                                continue;
+                            var value = propertyInfo.GetValue(structDescriptor);
+                            dic[propertyInfo.Name] = value ?? throw new Exception("");
+                        }   
                     }
                 }
                 structProcessor = CreateProcessor(dic);
             }
-            var structValue = Activator.CreateInstance(structClass);
-            if (structValue == null) throw new NullReferenceException("structValue is null");
-            var allTypeHints = BuildTypeHintsMap((IStruct)structValue);
-            structProcessor.SetTypeHints(allTypeHints);
-            structProcessor.CopyTo((IStruct)structValue);
-            return structValue;
+            {
+                var structValue = Activator.CreateInstance(structClass);
+                if (structValue == null) throw new NullReferenceException("structValue is null");
+                var allTypeHints = BuildTypeHintsMap((IStruct)structValue);
+                structProcessor.SetTypeHints(allTypeHints);
+                structProcessor.CopyTo((IStruct)structValue);
+                return structValue;   
+            }
         };
     }
 
@@ -301,14 +302,14 @@ public class RuleBasedTransactionFactory
         {
             var value = t.GetValue(t.Name);
             if (value == null) throw new NullReferenceException("");
-            if (((ISerializer) value).Size == 2)
+            result[t.Name] = ((ISerializer) value).Size switch
             {
-                result[t.Name] = ((IEnum<ushort>)value).Value;
-            }
-            else
-            {
-                result[t.Name] = ((IEnum<byte>)value).Value;
-            }
+                1 => ((IEnum<byte>) value).Value,
+                2 => ((IEnum<ushort>) value).Value,
+                4 => (int) ((IEnum<uint>) value).Value,
+                8 => (int) ((IEnum<ulong>) value).Value,
+                _ => result[t.Name]
+            };
         }
         return result;
     }

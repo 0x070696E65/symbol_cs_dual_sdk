@@ -28,30 +28,31 @@ public class TransactionsFactory
 	 * @param {object} transaction Transaction object.
 	 * @returns {object} Non-verifiable transaction object.
 	 */
-    public IBaseTransaction ToNonVerifiableTransaction(Dictionary<string, object> transactionDescriptor)
+    public static IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
     {
-        var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
-        transactionDescriptor.Add("Network", networkType);
-        var transaction = Factory.CreateFromFactory(NonVerifiableTransactionFactory.CreateByName, transactionDescriptor);
-        
-        var nonVerifiableClassName = transaction.GetType().GetConstructors().ToList().Select((ctor) => ctor.Name).First();
+        var nonVerifiableClassName = transaction.GetType().Name;
         nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
-
-        var type = Factory.Module.Find(t => t.Name == nonVerifiableClassName);
-        if (type == null) throw new NullReferenceException("transaction type is invalid");
+        var assm = Assembly.GetExecutingAssembly();
+        var types = assm.GetTypes()
+            .Where(p => p.Namespace == "CatSdk.Nem")
+            .OrderBy(o => o.Name)
+            .Where(s => !s.Name.Contains("<>"))
+            .ToList();
+        var nonVerifiableClass = types.Find(m => m.Name == nonVerifiableClassName);
+        if (nonVerifiableClass == null) throw new NullReferenceException("nonVerifiableClass type is invalid");
+        var inst = (IBaseTransaction)Activator.CreateInstance(nonVerifiableClass)!;
+        
+        var pInfos = inst.GetType().GetProperties();
+        var tInfos = transaction.GetType().GetProperties();
+        
+        foreach (var propertyInfo in pInfos)
         {
-            var inst = (IBaseTransaction)Activator.CreateInstance(type)!;
-            var pInfos = inst.GetType().GetProperties();
-            var tInfos = transaction.GetType().GetProperties();
-            
-            foreach (var propertyInfo in pInfos)
-            {
-                var tInfo = tInfos.ToList().Find(t => t.Name == propertyInfo.Name);
-                var value = tInfo?.GetValue(transaction);
-                propertyInfo.SetValue(inst, value);
-            }
-            return inst;
+            if (!propertyInfo.CanWrite) continue;
+            var tInfo = tInfos.ToList().Find(t => t.Name == propertyInfo.Name);
+            var value = tInfo?.GetValue(transaction);
+            propertyInfo.SetValue(inst, value);
         }
+        return inst;
     }
 
     public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
@@ -73,6 +74,11 @@ public class TransactionsFactory
         var castValue = (ByteArray)value;
         return new Address(castValue.bytes);
     }
+
+    public static byte[] RawAddressToBytes(string rawAddress)
+    {
+        return Converter.Utf8ToBytes(rawAddress);
+    }
     
     private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
     {
@@ -82,27 +88,30 @@ public class TransactionsFactory
             .OrderBy(o => o.Name)
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
-        var factory = new RuleBasedTransactionFactory(types, NemTypeConverter, typeRuleOverrides);
+        //var factory = new RuleBasedTransactionFactory(types, NemTypeConverter, typeRuleOverrides);
+        var factory = new RuleBasedTransactionFactory(types, RawAddressToBytes, null, typeRuleOverrides);
         
         factory.Autodetect();
         
-        var enumsMapping = new Dictionary<string, byte>
+        var enumsMapping = new []
         {
-            {"LinkAction", 1},
-            {"MessageType",1},
-            {"MosaicSupplyChangeAction",1},
-            {"MosaicTransferFeeType",1},
-            {"MultisigAccountModificationType",1},
-            {"NetworkType",1},
-            {"TransactionType",2}
+            "LinkAction",
+            "MessageType",
+            "MosaicSupplyChangeAction",
+            "MosaicTransferFeeType",
+            "MultisigAccountModificationType",
+            "NetworkType",
+            "TransactionType",
         };
-        foreach (var key in enumsMapping.Keys)
+        foreach (var key in enumsMapping)
         {
             factory.AddEnumParser(key);
         }
         
         var structsMapping = new []
         {
+            "Cosignature",
+            "SizePrefixedCosignature",
             "Message",
             "NamespaceId",
             "MosaicId",
@@ -132,9 +141,9 @@ public class TransactionsFactory
             factory.AddPodParser(key, sdkTypeMapping[key]);
         }
         
-        
         var arrayParserMapping = new []
         {
+            "struct:SizePrefixedCosignature",
             "struct:SizePrefixedMosaic",
             "struct:SizePrefixedMosaicProperty",
             "struct:SizePrefixedMultisigAccountModification",

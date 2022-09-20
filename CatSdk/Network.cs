@@ -49,9 +49,8 @@ public class BaseNetwork<T>
 		var resultHash = new byte[partThreeHashBuilder.GetDigestSize()];
 		partThreeHashBuilder.BlockUpdate(version, 0, version.Length);
 		partThreeHashBuilder.DoFinal(resultHash, 0);
-		var checksum = new byte[3];
-		Array.Copy(resultHash, checksum, 3);
-
+		var checksum = new byte[4];
+		Array.Copy(resultHash, checksum, 4);
 		return CreateAddress(version, checksum);
 	}
 }

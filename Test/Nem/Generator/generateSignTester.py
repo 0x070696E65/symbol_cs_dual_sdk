@@ -17,11 +17,11 @@ def indent(text, i = 1):
 with open(Path('../') / 'SignTest.cs', 'w', encoding='utf8', newline='\n') as output_file:
     result = """
 using CatSdk.CryptoTypes;
-using CatSdk.Symbol;
+using CatSdk.Nem;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Nem;
 public class SignTest
 {
 """

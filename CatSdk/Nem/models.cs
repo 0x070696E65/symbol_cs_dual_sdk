@@ -3099,7 +3099,7 @@ public class MultisigTransaction : ITransaction {
 
 	public Timestamp Deadline { get; set; }
 
-	public NonVerifiableTransaction InnerTransaction { get; set; }
+	public IBaseTransaction InnerTransaction { get; set; }
 
 	public SizePrefixedCosignature[] Cosignatures { get; set; }
 

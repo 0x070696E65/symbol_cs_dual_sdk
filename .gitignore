@@ -108,7 +108,6 @@ Desktop.ini
 
 # doxygen
 CatSdk/Doxyfile
-CatSdk/reference
 CatSdk/latex
 
 #ConsoleApp

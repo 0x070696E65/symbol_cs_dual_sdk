@@ -1,9 +1,6 @@
-using CatSdk.Nem;
+namespace CatSdk.Symbol;
 
-namespace CatSdk.Symbol
+public interface IBaseTransaction : IStruct
 {
-    public interface IBaseTransaction : IStruct
-    {
-        public TransactionType Type { get; set; }
-    }
+    public TransactionType Type { get; }
 }

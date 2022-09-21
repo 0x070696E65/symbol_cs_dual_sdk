@@ -1,18 +1,32 @@
 using System.Reflection;
 using CatSdk.Utils;
+using CatSdk;
+namespace CatSdk.Symbol.Factory;
 
-namespace CatSdk.Symbol.Factory
-{
-    public class TransactionsFactory
+/**
+ * Factory for creating Symbol transactions.
+ */
+public class TransactionsFactory
 {
     private readonly RuleBasedTransactionFactory Factory;
     public readonly Network Network;
+        
+    /**
+	 * Creates a factory for the specified network.
+	 * @param {Network} network Symbol network.
+	 * @param {Dictionary} typeRuleOverrides Type rule overrides.
+	 */
     public TransactionsFactory(Network network, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
         Factory = BuildRules(typeRuleOverrides);
         Network = network;
     }
-    
+        
+    /**
+	 * Creates a transaction from a transaction descriptor.
+	 * @param {Dictionary} transactionDescriptor Transaction descriptor.
+	 * @returns {ITransaction} Newly created transaction.
+	 */
     public ITransaction Create(Dictionary<string, object> transactionDescriptor)
     {
         var transactionType = transactionDescriptor["Type"];
@@ -33,7 +47,12 @@ namespace CatSdk.Symbol.Factory
         mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
         return mosaicDefinitionTransaction;
     }
-    
+        
+    /**
+	 * Creates an embedded transaction from a transaction descriptor.
+	 * @param {Dictionary} transactionDescriptor Transaction descriptor.
+	 * @returns {IBaseTransaction} Newly created transaction.
+	 */
     public IBaseTransaction CreateEmbedded(Dictionary<string, object> transactionDescriptor)
     {
         var transactionType = transactionDescriptor["Type"];
@@ -55,34 +74,40 @@ namespace CatSdk.Symbol.Factory
         mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
         return mosaicDefinitionTransaction;
     }
-    
-    public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
-        transaction.Signature = new Signature(signature.bytes);
+        
+    /**
+	 * Attaches a signature to a transaction.
+	 * @param {ITransaction} transaction Transaction object.
+	 * @param {Signature} signature Signature to attach.
+	 * @returns {string} JSON transaction payload.
+	 */
+    public string AttachSignature(ITransaction transaction, Signature signature) {
+        transaction.Signature = signature;
         var transactionBuffer = transaction.Serialize();
         var hexPayload = Converter.BytesToHex(transactionBuffer);
         var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
         return jsonPayload;
     }
-    
-    public ITransaction AttachSignatureTransaction(ITransaction transaction, CryptoTypes.Signature signature) {
-        transaction.Signature = new Signature(signature.bytes);
+        
+    public ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
+        transaction.Signature = signature;
         return transaction;
     }
-    
+        
     private static UnresolvedAddress? SymbolTypeConverter(object value)
     {
         if (value.GetType() != typeof(Address)) return null;
         var castValue = (ByteArray)value;
         return new UnresolvedAddress(castValue.bytes);
     }
-    
+        
     private static byte[] RawAddressToBytes(string rawAddress)
     {
         var rawBytes = Base32.Decode(rawAddress + "A");
         Array.Resize(ref rawBytes, rawBytes.Length - 1);
         return rawBytes;
     }
-    
+        
     private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
     {
         var assm = Assembly.GetExecutingAssembly();
@@ -91,7 +116,6 @@ namespace CatSdk.Symbol.Factory
             .OrderBy(o => o.Name)
             .Where(s => !s.Name.Contains("<>"))
             .ToList();
-        //var factory = new RuleBasedTransactionFactory(types, SymbolTypeConverter, typeRuleOverrides);
         var factory = new RuleBasedTransactionFactory(types, RawAddressToBytes, null, typeRuleOverrides);
         factory.Autodetect();
 
@@ -104,7 +128,7 @@ namespace CatSdk.Symbol.Factory
         {
             factory.AddFlagsParser(key);
         }
-        
+            
         var enumsMapping = new []
         {
             "AliasAction",
@@ -120,10 +144,10 @@ namespace CatSdk.Symbol.Factory
         {
             factory.AddEnumParser(key);
         }
-        
+            
         factory.AddStructParser("UnresolvedMosaic");
         factory.AddStructParser("Cosignature");
-        
+            
         var sdkTypeMapping = new Dictionary<string, Type>()
         {
             {"UnresolvedAddress", typeof(UnresolvedAddress)},
@@ -149,7 +173,7 @@ namespace CatSdk.Symbol.Factory
         {
             factory.AddArrayParser(key);
         }
-        
+            
         return factory;
     }
 
@@ -182,5 +206,4 @@ namespace CatSdk.Symbol.Factory
         if (type == TransactionType.TRANSFER) return "transfer_transaction";
         throw new Exception("type is invalid");
     }
-}
 }

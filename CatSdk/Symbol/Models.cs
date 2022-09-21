@@ -1,8 +1,8 @@
 using CatSdk.Utils;
-namespace CatSdk.Symbol{
+namespace CatSdk.Symbol;
 
 public class Amount : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Amount(ulong amount = 0): base(SIZE, amount) {
 	}
@@ -17,7 +17,7 @@ public class Amount : BaseValue, ISerializer {
 }
 
 public class BlockDuration : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public BlockDuration(ulong blockDuration = 0): base(SIZE, blockDuration) {
 	}
@@ -32,7 +32,7 @@ public class BlockDuration : BaseValue, ISerializer {
 }
 
 public class BlockFeeMultiplier : BaseValue, ISerializer {
-	private const byte SIZE = 4;
+	public const byte SIZE = 4;
 
 	public BlockFeeMultiplier(uint blockFeeMultiplier = 0): base(SIZE, blockFeeMultiplier) {
 	}
@@ -47,7 +47,7 @@ public class BlockFeeMultiplier : BaseValue, ISerializer {
 }
 
 public class Difficulty : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Difficulty(ulong difficulty = 0): base(SIZE, difficulty) {
 	}
@@ -62,7 +62,7 @@ public class Difficulty : BaseValue, ISerializer {
 }
 
 public class FinalizationEpoch : BaseValue, ISerializer {
-	private const byte SIZE = 4;
+	public const byte SIZE = 4;
 
 	public FinalizationEpoch(uint finalizationEpoch = 0): base(SIZE, finalizationEpoch) {
 	}
@@ -77,7 +77,7 @@ public class FinalizationEpoch : BaseValue, ISerializer {
 }
 
 public class FinalizationPoint : BaseValue, ISerializer {
-	private const byte SIZE = 4;
+	public const byte SIZE = 4;
 
 	public FinalizationPoint(uint finalizationPoint = 0): base(SIZE, finalizationPoint) {
 	}
@@ -92,7 +92,7 @@ public class FinalizationPoint : BaseValue, ISerializer {
 }
 
 public class Height : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Height(ulong height = 0): base(SIZE, height) {
 	}
@@ -107,7 +107,7 @@ public class Height : BaseValue, ISerializer {
 }
 
 public class Importance : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Importance(ulong importance = 0): base(SIZE, importance) {
 	}
@@ -122,7 +122,7 @@ public class Importance : BaseValue, ISerializer {
 }
 
 public class ImportanceHeight : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public ImportanceHeight(ulong importanceHeight = 0): base(SIZE, importanceHeight) {
 	}
@@ -137,7 +137,7 @@ public class ImportanceHeight : BaseValue, ISerializer {
 }
 
 public class UnresolvedMosaicId : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public UnresolvedMosaicId(ulong unresolvedMosaicId = 0): base(SIZE, unresolvedMosaicId) {
 	}
@@ -152,7 +152,7 @@ public class UnresolvedMosaicId : BaseValue, ISerializer {
 }
 
 public class MosaicId : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public MosaicId(ulong mosaicId = 0): base(SIZE, mosaicId) {
 	}
@@ -167,7 +167,7 @@ public class MosaicId : BaseValue, ISerializer {
 }
 
 public class Timestamp : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Timestamp(ulong timestamp = 0): base(SIZE, timestamp) {
 	}
@@ -182,7 +182,7 @@ public class Timestamp : BaseValue, ISerializer {
 }
 
 public class UnresolvedAddress : ByteArray, ISerializer {
-	private const byte SIZE = 24;
+	public const byte SIZE = 24;
 
 	public UnresolvedAddress(byte[]? unresolvedAddress = null): base(SIZE, unresolvedAddress) {
 	}
@@ -197,7 +197,7 @@ public class UnresolvedAddress : ByteArray, ISerializer {
 }
 
 public class Address : ByteArray, ISerializer {
-	private const byte SIZE = 24;
+	public const byte SIZE = 24;
 
 	public Address(byte[]? address = null): base(SIZE, address) {
 	}
@@ -212,7 +212,7 @@ public class Address : ByteArray, ISerializer {
 }
 
 public class Hash256 : ByteArray, ISerializer {
-	private const byte SIZE = 32;
+	public const byte SIZE = 32;
 
 	public Hash256(byte[]? hash256 = null): base(SIZE, hash256) {
 	}
@@ -227,7 +227,7 @@ public class Hash256 : ByteArray, ISerializer {
 }
 
 public class Hash512 : ByteArray, ISerializer {
-	private const byte SIZE = 64;
+	public const byte SIZE = 64;
 
 	public Hash512(byte[]? hash512 = null): base(SIZE, hash512) {
 	}
@@ -242,7 +242,7 @@ public class Hash512 : ByteArray, ISerializer {
 }
 
 public class PublicKey : ByteArray, ISerializer {
-	private const byte SIZE = 32;
+	public const byte SIZE = 32;
 
 	public PublicKey(byte[]? publicKey = null): base(SIZE, publicKey) {
 	}
@@ -257,7 +257,7 @@ public class PublicKey : ByteArray, ISerializer {
 }
 
 public class VotingPublicKey : ByteArray, ISerializer {
-	private const byte SIZE = 32;
+	public const byte SIZE = 32;
 
 	public VotingPublicKey(byte[]? votingPublicKey = null): base(SIZE, votingPublicKey) {
 	}
@@ -272,7 +272,7 @@ public class VotingPublicKey : ByteArray, ISerializer {
 }
 
 public class Signature : ByteArray, ISerializer {
-	private const byte SIZE = 64;
+	public const byte SIZE = 64;
 
 	public Signature(byte[]? signature = null): base(SIZE, signature) {
 	}
@@ -3803,7 +3803,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 }
 
 public class NamespaceId : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public NamespaceId(ulong namespaceId = 0): base(SIZE, namespaceId) {
 	}
@@ -4229,7 +4229,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 }
 
 public class MosaicNonce : BaseValue, ISerializer {
-	private const byte SIZE = 4;
+	public const byte SIZE = 4;
 
 	public MosaicNonce(uint mosaicNonce = 0): base(SIZE, mosaicNonce) {
 	}
@@ -7581,7 +7581,7 @@ public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
 }
 
 public class MosaicRestrictionKey : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public MosaicRestrictionKey(ulong mosaicRestrictionKey = 0): base(SIZE, mosaicRestrictionKey) {
 	}
@@ -8446,5 +8446,4 @@ public class EmbeddedTransactionFactory {
 		};
 		return mapping[entityName];
 	}
-}
 }

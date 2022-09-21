@@ -1,8 +1,8 @@
 using CatSdk.Utils;
-namespace CatSdk.Nem{
+namespace CatSdk.Nem;
 
 public class Amount : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Amount(ulong amount = 0): base(SIZE, amount) {
 	}
@@ -17,7 +17,7 @@ public class Amount : BaseValue, ISerializer {
 }
 
 public class Height : BaseValue, ISerializer {
-	private const byte SIZE = 8;
+	public const byte SIZE = 8;
 
 	public Height(ulong height = 0): base(SIZE, height) {
 	}
@@ -32,7 +32,7 @@ public class Height : BaseValue, ISerializer {
 }
 
 public class Timestamp : BaseValue, ISerializer {
-	private const byte SIZE = 4;
+	public const byte SIZE = 4;
 
 	public Timestamp(uint timestamp = 0): base(SIZE, timestamp) {
 	}
@@ -47,7 +47,7 @@ public class Timestamp : BaseValue, ISerializer {
 }
 
 public class Address : ByteArray, ISerializer {
-	private const byte SIZE = 40;
+	public const byte SIZE = 40;
 
 	public Address(byte[]? address = null): base(SIZE, address) {
 	}
@@ -62,7 +62,7 @@ public class Address : ByteArray, ISerializer {
 }
 
 public class Hash256 : ByteArray, ISerializer {
-	private const byte SIZE = 32;
+	public const byte SIZE = 32;
 
 	public Hash256(byte[]? hash256 = null): base(SIZE, hash256) {
 	}
@@ -77,7 +77,7 @@ public class Hash256 : ByteArray, ISerializer {
 }
 
 public class PublicKey : ByteArray, ISerializer {
-	private const byte SIZE = 32;
+	public const byte SIZE = 32;
 
 	public PublicKey(byte[]? publicKey = null): base(SIZE, publicKey) {
 	}
@@ -92,7 +92,7 @@ public class PublicKey : ByteArray, ISerializer {
 }
 
 public class Signature : ByteArray, ISerializer {
-	private const byte SIZE = 64;
+	public const byte SIZE = 64;
 
 	public Signature(byte[]? signature = null): base(SIZE, signature) {
 	}
@@ -4500,5 +4500,4 @@ public class NonVerifiableTransactionFactory {
 		};
 		return mapping[entityName];
 	}
-}
 }

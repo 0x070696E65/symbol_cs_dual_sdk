@@ -133,14 +133,14 @@ namespace CatSdk.Crypto
             0,
             0x10};
 
-        private static void A(long[] o, long[] a, long[] b)
+        public static void A(long[] o, long[] a, long[] b)
         {
             for (var i = 0; i < 16; i++) { 
                 o[i] = a[i] + b[i];
             }
         }
 
-        private static void Z(long[] o, long[] a, long[] b)
+        public static void Z(long[] o, long[] a, long[] b)
         {
             for (var i = 0; i < 16; i++) { 
                 o[i] = a[i] - b[i];
@@ -612,12 +612,12 @@ namespace CatSdk.Crypto
             o[15] = t15;
         }
 
-        private static void S(long[] o, long[] a)
+        public static void S(long[] o, long[] a)
         {
             M(o, a, a);
         }
         
-        private static long Vn(long[] x, int xi, long[] y, int yi, int n)
+        public static long Vn(long[] x, int xi, long[] y, int yi, int n)
         {
             long d = 0;
             for (var i = 0; i < n; i++) {
@@ -626,7 +626,7 @@ namespace CatSdk.Crypto
             return (1 & ((d - 1) >> 8)) - 1;
         }
         
-        private static void Pow2523(long[] o, long[] i)
+        public static void Pow2523(long[] o, long[] i)
         {
             var c = Gf();
             for (var a = 0; a < 16; a++) {
@@ -643,7 +643,7 @@ namespace CatSdk.Crypto
             }
         }
         
-        private static void Inv25519(long[] o, long[] i)
+        public static void Inv25519(long[] o, long[] i)
         {
             var c = Gf();
             for (var a = 0; a < 16; a++) {
@@ -667,7 +667,7 @@ namespace CatSdk.Crypto
             }
         }
         
-        private static void Car25519(long[] o)
+        public static void Car25519(long[] o)
         {
             long c = 1;
             for (var i = 0; i < 16; i++) {
@@ -678,7 +678,7 @@ namespace CatSdk.Crypto
             o[0] += c - 1 + 37 * (c - 1);
         }
         
-        private static void Sel25519(long[] p, long[] q, long b)
+        public static void Sel25519(long[] p, long[] q, long b)
         {
             var c = ~(b - 1);
             for (var i = 0; i < 16; i++) {
@@ -688,7 +688,7 @@ namespace CatSdk.Crypto
             }
         }
         
-        private static void Pack25519(long[] o, long[] n)
+        public static void Pack25519(long[] o, long[] n)
         {
             var m = Gf();
             var t = Gf();
@@ -715,7 +715,7 @@ namespace CatSdk.Crypto
             }
         }
 
-        private static void Cswap(long[][] p, long[][] q, long b)
+        public static void Cswap(long[][] p, long[][] q, long b)
         {
             for (var i = 0; i < 4; i++)
             {
@@ -723,7 +723,7 @@ namespace CatSdk.Crypto
             }
         }
         
-        private static long Neq25519(long[] a, long[] b)
+        public static long Neq25519(long[] a, long[] b)
         {
             var c = new long[32];
             var d = new long[32];
@@ -737,14 +737,14 @@ namespace CatSdk.Crypto
             return Vn(x, xi, y, yi, 32);
         }
         
-        private static long Par25519(long[] a)
+        public static long Par25519(long[] a)
         {
             var d = new long[32];
             Pack25519(d, a);
             return d[0] & 1;
         }
         
-        private static void Unpack25519(long[] o, byte[] n)
+        public static void Unpack25519(long[] o, byte[] n)
         {
             for (var i = 0; i < 16; i++) {
                 o[i] = n[2 * i] + (long)(n[2 * i + 1] << 8);
@@ -752,7 +752,7 @@ namespace CatSdk.Crypto
             o[15] &= 0x7fff;
         }
 
-        private static void Add(IReadOnlyList<long[]> p, IReadOnlyList<long[]> q)
+        public static void Add(IReadOnlyList<long[]> p, IReadOnlyList<long[]> q)
         {
             var a = Gf();
             var b = Gf();

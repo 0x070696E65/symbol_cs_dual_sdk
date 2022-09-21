@@ -1,12 +1,12 @@
 using System.Reflection;
 using CatSdk.Utils;
 
-namespace CatSdk.Nem.Factory
-{
-    public class TransactionsFactory
+namespace CatSdk.Nem.Factory;
+
+public class TransactionsFactory
 {
     private readonly RuleBasedTransactionFactory Factory;
-    public readonly Network Network;
+    private readonly Network Network;
     public TransactionsFactory(Network network, Dictionary<Type, Func<object, object>>? typeRuleOverrides = null)
     {
         Factory = BuildRules(typeRuleOverrides);
@@ -29,7 +29,7 @@ namespace CatSdk.Nem.Factory
 	 * @param {object} transaction Transaction object.
 	 * @returns {object} Non-verifiable transaction object.
 	 */
-    public static IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
+    public IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
     {
         var nonVerifiableClassName = transaction.GetType().Name;
         nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
@@ -56,7 +56,7 @@ namespace CatSdk.Nem.Factory
         return inst;
     }
 
-    public string AttachSignature(ITransaction transaction, CryptoTypes.Signature signature) {
+    public string AttachSignature(ITransaction transaction, Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         var transactionBuffer = transaction.Serialize();
         var hexPayload = Converter.BytesToHex(transactionBuffer);
@@ -64,7 +64,7 @@ namespace CatSdk.Nem.Factory
         return jsonPayload;
     }
     
-    public ITransaction AttachSignatureTransaction(ITransaction transaction, CryptoTypes.Signature signature) {
+    public ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
         transaction.Signature = new Signature(signature.bytes);
         return transaction;
     }
@@ -155,5 +155,4 @@ namespace CatSdk.Nem.Factory
         }
         return factory;
     }
-}
 }

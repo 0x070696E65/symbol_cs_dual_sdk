@@ -151,7 +151,7 @@ namespace CatSdk.Crypto
          * @param {string} recipientPrivate - A recipient private key
          * @param {string} senderPublic - A sender public key
          * @param {string} payload - An encrypted message payload
-         * @return {string} - The decoded payload as hex
+         * @return {string?} - The decoded payload as hex
          */
         public static string? Decode(string recipientPrivateKey, string senderPublic, string payload) {
             var decoded = _Decode(Converter.HexToBytes(recipientPrivateKey), Converter.HexToBytes(senderPublic), Converter.HexToBytes(payload));

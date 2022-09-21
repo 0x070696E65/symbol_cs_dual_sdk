@@ -1,8 +1,7 @@
-namespace CatSdk.Symbol
+namespace CatSdk.Symbol;
+
+public interface ITransaction : IBaseTransaction
 {
-    public interface ITransaction : IBaseTransaction
-    {
-        public Signature Signature { get; set; }
-        public PublicKey SignerPublicKey { get; set; }
-    }
+    public Signature Signature { get; set; }
+    public PublicKey SignerPublicKey { get; set; }
 }

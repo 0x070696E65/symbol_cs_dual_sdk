@@ -1,7 +1,6 @@
-namespace CatSdk
+namespace CatSdk;
+
+public interface IStruct : ISerializer
 {
-    public interface IStruct : ISerializer
-    {
-        public Dictionary<string, string> TypeHints { get; }
-    }
+    public Dictionary<string, string> TypeHints { get; }
 }

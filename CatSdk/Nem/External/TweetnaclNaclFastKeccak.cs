@@ -159,6 +159,106 @@ namespace CatSdk.Nem.External
             sig[i] = signedMsg[i];
         return sig;
     }
+
+    public static int Unpackneg(long[][] r, byte[] p)
+    {
+        var t = NaclCatapult.Gf(); var chk = NaclCatapult.Gf(); var num = NaclCatapult.Gf();
+        var den = NaclCatapult.Gf(); var den2 = NaclCatapult.Gf(); var den4 = NaclCatapult.Gf();
+        var den6 = NaclCatapult.Gf();
+
+        NaclCatapult.Set25519(r[2], gf1);
+        NaclCatapult.Unpack25519(r[1], p);
+        NaclCatapult.S(num, r[1]);
+        NaclCatapult.M(den, num, D);
+        NaclCatapult.Z(num, num, r[2]);
+        NaclCatapult.A(den, r[2], den);
+
+        NaclCatapult.S(den2, den);
+        NaclCatapult.S(den4, den2);
+        NaclCatapult.M(den6, den4, den2);
+        NaclCatapult.M(t, den6, num);
+        NaclCatapult.M(t, t, den);
+
+        NaclCatapult.Pow2523(t, t);
+        NaclCatapult.M(t, t, num);
+        NaclCatapult.M(t, t, den);
+        NaclCatapult.M(t, t, den);
+        NaclCatapult.M(r[0], t, den);
+
+        NaclCatapult.S(chk, r[0]);
+        NaclCatapult.M(chk, chk, den);
+        if (NaclCatapult.Neq25519(chk, num) != 0)
+            NaclCatapult.M(r[0], r[0], I);
+
+        NaclCatapult.S(chk, r[0]);
+        NaclCatapult.M(chk, chk, den);
+        if (NaclCatapult.Neq25519(chk, num) != 0)
+            return -1;
+
+        if (NaclCatapult.Par25519(r[0]) == (p[31] >> 7))
+            NaclCatapult.Z(r[0], gf0, r[0]);
+
+        NaclCatapult.M(r[3], r[0], r[1]);
+        return 0;
+    }
+    public static int CryptoSignOpen(byte[] m, byte[] sm, int n, byte[] pk)
+    {
+        int i;
+        long[] t = new long[32]; byte[] h = new byte[64];
+        var p = new[] {NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf()};
+        var q = new[] {NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf()};
+        
+        if (64 > n)
+            return -1;
+        
+        if (Unpackneg(q, pk) != 0)
+            return -1;
+        
+        for (i = 0; i < n; i++)
+            m[i] = sm[i];
+        for (i = 0; 32 > i; i++)
+            m[i + 32] = pk[i];
+
+        CryptoHash(h, m, n);
+        Reduce(h);
+        NaclCatapult.Scalarmult(p, q, h);
+        
+        ScalarBase(q, sm.ToList().GetRange(32, sm.Length - 32).ToArray());
+        NaclCatapult.Add(p, q);
+        NaclCatapult.Pack(t, p);
+        n -= 64;
+        var longArr = new long[sm.Length];
+        for (var k = 0; k < longArr.Length; k++)
+            longArr[k] = sm[k];
+        
+        if (NaclCatapult.CryptoVerify32(longArr, 0, t, 0) != 0) {
+            for (i = 0; i < n; i++)
+                m[i] = 0;
+            return -1;
+        }
+        for (var k = 0; k < longArr.Length; k++)
+            sm[k] = (byte)longArr[k];
+
+        for (i = 0; i < n; i++)
+            m[i] = sm[i + 64];
+        return n;
+    }
+
+    public static bool Verify(byte[] msg, byte[] sig, byte[] publicKey)
+    {
+        if (sig.Length != crypto_sign_BYTES)
+            throw new Exception("bad signature size");
+        if (publicKey.Length != crypto_sign_PUBLICKEYBYTES)
+            throw new Exception("bad public key size");
+        var sm = new byte[crypto_sign_BYTES + msg.Length];
+        var m = new byte[crypto_sign_BYTES + msg.Length];
+        int i;
+        for (i = 0; i < crypto_sign_BYTES; i++)
+            sm[i] = sig[i];
+        for (i = 0; i < msg.Length; i++)
+            sm[i + crypto_sign_BYTES] = msg[i];
+        return 0 <= CryptoSignOpen(m, sm, sm.Length, publicKey);
+    }
     
     static long[] gf0 = NaclCatapult.Gf(),
         gf1 = NaclCatapult.Gf(new long[]{1}),

@@ -46,7 +46,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "account_key_link_transaction"},
 						{"LinkAction", LinkAction.LINK},
 						{"RemotePublicKey", new PublicKey(Converter.HexToBytes("6269E26026CECEFE640C3E0DE050CB9B3CFD279A0713CF00E16EDEF5D6C10EB9"))},
@@ -71,7 +71,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "account_key_link_transaction"},
 						{"LinkAction", LinkAction.UNLINK},
 						{"RemotePublicKey", new PublicKey(Converter.HexToBytes("C3D4EAEB517BDDF22F21A2F7B61194D50666EDEBFE81B9118DB59ABE1D6E98E5"))},
@@ -355,7 +355,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_definition_transaction"},
 						{"MosaicDefinition", new MosaicDefinition(){
 							OwnerPublicKey = new PublicKey(Converter.HexToBytes("875BD953CB8EC0BDEAA01552E390B5E59DEAAD44D81BD7DEAF0C332F99AEECE8")),
@@ -411,7 +411,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_definition_transaction"},
 						{"MosaicDefinition", new MosaicDefinition(){
 							OwnerPublicKey = new PublicKey(Converter.HexToBytes("F53B19CB1CAB394E22E3DDFA6D9B42DA87F37EB517EFA214433071E5619F898D")),
@@ -467,7 +467,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_definition_transaction"},
 						{"MosaicDefinition", new MosaicDefinition(){
 							OwnerPublicKey = new PublicKey(Converter.HexToBytes("69AF8763FEECEF35E0AEF44A202EFAC4936532C202784CF85CBCD16BFC45F119")),
@@ -523,7 +523,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_definition_transaction"},
 						{"MosaicDefinition", new MosaicDefinition(){
 							OwnerPublicKey = new PublicKey(Converter.HexToBytes("B5B93DDE2D05D21D0A14E6F60DB33E983B88A99FB203916D408AF5749A396960")),
@@ -586,7 +586,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_definition_transaction"},
 						{"MosaicDefinition", new MosaicDefinition(){
 							OwnerPublicKey = new PublicKey(Converter.HexToBytes("D7F44870D24E7626DB24591452A2F7ECF6650B0D41D3BCB4FB4BA11B063B80AC")),
@@ -687,7 +687,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_supply_change_transaction"},
 						{"MosaicId", new MosaicId{
 							NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
@@ -716,7 +716,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "mosaic_supply_change_transaction"},
 						{"MosaicId", new MosaicId{
 							NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
@@ -745,7 +745,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 5000000},
@@ -887,7 +887,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "multisig_account_modification_transaction"},
 						{"Modifications", System.Array.Empty<SizePrefixedMultisigAccountModification>()},
 						{"MinApprovalDelta", 2},
@@ -912,7 +912,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "multisig_account_modification_transaction"},
 						{"Modifications", 	new SizePrefixedMultisigAccountModification[]{
 									new (){
@@ -944,7 +944,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "multisig_account_modification_transaction"},
 						{"Modifications", 	new SizePrefixedMultisigAccountModification[]{
 									new (){
@@ -1038,7 +1038,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "multisig_account_modification_transaction_v1"},
 						{"Modifications", 	new SizePrefixedMultisigAccountModification[]{
 									new (){
@@ -1069,7 +1069,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "multisig_account_modification_transaction_v1"},
 						{"Modifications", 	new SizePrefixedMultisigAccountModification[]{
 									new (){
@@ -1144,7 +1144,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "namespace_registration_transaction"},
 						{"RentalFeeSink", new Address(Converter.Utf8ToBytes("TCTXZSZTZGQBWS7MRXTWMOR72LPX2YEVKIXGDIHL"))},
 						{"RentalFee", new Amount(678000000)},
@@ -1171,7 +1171,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "namespace_registration_transaction"},
 						{"RentalFeeSink", new Address(Converter.Utf8ToBytes("TATVJXFNG7BL7NDHNEQNANEOO2UWA55JPJ7U5I2P"))},
 						{"RentalFee", new Amount(678000000)},
@@ -1342,7 +1342,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 5000000},
@@ -1382,7 +1382,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 5000000},
@@ -1422,7 +1422,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 5000000},
@@ -1474,7 +1474,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 5000000},
@@ -1602,7 +1602,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction_v1"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 654321000000},
@@ -1628,7 +1628,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction_v1"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 654321000000},
@@ -1658,7 +1658,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction_v1"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 654321000000},
@@ -1688,7 +1688,7 @@ public class TransactionNonParserTest
 		var descriptor = new Dictionary<string, object>(){
 			{"Type", "multisig_transaction"},
 			{"InnerTransaction", 
-				TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
+				Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {
 						{"Type", "transfer_transaction_v1"},
 						{"RecipientAddress", "TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36"},
 						{"Amount", 654321000000},

@@ -42,7 +42,7 @@ def generate_files(ast_models, output_directory: Path):
 
 	output_directory.mkdir(exist_ok=True)
 
-	with open(output_directory / 'models.cs', 'w', encoding='utf8', newline='\n') as output_file:
+	with open(output_directory / 'Models.cs', 'w', encoding='utf8', newline='\n') as output_file:
 		output_file.write(
 			f'using CatSdk.Utils;\nnamespace CatSdk.{chain_name(output_directory)}{{\n\n'
 		)

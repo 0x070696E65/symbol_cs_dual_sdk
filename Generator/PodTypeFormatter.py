@@ -27,7 +27,7 @@ class PodTypeFormatter(AbstractTypeFormatter):
 	#	return 'pod'
 
 	def get_fields(self):
-		return [f'private const byte SIZE = {self.pod.size};']
+		return [f'public const byte SIZE = {self.pod.size};']
 
 	def get_base_class(self):
 		return f'ByteArray, ISerializer' if self._is_array else f'BaseValue, ISerializer'

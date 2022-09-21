@@ -1,16 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "BouncyCastle.NetCoreSdk/1.9.6": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/BouncyCastle.Crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/BouncyCastle.Crypto.dll": {}
-        }
-      },
+    ".NETCoreApp,Version=v3.1": {
       "coverlet.collector/3.1.0": {
         "type": "package",
         "build": {
@@ -894,9 +885,8 @@
       },
       "CatSdk/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
-          "BouncyCastle.NetCoreSdk": "1.9.6",
           "NUnit": "3.13.2"
         },
         "compile": {
@@ -909,22 +899,6 @@
     }
   },
   "libraries": {
-    "BouncyCastle.NetCoreSdk/1.9.6": {
-      "sha512": "pt9GQPsEKfYwSNzdsZEb1tUz/dTOBu03UIekvMLkjgFsYOp384Y/PA1RwQuslv6MZEG45mgv38Gw05Q8KUtu1Q==",
-      "type": "package",
-      "path": "bouncycastle.netcoresdk/1.9.6",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "License.txt",
-        "README.md",
-        "bouncycastle.netcoresdk.1.9.6.nupkg.sha512",
-        "bouncycastle.netcoresdk.nuspec",
-        "lib/net481/BouncyCastle.Crypto.dll",
-        "lib/net6.0/BouncyCastle.Crypto.dll",
-        "lib/netstandard2.1/BouncyCastle.Crypto.dll"
-      ]
-    },
     "coverlet.collector/3.1.0": {
       "sha512": "YzYqSRrjoP5lULBhTDcTOjuM4IDPPi6PhFsl4w8EI4WdZhE6llt7E38Tg4CHyrS+QKwyu1+9OwkdDgluOdoBTw==",
       "type": "package",
@@ -3891,7 +3865,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    ".NETCoreApp,Version=v3.1": [
       "CatSdk >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.11.0",
       "NUnit >= 3.13.2",
@@ -3915,14 +3889,14 @@
         "/Users/matsukawatoshiya/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj": {
               "projectPath": "/Users/matsukawatoshiya/programs/NewSdk/CatSdk/CatSdk.csproj"
@@ -3937,8 +3911,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",

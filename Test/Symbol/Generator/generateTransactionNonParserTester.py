@@ -233,7 +233,7 @@ using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 
-namespace Test.Symbol;
+namespace Test.Symbol{
 public class TransactionNonParserTest
 {
     private readonly SymbolFacade Facade = new (Network.TestNet);    
@@ -250,5 +250,6 @@ public class TransactionNonParserTest
         body += indent(f'Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));\n')
         body += f'}}\n'
         result += indent(body)
+    result += "}"
     result += "}"
     output_file.write(result)

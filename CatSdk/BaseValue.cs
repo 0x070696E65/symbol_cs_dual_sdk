@@ -1,18 +1,19 @@
-namespace CatSdk;
-
-public abstract class BaseValue
+namespace CatSdk
 {
-    public uint Size { get; }
-    public readonly ulong Value;
+    public abstract class BaseValue
+    {
+        public uint Size { get; }
+        public readonly ulong Value;
 
-    protected BaseValue(byte size, ulong value)
-    {
-        Size = size;
-        Value = value;
-    }
+        protected BaseValue(byte size, ulong value)
+        {
+            Size = size;
+            Value = value;
+        }
     
-    public override string ToString()
-    {
-        return "0x" + $"{Value:X}".PadLeft((int)Size * 2, '0');
+        public override string ToString()
+        {
+            return "0x" + $"{Value:X}".PadLeft((int)Size * 2, '0');
+        }
     }
 }

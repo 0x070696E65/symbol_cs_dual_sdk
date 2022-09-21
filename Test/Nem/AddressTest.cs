@@ -4,7 +4,7 @@ using CatSdk.Nem.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Nem;
+namespace Test.Nem{
 public class AddressTest
 {
     private readonly NemFacade MainFacade = new (Network.MainNet);
@@ -1019,4 +1019,4 @@ public class AddressTest
 		Assert.AreEqual(addressPublic, mainAddress);
 		Assert.AreEqual(addressPublicTest, testAddress);
 	}
-}
+}}

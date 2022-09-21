@@ -1,8 +1,9 @@
 using System.Reflection;
 using CatSdk.Utils;
 
-namespace CatSdk.Symbol.Factory;
-public class TransactionsFactory
+namespace CatSdk.Symbol.Factory
+{
+    public class TransactionsFactory
 {
     private readonly RuleBasedTransactionFactory Factory;
     public readonly Network Network;
@@ -75,7 +76,7 @@ public class TransactionsFactory
         return new UnresolvedAddress(castValue.bytes);
     }
     
-    public static byte[] RawAddressToBytes(string rawAddress)
+    private static byte[] RawAddressToBytes(string rawAddress)
     {
         var rawBytes = Base32.Decode(rawAddress + "A");
         Array.Resize(ref rawBytes, rawBytes.Length - 1);
@@ -152,7 +153,7 @@ public class TransactionsFactory
         return factory;
     }
 
-    public static string TransactionTypeToString(TransactionType type)
+    private static string TransactionTypeToString(TransactionType type)
     {
         if (type == TransactionType.ACCOUNT_KEY_LINK) return "account_key_link_transaction";
         if (type == TransactionType.NODE_KEY_LINK) return "node_key_link_transaction";
@@ -181,4 +182,5 @@ public class TransactionsFactory
         if (type == TransactionType.TRANSFER) return "transfer_transaction";
         throw new Exception("type is invalid");
     }
+}
 }

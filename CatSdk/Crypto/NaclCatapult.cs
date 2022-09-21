@@ -1,6 +1,6 @@
-namespace CatSdk.Crypto;
-
-public static class NaclCatapult
+namespace CatSdk.Crypto
+{
+    public static class NaclCatapult
 {
     public static long[] Gf(long[]? init = null)
         {
@@ -865,4 +865,5 @@ public static class NaclCatapult
             M(r[3], r[0], r[1]);
             return 0;
         }
+}
 }

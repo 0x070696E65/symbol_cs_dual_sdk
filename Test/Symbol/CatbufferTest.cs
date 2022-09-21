@@ -7,8 +7,9 @@ using NUnit.Framework;
 namespace Test.Symbol;
 public class CatbufferTest
 {
-    private static string Test<T>(string hex, Func<BinaryReader, T> func) where T: ISerializer
+    private static string Test<T>(string? hex, Func<BinaryReader, T>? func) where T: ISerializer
     {
+        if (hex == null || func == null) throw new NullReferenceException("");
         var barr = Converter.HexToBytes(hex);
         var ms = new MemoryStream(barr);
         var br = new BinaryReader(ms);

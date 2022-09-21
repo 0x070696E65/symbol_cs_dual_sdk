@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "Fo0d7AVJBl8fzPvqqJNLdcD57FdkmANgVd/4lsBFhSw3nToOIApH0zyjIY5Vqcjhmqu+Sn28JehMaSdZquDJ4g==",
+  "dgSpecHash": "3yESQO8CbR2XuC2/LdTKx51Y0o6oTz1GK6AIolMARLsvv8bB5jyZeWVfodMcqPrUDFGy23aWdeOA5BrhiavYRw==",
   "success": true,
   "projectFilePath": "/Users/matsukawatoshiya/programs/NewSdk/Test/Test.csproj",
   "expectedPackageFiles": [
-    "/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/bouncycastle.netcoresdk.1.9.6.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/coverlet.collector/3.1.0/coverlet.collector.3.1.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.codecoverage/16.11.0/microsoft.codecoverage.16.11.0.nupkg.sha512",
     "/Users/matsukawatoshiya/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",

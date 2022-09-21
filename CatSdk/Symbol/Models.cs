@@ -1,5 +1,5 @@
 using CatSdk.Utils;
-namespace CatSdk.Symbol;
+namespace CatSdk.Symbol{
 
 public class Amount : BaseValue, ISerializer {
 	private const byte SIZE = 8;
@@ -288,7 +288,7 @@ public class Signature : ByteArray, ISerializer {
 
 public class Mosaic : IStruct {
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"MosaicId", "pod:MosaicId"},
 		{"Amount", "pod:Amount"}
 	};
@@ -342,7 +342,7 @@ public class Mosaic : IStruct {
 
 public class UnresolvedMosaic : IStruct {
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"MosaicId", "pod:UnresolvedMosaicId"},
 		{"Amount", "pod:Amount"}
 	};
@@ -395,9 +395,9 @@ public class UnresolvedMosaic : IStruct {
 }
 
 public class LinkAction : IEnum<byte> {
-	public static readonly LinkAction UNLINK = new (0);
+	public static readonly LinkAction UNLINK = new LinkAction(0);
 
-	public static readonly LinkAction LINK = new (1);
+	public static readonly LinkAction LINK = new LinkAction(1);
 
 	public byte Value { get; }
 
@@ -449,9 +449,9 @@ public class LinkAction : IEnum<byte> {
 }
 
 public class NetworkType : IEnum<byte> {
-	public static readonly NetworkType MAINNET = new (104);
+	public static readonly NetworkType MAINNET = new NetworkType(104);
 
-	public static readonly NetworkType TESTNET = new (152);
+	public static readonly NetworkType TESTNET = new NetworkType(152);
 
 	public byte Value { get; }
 
@@ -503,55 +503,55 @@ public class NetworkType : IEnum<byte> {
 }
 
 public class TransactionType : IEnum<ushort> {
-	public static readonly TransactionType ACCOUNT_KEY_LINK = new (16716);
+	public static readonly TransactionType ACCOUNT_KEY_LINK = new TransactionType(16716);
 
-	public static readonly TransactionType NODE_KEY_LINK = new (16972);
+	public static readonly TransactionType NODE_KEY_LINK = new TransactionType(16972);
 
-	public static readonly TransactionType AGGREGATE_COMPLETE = new (16705);
+	public static readonly TransactionType AGGREGATE_COMPLETE = new TransactionType(16705);
 
-	public static readonly TransactionType AGGREGATE_BONDED = new (16961);
+	public static readonly TransactionType AGGREGATE_BONDED = new TransactionType(16961);
 
-	public static readonly TransactionType VOTING_KEY_LINK = new (16707);
+	public static readonly TransactionType VOTING_KEY_LINK = new TransactionType(16707);
 
-	public static readonly TransactionType VRF_KEY_LINK = new (16963);
+	public static readonly TransactionType VRF_KEY_LINK = new TransactionType(16963);
 
-	public static readonly TransactionType HASH_LOCK = new (16712);
+	public static readonly TransactionType HASH_LOCK = new TransactionType(16712);
 
-	public static readonly TransactionType SECRET_LOCK = new (16722);
+	public static readonly TransactionType SECRET_LOCK = new TransactionType(16722);
 
-	public static readonly TransactionType SECRET_PROOF = new (16978);
+	public static readonly TransactionType SECRET_PROOF = new TransactionType(16978);
 
-	public static readonly TransactionType ACCOUNT_METADATA = new (16708);
+	public static readonly TransactionType ACCOUNT_METADATA = new TransactionType(16708);
 
-	public static readonly TransactionType MOSAIC_METADATA = new (16964);
+	public static readonly TransactionType MOSAIC_METADATA = new TransactionType(16964);
 
-	public static readonly TransactionType NAMESPACE_METADATA = new (17220);
+	public static readonly TransactionType NAMESPACE_METADATA = new TransactionType(17220);
 
-	public static readonly TransactionType MOSAIC_DEFINITION = new (16717);
+	public static readonly TransactionType MOSAIC_DEFINITION = new TransactionType(16717);
 
-	public static readonly TransactionType MOSAIC_SUPPLY_CHANGE = new (16973);
+	public static readonly TransactionType MOSAIC_SUPPLY_CHANGE = new TransactionType(16973);
 
-	public static readonly TransactionType MOSAIC_SUPPLY_REVOCATION = new (17229);
+	public static readonly TransactionType MOSAIC_SUPPLY_REVOCATION = new TransactionType(17229);
 
-	public static readonly TransactionType MULTISIG_ACCOUNT_MODIFICATION = new (16725);
+	public static readonly TransactionType MULTISIG_ACCOUNT_MODIFICATION = new TransactionType(16725);
 
-	public static readonly TransactionType ADDRESS_ALIAS = new (16974);
+	public static readonly TransactionType ADDRESS_ALIAS = new TransactionType(16974);
 
-	public static readonly TransactionType MOSAIC_ALIAS = new (17230);
+	public static readonly TransactionType MOSAIC_ALIAS = new TransactionType(17230);
 
-	public static readonly TransactionType NAMESPACE_REGISTRATION = new (16718);
+	public static readonly TransactionType NAMESPACE_REGISTRATION = new TransactionType(16718);
 
-	public static readonly TransactionType ACCOUNT_ADDRESS_RESTRICTION = new (16720);
+	public static readonly TransactionType ACCOUNT_ADDRESS_RESTRICTION = new TransactionType(16720);
 
-	public static readonly TransactionType ACCOUNT_MOSAIC_RESTRICTION = new (16976);
+	public static readonly TransactionType ACCOUNT_MOSAIC_RESTRICTION = new TransactionType(16976);
 
-	public static readonly TransactionType ACCOUNT_OPERATION_RESTRICTION = new (17232);
+	public static readonly TransactionType ACCOUNT_OPERATION_RESTRICTION = new TransactionType(17232);
 
-	public static readonly TransactionType MOSAIC_ADDRESS_RESTRICTION = new (16977);
+	public static readonly TransactionType MOSAIC_ADDRESS_RESTRICTION = new TransactionType(16977);
 
-	public static readonly TransactionType MOSAIC_GLOBAL_RESTRICTION = new (16721);
+	public static readonly TransactionType MOSAIC_GLOBAL_RESTRICTION = new TransactionType(16721);
 
-	public static readonly TransactionType TRANSFER = new (16724);
+	public static readonly TransactionType TRANSFER = new TransactionType(16724);
 
 	public ushort Value { get; }
 
@@ -634,7 +634,7 @@ public class Transaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -749,7 +749,7 @@ public class EmbeddedTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"}
@@ -841,7 +841,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -978,7 +978,7 @@ public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -1088,7 +1088,7 @@ public class NodeKeyLinkTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -1225,7 +1225,7 @@ public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -1329,7 +1329,7 @@ public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
 
 public class Cosignature : IStruct {
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Signature", "pod:Signature"}
 	};
@@ -1391,7 +1391,7 @@ public class Cosignature : IStruct {
 
 public class DetachedCosignature : IStruct {
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Signature", "pod:Signature"},
 		{"ParentHash", "pod:Hash256"}
@@ -1469,7 +1469,7 @@ public class AggregateCompleteTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AggregateTransactionHeaderReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -1625,7 +1625,7 @@ public class AggregateBondedTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AggregateTransactionHeaderReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -1780,7 +1780,7 @@ public class VotingKeyLinkTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -1935,7 +1935,7 @@ public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -2063,7 +2063,7 @@ public class VrfKeyLinkTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -2200,7 +2200,7 @@ public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -2310,7 +2310,7 @@ public class HashLockTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -2456,7 +2456,7 @@ public class EmbeddedHashLockTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -2568,11 +2568,11 @@ public class EmbeddedHashLockTransaction : IBaseTransaction {
 }
 
 public class LockHashAlgorithm : IEnum<byte> {
-	public static readonly LockHashAlgorithm SHA3_256 = new (0);
+	public static readonly LockHashAlgorithm SHA3_256 = new LockHashAlgorithm(0);
 
-	public static readonly LockHashAlgorithm HASH_160 = new (1);
+	public static readonly LockHashAlgorithm HASH_160 = new LockHashAlgorithm(1);
 
-	public static readonly LockHashAlgorithm HASH_256 = new (2);
+	public static readonly LockHashAlgorithm HASH_256 = new LockHashAlgorithm(2);
 
 	public byte Value { get; }
 
@@ -2632,7 +2632,7 @@ public class SecretLockTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -2796,7 +2796,7 @@ public class EmbeddedSecretLockTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -2933,7 +2933,7 @@ public class SecretProofTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -3091,7 +3091,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -3222,7 +3222,7 @@ public class AccountMetadataTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -3378,7 +3378,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -3507,7 +3507,7 @@ public class MosaicMetadataTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -3672,7 +3672,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -3818,9 +3818,9 @@ public class NamespaceId : BaseValue, ISerializer {
 }
 
 public class NamespaceRegistrationType : IEnum<byte> {
-	public static readonly NamespaceRegistrationType ROOT = new (0);
+	public static readonly NamespaceRegistrationType ROOT = new NamespaceRegistrationType(0);
 
-	public static readonly NamespaceRegistrationType CHILD = new (1);
+	public static readonly NamespaceRegistrationType CHILD = new NamespaceRegistrationType(1);
 
 	public byte Value { get; }
 
@@ -3872,9 +3872,9 @@ public class NamespaceRegistrationType : IEnum<byte> {
 }
 
 public class AliasAction : IEnum<byte> {
-	public static readonly AliasAction UNLINK = new (0);
+	public static readonly AliasAction UNLINK = new AliasAction(0);
 
-	public static readonly AliasAction LINK = new (1);
+	public static readonly AliasAction LINK = new AliasAction(1);
 
 	public byte Value { get; }
 
@@ -3933,7 +3933,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -4098,7 +4098,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -4244,15 +4244,15 @@ public class MosaicNonce : BaseValue, ISerializer {
 }
 
 public class MosaicFlags : IEnum<byte> {
-	public static readonly MosaicFlags NONE = new (0);
+	public static readonly MosaicFlags NONE = new MosaicFlags(0);
 
-	public static readonly MosaicFlags SUPPLY_MUTABLE = new (1);
+	public static readonly MosaicFlags SUPPLY_MUTABLE = new MosaicFlags(1);
 
-	public static readonly MosaicFlags TRANSFERABLE = new (2);
+	public static readonly MosaicFlags TRANSFERABLE = new MosaicFlags(2);
 
-	public static readonly MosaicFlags RESTRICTABLE = new (4);
+	public static readonly MosaicFlags RESTRICTABLE = new MosaicFlags(4);
 
-	public static readonly MosaicFlags REVOKABLE = new (8);
+	public static readonly MosaicFlags REVOKABLE = new MosaicFlags(8);
 
 	public byte Value { get; }
 
@@ -4297,9 +4297,9 @@ public class MosaicFlags : IEnum<byte> {
 }
 
 public class MosaicSupplyChangeAction : IEnum<byte> {
-	public static readonly MosaicSupplyChangeAction DECREASE = new (0);
+	public static readonly MosaicSupplyChangeAction DECREASE = new MosaicSupplyChangeAction(0);
 
-	public static readonly MosaicSupplyChangeAction INCREASE = new (1);
+	public static readonly MosaicSupplyChangeAction INCREASE = new MosaicSupplyChangeAction(1);
 
 	public byte Value { get; }
 
@@ -4358,7 +4358,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -4521,7 +4521,7 @@ public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -4657,7 +4657,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -4803,7 +4803,7 @@ public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -4922,7 +4922,7 @@ public class MosaicSupplyRevocationTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -5059,7 +5059,7 @@ public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -5170,7 +5170,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int MultisigAccountModificationTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -5336,7 +5336,7 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int MultisigAccountModificationTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -5474,7 +5474,7 @@ public class AddressAliasTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -5620,7 +5620,7 @@ public class EmbeddedAddressAliasTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -5739,7 +5739,7 @@ public class MosaicAliasTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -5885,7 +5885,7 @@ public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -6004,7 +6004,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -6199,7 +6199,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -6360,15 +6360,15 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 }
 
 public class AccountRestrictionFlags : IEnum<ushort> {
-	public static readonly AccountRestrictionFlags ADDRESS = new (1);
+	public static readonly AccountRestrictionFlags ADDRESS = new AccountRestrictionFlags(1);
 
-	public static readonly AccountRestrictionFlags MOSAIC_ID = new (2);
+	public static readonly AccountRestrictionFlags MOSAIC_ID = new AccountRestrictionFlags(2);
 
-	public static readonly AccountRestrictionFlags TRANSACTION_TYPE = new (4);
+	public static readonly AccountRestrictionFlags TRANSACTION_TYPE = new AccountRestrictionFlags(4);
 
-	public static readonly AccountRestrictionFlags OUTGOING = new (16384);
+	public static readonly AccountRestrictionFlags OUTGOING = new AccountRestrictionFlags(16384);
 
-	public static readonly AccountRestrictionFlags BLOCK = new (32768);
+	public static readonly AccountRestrictionFlags BLOCK = new AccountRestrictionFlags(32768);
 
 	public ushort Value { get; }
 
@@ -6421,7 +6421,7 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -6580,7 +6580,7 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -6712,7 +6712,7 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -6871,7 +6871,7 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -7003,7 +7003,7 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -7162,7 +7162,7 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 	private readonly int EntityBodyReserved_1;
 	private readonly int AccountRestrictionTransactionBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -7293,7 +7293,7 @@ public class MosaicAddressRestrictionTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -7454,7 +7454,7 @@ public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -7596,19 +7596,19 @@ public class MosaicRestrictionKey : BaseValue, ISerializer {
 }
 
 public class MosaicRestrictionType : IEnum<byte> {
-	public static readonly MosaicRestrictionType NONE = new (0);
+	public static readonly MosaicRestrictionType NONE = new MosaicRestrictionType(0);
 
-	public static readonly MosaicRestrictionType EQ = new (1);
+	public static readonly MosaicRestrictionType EQ = new MosaicRestrictionType(1);
 
-	public static readonly MosaicRestrictionType NE = new (2);
+	public static readonly MosaicRestrictionType NE = new MosaicRestrictionType(2);
 
-	public static readonly MosaicRestrictionType LT = new (3);
+	public static readonly MosaicRestrictionType LT = new MosaicRestrictionType(3);
 
-	public static readonly MosaicRestrictionType LE = new (4);
+	public static readonly MosaicRestrictionType LE = new MosaicRestrictionType(4);
 
-	public static readonly MosaicRestrictionType GT = new (5);
+	public static readonly MosaicRestrictionType GT = new MosaicRestrictionType(5);
 
-	public static readonly MosaicRestrictionType GE = new (6);
+	public static readonly MosaicRestrictionType GE = new MosaicRestrictionType(6);
 
 	public byte Value { get; }
 
@@ -7672,7 +7672,7 @@ public class MosaicGlobalRestrictionTransaction : ITransaction {
 	private readonly int VerifiableEntityHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -7851,7 +7851,7 @@ public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
 	private readonly int EmbeddedTransactionHeaderReserved_1;
 	private readonly int EntityBodyReserved_1;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -8005,7 +8005,7 @@ public class TransferTransaction : ITransaction {
 	private readonly int TransferTransactionBodyReserved_1;
 	private readonly int TransferTransactionBodyReserved_2;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"Signature", "pod:Signature"},
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
@@ -8171,7 +8171,7 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 	private readonly int TransferTransactionBodyReserved_1;
 	private readonly int TransferTransactionBodyReserved_2;
 
-	public Dictionary<string, string> TypeHints { get; } = new (){
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
 		{"SignerPublicKey", "pod:PublicKey"},
 		{"Network", "enum:NetworkType"},
 		{"Type", "enum:TransactionType"},
@@ -8446,4 +8446,5 @@ public class EmbeddedTransactionFactory {
 		};
 		return mapping[entityName];
 	}
+}
 }

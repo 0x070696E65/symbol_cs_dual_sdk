@@ -1,11 +1,9 @@
-using System.Text;
 using CatSdk.Crypto;
-using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace CatSdk.Nem.External;
-
-public class TweetnaclNaclFastKeccak
+namespace CatSdk.Nem.External
+{
+    public class TweetnaclNaclFastKeccak
 {
     private static void ScalarBase(long[][] p, byte[] s) {
         var q = new[] {NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf()};
@@ -188,4 +186,6 @@ public class TweetnaclNaclFastKeccak
         crypto_sign_SECRETKEYBYTES = 64,
         crypto_sign_SEEDBYTES = 32,
         crypto_hash_BYTES = 64;
+}
+
 }

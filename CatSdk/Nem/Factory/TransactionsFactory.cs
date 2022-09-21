@@ -1,8 +1,9 @@
 using System.Reflection;
 using CatSdk.Utils;
 
-namespace CatSdk.Nem.Factory;
-public class TransactionsFactory
+namespace CatSdk.Nem.Factory
+{
+    public class TransactionsFactory
 {
     private readonly RuleBasedTransactionFactory Factory;
     public readonly Network Network;
@@ -154,4 +155,5 @@ public class TransactionsFactory
         }
         return factory;
     }
+}
 }

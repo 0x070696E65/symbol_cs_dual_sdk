@@ -4,7 +4,7 @@ using CatSdk.Symbol;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Symbol{
 public class SignTest
 {
 	[Test]
@@ -1320,4 +1320,4 @@ public class SignTest
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
-}
+}}

@@ -6,7 +6,7 @@ using CatSdk.Facade;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 
-namespace Test.Symbol;
+namespace Test.Symbol{
 public class TransactionTest
 {
     private readonly SymbolFacade Facade = new (Network.TestNet);    
@@ -611,7 +611,7 @@ public class TransactionTest
 			{"Signature", "20B4DFBFC5EEDD4C3B86F59C2825870373B2BB829871366713682C003936A586B1B34F892AA3FA11A31885CFFD2FA527F277C5B3B64D51716496EC408CD41206"},
 			{"Fee", 18370164183782063840},
 			{"Deadline", 8207562320463688160},
-			{"Cosignatures",
+			{"Cosignatures", 
 				new Dictionary<string, object>[]{
 						new (){
 						{"SignerPublicKey", "1831d617f38ae2a7007993514e1cba0902e840666bf917fa8f80c8620a5a43b3"},
@@ -2204,4 +2204,4 @@ public class TransactionTest
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
-}
+}}

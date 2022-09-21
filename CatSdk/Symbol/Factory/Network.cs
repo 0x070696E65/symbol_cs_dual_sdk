@@ -2,9 +2,9 @@ using System.Numerics;
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace CatSdk.Symbol.Factory;
-
-public class NetworkTimestamp : CatSdk.NetworkTimestamp
+namespace CatSdk.Symbol.Factory
+{
+    public class NetworkTimestamp : CatSdk.NetworkTimestamp
 {
     public NetworkTimestamp(BigInteger timestamp) : base(timestamp)
     {
@@ -61,4 +61,5 @@ public class SymbolAddress : ByteArray
     public SymbolAddress(string address) : base(SIZE, Converter.StringToAddress(address)) { }
     public SymbolAddress(ByteArray address) : base(SIZE, address.bytes) { }
     public SymbolAddress(byte[] address) : base(SIZE, address) { }
+}
 }

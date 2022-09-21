@@ -5,7 +5,8 @@ using CatSdk.Facade;
 using CatSdk.Nem.Factory;
 using CatSdk.Nem;
 using CatSdk.Utils;
-namespace Test.Nem;
+
+namespace Test.Nem{
 public class TransactionNonParserTest
 {
     private readonly NemFacade Facade = new (Network.TestNet);     
@@ -1711,4 +1712,4 @@ public class TransactionNonParserTest
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
-}
+}}

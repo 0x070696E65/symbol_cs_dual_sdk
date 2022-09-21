@@ -4,7 +4,7 @@ using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Symbol{
 public class AddressTest
 {
     private readonly SymbolFacade MainFacade = new (Network.MainNet);
@@ -1019,4 +1019,4 @@ public class AddressTest
 		Assert.AreEqual(addressPublic, mainAddress);
 		Assert.AreEqual(addressPublicTest, testAddress);
 	}
-}
+}}

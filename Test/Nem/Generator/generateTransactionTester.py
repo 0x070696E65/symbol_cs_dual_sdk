@@ -70,7 +70,7 @@ using CatSdk.Nem.Factory;
 using CatSdk.Nem;
 using CatSdk.Utils;
 
-namespace Test.Nem;
+namespace Test.Nem{
 public class TransactionTest
 {
     private readonly NemFacade Facade = new (Network.TestNet);
@@ -87,5 +87,6 @@ public class TransactionTest
         body += indent(f'Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));\n')
         body += f'}}\n'
         result += indent(body)
+    result += "}"
     result += "}"
     output_file.write(result)

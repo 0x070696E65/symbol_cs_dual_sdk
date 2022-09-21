@@ -1,25 +1,27 @@
 using CatSdk.CryptoTypes;
 using CatSdk.Nem.External;
 
-namespace CatSdk.Nem;
-public class KeyPair
+namespace CatSdk.Nem
 {
-    public KeyPair(PrivateKey privateKey)
+    public class KeyPair
     {
-        PrivateKey = privateKey;
-        var reversed = new byte[32];
-        PrivateKey.bytes.CopyTo(reversed, 0);
-        Array.Reverse(reversed);
-        _keypair = TweetnaclNaclFastKeccak.FromSeed(reversed);
-    }
+        public KeyPair(PrivateKey privateKey)
+        {
+            PrivateKey = privateKey;
+            var reversed = new byte[32];
+            PrivateKey.bytes.CopyTo(reversed, 0);
+            Array.Reverse(reversed);
+            _keypair = TweetnaclNaclFastKeccak.FromSeed(reversed);
+        }
 
-    private Dictionary<string, byte[]> _keypair { get; }
-    public PrivateKey PrivateKey { get; }
+        private Dictionary<string, byte[]> _keypair { get; }
+        public PrivateKey PrivateKey { get; }
 
-    public PublicKey PublicKey => new PublicKey(_keypair["publicKey"]);
-    
-    public CryptoTypes.Signature Sign(byte[] data)
-    {
-        return new CryptoTypes.Signature(TweetnaclNaclFastKeccak.Detached(data, _keypair["secretKey"]));
+        public PublicKey PublicKey => new PublicKey(_keypair["publicKey"]);
+
+        public CryptoTypes.Signature Sign(byte[] data)
+        {
+            return new CryptoTypes.Signature(TweetnaclNaclFastKeccak.Detached(data, _keypair["secretKey"]));
+        }
     }
 }

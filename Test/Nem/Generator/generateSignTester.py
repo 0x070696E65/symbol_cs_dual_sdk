@@ -21,7 +21,7 @@ using CatSdk.Nem;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Nem;
+namespace Test.Nem{
 public class SignTest
 {
 """
@@ -42,5 +42,6 @@ public class SignTest
         result += indent(body)
         if i == 100:
             break
+    result += "}"
     result += "}"
     output_file.write(result)

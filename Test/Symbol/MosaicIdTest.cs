@@ -5,7 +5,7 @@ using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Symbol;
+namespace Test.Symbol{
 public class MosaicIdTest
 {
     private readonly SymbolFacade MainFacade = new (Network.MainNet);
@@ -1929,4 +1929,4 @@ public class MosaicIdTest
 		Assert.AreEqual(mosaicIdPublic, mosaicIdMain);
 		Assert.AreEqual(mosaicIdPublicTest, mosaicIdTest);
 	}
-}
+}}

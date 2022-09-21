@@ -90,7 +90,7 @@ class StructFormatter(AbstractTypeFormatter):
 	#	return 'struct'
 
 	def generate_type_hints(self):
-		body = 'public Dictionary<string, string> TypeHints { get; } = new (){\n'
+		body = 'public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){\n'
 		hints = []
 		for field in self.non_reserved_fields():
 			if not field.extensions.printer.type_hint:

@@ -25,7 +25,7 @@ class EnumTypeFormatter(AbstractTypeFormatter):
 	def get_fields(self):
 		return list(
 			map(
-				lambda e: f'public static readonly {self.typename} {e.name} = new ({e.value});\n',
+				lambda e: f'public static readonly {self.typename} {e.name} = new {self.typename}({e.value});\n',
 				self.enum_type.values,
 			)
 		) + [f"public {self.int_printer.get_type()} Value {{ get; }}"]

@@ -21,7 +21,7 @@ using CatSdk.Nem.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Nem;
+namespace Test.Nem{
 public class AddressTest
 {
     private readonly NemFacade MainFacade = new (Network.MainNet);
@@ -41,5 +41,6 @@ public class AddressTest
         result += indent(body)
         if i == 100:
             break
+    result += "}"
     result += "}"
     output_file.write(result)

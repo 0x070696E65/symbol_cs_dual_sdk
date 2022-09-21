@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 
-namespace CatSdk.CryptoTypes;
-
+namespace CatSdk.CryptoTypes
+{
 /**
  *  Represents a 256-bit hash.
  */
@@ -45,8 +45,12 @@ public class PrivateKey : ByteArray {
 	 * Creates a random private key.
 	 * @returns {PrivateKey} Random private key.
 	 */
-	public static PrivateKey Random() {
-		return new PrivateKey(RandomNumberGenerator.GetBytes(SIZE));
+	public static PrivateKey Random()
+	{
+		var rng = new RNGCryptoServiceProvider();
+		var random = new byte[SIZE];
+		rng.GetBytes(random);
+		return new PrivateKey(random);
 	}
 }
 
@@ -86,4 +90,5 @@ public class Signature : ByteArray {
 	public static Signature Zero() {
 		return new Signature(new byte[SIZE]);
 	}
+}	
 }

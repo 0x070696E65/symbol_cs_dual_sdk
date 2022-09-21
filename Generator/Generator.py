@@ -44,7 +44,7 @@ def generate_files(ast_models, output_directory: Path):
 
 	with open(output_directory / 'models.cs', 'w', encoding='utf8', newline='\n') as output_file:
 		output_file.write(
-			f'using CatSdk.Utils;\nnamespace CatSdk.{chain_name(output_directory)};\n\n'
+			f'using CatSdk.Utils;\nnamespace CatSdk.{chain_name(output_directory)}{{\n\n'
 		)
 
 		for ast_model in ast_models:
@@ -62,6 +62,7 @@ def generate_files(ast_models, output_directory: Path):
 				factories.append(str(factory_generator))
 
 		output_file.write('\n'.join(factories))
+		output_file.write(f'}}')
 
 		#generate_module_exports(output_file, list(map(lambda ast_model: ast_model.name, ast_models)) + factory_names)
 

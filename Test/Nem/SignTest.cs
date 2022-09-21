@@ -4,7 +4,7 @@ using CatSdk.Nem;
 using CatSdk.Utils;
 using NUnit.Framework;
 
-namespace Test.Nem;
+namespace Test.Nem{
 public class SignTest
 {
 	[Test]
@@ -1320,4 +1320,4 @@ public class SignTest
 		Assert.AreEqual(pubKey, publicKey);
 		Assert.AreEqual(sig, signature);
 	}
-}
+}}

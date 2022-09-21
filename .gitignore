@@ -80,7 +80,7 @@ bld/
 
 # User specific
 .idea/**
-**/.idea
+**/.idea/**
 **/.idea/**/workspace.xml
 **/.idea/**/tasks.xml
 **/.idea/shelf/*

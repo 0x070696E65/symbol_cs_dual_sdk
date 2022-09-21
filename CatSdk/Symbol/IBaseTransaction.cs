@@ -1,6 +1,7 @@
-namespace CatSdk.Symbol;
-
-public interface IBaseTransaction : IStruct
+namespace CatSdk.Symbol
 {
-    public TransactionType Type { get; }
+    public interface IBaseTransaction : IStruct
+    {
+        public TransactionType Type { get; }
+    }
 }

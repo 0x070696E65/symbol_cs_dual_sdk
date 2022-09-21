@@ -1,5 +1,5 @@
 using CatSdk.Utils;
-namespace CatSdk.Nem;
+namespace CatSdk.Nem{
 
 public class Amount : BaseValue, ISerializer {
 	public const byte SIZE = 8;
@@ -4500,4 +4500,5 @@ public class NonVerifiableTransactionFactory {
 		};
 		return mapping[entityName];
 	}
+}
 }

@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['id_0',['Id',['../class_cat_sdk_1_1_nem_1_1_mosaic_definition.html#ab45119f5b87c734c10efa09c19574b84',1,'CatSdk.Nem.MosaicDefinition.Id()'],['../class_cat_sdk_1_1_symbol_1_1_mosaic_definition_transaction.html#ac902a75ce066c2aadd4b01954411e462',1,'CatSdk.Symbol.MosaicDefinitionTransaction.Id()'],['../class_cat_sdk_1_1_symbol_1_1_embedded_mosaic_definition_transaction.html#ad61f27a47f92a72fbae9b551200c426a',1,'CatSdk.Symbol.EmbeddedMosaicDefinitionTransaction.Id()'],['../class_cat_sdk_1_1_symbol_1_1_namespace_registration_transaction.html#aaea81b0f921e274ecbe47362f5f82a33',1,'CatSdk.Symbol.NamespaceRegistrationTransaction.Id()'],['../class_cat_sdk_1_1_symbol_1_1_embedded_namespace_registration_transaction.html#a1801de45aa494ae971a15e294c9b238a',1,'CatSdk.Symbol.EmbeddedNamespaceRegistrationTransaction.Id()']]],
+  ['innertransaction_1',['InnerTransaction',['../class_cat_sdk_1_1_nem_1_1_multisig_transaction.html#ab903972755ec2b071a737a0f66febb5d',1,'CatSdk::Nem::MultisigTransaction']]]
+];

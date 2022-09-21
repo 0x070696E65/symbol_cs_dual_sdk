@@ -8,7 +8,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 
 namespace CatSdk.Crypto
 {
-    public class Crypto
+    public static class Crypto
     {
         /**
          * Generate random bytes by length
@@ -43,14 +43,14 @@ namespace CatSdk.Crypto
                 binaryWriter.Write(iv);
                 binaryWriter.Write(encryptedBytes);
             }
-                
+                    
             var combinedStreamArray = combinedStream.ToArray();
             var result = new byte[combinedStreamArray.Length];
             Array.Copy(combinedStreamArray, combinedStreamArray.Length - 16, result, 0,  16);
             Array.Copy(combinedStreamArray, 0, result, 16,  combinedStreamArray.Length - 16);
             return result;
         }
-        
+            
         public static byte[]? Decrypt(byte[] encryptedMessage, byte[] key)
         {
             var newArray = new byte[encryptedMessage.Length];
@@ -111,25 +111,25 @@ namespace CatSdk.Crypto
             var iv = RandomBytes(12);
             return _Encode(Converter.HexToBytes(senderPrivateKey), Converter.HexToBytes(recipientPub), isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
-        
+            
         public static string Encode(byte[] senderPrivateKey, string recipientPub, string msg, bool isHexString = false)
         {
             var iv = RandomBytes(12);
             return _Encode(senderPrivateKey, Converter.HexToBytes(recipientPub), isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
-        
+            
         public static string Encode(string senderPrivateKey, byte[] recipientPub, string msg, bool isHexString = false)
         {
             var iv = RandomBytes(12);
             return _Encode(Converter.HexToBytes(senderPrivateKey), recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
-        
+            
         public static string Encode(byte[] senderPrivateKey, byte[] recipientPub, string msg, bool isHexString = false)
         {
             var iv = RandomBytes(12);
             return _Encode(senderPrivateKey, recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
-        
+            
         /**
          * Decode an encrypted message payload
          *
@@ -157,22 +157,22 @@ namespace CatSdk.Crypto
             var decoded = _Decode(Converter.HexToBytes(recipientPrivateKey), Converter.HexToBytes(senderPublic), Converter.HexToBytes(payload));
             return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
-        
+            
         public static string? Decode(byte[] recipientPrivateKey, string senderPublic, string payload) {
             var decoded = _Decode(recipientPrivateKey, Converter.HexToBytes(senderPublic), Converter.HexToBytes(payload));
             return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
-        
+            
         public static string? Decode(string recipientPrivateKey, byte[] senderPublic, string payload) {
             var decoded = _Decode(Converter.HexToBytes(recipientPrivateKey), senderPublic, Converter.HexToBytes(payload));
             return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
-        
+            
         public static string? Decode(byte[] recipientPrivateKey, byte[] senderPublic, string payload) {
             var decoded = _Decode(recipientPrivateKey, senderPublic, Converter.HexToBytes(payload));
             return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
-        
+            
         private static Aes CreateAesManaged(string key, string iv)
         {
             var aes = Aes.Create();
@@ -184,7 +184,7 @@ namespace CatSdk.Crypto
             aes.Padding = PaddingMode.PKCS7;
             return aes;
         }
-        
+            
         public static string Encrypt(string text, string key, string iv)
         {
             var aes = CreateAesManaged(key, iv);
@@ -200,7 +200,7 @@ namespace CatSdk.Crypto
             var dest = aes.CreateDecryptor().TransformFinalBlock(src, 0, src.Length);
             return Encoding.UTF8.GetString(dest);
         }
-        
+            
         public static string EncryptString(string sourceString, string password, string salt)
         {
             using var rijndael = Aes.Create("AesManaged");

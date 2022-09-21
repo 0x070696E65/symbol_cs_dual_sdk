@@ -1,5 +1,5 @@
 using CatSdk.Utils;
-namespace CatSdk.Symbol;
+namespace CatSdk.Symbol{
 
 public class Amount : BaseValue, ISerializer {
 	public const byte SIZE = 8;
@@ -8446,4 +8446,5 @@ public class EmbeddedTransactionFactory {
 		};
 		return mapping[entityName];
 	}
+}
 }

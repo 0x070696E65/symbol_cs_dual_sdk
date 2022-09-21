@@ -1,7 +1,8 @@
-namespace CatSdk;
-
-public interface ISerializer
+namespace CatSdk
 {
-    public uint Size { get; }
-    public byte[] Serialize();
+    public interface ISerializer
+    {
+        public uint Size { get; }
+        public byte[] Serialize();
+    }
 }

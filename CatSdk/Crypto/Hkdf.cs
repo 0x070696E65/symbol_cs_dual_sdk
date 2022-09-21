@@ -47,4 +47,3 @@ namespace CatSdk.Crypto
         }
     }
 }
-

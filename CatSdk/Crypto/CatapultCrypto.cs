@@ -1,7 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CatSdk.Crypto{
+namespace CatSdk.Crypto
+{
     public static class CatapultCrypto
     {
         const int Key_Size = 32;
@@ -45,5 +46,5 @@ namespace CatSdk.Crypto{
             }
             return result;
         }
-    }
+    }   
 }

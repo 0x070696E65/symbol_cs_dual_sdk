@@ -81,7 +81,7 @@ namespace CatSdk.Symbol.Factory
 	     * @param {Signature} signature Signature to attach.
 	     * @returns {string} JSON transaction payload.
 	     */
-        public string AttachSignature(ITransaction transaction, Signature signature) {
+        public static string AttachSignature(ITransaction transaction, Signature signature) {
             transaction.Signature = signature;
             var transactionBuffer = transaction.Serialize();
             var hexPayload = Converter.BytesToHex(transactionBuffer);
@@ -89,7 +89,7 @@ namespace CatSdk.Symbol.Factory
             return jsonPayload;
         }
             
-        public ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
+        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
             transaction.Signature = signature;
             return transaction;
         }

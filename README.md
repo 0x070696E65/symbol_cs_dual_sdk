@@ -37,9 +37,16 @@ var Facade = new NemFacade(Network.MainNet);
 
 ## SampleTransaction
 
-### TransferTransaction
+### Symbol TransferTransaction
 
 ```c#
+using System.Text;
+using CatSdk.CryptoTypes;
+using CatSdk.Facade;
+using CatSdk.Utils;
+using CatSdk.Symbol;
+using CatSdk.Symbol.Factory;
+
 var facade = new SymbolFacade(Network.TestNet);
 var descriptor = new Dictionary<string, object>(){
     {"Type", TransactionType.TRANSFER},
@@ -66,14 +73,58 @@ var payload = facade.TransactionFactory.AttachSignature(tx, signature);
 var hash = facade.HashTransaction(facade.TransactionFactory.AttachSignatureTransaction(tx, signature));
 Console.WriteLine(payload);
 Console.WriteLine(hash);
-const string node = "https://hideyoshi.mydns.jp:3001/transactions";
+const string node = "NODE_URL";
 using var client = new HttpClient();
 var content = new StringContent(payload, Encoding.UTF8, "application/json");
-var response =  client.PutAsync(node, content).Result;
+var response =  client.PutAsync(node + "/transactions", content).Result;
 var responseDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseDetailsJson);
 
 ```
+
+### NEM TransferTransaction
+
+```c#
+using System.Text;
+using CatSdk.CryptoTypes;
+using CatSdk.Facade;
+using CatSdk.Utils;
+using CatSdk.Nem;
+
+var facade = new NemFacade(Network.TestNet);
+var timestamp = facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow);
+var deadline = timestamp.AddHours(2);
+var descriptor = new Dictionary<string, object>(){
+    {"Type", "transfer_transaction_v1"},
+    {"RecipientAddress", "RECIPIENT_ADDRESS"},
+    {"Amount", 1000000},
+    {"MessageEnvelopeSize", 0},
+    {"SignerPublicKey", new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY"))},
+    {"Fee", new Amount(1000000)},
+    {"Timestamp", timestamp.Timestamp - 5},
+    {"Deadline", deadline.Timestamp},
+};
+
+var tx = facade.TransactionFactory.Create(descriptor);
+var privateKey = new PrivateKey("SIGNER_PRIVATE_KEY");
+var keyPair = new KeyPair(privateKey);
+
+var signature = facade.SignTransaction(keyPair, tx);
+var payload = facade.TransactionFactory.AttachSignature(tx, signature);
+const string node = "NODE_URL";
+using var client = new HttpClient();
+var content = new StringContent(payload, Encoding.UTF8, "application/json");
+var response =  client.PostAsync(node + "/transaction/announce", content).Result;
+var problemDetailsJson = await response.Content.ReadAsStringAsync();
+Console.WriteLine(problemDetailsJson);
+```
+
+その他のトランザクションはテストデータを参考にしてください。<br>
+今後、需要があればドキュメントを更新するかもしれません。<br>
+
+[Symbol Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Symbol/TransactionNonParserTest.cs)
+<br>
+[NEM Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Nem/TransactionNonParserTest.cs)
 
 # Author
 [toshi](https://twitter.com/toshiya_ma)

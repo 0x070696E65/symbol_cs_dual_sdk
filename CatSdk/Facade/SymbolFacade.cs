@@ -34,9 +34,11 @@ namespace CatSdk.Facade
 	    {
 	        var hasher = new Sha3Digest(256);
 	        var hash = new byte[32];
-	        hasher.BlockUpdate(transaction.Signature.bytes, 0, hash.Length);
-	        hasher.BlockUpdate(transaction.SignerPublicKey.bytes, 0, hash.Length);
-	        hasher.BlockUpdate(Network.GenerationHashSeed?.bytes, 0, hash.Length);
+	        hasher.BlockUpdate(transaction.Signature.bytes, 0, transaction.Signature.bytes.Length);
+	        hasher.BlockUpdate(transaction.SignerPublicKey.bytes, 0, transaction.SignerPublicKey.bytes.Length);
+	        hasher.BlockUpdate(Network.GenerationHashSeed?.bytes, 0, Network.GenerationHashSeed!.bytes.Length);
+	        var transactionBytes = TransactionDataBuffer(transaction.Serialize());
+	        hasher.BlockUpdate(transactionBytes, 0, transactionBytes.Length);
 	        hasher.DoFinal(hash, 0);
 	        return new Hash256(hash);
 	    }

@@ -27,12 +27,53 @@ using CatSdk.Facade;
 使用するブロックチェーン、ネットワークのFacadeを作成します。<br><br>
 <b>例）Symbolブロックチェーン、テストネットの場合</b>
 ```c#
-private readonly SymbolFacade Facade = new (Network.TestNet);
+var Facade = new SymbolFacade(Network.TestNet);
+```
+
+<b>例）Nemブロックチェーン、メインネットの場合</b>
+```c#
+var Facade = new NemFacade(Network.MainNet);
 ```
 
 ## SampleTransaction
 
 ### TransferTransaction
+
+```c#
+var facade = new SymbolFacade(Network.TestNet);
+var descriptor = new Dictionary<string, object>(){
+    {"Type", TransactionType.TRANSFER},
+    {"RecipientAddress", "RECIPIENT_ADDRESS"},
+    {"Mosaics", 
+        new UnresolvedMosaic[]{
+            new (){
+                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+                Amount = new Amount(1000000)
+            },
+        }
+    },
+    {"SignerPublicKey", new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY"))},
+    {"Message", Converter.Utf8ToPlainMessage("Hello, Symbol")},
+    {"Fee", new Amount(1000000)},
+    {"Deadline", new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp)},
+};
+var privateKey = new PrivateKey("SIGNER_PRIVATE_KEY");
+var keyPair = new KeyPair(privateKey);
+
+var tx = facade.TransactionFactory.Create(descriptor);
+var signature = facade.SignTransaction(keyPair, tx);
+var payload = facade.TransactionFactory.AttachSignature(tx, signature);
+var hash = facade.HashTransaction(facade.TransactionFactory.AttachSignatureTransaction(tx, signature));
+Console.WriteLine(payload);
+Console.WriteLine(hash);
+const string node = "https://hideyoshi.mydns.jp:3001/transactions";
+using var client = new HttpClient();
+var content = new StringContent(payload, Encoding.UTF8, "application/json");
+var response =  client.PutAsync(node, content).Result;
+var responseDetailsJson = await response.Content.ReadAsStringAsync();
+Console.WriteLine(responseDetailsJson);
+
+```
 
 # Author
 [toshi](https://twitter.com/toshiya_ma)

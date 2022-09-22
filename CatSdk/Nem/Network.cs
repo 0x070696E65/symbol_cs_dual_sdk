@@ -1,15 +1,23 @@
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace CatSdk.Nem.Factory
+namespace CatSdk.Nem
 {
     /**
      * Represents a NEM network timestamp with millisecond resolution.
      */
     public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
-        public NetworkTimestamp(ulong timestamp) : base(timestamp)
-        {
+        public NetworkTimestamp(ulong timestamp) : base(timestamp) { }
+        
+        /**
+	     * Adds a specified number of seconds to this timestamp.
+	     * @override
+	     * @param {ulong} count Number of seconds to add.
+	     * @returns {NetworkTimestamp} New timestamp that is the specified number of seconds past this timestamp.
+	     */
+        public override CatSdk.NetworkTimestamp AddSeconds(ulong count) {
+            return new NetworkTimestamp(Timestamp + count);
         }
     }
 
@@ -23,12 +31,12 @@ namespace CatSdk.Nem.Factory
         public static readonly Network MainNet = new Network(
             "mainnet",
             0x68,
-            new DateTime(2015, 3, 1, 0, 6, 25)
+            new DateTime(2015, 4, 29, 0, 6, 25, DateTimeKind.Utc)
         );
         public static readonly Network TestNet = new Network(
             "testnet",
             0x98,
-            new DateTime(2015, 3, 1, 0, 6, 25)
+            new DateTime(2015, 4, 29, 0, 6, 25, DateTimeKind.Utc)
         );
         
         /**

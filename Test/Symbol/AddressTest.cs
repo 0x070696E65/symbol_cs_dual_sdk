@@ -1,6 +1,7 @@
 
 using System;
 using CatSdk.Facade;
+using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;

@@ -1,17 +1,35 @@
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace CatSdk.Symbol.Factory
+namespace CatSdk.Symbol
 {
     /**
      * Represents a symbol network timestamp with millisecond resolution.
      */
     public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
-        public NetworkTimestamp(ulong timestamp) : base(timestamp)
-        {
+        public NetworkTimestamp(ulong timestamp) : base(timestamp) { }
+        
+        /**
+	     * Adds a specified number of milliseconds to this timestamp.
+	     * @param {ulong} count Number of milliseconds to add.
+	     * @returns {NetworkTimestamp} New timestamp that is the specified number of milliseconds past this timestamp.
+	     */
+        public CatSdk.NetworkTimestamp AddMilliseconds(ulong count) {
+            return new NetworkTimestamp(Timestamp + count);
+        }
+
+        /**
+	     * Adds a specified number of seconds to this timestamp.
+	     * @override
+	     * @param {ulong} count Number of seconds to add.
+	     * @returns {NetworkTimestamp} New timestamp that is the specified number of seconds past this timestamp.
+	     */
+        public override CatSdk.NetworkTimestamp AddSeconds(ulong count) {
+            return AddMilliseconds(1000 * count);
         }
     }
+    
     /**
      * Represents a Symbol network.
      */
@@ -22,13 +40,13 @@ namespace CatSdk.Symbol.Factory
         public static readonly Network MainNet = new Network(
             "mainnet",
             0x68,
-            new DateTime(2021, 2, 16, 0, 6, 25),
+            new DateTime(2021, 3, 16, 0, 6, 25, DateTimeKind.Utc),
             new Hash256(Converter.HexToBytes("57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6"))
         );
         public static readonly Network TestNet = new Network(
             "testnet",
             0x98,
-            new DateTime(2021, 10, 25, 14, 0, 47),
+            new DateTime(2021, 11, 25, 14, 0, 47, DateTimeKind.Utc),
             new Hash256(Converter.HexToBytes("7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836"))
         );
             

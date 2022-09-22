@@ -8,13 +8,13 @@ namespace CatSdk
 	 */
 	public class BaseNetwork<T>
 	{
-		private string Name;
-		private readonly byte Identifier;
-		private NetworkTimestampDatetimeConverter DatetimeConverter;
-		private readonly KeccakDigest AddressHasher;
-		private readonly Func<byte[], byte[], T> CreateAddress;
-		private Type AddressClass;
-		private Type NetworkTimestampClass;
+		public readonly string Name;
+		public readonly byte Identifier;
+		public readonly NetworkTimestampDatetimeConverter DatetimeConverter;
+		public readonly KeccakDigest AddressHasher;
+		public readonly Func<byte[], byte[], T> CreateAddress;
+		public Type AddressClass;
+		public readonly Type NetworkTimestampClass;
 
 		/**
 		 * Creates a new network with the specified name and identifier byte.
@@ -72,6 +72,35 @@ namespace CatSdk
 			var checksum = new byte[4];
 			Array.Copy(resultHash, checksum, 4);
 			return CreateAddress(version, checksum);
+		}
+		
+		/**
+		 * Converts a network timestamp to a datetime.
+		 * @param {NetworkTimestamp} referenceNetworkTimestamp Reference network timestamp to convert.
+		 * @returns {DateTime} Datetime representation of the reference network timestamp.
+		 */
+		public DateTime ToDatetime(NetworkTimestamp referenceNetworkTimestamp) {
+			return DatetimeConverter.ToDatetime(referenceNetworkTimestamp.Timestamp);
+		}
+
+		/**
+		 * Converts a datetime to a network timestamp.
+		 * @param {DateTime} referenceDatetime Reference datetime to convert.
+		 * @returns {NetworkTimestamp} Network timestamp representation of the reference datetime.
+		 */
+		public E FromDatetime<E>(DateTime referenceDatetime) where E: NetworkTimestamp{
+			var instance = Activator.CreateInstance(NetworkTimestampClass, DatetimeConverter.ToDifference(referenceDatetime));
+			if (NetworkTimestampClass is null) throw new NullReferenceException("");
+			if (instance.GetType() == NetworkTimestampClass) return (E)instance;
+			throw new Exception("instance is invalid type");
+		}
+
+		/**
+		 * Returns string representation of this object.
+		 * @returns {string} String representation of this object
+		 */
+		public override string ToString() {
+			return Name;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 
 using CatSdk.Facade;
+using CatSdk.Nem;
 using CatSdk.Nem.Factory;
 using CatSdk.Utils;
 using NUnit.Framework;

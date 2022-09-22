@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using CatSdk.Facade;
+using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
 

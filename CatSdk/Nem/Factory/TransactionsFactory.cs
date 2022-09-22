@@ -55,12 +55,12 @@ namespace CatSdk.Nem.Factory
             }
             return inst;
         }
-
+        
         public string AttachSignature(ITransaction transaction, Signature signature) {
             transaction.Signature = new Signature(signature.bytes);
-            var transactionBuffer = transaction.Serialize();
-            var hexPayload = Converter.BytesToHex(transactionBuffer);
-            var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
+            var transactionHex = Converter.BytesToHex(ToNonVerifiableTransaction(transaction).Serialize());
+            var signatureHex = signature.ToString();
+            var jsonPayload = "{\"data\":\"" + transactionHex + "\",\"signature\":\"" + signatureHex + "\"}";
             return jsonPayload;
         }
         

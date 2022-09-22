@@ -31,12 +31,12 @@ namespace CatSdk.Nem
         public static readonly Network MainNet = new Network(
             "mainnet",
             0x68,
-            new DateTime(2015, 4, 29, 0, 6, 25, DateTimeKind.Utc)
+            new DateTime(2015, 3, 29, 0, 6, 25, DateTimeKind.Utc)
         );
         public static readonly Network TestNet = new Network(
             "testnet",
             0x98,
-            new DateTime(2015, 4, 29, 0, 6, 25, DateTimeKind.Utc)
+            new DateTime(2015, 3, 29, 0, 6, 25, DateTimeKind.Utc)
         );
         
         /**
@@ -48,7 +48,7 @@ namespace CatSdk.Nem
         private Network(string name, byte identifier, DateTime epochTime, Hash256? generationHashSeed = null) : base(
             name,
             identifier,
-            new NetworkTimestampDatetimeConverter(epochTime, "seconds'"),
+            new NetworkTimestampDatetimeConverter(epochTime, "seconds"),
             new KeccakDigest(256),
             CreateAddressFunc,
             typeof(Address),

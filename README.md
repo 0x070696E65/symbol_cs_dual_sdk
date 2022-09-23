@@ -49,6 +49,9 @@ using CatSdk.Symbol.Factory;
 
 var facade = new SymbolFacade(Network.TestNet);
 
+var privateKey = new PrivateKey("PRIVATE_KEY");
+var keyPair = new KeyPair(privateKey);
+
 var tx = new TransferTransaction
 {
     Network = NetworkType.TESTNET,
@@ -61,14 +64,12 @@ var tx = new TransferTransaction
             Amount = new Amount(1000000)
         },
     },
-    SignerPublicKey = new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY")),
+    SignerPublicKey = keyPair.PublicKey,
     Message = Converter.Utf8ToPlainMessage("Hello, Symbol"),
     Fee = new Amount(1000000),
     Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp)
 };
 
-var privateKey = new PrivateKey("BBD394D0EE4E10650D5BF15D1389580C6A6C044481E52022A98CD288A2EB679D");
-var keyPair = new KeyPair(privateKey);
 var signature = facade.SignTransaction(keyPair, transferTransaction);
 var payload = TransactionsFactory.AttachSignature(transferTransaction, signature);
 var signed = TransactionsFactory.AttachSignatureTransaction(transferTransaction, signature);

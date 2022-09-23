@@ -29,7 +29,7 @@ namespace CatSdk.Nem.Factory
 	     * @param {object} transaction Transaction object.
 	     * @returns {object} Non-verifiable transaction object.
 	     */
-        public IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
+        public static IBaseTransaction ToNonVerifiableTransaction(IBaseTransaction transaction)
         {
             var nonVerifiableClassName = transaction.GetType().Name;
             nonVerifiableClassName = nonVerifiableClassName.Contains("NonVerifiable") ? nonVerifiableClassName : $"NonVerifiable{nonVerifiableClassName}";
@@ -56,7 +56,7 @@ namespace CatSdk.Nem.Factory
             return inst;
         }
         
-        public string AttachSignature(ITransaction transaction, Signature signature) {
+        public static string AttachSignature(ITransaction transaction, Signature signature) {
             transaction.Signature = new Signature(signature.bytes);
             var transactionHex = Converter.BytesToHex(ToNonVerifiableTransaction(transaction).Serialize());
             var signatureHex = signature.ToString();
@@ -64,7 +64,7 @@ namespace CatSdk.Nem.Factory
             return jsonPayload;
         }
         
-        public ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
+        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
             transaction.Signature = new Signature(signature.bytes);
             return transaction;
         }

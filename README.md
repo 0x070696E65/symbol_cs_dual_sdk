@@ -48,31 +48,35 @@ using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 
 var facade = new SymbolFacade(Network.TestNet);
-var descriptor = new Dictionary<string, object>(){
-    {"Type", TransactionType.TRANSFER},
-    {"RecipientAddress", "RECIPIENT_ADDRESS"},
-    {"Mosaics", 
-        new UnresolvedMosaic[]{
-            new (){
-                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
-                Amount = new Amount(1000000)
-            },
-        }
-    },
-    {"SignerPublicKey", new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY"))},
-    {"Message", Converter.Utf8ToPlainMessage("Hello, Symbol")},
-    {"Fee", new Amount(1000000)},
-    {"Deadline", new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp)},
-};
-var privateKey = new PrivateKey("SIGNER_PRIVATE_KEY");
-var keyPair = new KeyPair(privateKey);
 
-var tx = facade.TransactionFactory.Create(descriptor);
-var signature = facade.SignTransaction(keyPair, tx);
-var payload = facade.TransactionFactory.AttachSignature(tx, signature);
-var hash = facade.HashTransaction(facade.TransactionFactory.AttachSignatureTransaction(tx, signature));
+var tx = new TransferTransaction
+{
+    Network = NetworkType.TESTNET,
+    RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("RECIPIENT_ADDRESS")),
+    Mosaics = new UnresolvedMosaic[]
+    {
+        new()
+        {
+            MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+            Amount = new Amount(1000000)
+        },
+    },
+    SignerPublicKey = new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY")),
+    Message = Converter.Utf8ToPlainMessage("Hello, Symbol"),
+    Fee = new Amount(1000000),
+    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp)
+};
+
+var privateKey = new PrivateKey("BBD394D0EE4E10650D5BF15D1389580C6A6C044481E52022A98CD288A2EB679D");
+var keyPair = new KeyPair(privateKey);
+var signature = facade.SignTransaction(keyPair, transferTransaction);
+var payload = TransactionsFactory.AttachSignature(transferTransaction, signature);
+var signed = TransactionsFactory.AttachSignatureTransaction(transferTransaction, signature);
+var hash = facade.HashTransaction(TransactionsFactory.AttachSignatureTransaction(transferTransaction, signature));
 Console.WriteLine(payload);
 Console.WriteLine(hash);
+Console.WriteLine(signed.Signature);
+
 const string node = "NODE_URL";
 using var client = new HttpClient();
 var content = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -94,23 +98,28 @@ using CatSdk.Nem;
 var facade = new NemFacade(Network.TestNet);
 var timestamp = facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow);
 var deadline = timestamp.AddHours(2);
-var descriptor = new Dictionary<string, object>(){
-    {"Type", "transfer_transaction_v1"},
-    {"RecipientAddress", "RECIPIENT_ADDRESS"},
-    {"Amount", 1000000},
-    {"MessageEnvelopeSize", 0},
-    {"SignerPublicKey", new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY"))},
-    {"Fee", new Amount(1000000)},
-    {"Timestamp", timestamp.Timestamp - 5},
-    {"Deadline", deadline.Timestamp},
+var tx = new TransferTransactionV1()
+{
+    Network = NetworkType.TESTNET,
+    RecipientAddress = new Address(Converter.Utf8ToBytes("RECIPIENT_ADDRESS")),
+    Amount = new Amount(1000000),
+    MessageEnvelopeSize = 0,
+    SignerPublicKey = new PublicKey(Converter.HexToBytes("SIGNER_PUBLIC_KEY")),
+    Fee = new Amount(1000000),
+    Timestamp = new Timestamp((uint)timestamp.Timestamp - 5),
+    Deadline = new Timestamp((uint)deadline.Timestamp),
 };
-
-var tx = facade.TransactionFactory.Create(descriptor);
 var privateKey = new PrivateKey("SIGNER_PRIVATE_KEY");
 var keyPair = new KeyPair(privateKey);
 
 var signature = facade.SignTransaction(keyPair, tx);
-var payload = facade.TransactionFactory.AttachSignature(tx, signature);
+var payload = TransactionsFactory.AttachSignature(tx, signature);
+var signed = TransactionsFactory.AttachSignatureTransaction(tx, signature);
+var hash = facade.HashTransaction(signed);
+Console.WriteLine(payload);
+Console.WriteLine(hash);
+Console.WriteLine(signed.Signature);
+
 const string node = "NODE_URL";
 using var client = new HttpClient();
 var content = new StringContent(payload, Encoding.UTF8, "application/json");

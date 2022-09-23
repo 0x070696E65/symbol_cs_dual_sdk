@@ -31,7 +31,7 @@ namespace CatSdk.Facade
         {
             var hasher = new KeccakDigest(256);
             var hash = new byte[32];
-            var nonVerifiableTransaction = TransactionFactory.ToNonVerifiableTransaction(transaction);
+            var nonVerifiableTransaction = TransactionsFactory.ToNonVerifiableTransaction(transaction);
             hasher.BlockUpdate(nonVerifiableTransaction.Serialize(), 0, nonVerifiableTransaction.Serialize().Length);
             hasher.DoFinal(hash, 0);
             return new Hash256(hash);
@@ -45,7 +45,7 @@ namespace CatSdk.Facade
 	     */
         public Signature SignTransaction(KeyPair keyPair, IBaseTransaction transaction)
         {
-            var nonVerifiableTransaction = TransactionFactory.ToNonVerifiableTransaction(transaction);
+            var nonVerifiableTransaction = TransactionsFactory.ToNonVerifiableTransaction(transaction);
             return keyPair.Sign(nonVerifiableTransaction.Serialize());
         }
         
@@ -55,8 +55,8 @@ namespace CatSdk.Facade
 	     * @param {Signature} signature Signature to verify.
 	     * @returns {bool} true if transaction signature is verified.
 	     */
-        public bool VerifyTransaction(ITransaction transaction, Signature signature) {
-            var nonVerifiableTransaction = TransactionFactory.ToNonVerifiableTransaction(transaction);
+        public static bool VerifyTransaction(ITransaction transaction, Signature signature) {
+            var nonVerifiableTransaction = TransactionsFactory.ToNonVerifiableTransaction(transaction);
             var publicKey = new PublicKey(transaction.SignerPublicKey.bytes);
             return new Verifier(publicKey).Verify(nonVerifiableTransaction.Serialize(), signature);
         }

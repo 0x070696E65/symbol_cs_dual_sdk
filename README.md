@@ -86,6 +86,85 @@ Console.WriteLine(responseDetailsJson);
 
 ```
 
+### Symbol AggregateCompleteTransaction
+```c#
+using System.Text;
+using CatSdk.CryptoTypes;
+using CatSdk.Facade;
+using CatSdk.Utils;
+using CatSdk.Symbol;
+using CatSdk.Symbol.Factory;
+
+var facade = new SymbolFacade(Network.TestNet);
+var alicePrivateKey = new PrivateKey("ALICE_PRIVATE_KEY");
+var aliceKeyPair = new KeyPair(alicePrivateKey);
+
+var bobPrivateKey = new PrivateKey("BOB_PRIVATE_KEY");
+var bobKeyPair = new KeyPair(bobPrivateKey);
+
+var innerTransactions = new IBaseTransaction[] {
+    new EmbeddedTransferTransaction
+    {
+        Network = NetworkType.TESTNET,
+        SignerPublicKey = aliceKeyPair.PublicKey,
+        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("ALICE_ADDRESS")),
+        Mosaics = new UnresolvedMosaic[]
+        {
+            new()
+            {
+                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+                Amount = new Amount(100)
+            }
+        }
+    }, 
+    new EmbeddedTransferTransaction
+    {
+        Network = NetworkType.TESTNET,
+        SignerPublicKey = bobKeyPair.PublicKey,
+        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("BOB_ADDRESS")),
+        Mosaics = new UnresolvedMosaic[]
+        {
+            new()
+            {
+                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+                Amount = new Amount(100)
+            }
+        }
+    }
+};
+
+var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
+
+var aggTx = new AggregateCompleteTransaction {
+    Network = NetworkType.TESTNET,
+    Transactions = 	innerTransactions,
+    SignerPublicKey = aliceKeyPair.PublicKey,
+    Fee = new Amount(1000000),
+    TransactionsHash = merkleHash,
+    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp),
+};
+
+var aliceSignature = facade.SignTransaction(aliceKeyPair, aggTx);
+TransactionsFactory.AttachSignature(aggTx, aliceSignature);
+
+var hash = facade.HashTransaction(aggTx);
+var bobCosignature = new Cosignature
+{
+    Signature = bobKeyPair.Sign(hash.bytes),
+    SignerPublicKey = bobKeyPair.PublicKey
+};
+aggTx.Cosignatures = new [] {bobCosignature};
+
+var payload = TransactionsFactory.CreatePayload(aggTx);
+
+const string node = "NODE";
+using var client = new HttpClient();
+var content = new StringContent(payload, Encoding.UTF8, "application/json");
+var response =  client.PutAsync(node + "/transactions", content).Result;
+var responseDetailsJson = await response.Content.ReadAsStringAsync();
+Console.WriteLine(responseDetailsJson);
+```
+
 ### NEM TransferTransaction
 
 ```c#
@@ -131,7 +210,7 @@ Console.WriteLine(problemDetailsJson);
 その他のトランザクションはテストデータを参考にしてください。<br>
 今後、需要があればドキュメントを更新するかもしれません。<br>
 
-[Symbol Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Symbol/TransactionNonParserTest.cs)
+[Symbol Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Symbol/TransactionTest.cs)
 <br>
 [NEM Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Nem/TransactionNonParserTest.cs)
 

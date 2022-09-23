@@ -73,6 +73,28 @@ namespace CatSdk.Facade
 		    txByte.CopyTo(newBytes, Network.GenerationHashSeed.bytes.Length);
 		    return new Verifier(transaction.SignerPublicKey).Verify(newBytes, signature);
 	    }
+	    
+	    /**
+		 * Hashes embedded transactions of an aggregate."""
+		 * @param {array&lt;ITransaction&gt;} embeddedTransactions Embedded transactions to hash.
+		 * @returns {Hash256} Aggregate transactions hash.
+		 */
+	    public static Hash256 HashEmbeddedTransactions(IBaseTransaction[] embeddedTransactions) {
+		    var hashBuilder = new MerkleHashBuilder();
+		    embeddedTransactions.ToList().ForEach(embeddedTransaction =>
+		    {
+			    var hasher = new Sha3Digest(256);
+			    var serialize = embeddedTransaction.Serialize();
+			    var hash = new byte[32];
+			    hasher.BlockUpdate(serialize, 0, serialize.Length);
+			    hasher.DoFinal(hash, 0);
+			    Console.WriteLine("AAA");
+			    Console.WriteLine(CatSdk.Utils.Converter.BytesToHex(hash));
+			    hashBuilder.Update(new Hash256(hash));
+		    });
+
+		    return hashBuilder.Final();
+	    }
 
 	    private bool IsAggregateTransaction(IReadOnlyList<byte> transactionBuffer)
 	    {

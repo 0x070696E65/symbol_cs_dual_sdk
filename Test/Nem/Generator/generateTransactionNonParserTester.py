@@ -40,7 +40,7 @@ def indent(text, i = 1):
 
 def innner(key, value, txType):
     t2 = f'\n'
-    t2 += f'Facade.TransactionFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {{\n'
+    t2 += f'TransactionsFactory.ToNonVerifiableTransaction(Facade.TransactionFactory.Create(new Dictionary<string, object>() {{\n'
     t3 = ''
     for key in value:
         t3 += indent(f'{{"{to_pascal_case(key)}", {type_check(key, value[key], txType)}}},\n')

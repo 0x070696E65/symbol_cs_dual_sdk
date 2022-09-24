@@ -213,7 +213,7 @@ Console.WriteLine(problemDetailsJson);
 
 [Symbol Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Symbol/TransactionTest.cs)
 <br>
-[NEM Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Nem/TransactionNonParserTest.cs)
+[NEM Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Nem/TransactionTest.cs)
 
 # Author
 [toshi](https://twitter.com/toshiya_ma)

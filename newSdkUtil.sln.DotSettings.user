@@ -14,5 +14,8 @@
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.AddressTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.SignTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionNonParserTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.AccountKeyLinkTransaction_account_key_link_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.TransferTransaction_transfer_single_1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

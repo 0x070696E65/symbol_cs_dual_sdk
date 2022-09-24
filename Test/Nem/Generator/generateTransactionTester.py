@@ -42,10 +42,10 @@ def innner(key, value, txType, schema):
     t2 = f'\n'
     t2 += f'TransactionsFactory.ToNonVerifiableTransaction(new {to_pascal_case(value["type"])}() {{\n'
     t3 = ''
-    t3 += indent(f'Network = NetworkType.TESTNET,\n')
+    t3 += f'Network = NetworkType.TESTNET,\n'
     for key in value:
         if key != "type":
-            t3 += indent(f'{to_pascal_case(key)} = {type_check(key, value[key], txType, schema)},\n')
+            t3 += f'{to_pascal_case(key)} = {type_check(key, value[key], txType, schema)},\n'
     t2 += indent(t3)
     t = t2
     t += f'}})\n'

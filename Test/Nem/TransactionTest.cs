@@ -42,13 +42,13 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new AccountKeyLinkTransaction() {
-						Network = NetworkType.TESTNET,
-						LinkAction = LinkAction.LINK,
-						RemotePublicKey = new PublicKey(Converter.HexToBytes("6269E26026CECEFE640C3E0DE050CB9B3CFD279A0713CF00E16EDEF5D6C10EB9")),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("8e3d50eb3ef46492a8a57201bd108749c3dbf1ab3c8376fd484ea4de167697b4")),
-						Signature = new Signature(Converter.HexToBytes("C55F4A7382CFD21C3C7ED7B390D9B324B2CCF6C1B30F8B19D179600EC634F5B2570B4B9DFEB5FC88B8EE77061DEF9C4306FBDB22049DA2EB8ECF0A71D9052695")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					LinkAction = LinkAction.LINK,
+					RemotePublicKey = new PublicKey(Converter.HexToBytes("6269E26026CECEFE640C3E0DE050CB9B3CFD279A0713CF00E16EDEF5D6C10EB9")),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("8e3d50eb3ef46492a8a57201bd108749c3dbf1ab3c8376fd484ea4de167697b4")),
+					Signature = new Signature(Converter.HexToBytes("C55F4A7382CFD21C3C7ED7B390D9B324B2CCF6C1B30F8B19D179600EC634F5B2570B4B9DFEB5FC88B8EE77061DEF9C4306FBDB22049DA2EB8ECF0A71D9052695")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("8e3d50eb3ef46492a8a57201bd108749c3dbf1ab3c8376fd484ea4de167697b4")),
@@ -66,13 +66,13 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new AccountKeyLinkTransaction() {
-						Network = NetworkType.TESTNET,
-						LinkAction = LinkAction.UNLINK,
-						RemotePublicKey = new PublicKey(Converter.HexToBytes("C3D4EAEB517BDDF22F21A2F7B61194D50666EDEBFE81B9118DB59ABE1D6E98E5")),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("9871ae2f65fa020679d484f4580d5f10d7a782a29f6c233a937e8b2306db111f")),
-						Signature = new Signature(Converter.HexToBytes("EAE6B4492EE5071763F8BB2F1CC6EF9A0674C12BC7F37D132E629C077F3AD91B17C756F6B80AC3080756F1284AE8347BBF5933E0000A4661150496DFD39CBCD3")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					LinkAction = LinkAction.UNLINK,
+					RemotePublicKey = new PublicKey(Converter.HexToBytes("C3D4EAEB517BDDF22F21A2F7B61194D50666EDEBFE81B9118DB59ABE1D6E98E5")),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("9871ae2f65fa020679d484f4580d5f10d7a782a29f6c233a937e8b2306db111f")),
+					Signature = new Signature(Converter.HexToBytes("EAE6B4492EE5071763F8BB2F1CC6EF9A0674C12BC7F37D132E629C077F3AD91B17C756F6B80AC3080756F1284AE8347BBF5933E0000A4661150496DFD39CBCD3")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("9871ae2f65fa020679d484f4580d5f10d7a782a29f6c233a937e8b2306db111f")),
@@ -343,44 +343,44 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicDefinitionTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicDefinition = new MosaicDefinition(){
-							OwnerPublicKey = new PublicKey(Converter.HexToBytes("875BD953CB8EC0BDEAA01552E390B5E59DEAAD44D81BD7DEAF0C332F99AEECE8")),
-							Id = new MosaicId {
-							Name = Converter.HexToBytes("616C6963652773206769667420766F756368657273"),
-							NamespaceId = {Name = Converter.HexToBytes("616C6963652E766F756368657273")}},
-							Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
-							Properties = new SizePrefixedMosaicProperty[] {
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("64697669736962696C697479"),
-										Value = Converter.HexToBytes("33")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("696E697469616C537570706C79"),
-										Value = Converter.HexToBytes("30")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("737570706C794D757461626C65"),
-										Value = Converter.HexToBytes("66616C7365")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("7472616E7366657261626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
+					Network = NetworkType.TESTNET,
+					MosaicDefinition = new MosaicDefinition(){
+						OwnerPublicKey = new PublicKey(Converter.HexToBytes("875BD953CB8EC0BDEAA01552E390B5E59DEAAD44D81BD7DEAF0C332F99AEECE8")),
+						Id = new MosaicId {
+						Name = Converter.HexToBytes("616C6963652773206769667420766F756368657273"),
+						NamespaceId = {Name = Converter.HexToBytes("616C6963652E766F756368657273")}},
+						Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
+						Properties = new SizePrefixedMosaicProperty[] {
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("64697669736962696C697479"),
+									Value = Converter.HexToBytes("33")}
 								},
-							LevySize = 0,
-								}
-						,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TDX5YX2NJUSWXEKJ4UQN3WXUY3SCCAGWHHFJ3B5J")),
-						RentalFee = new Amount(678000000),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("ebb0c23fc368a59387abb9dbdc22ab304250de1319b876a078f50e48c9a4413b")),
-						Signature = new Signature(Converter.HexToBytes("C43D84C2F819DC934A805FC7034626ECF39E32185FB87729A6C0C5E4E6008C6A41AB571A60C0DCCD36D252B8DD5625701A7E0073323D9110427CCD50EE7CF356")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("696E697469616C537570706C79"),
+									Value = Converter.HexToBytes("30")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("737570706C794D757461626C65"),
+									Value = Converter.HexToBytes("66616C7365")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("7472616E7366657261626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							},
+						LevySize = 0,
+							}
+					,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TDX5YX2NJUSWXEKJ4UQN3WXUY3SCCAGWHHFJ3B5J")),
+					RentalFee = new Amount(678000000),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("ebb0c23fc368a59387abb9dbdc22ab304250de1319b876a078f50e48c9a4413b")),
+					Signature = new Signature(Converter.HexToBytes("C43D84C2F819DC934A805FC7034626ECF39E32185FB87729A6C0C5E4E6008C6A41AB571A60C0DCCD36D252B8DD5625701A7E0073323D9110427CCD50EE7CF356")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("ebb0c23fc368a59387abb9dbdc22ab304250de1319b876a078f50e48c9a4413b")),
@@ -398,44 +398,44 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicDefinitionTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicDefinition = new MosaicDefinition(){
-							OwnerPublicKey = new PublicKey(Converter.HexToBytes("F53B19CB1CAB394E22E3DDFA6D9B42DA87F37EB517EFA214433071E5619F898D")),
-							Id = new MosaicId {
-							Name = Converter.HexToBytes("616C6963652773206769667420766F756368657273"),
-							NamespaceId = {Name = Converter.HexToBytes("616C6963652E766F756368657273")}},
-							Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
-							Properties = new SizePrefixedMosaicProperty[] {
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("64697669736962696C697479"),
-										Value = Converter.HexToBytes("33")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("696E697469616C537570706C79"),
-										Value = Converter.HexToBytes("333435363738")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("737570706C794D757461626C65"),
-										Value = Converter.HexToBytes("66616C7365")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("7472616E7366657261626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
+					Network = NetworkType.TESTNET,
+					MosaicDefinition = new MosaicDefinition(){
+						OwnerPublicKey = new PublicKey(Converter.HexToBytes("F53B19CB1CAB394E22E3DDFA6D9B42DA87F37EB517EFA214433071E5619F898D")),
+						Id = new MosaicId {
+						Name = Converter.HexToBytes("616C6963652773206769667420766F756368657273"),
+						NamespaceId = {Name = Converter.HexToBytes("616C6963652E766F756368657273")}},
+						Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
+						Properties = new SizePrefixedMosaicProperty[] {
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("64697669736962696C697479"),
+									Value = Converter.HexToBytes("33")}
 								},
-							LevySize = 0,
-								}
-						,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TCO5WSTHXII62V3MYWKBD7GOMCDRX35TFOZEX3BD")),
-						RentalFee = new Amount(678000000),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("77f34849afd8d7b031d7da77651bdcc6ea839d16ae9de1097d2797009e3c0327")),
-						Signature = new Signature(Converter.HexToBytes("9BD3E3CFB3271D57AF352144E0567A29E6B0B5BC5982A77AC38E6B6D2CD9B4F4FFE472782BBB96170D1A6BA1D7D5D58BF2D249E4ED0D403723BD5B19904DCBFA")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("696E697469616C537570706C79"),
+									Value = Converter.HexToBytes("333435363738")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("737570706C794D757461626C65"),
+									Value = Converter.HexToBytes("66616C7365")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("7472616E7366657261626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							},
+						LevySize = 0,
+							}
+					,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TCO5WSTHXII62V3MYWKBD7GOMCDRX35TFOZEX3BD")),
+					RentalFee = new Amount(678000000),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("77f34849afd8d7b031d7da77651bdcc6ea839d16ae9de1097d2797009e3c0327")),
+					Signature = new Signature(Converter.HexToBytes("9BD3E3CFB3271D57AF352144E0567A29E6B0B5BC5982A77AC38E6B6D2CD9B4F4FFE472782BBB96170D1A6BA1D7D5D58BF2D249E4ED0D403723BD5B19904DCBFA")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("77f34849afd8d7b031d7da77651bdcc6ea839d16ae9de1097d2797009e3c0327")),
@@ -453,44 +453,44 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicDefinitionTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicDefinition = new MosaicDefinition(){
-							OwnerPublicKey = new PublicKey(Converter.HexToBytes("69AF8763FEECEF35E0AEF44A202EFAC4936532C202784CF85CBCD16BFC45F119")),
-							Id = new MosaicId {
-							Name = Converter.HexToBytes("746572726F7269736D"),
-							NamespaceId = {Name = Converter.HexToBytes("73746174652E73706F6E736F726564")}},
-							Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
-							Properties = new SizePrefixedMosaicProperty[] {
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("64697669736962696C697479"),
-										Value = Converter.HexToBytes("32")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("696E697469616C537570706C79"),
-										Value = Converter.HexToBytes("31303030")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("737570706C794D757461626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("7472616E7366657261626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
+					Network = NetworkType.TESTNET,
+					MosaicDefinition = new MosaicDefinition(){
+						OwnerPublicKey = new PublicKey(Converter.HexToBytes("69AF8763FEECEF35E0AEF44A202EFAC4936532C202784CF85CBCD16BFC45F119")),
+						Id = new MosaicId {
+						Name = Converter.HexToBytes("746572726F7269736D"),
+						NamespaceId = {Name = Converter.HexToBytes("73746174652E73706F6E736F726564")}},
+						Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
+						Properties = new SizePrefixedMosaicProperty[] {
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("64697669736962696C697479"),
+									Value = Converter.HexToBytes("32")}
 								},
-							LevySize = 0,
-								}
-						,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TARPSQFPJL6A2ORAQJ46GOZUDPNYVQJKGVT2NMG7")),
-						RentalFee = new Amount(678000000),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("d79383b5996a558924fb0347793ada398ddea4f86f36ea440e74203536e30eb0")),
-						Signature = new Signature(Converter.HexToBytes("70AAB3087604FF91579D5CCB42982610D7B8A09388AAADB96BDF2959E012FAB78D41282872A2C7188935992726804D301C5333D0C19B384921250F15AEA233DF")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("696E697469616C537570706C79"),
+									Value = Converter.HexToBytes("31303030")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("737570706C794D757461626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("7472616E7366657261626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							},
+						LevySize = 0,
+							}
+					,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TARPSQFPJL6A2ORAQJ46GOZUDPNYVQJKGVT2NMG7")),
+					RentalFee = new Amount(678000000),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("d79383b5996a558924fb0347793ada398ddea4f86f36ea440e74203536e30eb0")),
+					Signature = new Signature(Converter.HexToBytes("70AAB3087604FF91579D5CCB42982610D7B8A09388AAADB96BDF2959E012FAB78D41282872A2C7188935992726804D301C5333D0C19B384921250F15AEA233DF")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("d79383b5996a558924fb0347793ada398ddea4f86f36ea440e74203536e30eb0")),
@@ -508,51 +508,51 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicDefinitionTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicDefinition = new MosaicDefinition(){
-							OwnerPublicKey = new PublicKey(Converter.HexToBytes("B5B93DDE2D05D21D0A14E6F60DB33E983B88A99FB203916D408AF5749A396960")),
-							Id = new MosaicId {
-							Name = Converter.HexToBytes("656C656374726F6E6963"),
-							NamespaceId = {Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")}},
-							Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
-							Properties = new SizePrefixedMosaicProperty[] {
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("64697669736962696C697479"),
-										Value = Converter.HexToBytes("32")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("696E697469616C537570706C79"),
-										Value = Converter.HexToBytes("31303030")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("737570706C794D757461626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("7472616E7366657261626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
+					Network = NetworkType.TESTNET,
+					MosaicDefinition = new MosaicDefinition(){
+						OwnerPublicKey = new PublicKey(Converter.HexToBytes("B5B93DDE2D05D21D0A14E6F60DB33E983B88A99FB203916D408AF5749A396960")),
+						Id = new MosaicId {
+						Name = Converter.HexToBytes("656C656374726F6E6963"),
+						NamespaceId = {Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")}},
+						Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
+						Properties = new SizePrefixedMosaicProperty[] {
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("64697669736962696C697479"),
+									Value = Converter.HexToBytes("32")}
 								},
-							LevySize = 84,
-							Levy = {
-								TransferFeeType = MosaicTransferFeeType.ABSOLUTE,
-								RecipientAddress = new Address(Converter.Utf8ToBytes("TCUTCNM64Y6Q4VB4OTEHBQT2ZKUY3CUYRVHCTIZ3")),
-								MosaicId = {
-									NamespaceId = new NamespaceId {Name = Converter.HexToBytes("72657074696C69616E73"),},
-									Name = Converter.HexToBytes("756E69746564"),},
-								Fee = new Amount(58132134)},
-								}
-						,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TD3M6P3CENCDVIC2GRJLQPLQXBX6MOB6FBQZOXM2")),
-						RentalFee = new Amount(678000000),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("e03c4c9768a9726e471f63a3d003ff38e860c7fc2753b60ee261b1c016034e52")),
-						Signature = new Signature(Converter.HexToBytes("595F57A2C922A46864ADEFA5A02BB379833F0A8306BE49ED973A65559686F0B1F1317958CCB02902322E9373ED0B3AABEC910F79EA8CAD97A8085F76466E49A2")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("696E697469616C537570706C79"),
+									Value = Converter.HexToBytes("31303030")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("737570706C794D757461626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("7472616E7366657261626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							},
+						LevySize = 84,
+						Levy = {
+							TransferFeeType = MosaicTransferFeeType.ABSOLUTE,
+							RecipientAddress = new Address(Converter.Utf8ToBytes("TCUTCNM64Y6Q4VB4OTEHBQT2ZKUY3CUYRVHCTIZ3")),
+							MosaicId = {
+								NamespaceId = new NamespaceId {Name = Converter.HexToBytes("72657074696C69616E73"),},
+								Name = Converter.HexToBytes("756E69746564"),},
+							Fee = new Amount(58132134)},
+							}
+					,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TD3M6P3CENCDVIC2GRJLQPLQXBX6MOB6FBQZOXM2")),
+					RentalFee = new Amount(678000000),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("e03c4c9768a9726e471f63a3d003ff38e860c7fc2753b60ee261b1c016034e52")),
+					Signature = new Signature(Converter.HexToBytes("595F57A2C922A46864ADEFA5A02BB379833F0A8306BE49ED973A65559686F0B1F1317958CCB02902322E9373ED0B3AABEC910F79EA8CAD97A8085F76466E49A2")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("e03c4c9768a9726e471f63a3d003ff38e860c7fc2753b60ee261b1c016034e52")),
@@ -570,51 +570,51 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicDefinitionTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicDefinition = new MosaicDefinition(){
-							OwnerPublicKey = new PublicKey(Converter.HexToBytes("D7F44870D24E7626DB24591452A2F7ECF6650B0D41D3BCB4FB4BA11B063B80AC")),
-							Id = new MosaicId {
-							Name = Converter.HexToBytes("656C656374726F6E6963"),
-							NamespaceId = {Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")}},
-							Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
-							Properties = new SizePrefixedMosaicProperty[] {
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("64697669736962696C697479"),
-										Value = Converter.HexToBytes("32")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("696E697469616C537570706C79"),
-										Value = Converter.HexToBytes("31303030")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("737570706C794D757461626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
-								new (){
-									Property = new MosaicProperty {
-										Name = Converter.HexToBytes("7472616E7366657261626C65"),
-										Value = Converter.HexToBytes("74727565")}
-									},
+					Network = NetworkType.TESTNET,
+					MosaicDefinition = new MosaicDefinition(){
+						OwnerPublicKey = new PublicKey(Converter.HexToBytes("D7F44870D24E7626DB24591452A2F7ECF6650B0D41D3BCB4FB4BA11B063B80AC")),
+						Id = new MosaicId {
+						Name = Converter.HexToBytes("656C656374726F6E6963"),
+						NamespaceId = {Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")}},
+						Description = Converter.HexToBytes("70726563696F757320766F756368657273"),
+						Properties = new SizePrefixedMosaicProperty[] {
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("64697669736962696C697479"),
+									Value = Converter.HexToBytes("32")}
 								},
-							LevySize = 80,
-							Levy = {
-								TransferFeeType = MosaicTransferFeeType.PERCENTILE,
-								RecipientAddress = new Address(Converter.Utf8ToBytes("TDAQGCFP4TR2U33WBXJEDUHH6OWV3T4YXWHSH46A")),
-								MosaicId = {
-									NamespaceId = new NamespaceId {Name = Converter.HexToBytes("6C697A617264"),},
-									Name = Converter.HexToBytes("70656F706C65"),},
-								Fee = new Amount(112358)},
-								}
-						,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TA2ZI764OYY233XIKTETFPGCC2HKORQSHTCUGCHX")),
-						RentalFee = new Amount(678000000),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("56f82899305f24f05c0e25266e94e1ca4ff380c7d75b544d66fc815a1615adf8")),
-						Signature = new Signature(Converter.HexToBytes("7A63250CA1326EBEFF362CEB63CBBD6AD13E06E515DBB867B0E2449717C8151119F9120C64D7C8F038C1D5D2259C3911D5E19875C74EBBE446C0791C929CF4A2")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("696E697469616C537570706C79"),
+									Value = Converter.HexToBytes("31303030")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("737570706C794D757461626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							new (){
+								Property = new MosaicProperty {
+									Name = Converter.HexToBytes("7472616E7366657261626C65"),
+									Value = Converter.HexToBytes("74727565")}
+								},
+							},
+						LevySize = 80,
+						Levy = {
+							TransferFeeType = MosaicTransferFeeType.PERCENTILE,
+							RecipientAddress = new Address(Converter.Utf8ToBytes("TDAQGCFP4TR2U33WBXJEDUHH6OWV3T4YXWHSH46A")),
+							MosaicId = {
+								NamespaceId = new NamespaceId {Name = Converter.HexToBytes("6C697A617264"),},
+								Name = Converter.HexToBytes("70656F706C65"),},
+							Fee = new Amount(112358)},
+							}
+					,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TA2ZI764OYY233XIKTETFPGCC2HKORQSHTCUGCHX")),
+					RentalFee = new Amount(678000000),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("56f82899305f24f05c0e25266e94e1ca4ff380c7d75b544d66fc815a1615adf8")),
+					Signature = new Signature(Converter.HexToBytes("7A63250CA1326EBEFF362CEB63CBBD6AD13E06E515DBB867B0E2449717C8151119F9120C64D7C8F038C1D5D2259C3911D5E19875C74EBBE446C0791C929CF4A2")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("56f82899305f24f05c0e25266e94e1ca4ff380c7d75b544d66fc815a1615adf8")),
@@ -668,17 +668,17 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicSupplyChangeTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicId = new MosaicId{
-							NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
-							Name = Converter.HexToBytes("6261696C6F7574")}
-						,
-						Action = MosaicSupplyChangeAction.INCREASE,
-						Delta = new Amount(345678),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("4085474fff5c85622f822185ef2755fafb240b6264a9915bdf163f3179735db6")),
-						Signature = new Signature(Converter.HexToBytes("95799A76EBBA045A99C5C59444EEF875B8D3BBC46790C1707D1BCB5E6EE74E6BA39C95E142FEF7C7BE595B8AB1A6EC17475FF5336F51C0D14D3E55B74F0222A2")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					MosaicId = new MosaicId{
+						NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
+						Name = Converter.HexToBytes("6261696C6F7574")}
+					,
+					Action = MosaicSupplyChangeAction.INCREASE,
+					Delta = new Amount(345678),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("4085474fff5c85622f822185ef2755fafb240b6264a9915bdf163f3179735db6")),
+					Signature = new Signature(Converter.HexToBytes("95799A76EBBA045A99C5C59444EEF875B8D3BBC46790C1707D1BCB5E6EE74E6BA39C95E142FEF7C7BE595B8AB1A6EC17475FF5336F51C0D14D3E55B74F0222A2")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("4085474fff5c85622f822185ef2755fafb240b6264a9915bdf163f3179735db6")),
@@ -696,17 +696,17 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MosaicSupplyChangeTransaction() {
-						Network = NetworkType.TESTNET,
-						MosaicId = new MosaicId{
-							NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
-							Name = Converter.HexToBytes("6261696C6F7574")}
-						,
-						Action = MosaicSupplyChangeAction.DECREASE,
-						Delta = new Amount(1953125),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("7f8619c1464c9ce85ee9fab592aed6f8984b3b282031ceabb47b7bba9d5dad81")),
-						Signature = new Signature(Converter.HexToBytes("A09920E03279E34AFDB38DF71E2D647900097CC6A1962FAF674EC40E2139DA78C6F219E514CFFC2C68B90ED0A8D09D2782AD611723EAA6E4E2E5E9F0C1863B37")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					MosaicId = new MosaicId{
+						NamespaceId = {Name = Converter.HexToBytes("62616E6B7374657273")},
+						Name = Converter.HexToBytes("6261696C6F7574")}
+					,
+					Action = MosaicSupplyChangeAction.DECREASE,
+					Delta = new Amount(1953125),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("7f8619c1464c9ce85ee9fab592aed6f8984b3b282031ceabb47b7bba9d5dad81")),
+					Signature = new Signature(Converter.HexToBytes("A09920E03279E34AFDB38DF71E2D647900097CC6A1962FAF674EC40E2139DA78C6F219E514CFFC2C68B90ED0A8D09D2782AD611723EAA6E4E2E5E9F0C1863B37")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("7f8619c1464c9ce85ee9fab592aed6f8984b3b282031ceabb47b7bba9d5dad81")),
@@ -724,32 +724,32 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransaction() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(5000000),
-						MessageEnvelopeSize = 20,
-						Message = 	new Message(){
-								MessageType = MessageType.PLAIN,
-								MessageField = Converter.Utf8ToBytes("Good Morning"),}
-						,
-						Mosaics = 
-							new SizePrefixedMosaic[]{
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
-										Name = Converter.HexToBytes("656C656374726F6E6963")},
-									Amount = new Amount(1394254)}
-								},
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6E656D")},
-										Name = Converter.HexToBytes("78656D")},
-									Amount = new Amount(379)}
-								},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("bfc484c2875375678b7aa28835b285f70c308853b1ce942dd6f71099b16f49b1")),
-						Signature = new Signature(Converter.HexToBytes("62559DAFC9347BD42DB2068229DA778E5784094F14286EEAA7AA2CA459EA26B5938C4F0578CD1668D4ABD9C4EADE3FB81A5D3DB7379E1414B8B7B65B2C795A0B")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(5000000),
+					MessageEnvelopeSize = 20,
+					Message = 	new Message(){
+							MessageType = MessageType.PLAIN,
+							MessageField = Converter.Utf8ToBytes("Good Morning"),}
+					,
+					Mosaics = 
+						new SizePrefixedMosaic[]{
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
+									Name = Converter.HexToBytes("656C656374726F6E6963")},
+								Amount = new Amount(1394254)}
+							},
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6E656D")},
+									Name = Converter.HexToBytes("78656D")},
+								Amount = new Amount(379)}
+							},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("bfc484c2875375678b7aa28835b285f70c308853b1ce942dd6f71099b16f49b1")),
+					Signature = new Signature(Converter.HexToBytes("62559DAFC9347BD42DB2068229DA778E5784094F14286EEAA7AA2CA459EA26B5938C4F0578CD1668D4ABD9C4EADE3FB81A5D3DB7379E1414B8B7B65B2C795A0B")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("bfc484c2875375678b7aa28835b285f70c308853b1ce942dd6f71099b16f49b1")),
@@ -860,13 +860,13 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MultisigAccountModificationTransaction() {
-						Network = NetworkType.TESTNET,
-						Modifications = System.Array.Empty<SizePrefixedMultisigAccountModification>(),
-						MinApprovalDelta = 2,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("ed38b8ad8240d993452c8877f623703dc49670265f7531938d93ed80193222f1")),
-						Signature = new Signature(Converter.HexToBytes("B3B88CF40C85C1DC6CE38BDF3CF0ADE3FA0E60C2573A2C92045FA3F0E645FC26A150B82B2BA99026F54A2444357E9B8BB105F19824150A32B411D9906982A412")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					Modifications = System.Array.Empty<SizePrefixedMultisigAccountModification>(),
+					MinApprovalDelta = 2,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("ed38b8ad8240d993452c8877f623703dc49670265f7531938d93ed80193222f1")),
+					Signature = new Signature(Converter.HexToBytes("B3B88CF40C85C1DC6CE38BDF3CF0ADE3FA0E60C2573A2C92045FA3F0E645FC26A150B82B2BA99026F54A2444357E9B8BB105F19824150A32B411D9906982A412")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("ed38b8ad8240d993452c8877f623703dc49670265f7531938d93ed80193222f1")),
@@ -884,20 +884,20 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MultisigAccountModificationTransaction() {
-						Network = NetworkType.TESTNET,
-						Modifications = 	new SizePrefixedMultisigAccountModification[]{
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("37D357E29CA8420FA0D615D8D1C4EEBAC06825FAC2FE4A0E28909CF6F79E0DD4")),
-								}},
-							}
-						,
-						MinApprovalDelta = unchecked((uint) -1),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("b2cadf1e4ddbaf14b2e21114c9b5c0a8634c4a7abacd8b6bdb13edefe256a5ee")),
-						Signature = new Signature(Converter.HexToBytes("18F04D567185997B9A34E08A79EBFA58E93C57B03C9ECAB647ED7A6CCB819F2E95784F6A43BD31EC0BC6BC6F70B2F3B02AEFC776651F14AA943CBA45917FB8AC")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					Modifications = 	new SizePrefixedMultisigAccountModification[]{
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("37D357E29CA8420FA0D615D8D1C4EEBAC06825FAC2FE4A0E28909CF6F79E0DD4")),
+							}},
+						}
+					,
+					MinApprovalDelta = unchecked((uint) -1),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("b2cadf1e4ddbaf14b2e21114c9b5c0a8634c4a7abacd8b6bdb13edefe256a5ee")),
+					Signature = new Signature(Converter.HexToBytes("18F04D567185997B9A34E08A79EBFA58E93C57B03C9ECAB647ED7A6CCB819F2E95784F6A43BD31EC0BC6BC6F70B2F3B02AEFC776651F14AA943CBA45917FB8AC")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("b2cadf1e4ddbaf14b2e21114c9b5c0a8634c4a7abacd8b6bdb13edefe256a5ee")),
@@ -915,30 +915,30 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MultisigAccountModificationTransaction() {
-						Network = NetworkType.TESTNET,
-						Modifications = 	new SizePrefixedMultisigAccountModification[]{
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("5D378657691CAD70CE35A46FB88CB134232B0B6B3655449C019A1F5F20AE9AAD")),
-								}},
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D79936328C188A4416224ABABF580CA2C5C8D852248DB1933FE4BC0DCA0EE7BC")),
-								}},
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.DELETE_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("BCEAE8AC9F6630893C75381CFA44BA971E556EA245C851D5CB224A18D6871843")),
-								}},
-							}
-						,
-						MinApprovalDelta = 1,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("c87ee121623c81d2b3cef148adfbd4e9543b3c56fa11bfe44e32ff718bc68733")),
-						Signature = new Signature(Converter.HexToBytes("9B8021DF389E038FFD0476FB1A64870C09F3D55A1C94A9FFCA5DA218820FC299292B5B420B2E3C2B287DEE4CCC248320E8C03239D532FD41F7CDB8292C27CCDD")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					Modifications = 	new SizePrefixedMultisigAccountModification[]{
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("5D378657691CAD70CE35A46FB88CB134232B0B6B3655449C019A1F5F20AE9AAD")),
+							}},
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D79936328C188A4416224ABABF580CA2C5C8D852248DB1933FE4BC0DCA0EE7BC")),
+							}},
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.DELETE_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("BCEAE8AC9F6630893C75381CFA44BA971E556EA245C851D5CB224A18D6871843")),
+							}},
+						}
+					,
+					MinApprovalDelta = 1,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("c87ee121623c81d2b3cef148adfbd4e9543b3c56fa11bfe44e32ff718bc68733")),
+					Signature = new Signature(Converter.HexToBytes("9B8021DF389E038FFD0476FB1A64870C09F3D55A1C94A9FFCA5DA218820FC299292B5B420B2E3C2B287DEE4CCC248320E8C03239D532FD41F7CDB8292C27CCDD")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("c87ee121623c81d2b3cef148adfbd4e9543b3c56fa11bfe44e32ff718bc68733")),
@@ -1006,19 +1006,19 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MultisigAccountModificationTransactionV1() {
-						Network = NetworkType.TESTNET,
-						Modifications = 	new SizePrefixedMultisigAccountModification[]{
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D27EAF5346C5E01C3EA1EAC431833765167E3C3FB976D436C578BFFC44E44637")),
-								}},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("219a58c1e6dacfa66a9702c58fb5966ccfdd3fdd059fee4cec38885b7d0e1b32")),
-						Signature = new Signature(Converter.HexToBytes("89ACF23467248A4136964F505439904455B2A6A8AE2FF92E2F976A89B03D0BD8546B54A52181B5D318728A9E21CBEA882FC0BAE84F24B1D011A3A37052C82017")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					Modifications = 	new SizePrefixedMultisigAccountModification[]{
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D27EAF5346C5E01C3EA1EAC431833765167E3C3FB976D436C578BFFC44E44637")),
+							}},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("219a58c1e6dacfa66a9702c58fb5966ccfdd3fdd059fee4cec38885b7d0e1b32")),
+					Signature = new Signature(Converter.HexToBytes("89ACF23467248A4136964F505439904455B2A6A8AE2FF92E2F976A89B03D0BD8546B54A52181B5D318728A9E21CBEA882FC0BAE84F24B1D011A3A37052C82017")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("219a58c1e6dacfa66a9702c58fb5966ccfdd3fdd059fee4cec38885b7d0e1b32")),
@@ -1036,29 +1036,29 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new MultisigAccountModificationTransactionV1() {
-						Network = NetworkType.TESTNET,
-						Modifications = 	new SizePrefixedMultisigAccountModification[]{
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("E401FF49AA42CC10C6FD2227A81C4C78D156B0AFC8B130D7B056784511E6D99E")),
-								}},
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D2FF731FE0CECBA4948173DCFC1CA8860EAABC7CA8F8495753E2AA38562AECB9")),
-								}},
-									new (){
-									Modification = new MultisigAccountModification {
-										ModificationType = MultisigAccountModificationType.DELETE_COSIGNATORY,
-										CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("50513870D3F5C0977E76B164C6EB0564939FB7C60F7B21F670A7F3234A88F316")),
-								}},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("d8516ab2f346196f6fb74a7120b4a9f06d66eab5c341009cc583c03dbe0b0610")),
-						Signature = new Signature(Converter.HexToBytes("18769E68ABE68C88110C288579557C642A36BF39ADE07B8BBD250051A0967209D84622A88329A5A6943EAA0147F747B569BE2469889209E53F55D45A4AF953CC")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					Modifications = 	new SizePrefixedMultisigAccountModification[]{
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("E401FF49AA42CC10C6FD2227A81C4C78D156B0AFC8B130D7B056784511E6D99E")),
+							}},
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.ADD_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("D2FF731FE0CECBA4948173DCFC1CA8860EAABC7CA8F8495753E2AA38562AECB9")),
+							}},
+								new (){
+								Modification = new MultisigAccountModification {
+									ModificationType = MultisigAccountModificationType.DELETE_COSIGNATORY,
+									CosignatoryPublicKey = new PublicKey(Converter.HexToBytes("50513870D3F5C0977E76B164C6EB0564939FB7C60F7B21F670A7F3234A88F316")),
+							}},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("d8516ab2f346196f6fb74a7120b4a9f06d66eab5c341009cc583c03dbe0b0610")),
+					Signature = new Signature(Converter.HexToBytes("18769E68ABE68C88110C288579557C642A36BF39ADE07B8BBD250051A0967209D84622A88329A5A6943EAA0147F747B569BE2469889209E53F55D45A4AF953CC")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("d8516ab2f346196f6fb74a7120b4a9f06d66eab5c341009cc583c03dbe0b0610")),
@@ -1108,15 +1108,15 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new NamespaceRegistrationTransaction() {
-						Network = NetworkType.TESTNET,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TCTXZSZTZGQBWS7MRXTWMOR72LPX2YEVKIXGDIHL")),
-						RentalFee = new Amount(678000000),
-						ParentName = System.Array.Empty<byte>(),
-						Name = Converter.HexToBytes("7374617465"),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("a0b55786c71b261916a19a36e424621965ed901183dfaf4bd8cd5d7a8d4944f3")),
-						Signature = new Signature(Converter.HexToBytes("866838970DB4BA212F5FB34AD8D48B28E42FFC10D1722A3EF20A3E93B829A97BEE4D7EBC0514C6465BCEB0BF9B15C8D2CF02CA5CD21245AEF3DEC6DFDBAFAC7D")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TCTXZSZTZGQBWS7MRXTWMOR72LPX2YEVKIXGDIHL")),
+					RentalFee = new Amount(678000000),
+					ParentName = System.Array.Empty<byte>(),
+					Name = Converter.HexToBytes("7374617465"),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("a0b55786c71b261916a19a36e424621965ed901183dfaf4bd8cd5d7a8d4944f3")),
+					Signature = new Signature(Converter.HexToBytes("866838970DB4BA212F5FB34AD8D48B28E42FFC10D1722A3EF20A3E93B829A97BEE4D7EBC0514C6465BCEB0BF9B15C8D2CF02CA5CD21245AEF3DEC6DFDBAFAC7D")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("a0b55786c71b261916a19a36e424621965ed901183dfaf4bd8cd5d7a8d4944f3")),
@@ -1134,15 +1134,15 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new NamespaceRegistrationTransaction() {
-						Network = NetworkType.TESTNET,
-						RentalFeeSink = new Address(Converter.Utf8ToBytes("TATVJXFNG7BL7NDHNEQNANEOO2UWA55JPJ7U5I2P")),
-						RentalFee = new Amount(678000000),
-						Name = Converter.HexToBytes("636F6E74726F6C6C6564"),
-						ParentName = Converter.HexToBytes("7374617465"),
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("b04569b66ea0486bfd3d8a5156a7b7946e5a46e8a9c5ea622c87429fd27ae841")),
-						Signature = new Signature(Converter.HexToBytes("AD10FC0DF55C6054B7232F89189BE9B5523FECF674F573344422968F392871A2E43578F75C796AF886A37AB6A94BEFF86751DCD077F5DFBEB4A5D2742009B38F")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RentalFeeSink = new Address(Converter.Utf8ToBytes("TATVJXFNG7BL7NDHNEQNANEOO2UWA55JPJ7U5I2P")),
+					RentalFee = new Amount(678000000),
+					Name = Converter.HexToBytes("636F6E74726F6C6C6564"),
+					ParentName = Converter.HexToBytes("7374617465"),
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("b04569b66ea0486bfd3d8a5156a7b7946e5a46e8a9c5ea622c87429fd27ae841")),
+					Signature = new Signature(Converter.HexToBytes("AD10FC0DF55C6054B7232F89189BE9B5523FECF674F573344422968F392871A2E43578F75C796AF886A37AB6A94BEFF86751DCD077F5DFBEB4A5D2742009B38F")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("b04569b66ea0486bfd3d8a5156a7b7946e5a46e8a9c5ea622c87429fd27ae841")),
@@ -1292,27 +1292,27 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransaction() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(5000000),
-						MessageEnvelopeSize = 11,
-						Message = 	new Message(){
-								MessageType = MessageType.PLAIN,
-								MessageField = Converter.HexToBytes("686921"),}
-						,
-						Mosaics = 
-							new SizePrefixedMosaic[]{
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
-										Name = Converter.HexToBytes("656C656374726F6E6963")},
-									Amount = new Amount(345678)}
-								},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("adbd4c3db95fe697830c3675339d7a26a00f6afbeb21323b6f4b66937792d5ef")),
-						Signature = new Signature(Converter.HexToBytes("0B3A52F17CB33DB5EB1096C93A1A7EA038121EE1AE8476984C6FAB60542D367DBFF6CD918DF3DAE3DE14DEBA467A9A0D60286EB4585089A5B3F4B7F53CAB2099")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(5000000),
+					MessageEnvelopeSize = 11,
+					Message = 	new Message(){
+							MessageType = MessageType.PLAIN,
+							MessageField = Converter.HexToBytes("686921"),}
+					,
+					Mosaics = 
+						new SizePrefixedMosaic[]{
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
+									Name = Converter.HexToBytes("656C656374726F6E6963")},
+								Amount = new Amount(345678)}
+							},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("adbd4c3db95fe697830c3675339d7a26a00f6afbeb21323b6f4b66937792d5ef")),
+					Signature = new Signature(Converter.HexToBytes("0B3A52F17CB33DB5EB1096C93A1A7EA038121EE1AE8476984C6FAB60542D367DBFF6CD918DF3DAE3DE14DEBA467A9A0D60286EB4585089A5B3F4B7F53CAB2099")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("adbd4c3db95fe697830c3675339d7a26a00f6afbeb21323b6f4b66937792d5ef")),
@@ -1330,27 +1330,27 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransaction() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(5000000),
-						MessageEnvelopeSize = 72,
-						Message = 	new Message(){
-								MessageType = MessageType.ENCRYPTED,
-								MessageField = Converter.HexToBytes("3F7FED92C755C444C492BD5DFD003A0F6F7E257A4DE7CC91E33EDD477F29C9BB5BD906BE5CC9E20B80A4F7C65C24727FAC4145AD42E055DBEDF516D96D386516"),}
-						,
-						Mosaics = 
-							new SizePrefixedMosaic[]{
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
-										Name = Converter.HexToBytes("656C656374726F6E6963")},
-									Amount = new Amount(345678)}
-								},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("3223990affc1122f1b520c9710017680f62a1aa8bfbe1b791db99a177a3b55ab")),
-						Signature = new Signature(Converter.HexToBytes("376A90EAB19F665BE6D7BB16257B310ECFFDD8AFF0752F8E952397A983DBC2E5E87817E3EAFD8FFFE31DD82EF46E0006FC70B945A9F27F3EAECE1BFF03CC1F1F")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(5000000),
+					MessageEnvelopeSize = 72,
+					Message = 	new Message(){
+							MessageType = MessageType.ENCRYPTED,
+							MessageField = Converter.HexToBytes("3F7FED92C755C444C492BD5DFD003A0F6F7E257A4DE7CC91E33EDD477F29C9BB5BD906BE5CC9E20B80A4F7C65C24727FAC4145AD42E055DBEDF516D96D386516"),}
+					,
+					Mosaics = 
+						new SizePrefixedMosaic[]{
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
+									Name = Converter.HexToBytes("656C656374726F6E6963")},
+								Amount = new Amount(345678)}
+							},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("3223990affc1122f1b520c9710017680f62a1aa8bfbe1b791db99a177a3b55ab")),
+					Signature = new Signature(Converter.HexToBytes("376A90EAB19F665BE6D7BB16257B310ECFFDD8AFF0752F8E952397A983DBC2E5E87817E3EAFD8FFFE31DD82EF46E0006FC70B945A9F27F3EAECE1BFF03CC1F1F")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("3223990affc1122f1b520c9710017680f62a1aa8bfbe1b791db99a177a3b55ab")),
@@ -1368,37 +1368,37 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransaction() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(5000000),
-						MessageEnvelopeSize = 11,
-						Message = 	new Message(){
-								MessageType = MessageType.PLAIN,
-								MessageField = Converter.HexToBytes("686921"),}
-						,
-						Mosaics = 
-							new SizePrefixedMosaic[]{
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("616C6D6F7374")},
-										Name = Converter.HexToBytes("6E6F6E66756E6769626C65")},
-									Amount = new Amount(2)}
-								},
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
-										Name = Converter.HexToBytes("656C656374726F6E6963")},
-									Amount = new Amount(345678)}
-								},
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6E656D")},
-										Name = Converter.HexToBytes("78656D")},
-									Amount = new Amount(123)}
-								},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("99e22bafb76fbe813908808e350e8c2aa7ac28df756b195f77e0b24da32b7ea3")),
-						Signature = new Signature(Converter.HexToBytes("CB7773B42D752093B17F827D8FE3B8FAE20B8C2A03124489B3396CD11AA4953E6B4FAF874A8B5335F95EB8DC0020D77DCB11F21E4E2DA51D1E1B36B51358FEDD")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(5000000),
+					MessageEnvelopeSize = 11,
+					Message = 	new Message(){
+							MessageType = MessageType.PLAIN,
+							MessageField = Converter.HexToBytes("686921"),}
+					,
+					Mosaics = 
+						new SizePrefixedMosaic[]{
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("616C6D6F7374")},
+									Name = Converter.HexToBytes("6E6F6E66756E6769626C65")},
+								Amount = new Amount(2)}
+							},
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
+									Name = Converter.HexToBytes("656C656374726F6E6963")},
+								Amount = new Amount(345678)}
+							},
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6E656D")},
+									Name = Converter.HexToBytes("78656D")},
+								Amount = new Amount(123)}
+							},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("99e22bafb76fbe813908808e350e8c2aa7ac28df756b195f77e0b24da32b7ea3")),
+					Signature = new Signature(Converter.HexToBytes("CB7773B42D752093B17F827D8FE3B8FAE20B8C2A03124489B3396CD11AA4953E6B4FAF874A8B5335F95EB8DC0020D77DCB11F21E4E2DA51D1E1B36B51358FEDD")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("99e22bafb76fbe813908808e350e8c2aa7ac28df756b195f77e0b24da32b7ea3")),
@@ -1416,37 +1416,37 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransaction() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(5000000),
-						MessageEnvelopeSize = 72,
-						Message = 	new Message(){
-								MessageType = MessageType.ENCRYPTED,
-								MessageField = Converter.HexToBytes("48365F97EB76BAD136AC4630E792D1610B6591C9BF7DE0EA9D618FD7480AAE21A092BC8223F427B8263C7ED4EB665C945B569E42F48FF1A50A4CD20A3AF5173D"),}
-						,
-						Mosaics = 
-							new SizePrefixedMosaic[]{
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("616C6D6F7374")},
-										Name = Converter.HexToBytes("6E6F6E66756E6769626C65")},
-									Amount = new Amount(2)}
-								},
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
-										Name = Converter.HexToBytes("656C656374726F6E6963")},
-									Amount = new Amount(345678)}
-								},
-								new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
-										Name = Converter.HexToBytes("6E656D")},
-										Name = Converter.HexToBytes("78656D")},
-									Amount = new Amount(123)}
-								},
-							}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("9fa8af6da4554e85e856d1de8d7e2f1179cdf360ea7fa0c6900fbf21b040a1cc")),
-						Signature = new Signature(Converter.HexToBytes("C61AF3370499AD421AA4F2ADD3BEF24351ECD66D6C2C9B403E864EAA4152CEF539134A42E1E149E9E1E3CFCF84266721218FAB1912349B897365E03BFFD081FF")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(5000000),
+					MessageEnvelopeSize = 72,
+					Message = 	new Message(){
+							MessageType = MessageType.ENCRYPTED,
+							MessageField = Converter.HexToBytes("48365F97EB76BAD136AC4630E792D1610B6591C9BF7DE0EA9D618FD7480AAE21A092BC8223F427B8263C7ED4EB665C945B569E42F48FF1A50A4CD20A3AF5173D"),}
+					,
+					Mosaics = 
+						new SizePrefixedMosaic[]{
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("616C6D6F7374")},
+									Name = Converter.HexToBytes("6E6F6E66756E6769626C65")},
+								Amount = new Amount(2)}
+							},
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6D6173732E7375727665696C6C616E6365")},
+									Name = Converter.HexToBytes("656C656374726F6E6963")},
+								Amount = new Amount(345678)}
+							},
+							new SizePrefixedMosaic() {Mosaic = {MosaicId = new MosaicId() {NamespaceId = new NamespaceId() {
+									Name = Converter.HexToBytes("6E656D")},
+									Name = Converter.HexToBytes("78656D")},
+								Amount = new Amount(123)}
+							},
+						}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("9fa8af6da4554e85e856d1de8d7e2f1179cdf360ea7fa0c6900fbf21b040a1cc")),
+					Signature = new Signature(Converter.HexToBytes("C61AF3370499AD421AA4F2ADD3BEF24351ECD66D6C2C9B403E864EAA4152CEF539134A42E1E149E9E1E3CFCF84266721218FAB1912349B897365E03BFFD081FF")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("9fa8af6da4554e85e856d1de8d7e2f1179cdf360ea7fa0c6900fbf21b040a1cc")),
@@ -1536,14 +1536,14 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransactionV1() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(654321000000),
-						MessageEnvelopeSize = 0,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("fcb5b993c3fd49d5fa681b547a55b72c17cf80ffb7af4a72d2883d125389f383")),
-						Signature = new Signature(Converter.HexToBytes("DD1AEEA95A27C477CBD7201464C924CEF026D9C698BB5C9F37D14887DB7DE9E7DAA19C29CC5BF63861BDB22CEFF0EFAC4953F209547797A357978818A4DF9D2B")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(654321000000),
+					MessageEnvelopeSize = 0,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("fcb5b993c3fd49d5fa681b547a55b72c17cf80ffb7af4a72d2883d125389f383")),
+					Signature = new Signature(Converter.HexToBytes("DD1AEEA95A27C477CBD7201464C924CEF026D9C698BB5C9F37D14887DB7DE9E7DAA19C29CC5BF63861BDB22CEFF0EFAC4953F209547797A357978818A4DF9D2B")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("fcb5b993c3fd49d5fa681b547a55b72c17cf80ffb7af4a72d2883d125389f383")),
@@ -1561,18 +1561,18 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransactionV1() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(654321000000),
-						MessageEnvelopeSize = 8,
-						Message = 	new Message(){
-								MessageType = MessageType.PLAIN,
-								MessageField = Converter.HexToBytes(""),}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("9ac0f217883abb923293d578975eda6e0dc75980e183b305e47b1cab627e3880")),
-						Signature = new Signature(Converter.HexToBytes("CF4E8458CB13CB51393ADD419EF29A92806C0E4469A0924BA135F0AB7794276E73224F2ABF5B38CD9E2FB41E8A88C388F0C86899FC579B8996E893ECA8AD90ED")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(654321000000),
+					MessageEnvelopeSize = 8,
+					Message = 	new Message(){
+							MessageType = MessageType.PLAIN,
+							MessageField = Converter.HexToBytes(""),}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("9ac0f217883abb923293d578975eda6e0dc75980e183b305e47b1cab627e3880")),
+					Signature = new Signature(Converter.HexToBytes("CF4E8458CB13CB51393ADD419EF29A92806C0E4469A0924BA135F0AB7794276E73224F2ABF5B38CD9E2FB41E8A88C388F0C86899FC579B8996E893ECA8AD90ED")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("9ac0f217883abb923293d578975eda6e0dc75980e183b305e47b1cab627e3880")),
@@ -1590,18 +1590,18 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransactionV1() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(654321000000),
-						MessageEnvelopeSize = 11,
-						Message = 	new Message(){
-								MessageType = MessageType.PLAIN,
-								MessageField = Converter.HexToBytes("686921"),}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("f551c8e08e9b45eb4d91f45be15ca4a45efb89bde6fde97d86c7bc94ec8ad0c0")),
-						Signature = new Signature(Converter.HexToBytes("C41B7BCAEA6181A30E9404EA7598A581877665653403AE41E2E035CF04071A0909031F42B1D1671C06EDE22E9EAB9BFC93EBB1E8520C7D125A73201C6F4048B1")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(654321000000),
+					MessageEnvelopeSize = 11,
+					Message = 	new Message(){
+							MessageType = MessageType.PLAIN,
+							MessageField = Converter.HexToBytes("686921"),}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("f551c8e08e9b45eb4d91f45be15ca4a45efb89bde6fde97d86c7bc94ec8ad0c0")),
+					Signature = new Signature(Converter.HexToBytes("C41B7BCAEA6181A30E9404EA7598A581877665653403AE41E2E035CF04071A0909031F42B1D1671C06EDE22E9EAB9BFC93EBB1E8520C7D125A73201C6F4048B1")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("f551c8e08e9b45eb4d91f45be15ca4a45efb89bde6fde97d86c7bc94ec8ad0c0")),
@@ -1619,18 +1619,18 @@ public class TransactionTest
 			Network = NetworkType.TESTNET,
 			InnerTransaction = 
 				TransactionsFactory.ToNonVerifiableTransaction(new TransferTransactionV1() {
-						Network = NetworkType.TESTNET,
-						RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
-						Amount = new Amount(654321000000),
-						MessageEnvelopeSize = 72,
-						Message = 	new Message(){
-								MessageType = MessageType.ENCRYPTED,
-								MessageField = Converter.HexToBytes("642E756F0DBF4BE90EFCAB7AB42F297ED64EDC83E05062F8E49F6CAC61FBBA9F8D198B4B79A33096C58977C9134FAEE74307A6E55156BF6C2718E2B0D44BE050"),}
-						,
-						SignerPublicKey = new PublicKey(Converter.HexToBytes("82234a0cb68821c90ac88d4c8952652e07775d37a05d04e78483a0a5735083a6")),
-						Signature = new Signature(Converter.HexToBytes("224AA4451DF594EC9D7958C3794B9035FDCF79149B5F2C325B283CAE5A7E4612B2658EAB99507193CC7BC1C2CF8EFF80DFE4D4CF4EA2C79EC832FE65ADDC231B")),
-						Fee = new Amount(18370164183782063840),
-						Timestamp = new Timestamp(1910972016),
+					Network = NetworkType.TESTNET,
+					RecipientAddress = new Address(Converter.Utf8ToBytes("TACQ6J4XXABJ4FRQ63ZHQ7PGDDTZCBJYK4ANOE36")),
+					Amount = new Amount(654321000000),
+					MessageEnvelopeSize = 72,
+					Message = 	new Message(){
+							MessageType = MessageType.ENCRYPTED,
+							MessageField = Converter.HexToBytes("642E756F0DBF4BE90EFCAB7AB42F297ED64EDC83E05062F8E49F6CAC61FBBA9F8D198B4B79A33096C58977C9134FAEE74307A6E55156BF6C2718E2B0D44BE050"),}
+					,
+					SignerPublicKey = new PublicKey(Converter.HexToBytes("82234a0cb68821c90ac88d4c8952652e07775d37a05d04e78483a0a5735083a6")),
+					Signature = new Signature(Converter.HexToBytes("224AA4451DF594EC9D7958C3794B9035FDCF79149B5F2C325B283CAE5A7E4612B2658EAB99507193CC7BC1C2CF8EFF80DFE4D4CF4EA2C79EC832FE65ADDC231B")),
+					Fee = new Amount(18370164183782063840),
+					Timestamp = new Timestamp(1910972016),
 				})
 			,
 			SignerPublicKey = new PublicKey(Converter.HexToBytes("82234a0cb68821c90ac88d4c8952652e07775d37a05d04e78483a0a5735083a6")),

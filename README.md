@@ -1,7 +1,8 @@
 # SymbolCsDualSDK
 # Features
 ブロックチェーンSymbolとNEMを一つのSDKで両方使えるC#用SDKです。<br>
-もちろんUnityで使用可能です。
+もちろんUnityで使用可能です。<br>
+※Unityのバージョンは2020.3.31, 2021.3.11は動作確認済みです。
 
 # Requirement
 <li>BouncyCastle.Crypto(1.9.0)</li>

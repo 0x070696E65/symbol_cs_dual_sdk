@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// <see cref="GlobalConfiguration"/> provides a compile-time extension point for globally configuring

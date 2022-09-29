@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
+using OpenAPIDateConverter = SymbolOpenApi.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace SymbolOpenApi.Model
 {
     /// <summary>
     /// Transaction to link an account with a VRF public key. The key is used to randomize block production and leader/participant selection. Required for all harvesting eligible accounts. 

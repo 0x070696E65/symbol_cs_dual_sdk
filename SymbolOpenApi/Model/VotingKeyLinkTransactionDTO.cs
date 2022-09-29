@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
+using OpenAPIDateConverter = SymbolOpenApi.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace SymbolOpenApi.Model
 {
     /// <summary>
     /// Transaction to associate a BLS public key with an account. Required for node operators willing to vote finalized blocks. 

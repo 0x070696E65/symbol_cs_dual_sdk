@@ -22,7 +22,7 @@ using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// API client is mainly responsible for making the HTTP call to the API backend.
@@ -53,7 +53,7 @@ namespace Org.OpenAPITools.Client
         /// </summary>
         public ApiClient()
         {
-            Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            Configuration = SymbolOpenApi.Client.Configuration.Default;
             RestClient = new RestClient("http://localhost:3000");
         }
 
@@ -64,7 +64,7 @@ namespace Org.OpenAPITools.Client
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config)
         {
-            Configuration = config ?? Org.OpenAPITools.Client.Configuration.Default;
+            Configuration = config ?? SymbolOpenApi.Client.Configuration.Default;
 
             RestClient = new RestClient(Configuration.BasePath);
         }
@@ -135,6 +135,7 @@ namespace Org.OpenAPITools.Client
             // add file parameter, if any
             foreach(var param in fileParams)
             {
+                //request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
                 request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength,  param.Value.ContentType);
             }
 

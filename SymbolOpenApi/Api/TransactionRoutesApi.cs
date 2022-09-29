@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a cosignature transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         AnnounceTransactionInfoDTO AnnounceCosignatureTransaction (Cosignature cosignature);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a cosignature transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         ApiResponse<AnnounceTransactionInfoDTO> AnnounceCosignatureTransactionWithHttpInfo (Cosignature cosignature);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces an aggregate bonded transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         AnnounceTransactionInfoDTO AnnouncePartialTransaction (TransactionPayload transactionPayload);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces an aggregate bonded transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         ApiResponse<AnnounceTransactionInfoDTO> AnnouncePartialTransactionWithHttpInfo (TransactionPayload transactionPayload);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         AnnounceTransactionInfoDTO AnnounceTransaction (TransactionPayload transactionPayload);
@@ -84,7 +84,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         ApiResponse<AnnounceTransactionInfoDTO> AnnounceTransactionWithHttpInfo (TransactionPayload transactionPayload);
@@ -94,7 +94,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         TransactionInfoDTO GetConfirmedTransaction (string transactionId);
@@ -105,7 +105,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         ApiResponse<TransactionInfoDTO> GetConfirmedTransactionWithHttpInfo (string transactionId);
@@ -115,7 +115,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         List<TransactionInfoDTO> GetConfirmedTransactions (TransactionIds transactionIds);
@@ -126,7 +126,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         ApiResponse<List<TransactionInfoDTO>> GetConfirmedTransactionsWithHttpInfo (TransactionIds transactionIds);
@@ -136,7 +136,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         TransactionInfoDTO GetPartialTransaction (string transactionId);
@@ -147,7 +147,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         ApiResponse<TransactionInfoDTO> GetPartialTransactionWithHttpInfo (string transactionId);
@@ -157,7 +157,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         List<TransactionInfoDTO> GetPartialTransactions (TransactionIds transactionIds);
@@ -168,7 +168,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         ApiResponse<List<TransactionInfoDTO>> GetPartialTransactionsWithHttpInfo (TransactionIds transactionIds);
@@ -178,7 +178,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         TransactionInfoDTO GetUnconfirmedTransaction (string transactionId);
@@ -189,7 +189,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         ApiResponse<TransactionInfoDTO> GetUnconfirmedTransactionWithHttpInfo (string transactionId);
@@ -199,7 +199,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         List<TransactionInfoDTO> GetUnconfirmedTransactions (TransactionIds transactionIds);
@@ -210,7 +210,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         ApiResponse<List<TransactionInfoDTO>> GetUnconfirmedTransactionsWithHttpInfo (TransactionIds transactionIds);
@@ -220,7 +220,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -245,7 +245,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -269,7 +269,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of partial transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -294,7 +294,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of partial transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -318,7 +318,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of unconfirmed transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -343,7 +343,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of unconfirmed transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -369,7 +369,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a cosignature transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -381,7 +381,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a cosignature transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -392,7 +392,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces an aggregate bonded transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -404,7 +404,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces an aggregate bonded transaction to the network.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -415,7 +415,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -427,7 +427,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -438,7 +438,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -450,7 +450,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -461,7 +461,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -473,7 +473,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns confirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -484,7 +484,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -496,7 +496,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -507,7 +507,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -519,7 +519,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns partial transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -530,7 +530,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -542,7 +542,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transaction information given a transactionId or hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -553,7 +553,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -565,7 +565,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns unconfirmed transactions information for a given array of transactionIds.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -576,7 +576,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -602,7 +602,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -627,7 +627,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of partial transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -653,7 +653,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of partial transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -678,7 +678,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of unconfirmed transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -704,7 +704,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of unconfirmed transactions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -731,7 +731,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class TransactionRoutesApi : ITransactionRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionRoutesApi"/> class.
@@ -739,9 +739,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public TransactionRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -750,9 +750,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public TransactionRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -761,14 +761,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public TransactionRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public TransactionRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -794,12 +794,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -837,7 +837,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a cosignature transaction Announces a cosignature transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         public AnnounceTransactionInfoDTO AnnounceCosignatureTransaction (Cosignature cosignature)
@@ -849,7 +849,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a cosignature transaction Announces a cosignature transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         public ApiResponse<AnnounceTransactionInfoDTO> AnnounceCosignatureTransactionWithHttpInfo (Cosignature cosignature)
@@ -911,7 +911,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a cosignature transaction Announces a cosignature transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -925,7 +925,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a cosignature transaction Announces a cosignature transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cosignature"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -988,7 +988,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce an aggregate bonded transaction Announces an aggregate bonded transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         public AnnounceTransactionInfoDTO AnnouncePartialTransaction (TransactionPayload transactionPayload)
@@ -1000,7 +1000,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce an aggregate bonded transaction Announces an aggregate bonded transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         public ApiResponse<AnnounceTransactionInfoDTO> AnnouncePartialTransactionWithHttpInfo (TransactionPayload transactionPayload)
@@ -1062,7 +1062,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce an aggregate bonded transaction Announces an aggregate bonded transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -1076,7 +1076,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce an aggregate bonded transaction Announces an aggregate bonded transaction to the network.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -1139,7 +1139,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a new transaction Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>AnnounceTransactionInfoDTO</returns>
         public AnnounceTransactionInfoDTO AnnounceTransaction (TransactionPayload transactionPayload)
@@ -1151,7 +1151,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a new transaction Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <returns>ApiResponse of AnnounceTransactionInfoDTO</returns>
         public ApiResponse<AnnounceTransactionInfoDTO> AnnounceTransactionWithHttpInfo (TransactionPayload transactionPayload)
@@ -1213,7 +1213,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a new transaction Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AnnounceTransactionInfoDTO</returns>
@@ -1227,7 +1227,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Announce a new transaction Announces a transaction to the network. The [catbuffer library](https://github.com/nemtech/catbuffer) defines the protocol to serialize and deserialize Symbol entities. Catbuffers are integrated into [Symbol SDKs](https://nemtech.github.io/sdk.html).  It's recommended to use SDKs instead of calling the API endpoint directly to announce transactions. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionPayload"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AnnounceTransactionInfoDTO)</returns>
@@ -1290,7 +1290,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed transaction information Returns confirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         public TransactionInfoDTO GetConfirmedTransaction (string transactionId)
@@ -1302,7 +1302,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed transaction information Returns confirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         public ApiResponse<TransactionInfoDTO> GetConfirmedTransactionWithHttpInfo (string transactionId)
@@ -1356,7 +1356,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed transaction information Returns confirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -1370,7 +1370,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed transaction information Returns confirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -1425,7 +1425,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed trasactions information Returns confirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         public List<TransactionInfoDTO> GetConfirmedTransactions (TransactionIds transactionIds)
@@ -1437,7 +1437,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed trasactions information Returns confirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         public ApiResponse<List<TransactionInfoDTO>> GetConfirmedTransactionsWithHttpInfo (TransactionIds transactionIds)
@@ -1499,7 +1499,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed trasactions information Returns confirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -1513,7 +1513,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get confirmed trasactions information Returns confirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -1576,7 +1576,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial transaction information Returns partial transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         public TransactionInfoDTO GetPartialTransaction (string transactionId)
@@ -1588,7 +1588,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial transaction information Returns partial transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         public ApiResponse<TransactionInfoDTO> GetPartialTransactionWithHttpInfo (string transactionId)
@@ -1642,7 +1642,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial transaction information Returns partial transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -1656,7 +1656,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial transaction information Returns partial transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -1711,7 +1711,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial trasactions information Returns partial transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         public List<TransactionInfoDTO> GetPartialTransactions (TransactionIds transactionIds)
@@ -1723,7 +1723,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial trasactions information Returns partial transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         public ApiResponse<List<TransactionInfoDTO>> GetPartialTransactionsWithHttpInfo (TransactionIds transactionIds)
@@ -1785,7 +1785,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial trasactions information Returns partial transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -1799,7 +1799,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get partial trasactions information Returns partial transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -1862,7 +1862,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed transaction information Returns unconfirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>TransactionInfoDTO</returns>
         public TransactionInfoDTO GetUnconfirmedTransaction (string transactionId)
@@ -1874,7 +1874,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed transaction information Returns unconfirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <returns>ApiResponse of TransactionInfoDTO</returns>
         public ApiResponse<TransactionInfoDTO> GetUnconfirmedTransactionWithHttpInfo (string transactionId)
@@ -1928,7 +1928,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed transaction information Returns unconfirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionInfoDTO</returns>
@@ -1942,7 +1942,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed transaction information Returns unconfirmed transaction information given a transactionId or hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionId">Transaction id or hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionInfoDTO)</returns>
@@ -1997,7 +1997,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed trasactions information Returns unconfirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>List<TransactionInfoDTO></returns>
         public List<TransactionInfoDTO> GetUnconfirmedTransactions (TransactionIds transactionIds)
@@ -2009,7 +2009,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed trasactions information Returns unconfirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <returns>ApiResponse of List<TransactionInfoDTO></returns>
         public ApiResponse<List<TransactionInfoDTO>> GetUnconfirmedTransactionsWithHttpInfo (TransactionIds transactionIds)
@@ -2071,7 +2071,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed trasactions information Returns unconfirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionInfoDTO></returns>
@@ -2085,7 +2085,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get unconfirmed trasactions information Returns unconfirmed transactions information for a given array of transactionIds.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionInfoDTO&gt;)</returns>
@@ -2148,7 +2148,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search confirmed transactions Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2174,7 +2174,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search confirmed transactions Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2253,7 +2253,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search confirmed transactions Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2281,7 +2281,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search confirmed transactions Returns an array of confirmed transactions. If a transaction was announced with an alias rather than an address, the address that will be considered when querying is the one that was resolved from the alias at confirmation time. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2361,7 +2361,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search partial transactions Returns an array of partial transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2387,7 +2387,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search partial transactions Returns an array of partial transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2466,7 +2466,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search partial transactions Returns an array of partial transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2494,7 +2494,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search partial transactions Returns an array of partial transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2574,7 +2574,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search unconfirmed transactions Returns an array of unconfirmed transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2600,7 +2600,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search unconfirmed transactions Returns an array of unconfirmed transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2679,7 +2679,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search unconfirmed transactions Returns an array of unconfirmed transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
@@ -2707,7 +2707,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search unconfirmed transactions Returns an array of unconfirmed transactions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="recipientAddress">Filter by address of the account receiving the transaction. (optional)</param>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>

@@ -11,7 +11,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// API Response

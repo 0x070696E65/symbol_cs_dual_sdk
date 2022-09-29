@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets a block from the chain that has the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>BlockInfoDTO</returns>
         BlockInfoDTO GetBlockByHeight (string height);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets a block from the chain that has the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>ApiResponse of BlockInfoDTO</returns>
         ApiResponse<BlockInfoDTO> GetBlockByHeightWithHttpInfo (string height);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <returns>MerkleProofInfoDTO</returns>
@@ -64,7 +64,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <returns>ApiResponse of MerkleProofInfoDTO</returns>
@@ -75,7 +75,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>MerkleProofInfoDTO</returns>
@@ -87,7 +87,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>ApiResponse of MerkleProofInfoDTO</returns>
@@ -98,7 +98,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of bocks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -115,7 +115,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of bocks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -133,7 +133,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets a block from the chain that has the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of BlockInfoDTO</returns>
@@ -145,7 +145,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets a block from the chain that has the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (BlockInfoDTO)</returns>
@@ -156,7 +156,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -169,7 +169,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -181,7 +181,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -194,7 +194,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -206,7 +206,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of bocks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -224,7 +224,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of bocks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -243,7 +243,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class BlockRoutesApi : IBlockRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockRoutesApi"/> class.
@@ -251,9 +251,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public BlockRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -262,9 +262,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public BlockRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -273,14 +273,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public BlockRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public BlockRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -306,12 +306,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -349,7 +349,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get block information Gets a block from the chain that has the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>BlockInfoDTO</returns>
         public BlockInfoDTO GetBlockByHeight (string height)
@@ -361,7 +361,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get block information Gets a block from the chain that has the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>ApiResponse of BlockInfoDTO</returns>
         public ApiResponse<BlockInfoDTO> GetBlockByHeightWithHttpInfo (string height)
@@ -395,7 +395,7 @@ namespace Org.OpenAPITools.Api
 
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -415,7 +415,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get block information Gets a block from the chain that has the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of BlockInfoDTO</returns>
@@ -429,7 +429,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get block information Gets a block from the chain that has the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (BlockInfoDTO)</returns>
@@ -484,7 +484,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a receipt statement hash and block Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <returns>MerkleProofInfoDTO</returns>
@@ -497,7 +497,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a receipt statement hash and block Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <returns>ApiResponse of MerkleProofInfoDTO</returns>
@@ -556,7 +556,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a receipt statement hash and block Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -571,7 +571,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a receipt statement hash and block Returns the merkle path for a receipt statement or resolution linked to a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.receiptsHash) to verify if the statement was linked with the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Receipt hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -631,7 +631,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a transaction and block Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>MerkleProofInfoDTO</returns>
@@ -644,7 +644,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a transaction and block Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>ApiResponse of MerkleProofInfoDTO</returns>
@@ -703,7 +703,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a transaction and block Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -718,7 +718,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the merkle path for a given a transaction and block Returns the merkle path for a transaction included in a block. The merkle path is the minimum number of nodes needed to calculate the merkle root.  Steps to calculate the merkle root: 1. proofHash = hash (leaf). 2. Concatenate proofHash with the first unprocessed item from the merklePath list as follows: * a) If item.position == left -> proofHash = sha_256(item.hash + proofHash). * b) If item.position == right -> proofHash = sha_256(proofHash+ item.hash). 3. Repeat 2. for every item in the merklePath list. 4. Compare if the calculated proofHash equals the one recorded in the block header (block.transactionsHash) to verify if the transaction was included in the block. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
@@ -778,7 +778,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search blocks Gets an array of bocks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -796,7 +796,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search blocks Gets an array of bocks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -859,7 +859,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search blocks Gets an array of bocks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -879,7 +879,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search blocks Gets an array of bocks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="signerPublicKey">Filter by public key of the account signing the entity. (optional)</param>
         /// <param name="beneficiaryAddress">Filter by beneficiary address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>

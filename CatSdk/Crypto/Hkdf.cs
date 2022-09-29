@@ -31,7 +31,7 @@ namespace CatSdk.Crypto
                 var currentInfo = new byte[resultBlock.Length + info.Length + 1];
                 Array.Copy(resultBlock, 0, currentInfo, 0, resultBlock.Length);
                 Array.Copy(info, 0, currentInfo, resultBlock.Length, info.Length);
-                currentInfo[^1] = (byte)i;
+                currentInfo[currentInfo.Length - 1] = (byte)i;
                 resultBlock = keyedHash(prk, currentInfo);
                 Array.Copy(resultBlock, 0, result, outputLength - bytesRemaining, Math.Min(resultBlock.Length, bytesRemaining));
                 bytesRemaining -= resultBlock.Length;

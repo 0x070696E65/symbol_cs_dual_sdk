@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the transaction status for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>TransactionStatusDTO</returns>
         TransactionStatusDTO GetTransactionStatus (string hash);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the transaction status for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>ApiResponse of TransactionStatusDTO</returns>
         ApiResponse<TransactionStatusDTO> GetTransactionStatusWithHttpInfo (string hash);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of transaction statuses for a given array of transaction hashes.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <returns>List<TransactionStatusDTO></returns>
         List<TransactionStatusDTO> GetTransactionStatuses (TransactionHashes transactionHashes);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of transaction statuses for a given array of transaction hashes.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <returns>ApiResponse of List<TransactionStatusDTO></returns>
         ApiResponse<List<TransactionStatusDTO>> GetTransactionStatusesWithHttpInfo (TransactionHashes transactionHashes);
@@ -75,7 +75,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the transaction status for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionStatusDTO</returns>
@@ -87,7 +87,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the transaction status for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionStatusDTO)</returns>
@@ -98,7 +98,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of transaction statuses for a given array of transaction hashes.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionStatusDTO></returns>
@@ -110,7 +110,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of transaction statuses for a given array of transaction hashes.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionStatusDTO&gt;)</returns>
@@ -123,7 +123,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class TransactionStatusRoutesApi : ITransactionStatusRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionStatusRoutesApi"/> class.
@@ -131,9 +131,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public TransactionStatusRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -142,9 +142,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public TransactionStatusRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -153,14 +153,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public TransactionStatusRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public TransactionStatusRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -186,12 +186,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -229,7 +229,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction status Returns the transaction status for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>TransactionStatusDTO</returns>
         public TransactionStatusDTO GetTransactionStatus (string hash)
@@ -241,7 +241,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction status Returns the transaction status for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <returns>ApiResponse of TransactionStatusDTO</returns>
         public ApiResponse<TransactionStatusDTO> GetTransactionStatusWithHttpInfo (string hash)
@@ -295,7 +295,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction status Returns the transaction status for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionStatusDTO</returns>
@@ -309,7 +309,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction status Returns the transaction status for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Transaction hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionStatusDTO)</returns>
@@ -364,7 +364,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction statuses Returns an array of transaction statuses for a given array of transaction hashes.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <returns>List<TransactionStatusDTO></returns>
         public List<TransactionStatusDTO> GetTransactionStatuses (TransactionHashes transactionHashes)
@@ -376,7 +376,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction statuses Returns an array of transaction statuses for a given array of transaction hashes.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <returns>ApiResponse of List<TransactionStatusDTO></returns>
         public ApiResponse<List<TransactionStatusDTO>> GetTransactionStatusesWithHttpInfo (TransactionHashes transactionHashes)
@@ -438,7 +438,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction statuses Returns an array of transaction statuses for a given array of transaction hashes.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<TransactionStatusDTO></returns>
@@ -452,7 +452,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction statuses Returns an array of transaction statuses for a given array of transaction hashes.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transactionHashes"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;TransactionStatusDTO&gt;)</returns>

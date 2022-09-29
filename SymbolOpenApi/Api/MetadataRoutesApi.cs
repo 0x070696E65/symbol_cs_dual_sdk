@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MetadataInfoDTO</returns>
         MetadataInfoDTO GetMetadata (string compositeHash);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MetadataInfoDTO</returns>
         ApiResponse<MetadataInfoDTO> GetMetadataWithHttpInfo (string compositeHash);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetMetadataMerkle (string compositeHash);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetMetadataMerkleWithHttpInfo (string compositeHash);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of metadata.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -92,7 +92,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of metadata.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -112,7 +112,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MetadataInfoDTO</returns>
@@ -124,7 +124,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MetadataInfoDTO)</returns>
@@ -135,7 +135,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -147,7 +147,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the metadata merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -158,7 +158,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of metadata.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -178,7 +178,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of metadata.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -199,7 +199,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class MetadataRoutesApi : IMetadataRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MetadataRoutesApi"/> class.
@@ -207,9 +207,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public MetadataRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -218,9 +218,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public MetadataRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -229,14 +229,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public MetadataRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public MetadataRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -262,12 +262,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -305,7 +305,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata information Gets the metadata for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MetadataInfoDTO</returns>
         public MetadataInfoDTO GetMetadata (string compositeHash)
@@ -317,7 +317,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata information Gets the metadata for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MetadataInfoDTO</returns>
         public ApiResponse<MetadataInfoDTO> GetMetadataWithHttpInfo (string compositeHash)
@@ -371,7 +371,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata information Gets the metadata for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MetadataInfoDTO</returns>
@@ -385,7 +385,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata information Gets the metadata for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MetadataInfoDTO)</returns>
@@ -440,7 +440,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata merkle information Gets the metadata merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetMetadataMerkle (string compositeHash)
@@ -452,7 +452,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata merkle information Gets the metadata merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetMetadataMerkleWithHttpInfo (string compositeHash)
@@ -506,7 +506,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata merkle information Gets the metadata merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -520,7 +520,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get metadata merkle information Gets the metadata merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -575,7 +575,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search metadata entries Returns an array of metadata.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -595,7 +595,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search metadata entries Returns an array of metadata.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -662,7 +662,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search metadata entries Returns an array of metadata.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>
@@ -684,7 +684,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search metadata entries Returns an array of metadata.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceAddress">Filter by address sending the metadata entry. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
         /// <param name="scopedMetadataKey">Filter by metadata key. (optional)</param>

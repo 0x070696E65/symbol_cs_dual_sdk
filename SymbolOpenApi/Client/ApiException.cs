@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// API Exception

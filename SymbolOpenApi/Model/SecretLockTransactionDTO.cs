@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
+using OpenAPIDateConverter = SymbolOpenApi.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace SymbolOpenApi.Model
 {
     /// <summary>
     /// Transaction to sends mosaics to a recipient if the proof used is revealed. If the duration is reached, the locked funds go back to the sender of the transaction.

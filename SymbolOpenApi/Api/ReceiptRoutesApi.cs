@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of address resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -46,7 +46,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of address resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -60,7 +60,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -75,7 +75,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -89,7 +89,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of transaction statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -111,7 +111,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of transaction statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -134,7 +134,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of address resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -150,7 +150,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of address resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -165,7 +165,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -181,7 +181,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic resolution statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -196,7 +196,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of transaction statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -219,7 +219,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of transaction statements.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -243,7 +243,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class ReceiptRoutesApi : IReceiptRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReceiptRoutesApi"/> class.
@@ -251,9 +251,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public ReceiptRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -262,9 +262,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public ReceiptRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -273,14 +273,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public ReceiptRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public ReceiptRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -306,12 +306,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -349,7 +349,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts address resolution statements Gets an array of address resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -365,7 +365,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts address resolution statements Gets an array of address resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -424,7 +424,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts address resolution statements Gets an array of address resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -442,7 +442,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts address resolution statements Gets an array of address resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -502,7 +502,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts mosaic resolution statements Gets an array of mosaic resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -518,7 +518,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts mosaic resolution statements Gets an array of mosaic resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -577,7 +577,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts mosaic resolution statements Gets an array of mosaic resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -595,7 +595,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get receipts mosaic resolution statements Gets an array of mosaic resolution statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -655,7 +655,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search transaction statements Gets an array of transaction statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -678,7 +678,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search transaction statements Gets an array of transaction statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -751,7 +751,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search transaction statements Gets an array of transaction statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>
@@ -776,7 +776,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search transaction statements Gets an array of transaction statements.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Filter by block height. (optional)</param>
         /// <param name="fromHeight">Only blocks with height greater or equal than this one are returned. (optional)</param>
         /// <param name="toHeight">Only blocks with height smaller or equal than this one are returned. (optional)</param>

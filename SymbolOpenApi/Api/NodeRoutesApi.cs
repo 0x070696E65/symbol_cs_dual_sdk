@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies information regarding the connection and services status.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeHealthInfoDTO</returns>
         NodeHealthInfoDTO GetNodeHealth ();
 
@@ -41,7 +41,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies information regarding the connection and services status.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeHealthInfoDTO</returns>
         ApiResponse<NodeHealthInfoDTO> GetNodeHealthWithHttpInfo ();
         /// <summary>
@@ -50,7 +50,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies additional information about the application running on a node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeInfoDTO</returns>
         NodeInfoDTO GetNodeInfo ();
 
@@ -60,7 +60,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies additional information about the application running on a node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeInfoDTO</returns>
         ApiResponse<NodeInfoDTO> GetNodeInfoWithHttpInfo ();
         /// <summary>
@@ -69,7 +69,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the list of peers visible by the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>List<NodeInfoDTO></returns>
         List<NodeInfoDTO> GetNodePeers ();
 
@@ -79,7 +79,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the list of peers visible by the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List<NodeInfoDTO></returns>
         ApiResponse<List<NodeInfoDTO>> GetNodePeersWithHttpInfo ();
         /// <summary>
@@ -88,7 +88,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns storage information about the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>StorageInfoDTO</returns>
         StorageInfoDTO GetNodeStorage ();
 
@@ -98,7 +98,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns storage information about the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of StorageInfoDTO</returns>
         ApiResponse<StorageInfoDTO> GetNodeStorageWithHttpInfo ();
         /// <summary>
@@ -107,7 +107,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the node time at the moment the reply was sent and received.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeTimeDTO</returns>
         NodeTimeDTO GetNodeTime ();
 
@@ -117,7 +117,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the node time at the moment the reply was sent and received.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeTimeDTO</returns>
         ApiResponse<NodeTimeDTO> GetNodeTimeWithHttpInfo ();
         /// <summary>
@@ -126,7 +126,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the version of the running catapult-rest component.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ServerInfoDTO</returns>
         ServerInfoDTO GetServerInfo ();
 
@@ -136,7 +136,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the version of the running catapult-rest component.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of ServerInfoDTO</returns>
         ApiResponse<ServerInfoDTO> GetServerInfoWithHttpInfo ();
         /// <summary>
@@ -145,7 +145,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns array of unlocked account public keys.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>UnlockedAccountDTO</returns>
         UnlockedAccountDTO GetUnlockedAccount ();
 
@@ -155,7 +155,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns array of unlocked account public keys.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of UnlockedAccountDTO</returns>
         ApiResponse<UnlockedAccountDTO> GetUnlockedAccountWithHttpInfo ();
         #endregion Synchronous Operations
@@ -166,7 +166,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies information regarding the connection and services status.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeHealthInfoDTO</returns>
         System.Threading.Tasks.Task<NodeHealthInfoDTO> GetNodeHealthAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -177,7 +177,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies information regarding the connection and services status.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeHealthInfoDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<NodeHealthInfoDTO>> GetNodeHealthWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -187,7 +187,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies additional information about the application running on a node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeInfoDTO</returns>
         System.Threading.Tasks.Task<NodeInfoDTO> GetNodeInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -198,7 +198,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Supplies additional information about the application running on a node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeInfoDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<NodeInfoDTO>> GetNodeInfoWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -208,7 +208,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the list of peers visible by the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<NodeInfoDTO></returns>
         System.Threading.Tasks.Task<List<NodeInfoDTO>> GetNodePeersAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -219,7 +219,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the list of peers visible by the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;NodeInfoDTO&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<NodeInfoDTO>>> GetNodePeersWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -229,7 +229,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns storage information about the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of StorageInfoDTO</returns>
         System.Threading.Tasks.Task<StorageInfoDTO> GetNodeStorageAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -240,7 +240,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns storage information about the node.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (StorageInfoDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<StorageInfoDTO>> GetNodeStorageWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -250,7 +250,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the node time at the moment the reply was sent and received.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeTimeDTO</returns>
         System.Threading.Tasks.Task<NodeTimeDTO> GetNodeTimeAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -261,7 +261,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the node time at the moment the reply was sent and received.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeTimeDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<NodeTimeDTO>> GetNodeTimeWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -271,7 +271,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the version of the running catapult-rest component.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ServerInfoDTO</returns>
         System.Threading.Tasks.Task<ServerInfoDTO> GetServerInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -282,7 +282,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the version of the running catapult-rest component.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (ServerInfoDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<ServerInfoDTO>> GetServerInfoWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -292,7 +292,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns array of unlocked account public keys.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of UnlockedAccountDTO</returns>
         System.Threading.Tasks.Task<UnlockedAccountDTO> GetUnlockedAccountAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -303,7 +303,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns array of unlocked account public keys.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (UnlockedAccountDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<UnlockedAccountDTO>> GetUnlockedAccountWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -315,7 +315,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class NodeRoutesApi : INodeRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NodeRoutesApi"/> class.
@@ -323,9 +323,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NodeRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -334,9 +334,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NodeRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -345,14 +345,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public NodeRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public NodeRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -378,12 +378,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -421,7 +421,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node health information Supplies information regarding the connection and services status.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeHealthInfoDTO</returns>
         public NodeHealthInfoDTO GetNodeHealth ()
         {
@@ -432,7 +432,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node health information Supplies information regarding the connection and services status.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeHealthInfoDTO</returns>
         public ApiResponse<NodeHealthInfoDTO> GetNodeHealthWithHttpInfo ()
         {
@@ -481,7 +481,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node health information Supplies information regarding the connection and services status.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeHealthInfoDTO</returns>
         public async System.Threading.Tasks.Task<NodeHealthInfoDTO> GetNodeHealthAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -494,7 +494,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node health information Supplies information regarding the connection and services status.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeHealthInfoDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NodeHealthInfoDTO>> GetNodeHealthWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -544,7 +544,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node information Supplies additional information about the application running on a node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeInfoDTO</returns>
         public NodeInfoDTO GetNodeInfo ()
         {
@@ -555,7 +555,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node information Supplies additional information about the application running on a node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeInfoDTO</returns>
         public ApiResponse<NodeInfoDTO> GetNodeInfoWithHttpInfo ()
         {
@@ -604,7 +604,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node information Supplies additional information about the application running on a node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeInfoDTO</returns>
         public async System.Threading.Tasks.Task<NodeInfoDTO> GetNodeInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -617,7 +617,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node information Supplies additional information about the application running on a node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeInfoDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NodeInfoDTO>> GetNodeInfoWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -667,7 +667,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get peers information Gets the list of peers visible by the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>List<NodeInfoDTO></returns>
         public List<NodeInfoDTO> GetNodePeers ()
         {
@@ -678,7 +678,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get peers information Gets the list of peers visible by the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List<NodeInfoDTO></returns>
         public ApiResponse<List<NodeInfoDTO>> GetNodePeersWithHttpInfo ()
         {
@@ -727,7 +727,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get peers information Gets the list of peers visible by the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<NodeInfoDTO></returns>
         public async System.Threading.Tasks.Task<List<NodeInfoDTO>> GetNodePeersAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -740,7 +740,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get peers information Gets the list of peers visible by the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;NodeInfoDTO&gt;)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<List<NodeInfoDTO>>> GetNodePeersWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -790,7 +790,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the storage information of the node Returns storage information about the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>StorageInfoDTO</returns>
         public StorageInfoDTO GetNodeStorage ()
         {
@@ -801,7 +801,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the storage information of the node Returns storage information about the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of StorageInfoDTO</returns>
         public ApiResponse<StorageInfoDTO> GetNodeStorageWithHttpInfo ()
         {
@@ -850,7 +850,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the storage information of the node Returns storage information about the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of StorageInfoDTO</returns>
         public async System.Threading.Tasks.Task<StorageInfoDTO> GetNodeStorageAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -863,7 +863,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the storage information of the node Returns storage information about the node.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (StorageInfoDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<StorageInfoDTO>> GetNodeStorageWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -913,7 +913,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node time Gets the node time at the moment the reply was sent and received.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NodeTimeDTO</returns>
         public NodeTimeDTO GetNodeTime ()
         {
@@ -924,7 +924,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node time Gets the node time at the moment the reply was sent and received.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NodeTimeDTO</returns>
         public ApiResponse<NodeTimeDTO> GetNodeTimeWithHttpInfo ()
         {
@@ -973,7 +973,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node time Gets the node time at the moment the reply was sent and received.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NodeTimeDTO</returns>
         public async System.Threading.Tasks.Task<NodeTimeDTO> GetNodeTimeAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -986,7 +986,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the node time Gets the node time at the moment the reply was sent and received.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NodeTimeDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NodeTimeDTO>> GetNodeTimeWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -1036,7 +1036,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the version of the running REST component Returns the version of the running catapult-rest component.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ServerInfoDTO</returns>
         public ServerInfoDTO GetServerInfo ()
         {
@@ -1047,7 +1047,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the version of the running REST component Returns the version of the running catapult-rest component.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of ServerInfoDTO</returns>
         public ApiResponse<ServerInfoDTO> GetServerInfoWithHttpInfo ()
         {
@@ -1096,7 +1096,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the version of the running REST component Returns the version of the running catapult-rest component.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ServerInfoDTO</returns>
         public async System.Threading.Tasks.Task<ServerInfoDTO> GetServerInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -1109,7 +1109,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the version of the running REST component Returns the version of the running catapult-rest component.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (ServerInfoDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ServerInfoDTO>> GetServerInfoWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -1159,7 +1159,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the unlocked harvesting account public keys. Returns array of unlocked account public keys.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>UnlockedAccountDTO</returns>
         public UnlockedAccountDTO GetUnlockedAccount ()
         {
@@ -1170,7 +1170,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the unlocked harvesting account public keys. Returns array of unlocked account public keys.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of UnlockedAccountDTO</returns>
         public ApiResponse<UnlockedAccountDTO> GetUnlockedAccountWithHttpInfo ()
         {
@@ -1219,7 +1219,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the unlocked harvesting account public keys. Returns array of unlocked account public keys.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of UnlockedAccountDTO</returns>
         public async System.Threading.Tasks.Task<UnlockedAccountDTO> GetUnlockedAccountAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -1232,7 +1232,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the unlocked harvesting account public keys. Returns array of unlocked account public keys.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (UnlockedAccountDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<UnlockedAccountDTO>> GetUnlockedAccountWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))

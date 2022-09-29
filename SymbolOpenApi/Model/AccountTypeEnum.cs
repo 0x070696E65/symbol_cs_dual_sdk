@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
+using OpenAPIDateConverter = SymbolOpenApi.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace SymbolOpenApi.Model
 {
     /// <summary>
     /// * 0 - Unlinked. * 1 - Balance-holding account that is linked to a remote harvester account. * 2 - Remote harvester account that is linked to a balance-holding account. * 3 - Remote harvester eligible account that is unlinked. 

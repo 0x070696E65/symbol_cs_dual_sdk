@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>MosaicInfoDTO</returns>
         MosaicInfoDTO GetMosaic (string mosaicId);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>ApiResponse of MosaicInfoDTO</returns>
         ApiResponse<MosaicInfoDTO> GetMosaicWithHttpInfo (string mosaicId);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition merkle for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetMosaicMerkle (string mosaicId);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition merkle for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetMosaicMerkleWithHttpInfo (string mosaicId);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic definition.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>List<MosaicInfoDTO></returns>
         List<MosaicInfoDTO> GetMosaics (MosaicIds mosaicIds);
@@ -84,7 +84,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic definition.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>ApiResponse of List<MosaicInfoDTO></returns>
         ApiResponse<List<MosaicInfoDTO>> GetMosaicsWithHttpInfo (MosaicIds mosaicIds);
@@ -94,7 +94,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -109,7 +109,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -125,7 +125,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicInfoDTO</returns>
@@ -137,7 +137,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicInfoDTO)</returns>
@@ -148,7 +148,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition merkle for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -160,7 +160,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the mosaic definition merkle for a given mosaic identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -171,7 +171,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic definition.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<MosaicInfoDTO></returns>
@@ -183,7 +183,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaic definition.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;MosaicInfoDTO&gt;)</returns>
@@ -194,7 +194,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -210,7 +210,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -227,7 +227,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class MosaicRoutesApi : IMosaicRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MosaicRoutesApi"/> class.
@@ -235,9 +235,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public MosaicRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -246,9 +246,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public MosaicRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -257,14 +257,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public MosaicRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public MosaicRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -290,12 +290,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -333,7 +333,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic information Gets the mosaic definition for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>MosaicInfoDTO</returns>
         public MosaicInfoDTO GetMosaic (string mosaicId)
@@ -345,7 +345,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic information Gets the mosaic definition for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>ApiResponse of MosaicInfoDTO</returns>
         public ApiResponse<MosaicInfoDTO> GetMosaicWithHttpInfo (string mosaicId)
@@ -399,7 +399,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic information Gets the mosaic definition for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicInfoDTO</returns>
@@ -413,7 +413,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic information Gets the mosaic definition for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicInfoDTO)</returns>
@@ -468,7 +468,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic merkle information Gets the mosaic definition merkle for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetMosaicMerkle (string mosaicId)
@@ -480,7 +480,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic merkle information Gets the mosaic definition merkle for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetMosaicMerkleWithHttpInfo (string mosaicId)
@@ -534,7 +534,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic merkle information Gets the mosaic definition merkle for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -548,7 +548,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaic merkle information Gets the mosaic definition merkle for a given mosaic identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Mosaic identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -603,7 +603,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaics information for an array of mosaics Gets an array of mosaic definition.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>List<MosaicInfoDTO></returns>
         public List<MosaicInfoDTO> GetMosaics (MosaicIds mosaicIds)
@@ -615,7 +615,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaics information for an array of mosaics Gets an array of mosaic definition.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>ApiResponse of List<MosaicInfoDTO></returns>
         public ApiResponse<List<MosaicInfoDTO>> GetMosaicsWithHttpInfo (MosaicIds mosaicIds)
@@ -677,7 +677,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaics information for an array of mosaics Gets an array of mosaic definition.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<MosaicInfoDTO></returns>
@@ -691,7 +691,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get mosaics information for an array of mosaics Gets an array of mosaic definition.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;MosaicInfoDTO&gt;)</returns>
@@ -754,7 +754,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaics Gets an array of mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -770,7 +770,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaics Gets an array of mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -829,7 +829,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaics Gets an array of mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -847,7 +847,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaics Gets an array of mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>

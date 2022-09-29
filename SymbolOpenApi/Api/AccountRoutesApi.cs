@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>AccountInfoDTO</returns>
         AccountInfoDTO GetAccountInfo (string accountId);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>ApiResponse of AccountInfoDTO</returns>
         ApiResponse<AccountInfoDTO> GetAccountInfoWithHttpInfo (string accountId);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account merkle information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetAccountInfoMerkle (string accountId);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account merkle information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetAccountInfoMerkleWithHttpInfo (string accountId);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information for an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <returns>List<AccountInfoDTO></returns>
         List<AccountInfoDTO> GetAccountsInfo (AccountIds accountIds = default(AccountIds));
@@ -84,7 +84,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information for an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <returns>ApiResponse of List<AccountInfoDTO></returns>
         ApiResponse<List<AccountInfoDTO>> GetAccountsInfoWithHttpInfo (AccountIds accountIds = default(AccountIds));
@@ -94,7 +94,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -110,7 +110,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -127,7 +127,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AccountInfoDTO</returns>
@@ -139,7 +139,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AccountInfoDTO)</returns>
@@ -150,7 +150,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account merkle information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -162,7 +162,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account merkle information.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -173,7 +173,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information for an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<AccountInfoDTO></returns>
@@ -185,7 +185,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the account information for an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;AccountInfoDTO&gt;)</returns>
@@ -196,7 +196,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -213,7 +213,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -231,7 +231,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class AccountRoutesApi : IAccountRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountRoutesApi"/> class.
@@ -239,9 +239,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public AccountRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -250,9 +250,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public AccountRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -261,14 +261,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public AccountRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public AccountRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -294,12 +294,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -337,7 +337,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account information Returns the account information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>AccountInfoDTO</returns>
         public AccountInfoDTO GetAccountInfo (string accountId)
@@ -349,7 +349,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account information Returns the account information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>ApiResponse of AccountInfoDTO</returns>
         public ApiResponse<AccountInfoDTO> GetAccountInfoWithHttpInfo (string accountId)
@@ -403,7 +403,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account information Returns the account information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AccountInfoDTO</returns>
@@ -417,7 +417,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account information Returns the account information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AccountInfoDTO)</returns>
@@ -472,7 +472,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account merkle information Returns the account merkle information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetAccountInfoMerkle (string accountId)
@@ -484,7 +484,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account merkle information Returns the account merkle information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetAccountInfoMerkleWithHttpInfo (string accountId)
@@ -538,7 +538,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account merkle information Returns the account merkle information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -552,7 +552,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get account merkle information Returns the account merkle information.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">Account public key or address encoded using a 32-character set.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -607,7 +607,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get accounts information Returns the account information for an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <returns>List<AccountInfoDTO></returns>
         public List<AccountInfoDTO> GetAccountsInfo (AccountIds accountIds = default(AccountIds))
@@ -619,7 +619,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get accounts information Returns the account information for an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <returns>ApiResponse of List<AccountInfoDTO></returns>
         public ApiResponse<List<AccountInfoDTO>> GetAccountsInfoWithHttpInfo (AccountIds accountIds = default(AccountIds))
@@ -678,7 +678,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get accounts information Returns the account information for an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<AccountInfoDTO></returns>
@@ -692,7 +692,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get accounts information Returns the account information for an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountIds"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;AccountInfoDTO&gt;)</returns>
@@ -752,7 +752,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search accounts Gets an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -769,7 +769,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search accounts Gets an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -830,7 +830,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search accounts Gets an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>
@@ -849,7 +849,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search accounts Gets an array of accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
         /// <param name="offset">Entry id at which to start pagination. If the ordering parameter is set to -id, the elements returned precede the identifier. Otherwise, newer elements with respect to the id are returned.  (optional)</param>

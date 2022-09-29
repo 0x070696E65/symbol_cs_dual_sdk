@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof for the greatest height associated with the given epoch.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <returns>FinalizationProofDTO</returns>
         FinalizationProofDTO GetFinalizationProofAtEpoch (long epoch);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof for the greatest height associated with the given epoch.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <returns>ApiResponse of FinalizationProofDTO</returns>
         ApiResponse<FinalizationProofDTO> GetFinalizationProofAtEpochWithHttpInfo (long epoch);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof at the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>FinalizationProofDTO</returns>
         FinalizationProofDTO GetFinalizationProofAtHeight (string height);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof at the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>ApiResponse of FinalizationProofDTO</returns>
         ApiResponse<FinalizationProofDTO> GetFinalizationProofAtHeightWithHttpInfo (string height);
@@ -75,7 +75,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof for the greatest height associated with the given epoch.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of FinalizationProofDTO</returns>
@@ -87,7 +87,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof for the greatest height associated with the given epoch.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (FinalizationProofDTO)</returns>
@@ -98,7 +98,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof at the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of FinalizationProofDTO</returns>
@@ -110,7 +110,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets finalization proof at the given height.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (FinalizationProofDTO)</returns>
@@ -123,7 +123,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class FinalizationRoutesApi : IFinalizationRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FinalizationRoutesApi"/> class.
@@ -131,9 +131,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public FinalizationRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -142,9 +142,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public FinalizationRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -153,14 +153,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public FinalizationRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public FinalizationRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -186,12 +186,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -229,7 +229,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof for the greatest height associated with the given epoch.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <returns>FinalizationProofDTO</returns>
         public FinalizationProofDTO GetFinalizationProofAtEpoch (long epoch)
@@ -241,7 +241,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof for the greatest height associated with the given epoch.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <returns>ApiResponse of FinalizationProofDTO</returns>
         public ApiResponse<FinalizationProofDTO> GetFinalizationProofAtEpochWithHttpInfo (long epoch)
@@ -295,7 +295,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof for the greatest height associated with the given epoch.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of FinalizationProofDTO</returns>
@@ -309,7 +309,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof for the greatest height associated with the given epoch.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="epoch">Finalization epoch.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (FinalizationProofDTO)</returns>
@@ -364,7 +364,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof at the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>FinalizationProofDTO</returns>
         public FinalizationProofDTO GetFinalizationProofAtHeight (string height)
@@ -376,7 +376,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof at the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <returns>ApiResponse of FinalizationProofDTO</returns>
         public ApiResponse<FinalizationProofDTO> GetFinalizationProofAtHeightWithHttpInfo (string height)
@@ -430,7 +430,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof at the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of FinalizationProofDTO</returns>
@@ -444,7 +444,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get finalization proof Gets finalization proof at the given height.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="height">Block height.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (FinalizationProofDTO)</returns>

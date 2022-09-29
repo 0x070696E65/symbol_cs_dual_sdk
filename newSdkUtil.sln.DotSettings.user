@@ -1,5 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FCatSdk_002FPlugins_002FBouncyCastle_002ECrypto_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FJsonSubTypes_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FMicrosoft_002ECSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FRestSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FSystem_002EComponentModel_002EAnnotations_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FJsonSubTypes_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FMicrosoft_002ECSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FRestSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FSystem_002EComponentModel_002EAnnotations_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/lib/net6.0/BouncyCastle.Crypto.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>

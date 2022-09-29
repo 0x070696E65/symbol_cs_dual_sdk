@@ -16,7 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// Represents a set of configuration settings
@@ -417,7 +417,7 @@ namespace Org.OpenAPITools.Client
         /// </summary>
         public static String ToDebugReport()
         {
-            String report = "C# SDK (Org.OpenAPITools) Debug Report:\n";
+            String report = "C# SDK (SymbolOpenApi) Debug Report:\n";
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 1.0.4\n";

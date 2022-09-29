@@ -109,7 +109,7 @@ namespace CatSdk
         public ulong ToDifference(DateTime referenceDatetime) {
 	        if (referenceDatetime < Epoch)
 		        throw new Exception("timestamp cannot be before epoch");
-	        return (ulong)((referenceDatetime - Epoch) / TimeUnits).TotalMilliseconds;
+	        return (ulong)((referenceDatetime - Epoch).TotalMilliseconds / TimeUnits);
         }
     }
 }

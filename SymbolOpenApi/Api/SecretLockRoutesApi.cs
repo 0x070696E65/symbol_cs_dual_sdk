@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>SecretLockInfoDTO</returns>
         SecretLockInfoDTO GetSecretLock (string compositeHash);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of SecretLockInfoDTO</returns>
         ApiResponse<SecretLockInfoDTO> GetSecretLockWithHttpInfo (string compositeHash);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetSecretLockMerkle (string compositeHash);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetSecretLockMerkleWithHttpInfo (string compositeHash);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of secret locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -89,7 +89,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of secret locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -106,7 +106,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of SecretLockInfoDTO</returns>
@@ -118,7 +118,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (SecretLockInfoDTO)</returns>
@@ -129,7 +129,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -141,7 +141,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -152,7 +152,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of secret locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -169,7 +169,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of secret locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -187,7 +187,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class SecretLockRoutesApi : ISecretLockRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SecretLockRoutesApi"/> class.
@@ -195,9 +195,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public SecretLockRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -206,9 +206,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public SecretLockRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -217,14 +217,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public SecretLockRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public SecretLockRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -250,12 +250,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -293,7 +293,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock information Gets the hash lock for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>SecretLockInfoDTO</returns>
         public SecretLockInfoDTO GetSecretLock (string compositeHash)
@@ -305,7 +305,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock information Gets the hash lock for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of SecretLockInfoDTO</returns>
         public ApiResponse<SecretLockInfoDTO> GetSecretLockWithHttpInfo (string compositeHash)
@@ -359,7 +359,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock information Gets the hash lock for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of SecretLockInfoDTO</returns>
@@ -373,7 +373,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock information Gets the hash lock for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (SecretLockInfoDTO)</returns>
@@ -428,7 +428,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock merkle information Gets the hash lock merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetSecretLockMerkle (string compositeHash)
@@ -440,7 +440,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock merkle information Gets the hash lock merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetSecretLockMerkleWithHttpInfo (string compositeHash)
@@ -494,7 +494,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock merkle information Gets the hash lock merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -508,7 +508,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get secret lock merkle information Gets the hash lock merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -563,7 +563,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search secret lock entries Returns an array of secret locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -580,7 +580,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search secret lock entries Returns an array of secret locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -641,7 +641,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search secret lock entries Returns an array of secret locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
@@ -660,7 +660,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search secret lock entries Returns an array of secret locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="secret">Filter by secret. (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>

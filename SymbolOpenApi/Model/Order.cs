@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
+using OpenAPIDateConverter = SymbolOpenApi.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace SymbolOpenApi.Model
 {
     /// <summary>
     /// Indicates how to sort the results:  * &#x60;&#x60;asc&#x60;&#x60; - ascending * &#x60;&#x60;desc&#x60;&#x60; - descending 

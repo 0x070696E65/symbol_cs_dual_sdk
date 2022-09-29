@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions for a composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MosaicRestrictionDTO</returns>
         MosaicRestrictionDTO GetMosaicRestrictions (string compositeHash);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions for a composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MosaicRestrictionDTO</returns>
         ApiResponse<MosaicRestrictionDTO> GetMosaicRestrictionsWithHttpInfo (string compositeHash);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetMosaicRestrictionsMerkle (string compositeHash);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetMosaicRestrictionsMerkleWithHttpInfo (string compositeHash);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of mosaic restrictions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -90,7 +90,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of mosaic restrictions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -108,7 +108,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions for a composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicRestrictionDTO</returns>
@@ -120,7 +120,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions for a composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicRestrictionDTO)</returns>
@@ -131,7 +131,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -143,7 +143,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the mosaic restrictions merkle for a given composite hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -154,7 +154,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of mosaic restrictions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -172,7 +172,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of mosaic restrictions.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -191,7 +191,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class RestrictionMosaicRoutesApi : IRestrictionMosaicRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RestrictionMosaicRoutesApi"/> class.
@@ -199,9 +199,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public RestrictionMosaicRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -210,9 +210,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public RestrictionMosaicRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -221,14 +221,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public RestrictionMosaicRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public RestrictionMosaicRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -254,12 +254,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -297,7 +297,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions Returns the mosaic restrictions for a composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MosaicRestrictionDTO</returns>
         public MosaicRestrictionDTO GetMosaicRestrictions (string compositeHash)
@@ -309,7 +309,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions Returns the mosaic restrictions for a composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MosaicRestrictionDTO</returns>
         public ApiResponse<MosaicRestrictionDTO> GetMosaicRestrictionsWithHttpInfo (string compositeHash)
@@ -363,7 +363,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions Returns the mosaic restrictions for a composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicRestrictionDTO</returns>
@@ -377,7 +377,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions Returns the mosaic restrictions for a composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicRestrictionDTO)</returns>
@@ -432,7 +432,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions merkle Returns the mosaic restrictions merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetMosaicRestrictionsMerkle (string compositeHash)
@@ -444,7 +444,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions merkle Returns the mosaic restrictions merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetMosaicRestrictionsMerkleWithHttpInfo (string compositeHash)
@@ -498,7 +498,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions merkle Returns the mosaic restrictions merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -512,7 +512,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the mosaic restrictions merkle Returns the mosaic restrictions merkle for a given composite hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="compositeHash">Filter by composite hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -567,7 +567,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaic restrictions Returns an array of mosaic restrictions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -585,7 +585,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaic restrictions Returns an array of mosaic restrictions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -648,7 +648,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaic restrictions Returns an array of mosaic restrictions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>
@@ -668,7 +668,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search mosaic restrictions Returns an array of mosaic restrictions.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicId">Filter by mosaic identifier. (optional)</param>
         /// <param name="entryType">Filter by entry type. (optional)</param>
         /// <param name="targetAddress">Filter by target address. (optional)</param>

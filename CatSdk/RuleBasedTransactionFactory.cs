@@ -171,7 +171,7 @@ namespace CatSdk
                 switch (flags)
                 {
                     case string s:
-                        flagsInt = s.Split(" ").ToList().Select(flagName =>
+                        flagsInt = s.Split(' ').ToList().Select(flagName =>
                         {
                             if (stringToEnum == null) throw new Exception("");
                             if (stringToEnum.Values == null) throw new Exception("");
@@ -308,28 +308,28 @@ namespace CatSdk
         private static Dictionary<string, string> BuildTypeHintsMap(IStruct structValue) {
             var typeHints = new Dictionary<string, string>();
             var rawTypeHints = structValue.TypeHints;
-            foreach (var (key, hint) in rawTypeHints)
+            foreach (var kvp in rawTypeHints)
             {
                 string? ruleName = null;
-                if (hint.IndexOf("array[", StringComparison.Ordinal) == 0)
+                if (kvp.Value.IndexOf("array[", StringComparison.Ordinal) == 0)
                 {
-                    ruleName = hint;
-                } else if (hint.IndexOf("enum:", StringComparison.Ordinal) == 0)
+                    ruleName = kvp.Value;
+                } else if (kvp.Value.IndexOf("enum:", StringComparison.Ordinal) == 0)
                 {
-                    ruleName = hint["enum:".Length..];
+                    ruleName = kvp.Value.Substring("enum:".Length);
                 }
-                else if (hint.IndexOf("pod:", StringComparison.Ordinal) == 0)
+                else if (kvp.Value.IndexOf("pod:", StringComparison.Ordinal) == 0)
                 {
-                    ruleName = hint["pod:".Length..];
+                    ruleName = kvp.Value.Substring("pod:".Length);
                 }
-                else if (hint.IndexOf("struct:", StringComparison.Ordinal) == 0)
+                else if (kvp.Value.IndexOf("struct:", StringComparison.Ordinal) == 0)
                 {
-                    ruleName = hint;
+                    ruleName = kvp.Value;
                 }
 
                 if (ruleName != null)
                 {
-                    typeHints[key] = ruleName;
+                    typeHints[kvp.Key] = ruleName;
                 }
             }
             return typeHints;

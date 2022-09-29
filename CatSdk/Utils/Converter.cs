@@ -78,7 +78,7 @@ namespace CatSdk.Utils
             {
                 var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
                 Array.Copy(decoded, padded, decoded.Length);
-                return Base32.Encode(padded)[.._constants["sizes"]["symbolAddressEncoded"]];   
+                return Base32.Encode(padded).Substring(0, _constants["sizes"]["symbolAddressEncoded"]);   
             }
             if (_constants["sizes"]["nemAddressDecoded"] != decoded.Length)
             {

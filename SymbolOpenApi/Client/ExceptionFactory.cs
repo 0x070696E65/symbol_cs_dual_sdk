@@ -12,7 +12,7 @@
 using System;
 using RestSharp;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// A delegate to ExceptionFactory method

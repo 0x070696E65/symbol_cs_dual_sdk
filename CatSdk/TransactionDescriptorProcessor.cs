@@ -55,12 +55,12 @@ namespace CatSdk
 	     */
         public void CopyTo(IStruct transaction, string[]? ignoreKeys = null)
         {
-            foreach (var (key, _) in TransactionDescriptor)
+            foreach (var kvp in TransactionDescriptor)
             {
-                if(ignoreKeys != null && -1 != Array.IndexOf(ignoreKeys, key)) continue;
-                var p = transaction.GetType().GetProperty(key);
-                if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {key}");
-                var value = LookupValue(key);
+                if(ignoreKeys != null && -1 != Array.IndexOf(ignoreKeys, kvp.Key)) continue;
+                var p = transaction.GetType().GetProperty(kvp.Key);
+                if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {kvp.Key}");
+                var value = LookupValue(kvp.Key);
                 if (value is int i && Math.Sign(i) < 0 && p.PropertyType == typeof(ushort)) value = (ushort) (i - 0xFFFF0000);
                 if (value is int ii && Math.Sign(ii) < 0 && p.PropertyType == typeof(uint)) value = (uint)ii;
                 if (p.PropertyType == typeof(byte)) value = Convert.ToByte(value);

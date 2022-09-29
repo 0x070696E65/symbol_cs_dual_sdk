@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>HashLockInfoDTO</returns>
         HashLockInfoDTO GetHashLock (string hash);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>ApiResponse of HashLockInfoDTO</returns>
         ApiResponse<HashLockInfoDTO> GetHashLockWithHttpInfo (string hash);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetHashLockMerkle (string hash);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetHashLockMerkleWithHttpInfo (string hash);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of hash locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -88,7 +88,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of hash locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -104,7 +104,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of HashLockInfoDTO</returns>
@@ -116,7 +116,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (HashLockInfoDTO)</returns>
@@ -127,7 +127,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -139,7 +139,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the hash lock merkle for a given hash.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -150,7 +150,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of hash locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -166,7 +166,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns an array of hash locks.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -183,7 +183,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class HashLockRoutesApi : IHashLockRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HashLockRoutesApi"/> class.
@@ -191,9 +191,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public HashLockRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -202,9 +202,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public HashLockRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -213,14 +213,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public HashLockRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public HashLockRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -246,12 +246,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -289,7 +289,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock information Gets the hash lock for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>HashLockInfoDTO</returns>
         public HashLockInfoDTO GetHashLock (string hash)
@@ -301,7 +301,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock information Gets the hash lock for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>ApiResponse of HashLockInfoDTO</returns>
         public ApiResponse<HashLockInfoDTO> GetHashLockWithHttpInfo (string hash)
@@ -355,7 +355,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock information Gets the hash lock for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of HashLockInfoDTO</returns>
@@ -369,7 +369,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock information Gets the hash lock for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (HashLockInfoDTO)</returns>
@@ -424,7 +424,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock merkle information Gets the hash lock merkle for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetHashLockMerkle (string hash)
@@ -436,7 +436,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock merkle information Gets the hash lock merkle for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetHashLockMerkleWithHttpInfo (string hash)
@@ -490,7 +490,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock merkle information Gets the hash lock merkle for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -504,7 +504,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get hash lock merkle information Gets the hash lock merkle for a given hash.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">Filter by hash.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -559,7 +559,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search hash lock entries Returns an array of hash locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -575,7 +575,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search hash lock entries Returns an array of hash locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -634,7 +634,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search hash lock entries Returns an array of hash locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>
@@ -652,7 +652,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search hash lock entries Returns an array of hash locks.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="address">Filter by address involved in the transaction. An account&#39;s address is considered to be involved in the transaction when the account is the sender, recipient, or it is required to cosign the transaction. This filter cannot be combined with &#x60;&#x60;recipientAddress&#x60;&#x60; and &#x60;&#x60;signerPublicKey&#x60;&#x60; query params.  (optional)</param>
         /// <param name="pageSize">Select the number of entries to return. (optional, default to 10)</param>
         /// <param name="pageNumber">Filter by page number. (optional, default to 1)</param>

@@ -11,7 +11,7 @@
 
 using System.Collections.Generic;
 
-namespace Org.OpenAPITools.Client
+namespace SymbolOpenApi.Client
 {
     /// <summary>
     /// Represents a readable-only configuration contract.

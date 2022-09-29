@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NetworkConfigurationDTO</returns>
         NetworkConfigurationDTO GetNetworkProperties ();
 
@@ -41,7 +41,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NetworkConfigurationDTO</returns>
         ApiResponse<NetworkConfigurationDTO> GetNetworkPropertiesWithHttpInfo ();
         /// <summary>
@@ -50,7 +50,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the current network type.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NetworkTypeDTO</returns>
         NetworkTypeDTO GetNetworkType ();
 
@@ -60,7 +60,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the current network type.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NetworkTypeDTO</returns>
         ApiResponse<NetworkTypeDTO> GetNetworkTypeWithHttpInfo ();
         /// <summary>
@@ -69,7 +69,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>RentalFeesDTO</returns>
         RentalFeesDTO GetRentalFees ();
 
@@ -79,7 +79,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of RentalFeesDTO</returns>
         ApiResponse<RentalFeesDTO> GetRentalFeesWithHttpInfo ();
         /// <summary>
@@ -88,7 +88,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>TransactionFeesDTO</returns>
         TransactionFeesDTO GetTransactionFees ();
 
@@ -98,7 +98,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of TransactionFeesDTO</returns>
         ApiResponse<TransactionFeesDTO> GetTransactionFeesWithHttpInfo ();
         #endregion Synchronous Operations
@@ -109,7 +109,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NetworkConfigurationDTO</returns>
         System.Threading.Tasks.Task<NetworkConfigurationDTO> GetNetworkPropertiesAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -120,7 +120,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NetworkConfigurationDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<NetworkConfigurationDTO>> GetNetworkPropertiesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -130,7 +130,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the current network type.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NetworkTypeDTO</returns>
         System.Threading.Tasks.Task<NetworkTypeDTO> GetNetworkTypeAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -141,7 +141,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the current network type.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NetworkTypeDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<NetworkTypeDTO>> GetNetworkTypeWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -151,7 +151,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of RentalFeesDTO</returns>
         System.Threading.Tasks.Task<RentalFeesDTO> GetRentalFeesAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -162,7 +162,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (RentalFeesDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<RentalFeesDTO>> GetRentalFeesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -172,7 +172,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionFeesDTO</returns>
         System.Threading.Tasks.Task<TransactionFeesDTO> GetTransactionFeesAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -183,7 +183,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionFeesDTO)</returns>
         System.Threading.Tasks.Task<ApiResponse<TransactionFeesDTO>> GetTransactionFeesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken));
@@ -195,7 +195,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class NetworkRoutesApi : INetworkRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NetworkRoutesApi"/> class.
@@ -203,9 +203,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NetworkRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -214,9 +214,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NetworkRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -225,14 +225,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public NetworkRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public NetworkRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -258,12 +258,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -301,7 +301,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the network properties Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NetworkConfigurationDTO</returns>
         public NetworkConfigurationDTO GetNetworkProperties ()
         {
@@ -312,7 +312,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the network properties Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NetworkConfigurationDTO</returns>
         public ApiResponse<NetworkConfigurationDTO> GetNetworkPropertiesWithHttpInfo ()
         {
@@ -361,7 +361,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the network properties Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NetworkConfigurationDTO</returns>
         public async System.Threading.Tasks.Task<NetworkConfigurationDTO> GetNetworkPropertiesAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -374,7 +374,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the network properties Returns the content from a catapult-server network configuration file (resources/config-network.properties). To enable this feature, the REST setting \"network.propertiesFilePath\" must define where the file is located. This is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NetworkConfigurationDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NetworkConfigurationDTO>> GetNetworkPropertiesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -424,7 +424,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the current network type of the chain Returns the current network type.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>NetworkTypeDTO</returns>
         public NetworkTypeDTO GetNetworkType ()
         {
@@ -435,7 +435,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the current network type of the chain Returns the current network type.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of NetworkTypeDTO</returns>
         public ApiResponse<NetworkTypeDTO> GetNetworkTypeWithHttpInfo ()
         {
@@ -484,7 +484,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the current network type of the chain Returns the current network type.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NetworkTypeDTO</returns>
         public async System.Threading.Tasks.Task<NetworkTypeDTO> GetNetworkTypeAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -497,7 +497,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get the current network type of the chain Returns the current network type.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NetworkTypeDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NetworkTypeDTO>> GetNetworkTypeWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -547,7 +547,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get rental fees information Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>RentalFeesDTO</returns>
         public RentalFeesDTO GetRentalFees ()
         {
@@ -558,7 +558,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get rental fees information Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of RentalFeesDTO</returns>
         public ApiResponse<RentalFeesDTO> GetRentalFeesWithHttpInfo ()
         {
@@ -607,7 +607,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get rental fees information Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of RentalFeesDTO</returns>
         public async System.Threading.Tasks.Task<RentalFeesDTO> GetRentalFeesAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -620,7 +620,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get rental fees information Returns the estimated effective rental fees for namespaces and mosaics. This endpoint is only available if the REST instance has access to catapult-server ``resources/config-network.properties`` file. To activate this feature, add the setting \"network.propertiesFilePath\" in the configuration file (rest/resources/rest.json). 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (RentalFeesDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<RentalFeesDTO>> GetRentalFeesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -670,7 +670,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction fees information Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>TransactionFeesDTO</returns>
         public TransactionFeesDTO GetTransactionFees ()
         {
@@ -681,7 +681,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction fees information Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of TransactionFeesDTO</returns>
         public ApiResponse<TransactionFeesDTO> GetTransactionFeesWithHttpInfo ()
         {
@@ -730,7 +730,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction fees information Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of TransactionFeesDTO</returns>
         public async System.Threading.Tasks.Task<TransactionFeesDTO> GetTransactionFeesAsync (CancellationToken cancellationToken = default(CancellationToken))
@@ -743,7 +743,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get transaction fees information Returns the average, median, highest and lower fee multiplier over the last \"numBlocksTransactionFeeStats\". The setting \"numBlocksTransactionFeeStats\" is adjustable via the configuration file (rest/resources/rest.json) per REST instance. 
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (TransactionFeesDTO)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<TransactionFeesDTO>> GetTransactionFeesWithHttpInfoAsync (CancellationToken cancellationToken = default(CancellationToken))

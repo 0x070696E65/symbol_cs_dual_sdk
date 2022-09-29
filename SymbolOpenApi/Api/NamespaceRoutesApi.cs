@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using RestSharp;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+using SymbolOpenApi.Client;
+using SymbolOpenApi.Model;
 
-namespace Org.OpenAPITools.Api
+namespace SymbolOpenApi.Api
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -31,7 +31,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <returns>AccountsNamesDTO</returns>
         AccountsNamesDTO GetAccountsNames (Addresses addresses);
@@ -42,7 +42,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <returns>ApiResponse of AccountsNamesDTO</returns>
         ApiResponse<AccountsNamesDTO> GetAccountsNamesWithHttpInfo (Addresses addresses);
@@ -52,7 +52,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>MosaicsNamesDTO</returns>
         MosaicsNamesDTO GetMosaicsNames (MosaicIds mosaicIds);
@@ -63,7 +63,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>ApiResponse of MosaicsNamesDTO</returns>
         ApiResponse<MosaicsNamesDTO> GetMosaicsNamesWithHttpInfo (MosaicIds mosaicIds);
@@ -73,7 +73,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>NamespaceInfoDTO</returns>
         NamespaceInfoDTO GetNamespace (string namespaceId);
@@ -84,7 +84,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>ApiResponse of NamespaceInfoDTO</returns>
         ApiResponse<NamespaceInfoDTO> GetNamespaceWithHttpInfo (string namespaceId);
@@ -94,7 +94,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace merkle for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         MerkleStateInfoDTO GetNamespaceMerkle (string namespaceId);
@@ -105,7 +105,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace merkle for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         ApiResponse<MerkleStateInfoDTO> GetNamespaceMerkleWithHttpInfo (string namespaceId);
@@ -115,7 +115,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <returns>List<NamespaceNameDTO></returns>
         List<NamespaceNameDTO> GetNamespacesNames (NamespaceIds namespaceIds);
@@ -126,7 +126,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <returns>ApiResponse of List<NamespaceNameDTO></returns>
         ApiResponse<List<NamespaceNameDTO>> GetNamespacesNamesWithHttpInfo (NamespaceIds namespaceIds);
@@ -136,7 +136,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -154,7 +154,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -173,7 +173,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AccountsNamesDTO</returns>
@@ -185,7 +185,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for accounts.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AccountsNamesDTO)</returns>
@@ -196,7 +196,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicsNamesDTO</returns>
@@ -208,7 +208,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for mosaics.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicsNamesDTO)</returns>
@@ -219,7 +219,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NamespaceInfoDTO</returns>
@@ -231,7 +231,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NamespaceInfoDTO)</returns>
@@ -242,7 +242,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace merkle for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -254,7 +254,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets the namespace merkle for a given namespace identifier.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -265,7 +265,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<NamespaceNameDTO></returns>
@@ -277,7 +277,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Returns friendly names for namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;NamespaceNameDTO&gt;)</returns>
@@ -288,7 +288,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -307,7 +307,7 @@ namespace Org.OpenAPITools.Api
         /// <remarks>
         /// Gets an array of namespaces.
         /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -327,7 +327,7 @@ namespace Org.OpenAPITools.Api
     /// </summary>
     public partial class NamespaceRoutesApi : INamespaceRoutesApi
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private SymbolOpenApi.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NamespaceRoutesApi"/> class.
@@ -335,9 +335,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NamespaceRoutesApi(String basePath)
         {
-            this.Configuration = new Org.OpenAPITools.Client.Configuration { BasePath = basePath };
+            this.Configuration = new SymbolOpenApi.Client.Configuration { BasePath = basePath };
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -346,9 +346,9 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         public NamespaceRoutesApi()
         {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+            this.Configuration = SymbolOpenApi.Client.Configuration.Default;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -357,14 +357,14 @@ namespace Org.OpenAPITools.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public NamespaceRoutesApi(Org.OpenAPITools.Client.Configuration configuration = null)
+        public NamespaceRoutesApi(SymbolOpenApi.Client.Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = Org.OpenAPITools.Client.Configuration.Default;
+                this.Configuration = SymbolOpenApi.Client.Configuration.Default;
             else
                 this.Configuration = configuration;
 
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = SymbolOpenApi.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -390,12 +390,12 @@ namespace Org.OpenAPITools.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.Configuration Configuration {get; set;}
+        public SymbolOpenApi.Client.Configuration Configuration {get; set;}
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
+        public SymbolOpenApi.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -433,7 +433,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of accountIds Returns friendly names for accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <returns>AccountsNamesDTO</returns>
         public AccountsNamesDTO GetAccountsNames (Addresses addresses)
@@ -445,7 +445,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of accountIds Returns friendly names for accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <returns>ApiResponse of AccountsNamesDTO</returns>
         public ApiResponse<AccountsNamesDTO> GetAccountsNamesWithHttpInfo (Addresses addresses)
@@ -507,7 +507,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of accountIds Returns friendly names for accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of AccountsNamesDTO</returns>
@@ -521,7 +521,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of accountIds Returns friendly names for accounts.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="addresses"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (AccountsNamesDTO)</returns>
@@ -584,7 +584,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of mosaics Returns friendly names for mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>MosaicsNamesDTO</returns>
         public MosaicsNamesDTO GetMosaicsNames (MosaicIds mosaicIds)
@@ -596,7 +596,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of mosaics Returns friendly names for mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <returns>ApiResponse of MosaicsNamesDTO</returns>
         public ApiResponse<MosaicsNamesDTO> GetMosaicsNamesWithHttpInfo (MosaicIds mosaicIds)
@@ -658,7 +658,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of mosaics Returns friendly names for mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MosaicsNamesDTO</returns>
@@ -672,7 +672,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of mosaics Returns friendly names for mosaics.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mosaicIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MosaicsNamesDTO)</returns>
@@ -735,7 +735,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace information Gets the namespace for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>NamespaceInfoDTO</returns>
         public NamespaceInfoDTO GetNamespace (string namespaceId)
@@ -747,7 +747,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace information Gets the namespace for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>ApiResponse of NamespaceInfoDTO</returns>
         public ApiResponse<NamespaceInfoDTO> GetNamespaceWithHttpInfo (string namespaceId)
@@ -801,7 +801,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace information Gets the namespace for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of NamespaceInfoDTO</returns>
@@ -815,7 +815,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace information Gets the namespace for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (NamespaceInfoDTO)</returns>
@@ -870,7 +870,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace merkle information Gets the namespace merkle for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>MerkleStateInfoDTO</returns>
         public MerkleStateInfoDTO GetNamespaceMerkle (string namespaceId)
@@ -882,7 +882,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace merkle information Gets the namespace merkle for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <returns>ApiResponse of MerkleStateInfoDTO</returns>
         public ApiResponse<MerkleStateInfoDTO> GetNamespaceMerkleWithHttpInfo (string namespaceId)
@@ -936,7 +936,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace merkle information Gets the namespace merkle for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of MerkleStateInfoDTO</returns>
@@ -950,7 +950,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get namespace merkle information Gets the namespace merkle for a given namespace identifier.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceId">Namespace identifier.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (MerkleStateInfoDTO)</returns>
@@ -1005,7 +1005,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of namespaces Returns friendly names for namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <returns>List<NamespaceNameDTO></returns>
         public List<NamespaceNameDTO> GetNamespacesNames (NamespaceIds namespaceIds)
@@ -1017,7 +1017,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of namespaces Returns friendly names for namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <returns>ApiResponse of List<NamespaceNameDTO></returns>
         public ApiResponse<List<NamespaceNameDTO>> GetNamespacesNamesWithHttpInfo (NamespaceIds namespaceIds)
@@ -1079,7 +1079,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of namespaces Returns friendly names for namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of List<NamespaceNameDTO></returns>
@@ -1093,7 +1093,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Get readable names for a set of namespaces Returns friendly names for namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="namespaceIds"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel request (optional) </param>
         /// <returns>Task of ApiResponse (List&lt;NamespaceNameDTO&gt;)</returns>
@@ -1156,7 +1156,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search namespaces Gets an array of namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -1175,7 +1175,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search namespaces Gets an array of namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -1240,7 +1240,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search namespaces Gets an array of namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>
@@ -1261,7 +1261,7 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         /// Search namespaces Gets an array of namespaces.
         /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="SymbolOpenApi.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ownerAddress">Filter by owner address. (optional)</param>
         /// <param name="registrationType">Filter by registration type. (optional)</param>
         /// <param name="level0">Filter by root namespace. (optional)</param>

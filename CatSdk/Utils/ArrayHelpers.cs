@@ -62,7 +62,7 @@ namespace CatSdk.Utils
             if (!skipLastElementPadding) return (uint) elements.Sum((e) => AlignUp(e.Size, alignment));
                 
             var sum = elements.Take(elements.Length - 1).Sum((e) => e.Size);
-            return (uint) (sum + elements[^1].Size);
+            return (uint) (sum + elements[elements.Length - 1].Size);
         }
         
         /**

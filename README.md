@@ -212,7 +212,7 @@ var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
 var aggTx = new AggregateCompleteTransaction {
     Network = NetworkType.TESTNET,
     Transactions = 	innerTransactions,
-    SignerPublicKey = aliceKeyPair.PublicKey,
+    SignerPublicKey = alicePublicKey,
     Fee = new Amount(1000000),
     TransactionsHash = merkleHash,
     Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp),
@@ -227,7 +227,7 @@ C#で取得したペイロードをSSSで署名する
 window.SSS.setTransactionByPayload("PAYLOAD");
 window.SSS.requestSign().then((signedTx) => {
     console.log(signedTx.payload)
-};
+});
 ```
 
 署名済みペイロードを用いて再度C#でアグリゲートトランザクションの再構築
@@ -252,7 +252,6 @@ var content = new StringContent(payload, Encoding.UTF8, "application/json");
 var response =  client.PutAsync(node + "/transactions", content).Result;
 var responseDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseDetailsJson);
-
 ```
 
 ####Aliceが署名者でBobがSSSで連署する場合
@@ -270,7 +269,7 @@ SSSで連署する。requestSignCosignatureTransactionである点に注意<br>
 window.SSS.setTransactionByPayload("PAYLOAD")
 window.SSS.requestSignCosignatureTransaction().then((signedTx) => {
     console.log(signedTx.signature)
-};
+});
 ```
 
 ```c#

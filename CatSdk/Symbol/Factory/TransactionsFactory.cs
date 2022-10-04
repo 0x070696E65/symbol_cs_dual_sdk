@@ -70,12 +70,8 @@ namespace CatSdk.Symbol.Factory
 
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
             var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
-            Console.WriteLine(mosaicDefinitionTransaction.SignerPublicKey);
             var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
-            Console.WriteLine(address);
-            Console.WriteLine(mosaicDefinitionTransaction.Nonce.Value);
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
-            Console.WriteLine(mosaicDefinitionTransaction.Id);
             return mosaicDefinitionTransaction;
         }
             

@@ -167,6 +167,123 @@ var responseDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseDetailsJson);
 ```
 
+### Symbol AggregateCompleteTransaction using SSS Extension
+####AliceがSSSで署名、Bobが連署者の場合
+```c#
+var facade = new SymbolFacade(Network.TestNet);
+
+var alicePublicKey = new PublicKey(Converter.HexToBytes("ALICE_PUBLIC_KEY"));
+var bobPrivateKey = new PrivateKey("BOB_PRIVATE_KEY");
+var bobKeyPair = new KeyPair(bobPrivateKey);
+
+var innerTransactions = new IBaseTransaction[] {
+    new EmbeddedTransferTransaction
+    {
+        Network = NetworkType.TESTNET,
+        SignerPublicKey = alicePublicKey,
+        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("BOB_ADDRESS")),
+        Mosaics = new UnresolvedMosaic[]
+        {
+            new()
+            {
+                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+                Amount = new Amount(100)
+            }
+        }
+    }, 
+    new EmbeddedTransferTransaction
+    {
+        Network = NetworkType.TESTNET,
+        SignerPublicKey = bobKeyPair.PublicKey,
+        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("ALICE_ADDRESS")),
+        Mosaics = new UnresolvedMosaic[]
+        {
+            new()
+            {
+                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+                Amount = new Amount(100)
+            }
+        }
+    }
+};
+
+var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
+
+var aggTx = new AggregateCompleteTransaction {
+    Network = NetworkType.TESTNET,
+    Transactions = 	innerTransactions,
+    SignerPublicKey = aliceKeyPair.PublicKey,
+    Fee = new Amount(1000000),
+    TransactionsHash = merkleHash,
+    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp),
+};
+
+// アグリゲートトランザクションのペイロード
+Console.WriteLine(Converter.BytesToHex(aggTx.Serialize()));
+```
+
+C#で取得したペイロードをSSSで署名する
+```javascript
+window.SSS.setTransactionByPayload("PAYLOAD");
+window.SSS.requestSign().then((signedTx) => {
+    console.log(signedTx.payload)
+};
+```
+
+署名済みペイロードを用いて再度C#でアグリゲートトランザクションの再構築
+```c#
+var ms = new MemoryStream(Converter.HexToBytes("SIGNED_TRASACTION_PEYLOAD"));
+var br = new BinaryReader(ms);
+var aggTx = AggregateCompleteTransaction.Deserialize(br);
+
+var hash = facade.HashTransaction(aggTx);
+var bobCosignature = new Cosignature
+{
+    Signature = bobKeyPair.Sign(hash.bytes),
+    SignerPublicKey = bobKeyPair.PublicKey
+};
+aggTx.Cosignatures = new [] {bobCosignature};
+
+var payload = TransactionsFactory.CreatePayload(aggTx);
+
+const string node = "NODE_URL";
+using var client = new HttpClient();
+var content = new StringContent(payload, Encoding.UTF8, "application/json");
+var response =  client.PutAsync(node + "/transactions", content).Result;
+var responseDetailsJson = await response.Content.ReadAsStringAsync();
+Console.WriteLine(responseDetailsJson);
+
+```
+
+####Aliceが署名者でBobがSSSで連署する場合
+アグリゲートトランザクションの構築まで上と同じ
+```c#
+var aliceSignature = facade.SignTransaction(aliceKeyPair, aggTx);
+TransactionsFactory.AttachSignature(aggTx, aliceSignature);
+
+Console.WriteLine(Converter.BytesToHex(aggTx.Serialize()));
+```
+
+SSSで連署する。requestSignCosignatureTransactionである点に注意<br>
+取得するのはトランザクションの署名（signedTx.signature）
+```javascript
+window.SSS.setTransactionByPayload("PAYLOAD")
+window.SSS.requestSignCosignatureTransaction().then((signedTx) => {
+    console.log(signedTx.signature)
+};
+```
+
+```c#
+var bobCosignature = new Cosignature
+{
+    Signature = new Signature(Converter.HexToBytes("BOB_SIGNATURE")),
+    SignerPublicKey = bobKeyPair.PublicKey
+};
+aggTx.Cosignatures = new [] {bobCosignature};
+
+var payload = TransactionsFactory.CreatePayload(aggTx);
+```
+
 ### NEM TransferTransaction
 
 ```c#

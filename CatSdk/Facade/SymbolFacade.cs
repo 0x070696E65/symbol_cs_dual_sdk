@@ -88,8 +88,6 @@ namespace CatSdk.Facade
 			    var hash = new byte[32];
 			    hasher.BlockUpdate(serialize, 0, serialize.Length);
 			    hasher.DoFinal(hash, 0);
-			    Console.WriteLine("AAA");
-			    Console.WriteLine(CatSdk.Utils.Converter.BytesToHex(hash));
 			    hashBuilder.Update(new Hash256(hash));
 		    });
 

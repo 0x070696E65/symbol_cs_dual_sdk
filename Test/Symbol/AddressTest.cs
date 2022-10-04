@@ -9,11 +9,7 @@ using NUnit.Framework;
 namespace Test.Symbol{
 public class AddressTest
 {
-	public void Main()
-	{
-		Console.WriteLine("A");
-	}
-    private readonly SymbolFacade MainFacade = new (Network.MainNet);
+	private readonly SymbolFacade MainFacade = new (Network.MainNet);
     private readonly SymbolFacade TestFacade = new (Network.TestNet);
 	[Test]
 	public void AddressTest0(){

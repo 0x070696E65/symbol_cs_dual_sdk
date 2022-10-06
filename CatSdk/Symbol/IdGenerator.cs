@@ -1,3 +1,4 @@
+using System.Text;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Symbol
@@ -40,6 +41,18 @@ namespace CatSdk.Symbol
             hasher.DoFinal(arr, 0);
             var result = BitConverter.ToUInt64(arr, 0);
             return result | NAMESPACE_FLAG;
+        }
+
+        public static ulong GenerateUlongKey(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+            var sha3256Digest = new Sha3Digest(256);
+            var sha3256Hash = new byte[sha3256Digest.GetDigestSize()];
+            sha3256Digest.BlockUpdate(bytes, 0, bytes.Length);
+            sha3256Digest.DoFinal(sha3256Hash, 0);
+            var list = new List<byte>(sha3256Hash).GetRange(0, 8);
+            list[7] = (byte)(list[7] | 0x80);
+            return BitConverter.ToUInt64(list.ToArray(), 0);
         }
     }
 }

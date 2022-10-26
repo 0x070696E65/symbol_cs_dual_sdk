@@ -34,6 +34,7 @@ inline struct TransferTransactionBody
 	amount = Amount
 
 	# message envelope size
+	@sizeref(message, 4)
 	message_envelope_size = uint32
 
 	# optional message
@@ -69,11 +70,11 @@ struct NonVerifiableTransferTransactionV1
 	inline TransferTransactionV1Body
 
 # binary layout for a transfer transaction (V2, latest)
-struct TransferTransaction
+struct TransferTransactionV2
 	inline Transaction
 	inline TransferTransactionV2Body
 
 # binary layout for a non-verifiable transfer transaction (V2, latest)
-struct NonVerifiableTransferTransaction
+struct NonVerifiableTransferTransactionV2
 	inline NonVerifiableTransaction
 	inline TransferTransactionV2Body

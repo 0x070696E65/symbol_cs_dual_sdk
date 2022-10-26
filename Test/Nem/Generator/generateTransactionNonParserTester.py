@@ -65,7 +65,7 @@ def to_mosaic_definition(value):
         t3 += indent(f'}},\n', 2)
         t2 += indent(t3)
     t2 += indent(f'}},\n', 2)
-    t2 += indent(f'LevySize = {value["levy_size"]},\n')
+    #t2 += indent(f'LevySize = {value["levy_size"]},\n')
     if "levy" in value:
         t2 += indent(f'Levy = {{\n')
         t2 += indent(f'TransferFeeType = MosaicTransferFeeType.{value["levy"]["transfer_fee_type"].upper()},\n', 2)

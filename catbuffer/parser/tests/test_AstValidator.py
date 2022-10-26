@@ -73,7 +73,7 @@ class AstValidatorTests(unittest.TestCase):
 			# Assert:
 			self.assertEqual(expected_errors, validator.errors)
 
-	# region other types
+	# region alias
 
 	def test_can_validate_alias(self):
 		# Arrange:
@@ -299,6 +299,37 @@ class AstValidatorTests(unittest.TestCase):
 			ErrorDescriptor('reference to unknown element type "ElementType"', 'FooBar', 'alpha'),
 			ErrorDescriptor('reference to unknown sort_key property "height"', 'FooBar', 'alpha')
 		])
+
+	# endregion
+
+	# region struct - sizeref linkin
+
+	def test_cannot_validate_struct_containing_integer_with_unknown_sizeref_field(self):
+		# Arrange:
+		integer_model = FixedSizeInteger('uint16')
+		integer_model.sizeref = ['sigma', 8]
+
+		validator = AstValidator([
+			Struct([None, 'FooBar', StructField(['alpha', integer_model])])
+		])
+
+		# Act + Assert:
+		self._asssert_validate(validator, [
+			ErrorDescriptor('reference to unknown sizeref property "sigma"', 'FooBar', 'alpha')
+		])
+
+	def test_can_validate_struct_containing_integer_with_known_sizeref_field(self):
+		# Arrange:
+		integer_model = FixedSizeInteger('uint16')
+		integer_model.sizeref = ['sigma', 8]
+
+		validator = AstValidator([
+			Struct([None, 'ElementType', StructField(['weight', FixedSizeInteger('uint16')])]),
+			Struct([None, 'FooBar', StructField(['alpha', integer_model]), StructField(['sigma', 'ElementType'])])
+		])
+
+		# Act + Assert:
+		self._asssert_validate(validator, [])
 
 	# endregion
 
@@ -639,6 +670,39 @@ class AstValidatorTests(unittest.TestCase):
 		self._asssert_validate(validator, [
 			ErrorDescriptor('reference to unknown "discriminator" property "blah"', 'FooBar'),
 			ErrorDescriptor('reference to unknown "discriminator" property "alpha"', 'FooBar')
+		], [AstValidator.Mode.POST_EXPANSION])
+
+	def test_can_validate_struct_containing_custom_comparer(self):
+		# Arrange:
+		validator = AstValidator(self._create_type_descriptors_for_attribute_link_tests([
+			Attribute(['comparer', 'weight', None, 'height', 'ripemd_keccak_256'])
+		]))
+
+		# Act + Assert:
+		self._asssert_validate(validator, [])
+
+	def test_cannot_validate_struct_containing_custom_comparer_referencing_non_existent_property(self):
+		# Arrange:
+		validator = AstValidator(self._create_type_descriptors_for_attribute_link_tests([
+			Attribute(['comparer', 'weight', None, 'alpha', 'ripemd_keccak_256'])
+		]))
+
+		# Act + Assert:
+		self._asssert_validate(validator, [], [AstValidator.Mode.PRE_EXPANSION])
+		self._asssert_validate(validator, [
+			ErrorDescriptor('reference to unknown "comparer" property "alpha"', 'FooBar')
+		], [AstValidator.Mode.POST_EXPANSION])
+
+	def test_cannot_validate_struct_containing_custom_comparer_referencing_non_existent_transform(self):
+		# Arrange:
+		validator = AstValidator(self._create_type_descriptors_for_attribute_link_tests([
+			Attribute(['comparer', 'weight', None, 'height', 'keccak_512'])
+		]))
+
+		# Act + Assert:
+		self._asssert_validate(validator, [], [AstValidator.Mode.PRE_EXPANSION])
+		self._asssert_validate(validator, [
+			ErrorDescriptor('reference to unknown "comparer" transform "keccak_512"', 'FooBar')
 		], [AstValidator.Mode.POST_EXPANSION])
 
 	def test_can_validate_struct_containing_initializes_attribute_referencing_known_property_and_const_with_same_type(self):

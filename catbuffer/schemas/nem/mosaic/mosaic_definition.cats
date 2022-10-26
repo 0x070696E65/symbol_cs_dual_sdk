@@ -76,6 +76,7 @@ struct MosaicDefinition
 	properties = array(SizePrefixedMosaicProperty, properties_count)
 
 	# size of the serialized levy
+	@sizeref(levy, 4)
 	levy_size = uint32
 
 	# optional levy that is applied to transfers of this mosaic
@@ -100,12 +101,12 @@ inline struct MosaicDefinitionTransactionBody
 	# mosaic rental fee
 	rental_fee = Amount
 
-# binary layout for a mosaic definition transaction
-struct MosaicDefinitionTransaction
+# binary layout for a mosaic definition transaction (V1, latest)
+struct MosaicDefinitionTransactionV1
 	inline Transaction
 	inline MosaicDefinitionTransactionBody
 
-# binary layout for a non-verifiable mosaic definition transaction
-struct NonVerifiableMosaicDefinitionTransaction
+# binary layout for a non-verifiable mosaic definition transaction (V1, latest)
+struct NonVerifiableMosaicDefinitionTransactionV1
 	inline NonVerifiableTransaction
 	inline MosaicDefinitionTransactionBody

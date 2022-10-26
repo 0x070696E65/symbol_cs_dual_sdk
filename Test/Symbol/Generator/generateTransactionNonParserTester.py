@@ -10,55 +10,59 @@ CAMEL_CASE_PATTERN = re.compile(r'(?<!^)(?=[A-Z])')
 SNAKE_CASE_PATTERN = re.compile(r'_([a-z])')
 
 def type_converter(type):
-    if type == "account_key_link_transaction":
+    if type == "account_key_link_transaction_v1":
         return "TransactionType.ACCOUNT_KEY_LINK"
-    if type == "node_key_link_transaction":
+    if type == "node_key_link_transaction_v1":
         return "TransactionType.NODE_KEY_LINK"
-    if type == "aggregate_complete_transaction":
+    if type == "aggregate_complete_transaction_v1":
         return "TransactionType.AGGREGATE_COMPLETE"
-    if type == "aggregate_bonded_transaction":
+    if type == "aggregate_bonded_transaction_v1":
         return "TransactionType.AGGREGATE_BONDED"
-    if type == "voting_key_link_transaction":
+    if type == "aggregate_complete_transaction_v2":
+        return "TransactionType.AGGREGATE_COMPLETE"
+    if type == "aggregate_bonded_transaction_v2":
+        return "TransactionType.AGGREGATE_BONDED"
+    if type == "voting_key_link_transaction_v1":
         return "TransactionType.VOTING_KEY_LINK"
-    if type == "vrf_key_link_transaction":
+    if type == "vrf_key_link_transaction_v1":
         return "TransactionType.VRF_KEY_LINK"
-    if type == "hash_lock_transaction":
+    if type == "hash_lock_transaction_v1":
         return "TransactionType.HASH_LOCK"
-    if type == "secret_lock_transaction":
+    if type == "secret_lock_transaction_v1":
         return "TransactionType.SECRET_LOCK"
-    if type == "secret_proof_transaction":
+    if type == "secret_proof_transaction_v1":
         return "TransactionType.SECRET_PROOF"
-    if type == "account_metadata_transaction":
+    if type == "account_metadata_transaction_v1":
         return "TransactionType.ACCOUNT_METADATA"
-    if type == "mosaic_metadata_transaction":
+    if type == "mosaic_metadata_transaction_v1":
         return "TransactionType.MOSAIC_METADATA"
-    if type == "namespace_metadata_transaction":
+    if type == "namespace_metadata_transaction_v1":
         return "TransactionType.NAMESPACE_METADATA"
-    if type == "mosaic_definition_transaction":
+    if type == "mosaic_definition_transaction_v1":
         return "TransactionType.MOSAIC_DEFINITION"
-    if type == "mosaic_supply_change_transaction":
+    if type == "mosaic_supply_change_transaction_v1":
         return "TransactionType.MOSAIC_SUPPLY_CHANGE"
-    if type == "mosaic_supply_revocation_transaction":
+    if type == "mosaic_supply_revocation_transaction_v1":
         return "TransactionType.MOSAIC_SUPPLY_REVOCATION"
-    if type == "multisig_account_modification_transaction":
+    if type == "multisig_account_modification_transaction_v1":
         return "TransactionType.MULTISIG_ACCOUNT_MODIFICATION"
-    if type == "address_alias_transaction":
+    if type == "address_alias_transaction_v1":
         return "TransactionType.ADDRESS_ALIAS"
-    if type == "mosaic_alias_transaction":
+    if type == "mosaic_alias_transaction_v1":
         return "TransactionType.MOSAIC_ALIAS"
-    if type == "namespace_registration_transaction":
+    if type == "namespace_registration_transaction_v1":
         return "TransactionType.NAMESPACE_REGISTRATION"
-    if type == "account_address_restriction_transaction":
+    if type == "account_address_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_ADDRESS_RESTRICTION"
-    if type == "account_mosaic_restriction_transaction":
+    if type == "account_mosaic_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_MOSAIC_RESTRICTION"
-    if type == "account_operation_restriction_transaction":
+    if type == "account_operation_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_OPERATION_RESTRICTION"
-    if type == "mosaic_address_restriction_transaction":
+    if type == "mosaic_address_restriction_transaction_v1":
         return "TransactionType.MOSAIC_ADDRESS_RESTRICTION"
-    if type == "mosaic_global_restriction_transaction":
+    if type == "mosaic_global_restriction_transaction_v1":
         return "TransactionType.MOSAIC_GLOBAL_RESTRICTION"
-    if type == "transfer_transaction":
+    if type == "transfer_transaction_v1":
         return "TransactionType.TRANSFER"
 
 def to_flags(value, type):

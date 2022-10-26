@@ -203,7 +203,7 @@ namespace CatSdk.Crypto
             
         public static string EncryptString(string sourceString, string password, string salt)
         {
-            using var rijndael = Aes.Create("AesManaged");
+            using var rijndael = Aes.Create("System.Security.Cryptography.AesManaged");
             if (rijndael == null) throw new Exception("rijndael is null");
             GenerateKeyFromPassword(password, rijndael.KeySize, out var key, rijndael.BlockSize, out var iv, salt);
             rijndael.Key = key;
@@ -217,7 +217,7 @@ namespace CatSdk.Crypto
 
         public static string DecryptString(string sourceString, string password, string salt)
         {
-            using var rijndael = Aes.Create("AesManaged");
+            using var rijndael = Aes.Create("System.Security.Cryptography.AesManaged");
             if (rijndael == null) throw new Exception("rijndael is null");
             GenerateKeyFromPassword(password, rijndael.KeySize, out var key, rijndael.BlockSize, out var iv, salt);
             rijndael.Key = key;

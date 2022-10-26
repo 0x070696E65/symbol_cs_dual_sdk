@@ -53,7 +53,7 @@ var facade = new SymbolFacade(Network.TestNet);
 var privateKey = new PrivateKey("PRIVATE_KEY");
 var keyPair = new KeyPair(privateKey);
 
-var tx = new TransferTransaction
+var tx = new TransferTransactionV1
 {
     Network = NetworkType.TESTNET,
     RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("RECIPIENT_ADDRESS")),
@@ -105,7 +105,7 @@ var bobPrivateKey = new PrivateKey("BOB_PRIVATE_KEY");
 var bobKeyPair = new KeyPair(bobPrivateKey);
 
 var innerTransactions = new IBaseTransaction[] {
-    new EmbeddedTransferTransaction
+    new EmbeddedTransferTransactionV1
     {
         Network = NetworkType.TESTNET,
         SignerPublicKey = aliceKeyPair.PublicKey,
@@ -119,7 +119,7 @@ var innerTransactions = new IBaseTransaction[] {
             }
         }
     }, 
-    new EmbeddedTransferTransaction
+    new EmbeddedTransferTransactionV1
     {
         Network = NetworkType.TESTNET,
         SignerPublicKey = bobKeyPair.PublicKey,
@@ -137,7 +137,7 @@ var innerTransactions = new IBaseTransaction[] {
 
 var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
 
-var aggTx = new AggregateCompleteTransaction {
+var aggTx = new AggregateCompleteTransactionV2 {
     Network = NetworkType.TESTNET,
     Transactions = 	innerTransactions,
     SignerPublicKey = aliceKeyPair.PublicKey,
@@ -177,7 +177,7 @@ var bobPrivateKey = new PrivateKey("BOB_PRIVATE_KEY");
 var bobKeyPair = new KeyPair(bobPrivateKey);
 
 var innerTransactions = new IBaseTransaction[] {
-    new EmbeddedTransferTransaction
+    new EmbeddedTransferTransactionV1
     {
         Network = NetworkType.TESTNET,
         SignerPublicKey = alicePublicKey,
@@ -191,7 +191,7 @@ var innerTransactions = new IBaseTransaction[] {
             }
         }
     }, 
-    new EmbeddedTransferTransaction
+    new EmbeddedTransferTransactionV1
     {
         Network = NetworkType.TESTNET,
         SignerPublicKey = bobKeyPair.PublicKey,
@@ -209,7 +209,7 @@ var innerTransactions = new IBaseTransaction[] {
 
 var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
 
-var aggTx = new AggregateCompleteTransaction {
+var aggTx = new AggregateCompleteTransactionV2 {
     Network = NetworkType.TESTNET,
     Transactions = 	innerTransactions,
     SignerPublicKey = alicePublicKey,

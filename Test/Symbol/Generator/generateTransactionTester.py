@@ -10,104 +10,108 @@ CAMEL_CASE_PATTERN = re.compile(r'(?<!^)(?=[A-Z])')
 SNAKE_CASE_PATTERN = re.compile(r'_([a-z])')
 
 def type_converter(type):
-    if type == "account_key_link_transaction":
+    if type == "account_key_link_transaction_v1":
         return "TransactionType.ACCOUNT_KEY_LINK"
-    if type == "node_key_link_transaction":
+    if type == "node_key_link_transaction_v1":
         return "TransactionType.NODE_KEY_LINK"
-    if type == "aggregate_complete_transaction":
+    if type == "aggregate_complete_transaction_v1":
         return "TransactionType.AGGREGATE_COMPLETE"
-    if type == "aggregate_bonded_transaction":
+    if type == "aggregate_bonded_transaction_v1":
         return "TransactionType.AGGREGATE_BONDED"
-    if type == "voting_key_link_transaction":
+    if type == "aggregate_complete_transaction_v2":
+        return "TransactionType.AGGREGATE_COMPLETE"
+    if type == "aggregate_bonded_transaction_v2":
+        return "TransactionType.AGGREGATE_BONDED"
+    if type == "voting_key_link_transaction_v1":
         return "TransactionType.VOTING_KEY_LINK"
-    if type == "vrf_key_link_transaction":
+    if type == "vrf_key_link_transaction_v1":
         return "TransactionType.VRF_KEY_LINK"
-    if type == "hash_lock_transaction":
+    if type == "hash_lock_transaction_v1":
         return "TransactionType.HASH_LOCK"
-    if type == "secret_lock_transaction":
+    if type == "secret_lock_transaction_v1":
         return "TransactionType.SECRET_LOCK"
-    if type == "secret_proof_transaction":
+    if type == "secret_proof_transaction_v1":
         return "TransactionType.SECRET_PROOF"
-    if type == "account_metadata_transaction":
+    if type == "account_metadata_transaction_v1":
         return "TransactionType.ACCOUNT_METADATA"
-    if type == "mosaic_metadata_transaction":
+    if type == "mosaic_metadata_transaction_v1":
         return "TransactionType.MOSAIC_METADATA"
-    if type == "namespace_metadata_transaction":
+    if type == "namespace_metadata_transaction_v1":
         return "TransactionType.NAMESPACE_METADATA"
-    if type == "mosaic_definition_transaction":
+    if type == "mosaic_definition_transaction_v1":
         return "TransactionType.MOSAIC_DEFINITION"
-    if type == "mosaic_supply_change_transaction":
+    if type == "mosaic_supply_change_transaction_v1":
         return "TransactionType.MOSAIC_SUPPLY_CHANGE"
-    if type == "mosaic_supply_revocation_transaction":
+    if type == "mosaic_supply_revocation_transaction_v1":
         return "TransactionType.MOSAIC_SUPPLY_REVOCATION"
-    if type == "multisig_account_modification_transaction":
+    if type == "multisig_account_modification_transaction_v1":
         return "TransactionType.MULTISIG_ACCOUNT_MODIFICATION"
-    if type == "address_alias_transaction":
+    if type == "address_alias_transaction_v1":
         return "TransactionType.ADDRESS_ALIAS"
-    if type == "mosaic_alias_transaction":
+    if type == "mosaic_alias_transaction_v1":
         return "TransactionType.MOSAIC_ALIAS"
-    if type == "namespace_registration_transaction":
+    if type == "namespace_registration_transaction_v1":
         return "TransactionType.NAMESPACE_REGISTRATION"
-    if type == "account_address_restriction_transaction":
+    if type == "account_address_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_ADDRESS_RESTRICTION"
-    if type == "account_mosaic_restriction_transaction":
+    if type == "account_mosaic_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_MOSAIC_RESTRICTION"
-    if type == "account_operation_restriction_transaction":
+    if type == "account_operation_restriction_transaction_v1":
         return "TransactionType.ACCOUNT_OPERATION_RESTRICTION"
-    if type == "mosaic_address_restriction_transaction":
+    if type == "mosaic_address_restriction_transaction_v1":
         return "TransactionType.MOSAIC_ADDRESS_RESTRICTION"
-    if type == "mosaic_global_restriction_transaction":
+    if type == "mosaic_global_restriction_transaction_v1":
         return "TransactionType.MOSAIC_GLOBAL_RESTRICTION"
-    if type == "transfer_transaction":
+    if type == "transfer_transaction_v1":
         return "TransactionType.TRANSFER"
 
 def embedded_type_converter(type):
-    if type == "account_key_link_transaction":
-        return "EmbeddedAccountKeyLinkTransaction"
-    if type == "node_key_link_transaction":
-        return "EmbeddedNodeKeyLinkTransaction"
-    if type == "voting_key_link_transaction":
-        return "EmbeddedVotingKeyLinkTransaction"
-    if type == "vrf_key_link_transaction":
-        return "EmbeddedVrfKeyLinkTransaction"
-    if type == "hash_lock_transaction":
-        return "EmbeddedHashLockTransaction"
-    if type == "secret_lock_transaction":
-        return "EmbeddedSecretLockTransaction"
-    if type == "secret_proof_transaction":
-        return "EmbeddedSecretProofTransaction"
-    if type == "account_metadata_transaction":
-        return "EmbeddedAccountMetadataTransaction"
-    if type == "mosaic_metadata_transaction":
-        return "EmbeddedMosaicMetadataTransaction"
-    if type == "namespace_metadata_transaction":
-        return "EmbeddedNamespaceMetadataTransaction"
-    if type == "mosaic_definition_transaction":
-        return "EmbeddedMosaicDefinitionTransaction"
-    if type == "mosaic_supply_change_transaction":
-        return "EmbeddedMosaicSupplyChangeTransaction"
-    if type == "mosaic_supply_revocation_transaction":
-        return "EmbeddedMosaicSupplyRevocationTransaction"
-    if type == "multisig_account_modification_transaction":
-        return "EmbeddedMultisigAccountModificationTransaction"
-    if type == "address_alias_transaction":
-        return "EmbeddedAddressAliasTransaction"
-    if type == "mosaic_alias_transaction":
-        return "EmbeddedMosaicAliasTransaction"
-    if type == "namespace_registration_transaction":
-        return "EmbeddedNamespaceRegistrationTransaction"
-    if type == "account_address_restriction_transaction":
-        return "EmbeddedAccountAddressRestrictionTransaction"
-    if type == "account_mosaic_restriction_transaction":
-        return "EmbeddedAccountMosaicRestrictionTransaction"
-    if type == "account_operation_restriction_transaction":
-        return "EmbeddedAccountOperationRestrictionTransaction"
-    if type == "mosaic_address_restriction_transaction":
-        return "EmbeddedMosaicAddressRestrictionTransaction"
-    if type == "mosaic_global_restriction_transaction":
-        return "EmbeddedMosaicGlobalRestrictionTransaction"
-    if type == "transfer_transaction":
-        return "EmbeddedTransferTransaction"
+    if type == "account_key_link_transaction_v1":
+        return "EmbeddedAccountKeyLinkTransactionV1"
+    if type == "node_key_link_transaction_v1":
+        return "EmbeddedNodeKeyLinkTransactionV1"
+    if type == "voting_key_link_transaction_v1":
+        return "EmbeddedVotingKeyLinkTransactionV1"
+    if type == "vrf_key_link_transaction_v1":
+        return "EmbeddedVrfKeyLinkTransactionV1"
+    if type == "hash_lock_transaction_v1":
+        return "EmbeddedHashLockTransactionV1"
+    if type == "secret_lock_transaction_v1":
+        return "EmbeddedSecretLockTransactionV1"
+    if type == "secret_proof_transaction_v1":
+        return "EmbeddedSecretProofTransactionV1"
+    if type == "account_metadata_transaction_v1":
+        return "EmbeddedAccountMetadataTransactionV1"
+    if type == "mosaic_metadata_transaction_v1":
+        return "EmbeddedMosaicMetadataTransactionV1"
+    if type == "namespace_metadata_transaction_v1":
+        return "EmbeddedNamespaceMetadataTransactionV1"
+    if type == "mosaic_definition_transaction_v1":
+        return "EmbeddedMosaicDefinitionTransactionV1"
+    if type == "mosaic_supply_change_transaction_v1":
+        return "EmbeddedMosaicSupplyChangeTransactionV1"
+    if type == "mosaic_supply_revocation_transaction_v1":
+        return "EmbeddedMosaicSupplyRevocationTransactionV1"
+    if type == "multisig_account_modification_transaction_v1":
+        return "EmbeddedMultisigAccountModificationTransactionV1"
+    if type == "address_alias_transaction_v1":
+        return "EmbeddedAddressAliasTransactionV1"
+    if type == "mosaic_alias_transaction_v1":
+        return "EmbeddedMosaicAliasTransactionV1"
+    if type == "namespace_registration_transaction_v1":
+        return "EmbeddedNamespaceRegistrationTransactionV1"
+    if type == "account_address_restriction_transaction_v1":
+        return "EmbeddedAccountAddressRestrictionTransactionV1"
+    if type == "account_mosaic_restriction_transaction_v1":
+        return "EmbeddedAccountMosaicRestrictionTransactionV1"
+    if type == "account_operation_restriction_transaction_v1":
+        return "EmbeddedAccountOperationRestrictionTransactionV1"
+    if type == "mosaic_address_restriction_transaction_v1":
+        return "EmbeddedMosaicAddressRestrictionTransactionV1"
+    if type == "mosaic_global_restriction_transaction_v1":
+        return "EmbeddedMosaicGlobalRestrictionTransactionV1"
+    if type == "transfer_transaction_v1":
+        return "EmbeddedTransferTransactionV1"
 
 def to_flags(value, type):
     arr = re.split(" ", value)
@@ -150,7 +154,7 @@ def innner(key, value, txType, schema):
         for key in value[i]:
             if key != "type":
                 t3 += indent(f'{to_pascal_case(key)} = {type_check(key, value[i][key], txType, s)},\n')
-        if s == "EmbeddedMosaicDefinitionTransaction":
+        if s == "EmbeddedMosaicDefinitionTransactionV1":
             t3 += indent(f'Id = new MosaicId(IdGenerator.GenerateMosaicId(Facade.Network.PublicKeyToAddress("0000000000000000000000000000000000000000000000000000000000000000"), {value[i]["nonce"]})),\n')
         t3 += f'}},\n'
         t2 += t3
@@ -275,7 +279,7 @@ def type_check(key, value, txType, schema):
     if key == "transactions_hash" or key == "hash":
         return f'new Hash256(Converter.HexToBytes("{value}"))'
     if key == "mosaic_id" or key == "reference_mosaic_id" or key == "target_mosaic_id":
-        if schema == "MosaicAliasTransaction" or schema == "EmbeddedMosaicAliasTransaction":
+        if schema == "MosaicAliasTransactionV1" or schema == "EmbeddedMosaicAliasTransactionV1":
             return f'new MosaicId({value})'    
         return f'new UnresolvedMosaicId({value})'
     if key == "duration":
@@ -325,7 +329,7 @@ public class TransactionTest
         for key in c["descriptor"]:
             if key != "type":
                 body += indent(f'{to_pascal_case(key)} = {type_check(key, c["descriptor"][key], c["test_name"], c["schema_name"])},\n', 2)
-        if c["schema_name"] == "MosaicDefinitionTransaction":
+        if c["schema_name"] == "MosaicDefinitionTransactionV1":
             body += indent(f'Id = new MosaicId(IdGenerator.GenerateMosaicId(Facade.Network.PublicKeyToAddress("{c["descriptor"]["signer_public_key"]}"), {c["descriptor"]["nonce"]})),\n', 2)
         body += indent(f'}};\n')
         body += indent(f'Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));\n')

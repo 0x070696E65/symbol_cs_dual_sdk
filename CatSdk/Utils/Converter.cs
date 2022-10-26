@@ -159,5 +159,15 @@ namespace CatSdk.Utils
         {
             return !string.IsNullOrEmpty(s) && s.All(Uri.IsHexDigit);
         }
+        
+        public static byte[] Xor(byte[] currentMetadataValueBytes, byte[] newMetadataValueBytes)
+        {
+            var length = Math.Max(currentMetadataValueBytes.Length, newMetadataValueBytes.Length);
+            for (var i = currentMetadataValueBytes.Length; i < length; i++) currentMetadataValueBytes.ToList().Add(0);
+            for (var i = newMetadataValueBytes.Length; i < length; i++) newMetadataValueBytes.ToList().Add(0);
+            var metadataNewlist = new List<byte>();
+            for (var i = 0; i < length; i++) metadataNewlist.Add((byte)(currentMetadataValueBytes[i] ^ newMetadataValueBytes[i]));
+            return metadataNewlist.ToArray();
+        }
     }
 }

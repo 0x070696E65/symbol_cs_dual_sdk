@@ -527,7 +527,7 @@ public class LinkAction : IEnum<uint> {
 	}
 }
 
-public class AccountKeyLinkTransaction : ITransaction {
+public class AccountKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
@@ -549,7 +549,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 		{"RemotePublicKey", "pod:PublicKey"}
 	};
 
-	public AccountKeyLinkTransaction() {
+	public AccountKeyLinkTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -607,7 +607,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 		}
 	}
 
-	public static AccountKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static AccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -631,7 +631,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 			throw new Exception($"Invalid value of reserved field ({remotePublicKeySize})");
 		var remotePublicKey = PublicKey.Deserialize(br);
 
-		var instance = new AccountKeyLinkTransaction()
+		var instance = new AccountKeyLinkTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -684,7 +684,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableAccountKeyLinkTransaction : IBaseTransaction {
+public class NonVerifiableAccountKeyLinkTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
@@ -704,7 +704,7 @@ public class NonVerifiableAccountKeyLinkTransaction : IBaseTransaction {
 		{"RemotePublicKey", "pod:PublicKey"}
 	};
 
-	public NonVerifiableAccountKeyLinkTransaction() {
+	public NonVerifiableAccountKeyLinkTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -756,7 +756,7 @@ public class NonVerifiableAccountKeyLinkTransaction : IBaseTransaction {
 		}
 	}
 
-	public static NonVerifiableAccountKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableAccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -776,7 +776,7 @@ public class NonVerifiableAccountKeyLinkTransaction : IBaseTransaction {
 			throw new Exception($"Invalid value of reserved field ({remotePublicKeySize})");
 		var remotePublicKey = PublicKey.Deserialize(br);
 
-		var instance = new NonVerifiableAccountKeyLinkTransaction()
+		var instance = new NonVerifiableAccountKeyLinkTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -1400,7 +1400,7 @@ public class MosaicDefinition : IStruct {
 	}
 }
 
-public class MosaicDefinitionTransaction : ITransaction {
+public class MosaicDefinitionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
@@ -1423,7 +1423,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		{"RentalFee", "pod:Amount"}
 	};
 
-	public MosaicDefinitionTransaction() {
+	public MosaicDefinitionTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1486,7 +1486,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicDefinitionTransaction Deserialize(BinaryReader br) {
+	public static MosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -1513,7 +1513,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		var rentalFeeSink = Address.Deserialize(br);
 		var rentalFee = Amount.Deserialize(br);
 
-		var instance = new MosaicDefinitionTransaction()
+		var instance = new MosaicDefinitionTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -1570,7 +1570,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMosaicDefinitionTransaction : IBaseTransaction {
+public class NonVerifiableMosaicDefinitionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
@@ -1591,7 +1591,7 @@ public class NonVerifiableMosaicDefinitionTransaction : IBaseTransaction {
 		{"RentalFee", "pod:Amount"}
 	};
 
-	public NonVerifiableMosaicDefinitionTransaction() {
+	public NonVerifiableMosaicDefinitionTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1648,7 +1648,7 @@ public class NonVerifiableMosaicDefinitionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static NonVerifiableMosaicDefinitionTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableMosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -1671,7 +1671,7 @@ public class NonVerifiableMosaicDefinitionTransaction : IBaseTransaction {
 		var rentalFeeSink = Address.Deserialize(br);
 		var rentalFee = Amount.Deserialize(br);
 
-		var instance = new NonVerifiableMosaicDefinitionTransaction()
+		var instance = new NonVerifiableMosaicDefinitionTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -1778,7 +1778,7 @@ public class MosaicSupplyChangeAction : IEnum<uint> {
 	}
 }
 
-public class MosaicSupplyChangeTransaction : ITransaction {
+public class MosaicSupplyChangeTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
@@ -1800,7 +1800,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		{"Delta", "pod:Amount"}
 	};
 
-	public MosaicSupplyChangeTransaction() {
+	public MosaicSupplyChangeTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1861,7 +1861,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+	public static MosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -1885,7 +1885,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 		var delta = Amount.Deserialize(br);
 
-		var instance = new MosaicSupplyChangeTransaction()
+		var instance = new MosaicSupplyChangeTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -1941,7 +1941,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMosaicSupplyChangeTransaction : IBaseTransaction {
+public class NonVerifiableMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
@@ -1961,7 +1961,7 @@ public class NonVerifiableMosaicSupplyChangeTransaction : IBaseTransaction {
 		{"Delta", "pod:Amount"}
 	};
 
-	public NonVerifiableMosaicSupplyChangeTransaction() {
+	public NonVerifiableMosaicSupplyChangeTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2016,7 +2016,7 @@ public class NonVerifiableMosaicSupplyChangeTransaction : IBaseTransaction {
 		}
 	}
 
-	public static NonVerifiableMosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableMosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -2036,7 +2036,7 @@ public class NonVerifiableMosaicSupplyChangeTransaction : IBaseTransaction {
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 		var delta = Amount.Deserialize(br);
 
-		var instance = new NonVerifiableMosaicSupplyChangeTransaction()
+		var instance = new NonVerifiableMosaicSupplyChangeTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -2524,7 +2524,7 @@ public class NonVerifiableMultisigAccountModificationTransactionV1 : IBaseTransa
 	}
 }
 
-public class MultisigAccountModificationTransaction : ITransaction {
+public class MultisigAccountModificationTransactionV2 : ITransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -2545,7 +2545,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
 	};
 
-	public MultisigAccountModificationTransaction() {
+	public MultisigAccountModificationTransactionV2() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2604,7 +2604,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		}
 	}
 
-	public static MultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+	public static MultisigAccountModificationTransactionV2 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -2629,7 +2629,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
 		var minApprovalDelta = br.ReadUInt32();
 
-		var instance = new MultisigAccountModificationTransaction()
+		var instance = new MultisigAccountModificationTransactionV2()
 		{
 			Type = type,
 			Version = version,
@@ -2683,7 +2683,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableMultisigAccountModificationTransaction : IBaseTransaction {
+public class NonVerifiableMultisigAccountModificationTransactionV2 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -2702,7 +2702,7 @@ public class NonVerifiableMultisigAccountModificationTransaction : IBaseTransact
 		{"Modifications", "array[SizePrefixedMultisigAccountModification]"}
 	};
 
-	public NonVerifiableMultisigAccountModificationTransaction() {
+	public NonVerifiableMultisigAccountModificationTransactionV2() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2755,7 +2755,7 @@ public class NonVerifiableMultisigAccountModificationTransaction : IBaseTransact
 		}
 	}
 
-	public static NonVerifiableMultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableMultisigAccountModificationTransactionV2 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -2776,7 +2776,7 @@ public class NonVerifiableMultisigAccountModificationTransaction : IBaseTransact
 			throw new Exception($"Invalid value of reserved field ({minApprovalDeltaSize})");
 		var minApprovalDelta = br.ReadUInt32();
 
-		var instance = new NonVerifiableMultisigAccountModificationTransaction()
+		var instance = new NonVerifiableMultisigAccountModificationTransactionV2()
 		{
 			Type = type,
 			Version = version,
@@ -3046,7 +3046,7 @@ public class SizePrefixedCosignature : IStruct {
 	}
 }
 
-public class MultisigTransaction : ITransaction {
+public class MultisigTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_TRANSACTION;
@@ -3067,7 +3067,7 @@ public class MultisigTransaction : ITransaction {
 		{"Cosignatures", "array[SizePrefixedCosignature]"}
 	};
 
-	public MultisigTransaction() {
+	public MultisigTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3125,7 +3125,7 @@ public class MultisigTransaction : ITransaction {
 		}
 	}
 
-	public static MultisigTransaction Deserialize(BinaryReader br) {
+	public static MultisigTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -3149,7 +3149,7 @@ public class MultisigTransaction : ITransaction {
 		var cosignaturesCount = br.ReadUInt32();
 		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignature.Deserialize, (byte)cosignaturesCount);
 
-		var instance = new MultisigTransaction()
+		var instance = new MultisigTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -3203,7 +3203,7 @@ public class MultisigTransaction : ITransaction {
 	}
 }
 
-public class NamespaceRegistrationTransaction : ITransaction {
+public class NamespaceRegistrationTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
@@ -3227,7 +3227,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		{"ParentName", "bytes_array"}
 	};
 
-	public NamespaceRegistrationTransaction() {
+	public NamespaceRegistrationTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3297,7 +3297,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		}
 	}
 
-	public static NamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+	public static NamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -3330,7 +3330,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 			}
 		}
 
-		var instance = new NamespaceRegistrationTransaction()
+		var instance = new NamespaceRegistrationTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -3395,7 +3395,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableNamespaceRegistrationTransaction : IBaseTransaction {
+public class NonVerifiableNamespaceRegistrationTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
@@ -3417,7 +3417,7 @@ public class NonVerifiableNamespaceRegistrationTransaction : IBaseTransaction {
 		{"ParentName", "bytes_array"}
 	};
 
-	public NonVerifiableNamespaceRegistrationTransaction() {
+	public NonVerifiableNamespaceRegistrationTransactionV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3481,7 +3481,7 @@ public class NonVerifiableNamespaceRegistrationTransaction : IBaseTransaction {
 		}
 	}
 
-	public static NonVerifiableNamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableNamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -3510,7 +3510,7 @@ public class NonVerifiableNamespaceRegistrationTransaction : IBaseTransaction {
 			}
 		}
 
-		var instance = new NonVerifiableNamespaceRegistrationTransaction()
+		var instance = new NonVerifiableNamespaceRegistrationTransactionV1()
 		{
 			Type = type,
 			Version = version,
@@ -4036,7 +4036,7 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 	}
 }
 
-public class TransferTransaction : ITransaction {
+public class TransferTransactionV2 : ITransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -4060,7 +4060,7 @@ public class TransferTransaction : ITransaction {
 		{"Mosaics", "array[SizePrefixedMosaic]"}
 	};
 
-	public TransferTransaction() {
+	public TransferTransactionV2() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -4133,7 +4133,7 @@ public class TransferTransaction : ITransaction {
 		}
 	}
 
-	public static TransferTransaction Deserialize(BinaryReader br) {
+	public static TransferTransactionV2 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -4166,7 +4166,7 @@ public class TransferTransaction : ITransaction {
 		var mosaicsCount = br.ReadUInt32();
 		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, (byte)mosaicsCount);
 
-		var instance = new TransferTransaction()
+		var instance = new TransferTransactionV2()
 		{
 			Type = type,
 			Version = version,
@@ -4233,7 +4233,7 @@ public class TransferTransaction : ITransaction {
 	}
 }
 
-public class NonVerifiableTransferTransaction : IBaseTransaction {
+public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 2;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -4255,7 +4255,7 @@ public class NonVerifiableTransferTransaction : IBaseTransaction {
 		{"Mosaics", "array[SizePrefixedMosaic]"}
 	};
 
-	public NonVerifiableTransferTransaction() {
+	public NonVerifiableTransferTransactionV2() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -4322,7 +4322,7 @@ public class NonVerifiableTransferTransaction : IBaseTransaction {
 		}
 	}
 
-	public static NonVerifiableTransferTransaction Deserialize(BinaryReader br) {
+	public static NonVerifiableTransferTransactionV2 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -4351,7 +4351,7 @@ public class NonVerifiableTransferTransaction : IBaseTransaction {
 		var mosaicsCount = br.ReadUInt32();
 		var mosaics = ArrayHelpers.ReadArrayCount(br, SizePrefixedMosaic.Deserialize, (byte)mosaicsCount);
 
-		var instance = new NonVerifiableTransferTransaction()
+		var instance = new NonVerifiableTransferTransactionV2()
 		{
 			Type = type,
 			Version = version,
@@ -4420,16 +4420,16 @@ public class TransactionFactory {
 		var parent = Transaction.Deserialize(br);
 		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
 		{
-			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.Deserialize},
-			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.Deserialize},
-			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, MosaicSupplyChangeTransaction.Deserialize},
+			{AccountKeyLinkTransactionV1.TRANSACTION_TYPE, AccountKeyLinkTransactionV1.Deserialize},
+			{MosaicDefinitionTransactionV1.TRANSACTION_TYPE, MosaicDefinitionTransactionV1.Deserialize},
+			{MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, MosaicSupplyChangeTransactionV1.Deserialize},
 			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.Deserialize},
-			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, MultisigAccountModificationTransaction.Deserialize},
+			{MultisigAccountModificationTransactionV2.TRANSACTION_TYPE, MultisigAccountModificationTransactionV2.Deserialize},
 			{Cosignature.TRANSACTION_TYPE, Cosignature.Deserialize},
-			{MultisigTransaction.TRANSACTION_TYPE, MultisigTransaction.Deserialize},
-			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, NamespaceRegistrationTransaction.Deserialize},
+			{MultisigTransactionV1.TRANSACTION_TYPE, MultisigTransactionV1.Deserialize},
+			{NamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NamespaceRegistrationTransactionV1.Deserialize},
 			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.Deserialize},
-			{TransferTransaction.TRANSACTION_TYPE, TransferTransaction.Deserialize}
+			{TransferTransactionV2.TRANSACTION_TYPE, TransferTransactionV2.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
@@ -4444,16 +4444,16 @@ public class TransactionFactory {
 	public static ITransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, ITransaction>
 		{
-			{"account_key_link_transaction", new AccountKeyLinkTransaction()},
-			{"mosaic_definition_transaction", new MosaicDefinitionTransaction()},
-			{"mosaic_supply_change_transaction", new MosaicSupplyChangeTransaction()},
+			{"account_key_link_transaction_v1", new AccountKeyLinkTransactionV1()},
+			{"mosaic_definition_transaction_v1", new MosaicDefinitionTransactionV1()},
+			{"mosaic_supply_change_transaction_v1", new MosaicSupplyChangeTransactionV1()},
 			{"multisig_account_modification_transaction_v1", new MultisigAccountModificationTransactionV1()},
-			{"multisig_account_modification_transaction", new MultisigAccountModificationTransaction()},
+			{"multisig_account_modification_transaction_v2", new MultisigAccountModificationTransactionV2()},
 			{"cosignature", new Cosignature()},
-			{"multisig_transaction", new MultisigTransaction()},
-			{"namespace_registration_transaction", new NamespaceRegistrationTransaction()},
+			{"multisig_transaction_v1", new MultisigTransactionV1()},
+			{"namespace_registration_transaction_v1", new NamespaceRegistrationTransactionV1()},
 			{"transfer_transaction_v1", new TransferTransactionV1()},
-			{"transfer_transaction", new TransferTransaction()}
+			{"transfer_transaction_v2", new TransferTransactionV2()}
 
 		};
 		return mapping[entityName];
@@ -4466,14 +4466,14 @@ public class NonVerifiableTransactionFactory {
 		var parent = NonVerifiableTransaction.Deserialize(br);
 		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
 		{
-			{NonVerifiableAccountKeyLinkTransaction.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransaction.Deserialize},
-			{NonVerifiableMosaicDefinitionTransaction.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransaction.Deserialize},
-			{NonVerifiableMosaicSupplyChangeTransaction.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransaction.Deserialize},
+			{NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransactionV1.Deserialize},
+			{NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransactionV1.Deserialize},
+			{NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransactionV1.Deserialize},
 			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
-			{NonVerifiableMultisigAccountModificationTransaction.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransaction.Deserialize},
-			{NonVerifiableNamespaceRegistrationTransaction.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransaction.Deserialize},
+			{NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV2.Deserialize},
+			{NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransactionV1.Deserialize},
 			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.Deserialize},
-			{NonVerifiableTransferTransaction.TRANSACTION_TYPE, NonVerifiableTransferTransaction.Deserialize}
+			{NonVerifiableTransferTransactionV2.TRANSACTION_TYPE, NonVerifiableTransferTransactionV2.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
@@ -4488,14 +4488,14 @@ public class NonVerifiableTransactionFactory {
 	public static IBaseTransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, IBaseTransaction>
 		{
-			{"non_verifiable_account_key_link_transaction", new NonVerifiableAccountKeyLinkTransaction()},
-			{"non_verifiable_mosaic_definition_transaction", new NonVerifiableMosaicDefinitionTransaction()},
-			{"non_verifiable_mosaic_supply_change_transaction", new NonVerifiableMosaicSupplyChangeTransaction()},
+			{"non_verifiable_account_key_link_transaction_v1", new NonVerifiableAccountKeyLinkTransactionV1()},
+			{"non_verifiable_mosaic_definition_transaction_v1", new NonVerifiableMosaicDefinitionTransactionV1()},
+			{"non_verifiable_mosaic_supply_change_transaction_v1", new NonVerifiableMosaicSupplyChangeTransactionV1()},
 			{"non_verifiable_multisig_account_modification_transaction_v1", new NonVerifiableMultisigAccountModificationTransactionV1()},
-			{"non_verifiable_multisig_account_modification_transaction", new NonVerifiableMultisigAccountModificationTransaction()},
-			{"non_verifiable_namespace_registration_transaction", new NonVerifiableNamespaceRegistrationTransaction()},
+			{"non_verifiable_multisig_account_modification_transaction_v2", new NonVerifiableMultisigAccountModificationTransactionV2()},
+			{"non_verifiable_namespace_registration_transaction_v1", new NonVerifiableNamespaceRegistrationTransactionV1()},
 			{"non_verifiable_transfer_transaction_v1", new NonVerifiableTransferTransactionV1()},
-			{"non_verifiable_transfer_transaction", new NonVerifiableTransferTransaction()}
+			{"non_verifiable_transfer_transaction_v2", new NonVerifiableTransferTransactionV2()}
 
 		};
 		return mapping[entityName];

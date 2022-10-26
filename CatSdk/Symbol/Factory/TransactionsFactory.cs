@@ -36,13 +36,13 @@ namespace CatSdk.Symbol.Factory
             var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
-                var namespaceRegistrationTransaction = (NamespaceRegistrationTransaction) transaction;
+                var namespaceRegistrationTransaction = (NamespaceRegistrationTransactionV1) transaction;
                 var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
                 namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
                 return namespaceRegistrationTransaction; 
             }
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-            var mosaicDefinitionTransaction = (MosaicDefinitionTransaction) transaction;
+            var mosaicDefinitionTransaction = (MosaicDefinitionTransactionV1) transaction;
             var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
             return mosaicDefinitionTransaction;
@@ -62,14 +62,14 @@ namespace CatSdk.Symbol.Factory
             var transaction = Factory.CreateFromFactory(EmbeddedTransactionFactory.CreateByName, transactionDescriptor);
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
-                var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransaction) transaction;
+                var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransactionV1) transaction;
                 var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
                 namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId); 
                 return namespaceRegistrationTransaction;
             }
 
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransaction) transaction;
+            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransactionV1) transaction;
             var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
             return mosaicDefinitionTransaction;
@@ -96,7 +96,7 @@ namespace CatSdk.Symbol.Factory
             var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
             return jsonPayload;
         }
-            
+
         public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
             transaction.Signature = signature;
             return transaction;
@@ -187,31 +187,31 @@ namespace CatSdk.Symbol.Factory
 
         private static string TransactionTypeToString(TransactionType type)
         {
-            if (type == TransactionType.ACCOUNT_KEY_LINK) return "account_key_link_transaction";
-            if (type == TransactionType.NODE_KEY_LINK) return "node_key_link_transaction";
-            if (type == TransactionType.AGGREGATE_COMPLETE) return "aggregate_complete_transaction";
-            if (type == TransactionType.AGGREGATE_BONDED) return "aggregate_bonded_transaction";
-            if (type == TransactionType.VOTING_KEY_LINK) return "voting_key_link_transaction";
-            if (type == TransactionType.VRF_KEY_LINK) return "vrf_key_link_transaction";
-            if (type == TransactionType.HASH_LOCK) return "hash_lock_transaction";
-            if (type == TransactionType.SECRET_LOCK) return "secret_lock_transaction";
-            if (type == TransactionType.SECRET_PROOF) return "secret_proof_transaction";
-            if (type == TransactionType.ACCOUNT_METADATA) return "account_metadata_transaction";
-            if (type == TransactionType.MOSAIC_METADATA) return "mosaic_metadata_transaction";
-            if (type == TransactionType.NAMESPACE_METADATA) return "namespace_metadata_transaction";
-            if (type == TransactionType.MOSAIC_DEFINITION) return "mosaic_definition_transaction";
-            if (type == TransactionType.MOSAIC_SUPPLY_CHANGE) return "mosaic_supply_change_transaction";
-            if (type == TransactionType.MOSAIC_SUPPLY_REVOCATION) return "mosaic_supply_revocation_transaction";
-            if (type == TransactionType.MULTISIG_ACCOUNT_MODIFICATION) return "multisig_account_modification_transaction";
-            if (type == TransactionType.ADDRESS_ALIAS) return "address_alias_transaction";
-            if (type == TransactionType.MOSAIC_ALIAS) return "mosaic_alias_transaction";
-            if (type == TransactionType.NAMESPACE_REGISTRATION) return "namespace_registration_transaction";
-            if (type == TransactionType.ACCOUNT_ADDRESS_RESTRICTION) return "account_address_restriction_transaction";
-            if (type == TransactionType.ACCOUNT_MOSAIC_RESTRICTION) return "account_mosaic_restriction_transaction";
-            if (type == TransactionType.ACCOUNT_OPERATION_RESTRICTION) return "account_operation_restriction_transaction";
-            if (type == TransactionType.MOSAIC_ADDRESS_RESTRICTION) return "mosaic_address_restriction_transaction";
-            if (type == TransactionType.MOSAIC_GLOBAL_RESTRICTION) return "mosaic_global_restriction_transaction";
-            if (type == TransactionType.TRANSFER) return "transfer_transaction";
+            if (type == TransactionType.ACCOUNT_KEY_LINK) return "account_key_link_transaction_v1";
+            if (type == TransactionType.NODE_KEY_LINK) return "node_key_link_transaction_v1";
+            if (type == TransactionType.AGGREGATE_COMPLETE) return "aggregate_complete_transaction_v2";
+            if (type == TransactionType.AGGREGATE_BONDED) return "aggregate_bonded_transaction_v2";
+            if (type == TransactionType.VOTING_KEY_LINK) return "voting_key_link_transaction_v1";
+            if (type == TransactionType.VRF_KEY_LINK) return "vrf_key_link_transaction_v1";
+            if (type == TransactionType.HASH_LOCK) return "hash_lock_transaction_v1";
+            if (type == TransactionType.SECRET_LOCK) return "secret_lock_transaction_v1";
+            if (type == TransactionType.SECRET_PROOF) return "secret_proof_transaction_v1";
+            if (type == TransactionType.ACCOUNT_METADATA) return "account_metadata_transaction_v1";
+            if (type == TransactionType.MOSAIC_METADATA) return "mosaic_metadata_transaction_v1";
+            if (type == TransactionType.NAMESPACE_METADATA) return "namespace_metadata_transaction_v1";
+            if (type == TransactionType.MOSAIC_DEFINITION) return "mosaic_definition_transaction_v1";
+            if (type == TransactionType.MOSAIC_SUPPLY_CHANGE) return "mosaic_supply_change_transaction_v1";
+            if (type == TransactionType.MOSAIC_SUPPLY_REVOCATION) return "mosaic_supply_revocation_transaction_v1";
+            if (type == TransactionType.MULTISIG_ACCOUNT_MODIFICATION) return "multisig_account_modification_transaction_v1";
+            if (type == TransactionType.ADDRESS_ALIAS) return "address_alias_transaction_v1";
+            if (type == TransactionType.MOSAIC_ALIAS) return "mosaic_alias_transaction_v1";
+            if (type == TransactionType.NAMESPACE_REGISTRATION) return "namespace_registration_transaction_v1";
+            if (type == TransactionType.ACCOUNT_ADDRESS_RESTRICTION) return "account_address_restriction_transaction_v1";
+            if (type == TransactionType.ACCOUNT_MOSAIC_RESTRICTION) return "account_mosaic_restriction_transaction_v1";
+            if (type == TransactionType.ACCOUNT_OPERATION_RESTRICTION) return "account_operation_restriction_transaction_v1";
+            if (type == TransactionType.MOSAIC_ADDRESS_RESTRICTION) return "mosaic_address_restriction_transaction_v1";
+            if (type == TransactionType.MOSAIC_GLOBAL_RESTRICTION) return "mosaic_global_restriction_transaction_v1";
+            if (type == TransactionType.TRANSFER) return "transfer_transaction_v1";
             throw new Exception("type is invalid");
         }
     }

@@ -833,7 +833,7 @@ public class EmbeddedTransaction : IBaseTransaction {
 	}
 }
 
-public class AccountKeyLinkTransaction : ITransaction {
+public class AccountKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
@@ -852,7 +852,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public AccountKeyLinkTransaction() {
+	public AccountKeyLinkTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -903,7 +903,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 		}
 	}
 
-	public static AccountKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static AccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -921,7 +921,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new AccountKeyLinkTransaction()
+		var instance = new AccountKeyLinkTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -970,7 +970,7 @@ public class AccountKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
+public class EmbeddedAccountKeyLinkTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_KEY_LINK;
@@ -986,7 +986,7 @@ public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public EmbeddedAccountKeyLinkTransaction() {
+	public EmbeddedAccountKeyLinkTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1025,7 +1025,7 @@ public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAccountKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -1040,7 +1040,7 @@ public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new EmbeddedAccountKeyLinkTransaction()
+		var instance = new EmbeddedAccountKeyLinkTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -1080,7 +1080,7 @@ public class EmbeddedAccountKeyLinkTransaction : IBaseTransaction {
 	}
 }
 
-public class NodeKeyLinkTransaction : ITransaction {
+public class NodeKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NODE_KEY_LINK;
@@ -1099,7 +1099,7 @@ public class NodeKeyLinkTransaction : ITransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public NodeKeyLinkTransaction() {
+	public NodeKeyLinkTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -1150,7 +1150,7 @@ public class NodeKeyLinkTransaction : ITransaction {
 		}
 	}
 
-	public static NodeKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static NodeKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -1168,7 +1168,7 @@ public class NodeKeyLinkTransaction : ITransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new NodeKeyLinkTransaction()
+		var instance = new NodeKeyLinkTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -1217,7 +1217,7 @@ public class NodeKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
+public class EmbeddedNodeKeyLinkTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NODE_KEY_LINK;
@@ -1233,7 +1233,7 @@ public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public EmbeddedNodeKeyLinkTransaction() {
+	public EmbeddedNodeKeyLinkTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1272,7 +1272,7 @@ public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedNodeKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedNodeKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -1287,7 +1287,7 @@ public class EmbeddedNodeKeyLinkTransaction : IBaseTransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new EmbeddedNodeKeyLinkTransaction()
+		var instance = new EmbeddedNodeKeyLinkTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -1460,7 +1460,7 @@ public class DetachedCosignature : IStruct {
 	}
 }
 
-public class AggregateCompleteTransaction : ITransaction {
+public class AggregateCompleteTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.AGGREGATE_COMPLETE;
@@ -1481,7 +1481,7 @@ public class AggregateCompleteTransaction : ITransaction {
 		{"Cosignatures", "array[Cosignature]"}
 	};
 
-	public AggregateCompleteTransaction() {
+	public AggregateCompleteTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -1539,7 +1539,7 @@ public class AggregateCompleteTransaction : ITransaction {
 		}
 	}
 
-	public static AggregateCompleteTransaction Deserialize(BinaryReader br) {
+	public static AggregateCompleteTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -1562,7 +1562,7 @@ public class AggregateCompleteTransaction : ITransaction {
 		var transactions = ArrayHelpers.ReadVariableSizeElements(br, EmbeddedTransactionFactory.Deserialize, payloadSize, 8);
 		var cosignatures = ArrayHelpers.ReadArray(br, Cosignature.Deserialize);
 
-		var instance = new AggregateCompleteTransaction()
+		var instance = new AggregateCompleteTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -1616,7 +1616,163 @@ public class AggregateCompleteTransaction : ITransaction {
 	}
 }
 
-public class AggregateBondedTransaction : ITransaction {
+public class AggregateCompleteTransactionV2 : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.AGGREGATE_COMPLETE;
+
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+	private readonly int AggregateTransactionHeaderReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:TransactionType"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"Transactions", "array[EmbeddedTransaction]"},
+		{"Cosignatures", "array[Cosignature]"}
+	};
+
+	public AggregateCompleteTransactionV2() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Type = TRANSACTION_TYPE;
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		TransactionsHash = new Hash256();
+		Transactions = Array.Empty<IBaseTransaction>();
+		Cosignatures = Array.Empty<Cosignature>();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+		AggregateTransactionHeaderReserved_1 = 0; // reserved field
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public TransactionType Type { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public IBaseTransaction[] Transactions { get; set; }
+
+	public Cosignature[] Cosignatures { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += TransactionsHash.Size;
+			size += 4;
+			size += 4;
+			size += ArrayHelpers.Size(Transactions, 8);
+			size += ArrayHelpers.Size(Cosignatures);
+			return size;
+		}
+	}
+
+	public static AggregateCompleteTransactionV2 Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = TransactionType.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var payloadSize = br.ReadUInt32();
+		var aggregateTransactionHeaderReserved_1 = br.ReadUInt32();
+		if (0 != aggregateTransactionHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({aggregateTransactionHeaderReserved_1})");
+		var transactions = ArrayHelpers.ReadVariableSizeElements(br, EmbeddedTransactionFactory.Deserialize, payloadSize, 8);
+		var cosignatures = ArrayHelpers.ReadArray(br, Cosignature.Deserialize);
+
+		var instance = new AggregateCompleteTransactionV2()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Fee = fee,
+			Deadline = deadline,
+			TransactionsHash = transactionsHash,
+			Transactions = transactions,
+			Cosignatures = cosignatures
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)ArrayHelpers.Size(Transactions, 8)));  // bound: payload_size
+		bw.Write(BitConverter.GetBytes((uint)(uint)AggregateTransactionHeaderReserved_1)); 
+		ArrayHelpers.WriteVariableSizeElements(bw, Transactions, 8);
+		ArrayHelpers.WriteArray(bw, Cosignatures);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"transactions: [{string.Join(",", Transactions.Select(e => e.ToString()))}], ";
+		result += $"cosignatures: [{string.Join(",", Cosignatures.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class AggregateBondedTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.AGGREGATE_BONDED;
@@ -1637,7 +1793,7 @@ public class AggregateBondedTransaction : ITransaction {
 		{"Cosignatures", "array[Cosignature]"}
 	};
 
-	public AggregateBondedTransaction() {
+	public AggregateBondedTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -1695,7 +1851,7 @@ public class AggregateBondedTransaction : ITransaction {
 		}
 	}
 
-	public static AggregateBondedTransaction Deserialize(BinaryReader br) {
+	public static AggregateBondedTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -1718,7 +1874,7 @@ public class AggregateBondedTransaction : ITransaction {
 		var transactions = ArrayHelpers.ReadVariableSizeElements(br, EmbeddedTransactionFactory.Deserialize, payloadSize, 8);
 		var cosignatures = ArrayHelpers.ReadArray(br, Cosignature.Deserialize);
 
-		var instance = new AggregateBondedTransaction()
+		var instance = new AggregateBondedTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -1772,7 +1928,163 @@ public class AggregateBondedTransaction : ITransaction {
 	}
 }
 
-public class VotingKeyLinkTransaction : ITransaction {
+public class AggregateBondedTransactionV2 : ITransaction {
+	public const byte TRANSACTION_VERSION = 2;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.AGGREGATE_BONDED;
+
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+	private readonly int AggregateTransactionHeaderReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:TransactionType"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"Transactions", "array[EmbeddedTransaction]"},
+		{"Cosignatures", "array[Cosignature]"}
+	};
+
+	public AggregateBondedTransactionV2() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Type = TRANSACTION_TYPE;
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		TransactionsHash = new Hash256();
+		Transactions = Array.Empty<IBaseTransaction>();
+		Cosignatures = Array.Empty<Cosignature>();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+		AggregateTransactionHeaderReserved_1 = 0; // reserved field
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public TransactionType Type { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public IBaseTransaction[] Transactions { get; set; }
+
+	public Cosignature[] Cosignatures { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += TransactionsHash.Size;
+			size += 4;
+			size += 4;
+			size += ArrayHelpers.Size(Transactions, 8);
+			size += ArrayHelpers.Size(Cosignatures);
+			return size;
+		}
+	}
+
+	public static AggregateBondedTransactionV2 Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = TransactionType.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var payloadSize = br.ReadUInt32();
+		var aggregateTransactionHeaderReserved_1 = br.ReadUInt32();
+		if (0 != aggregateTransactionHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({aggregateTransactionHeaderReserved_1})");
+		var transactions = ArrayHelpers.ReadVariableSizeElements(br, EmbeddedTransactionFactory.Deserialize, payloadSize, 8);
+		var cosignatures = ArrayHelpers.ReadArray(br, Cosignature.Deserialize);
+
+		var instance = new AggregateBondedTransactionV2()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Fee = fee,
+			Deadline = deadline,
+			TransactionsHash = transactionsHash,
+			Transactions = transactions,
+			Cosignatures = cosignatures
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)ArrayHelpers.Size(Transactions, 8)));  // bound: payload_size
+		bw.Write(BitConverter.GetBytes((uint)(uint)AggregateTransactionHeaderReserved_1)); 
+		ArrayHelpers.WriteVariableSizeElements(bw, Transactions, 8);
+		ArrayHelpers.WriteArray(bw, Cosignatures);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"transactions: [{string.Join(",", Transactions.Select(e => e.ToString()))}], ";
+		result += $"cosignatures: [{string.Join(",", Cosignatures.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class VotingKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.VOTING_KEY_LINK;
@@ -1793,7 +2105,7 @@ public class VotingKeyLinkTransaction : ITransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public VotingKeyLinkTransaction() {
+	public VotingKeyLinkTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -1852,7 +2164,7 @@ public class VotingKeyLinkTransaction : ITransaction {
 		}
 	}
 
-	public static VotingKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static VotingKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -1872,7 +2184,7 @@ public class VotingKeyLinkTransaction : ITransaction {
 		var endEpoch = FinalizationEpoch.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new VotingKeyLinkTransaction()
+		var instance = new VotingKeyLinkTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -1927,7 +2239,7 @@ public class VotingKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
+public class EmbeddedVotingKeyLinkTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.VOTING_KEY_LINK;
@@ -1945,7 +2257,7 @@ public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public EmbeddedVotingKeyLinkTransaction() {
+	public EmbeddedVotingKeyLinkTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -1992,7 +2304,7 @@ public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedVotingKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedVotingKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -2009,7 +2321,7 @@ public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
 		var endEpoch = FinalizationEpoch.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new EmbeddedVotingKeyLinkTransaction()
+		var instance = new EmbeddedVotingKeyLinkTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -2055,7 +2367,7 @@ public class EmbeddedVotingKeyLinkTransaction : IBaseTransaction {
 	}
 }
 
-public class VrfKeyLinkTransaction : ITransaction {
+public class VrfKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.VRF_KEY_LINK;
@@ -2074,7 +2386,7 @@ public class VrfKeyLinkTransaction : ITransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public VrfKeyLinkTransaction() {
+	public VrfKeyLinkTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -2125,7 +2437,7 @@ public class VrfKeyLinkTransaction : ITransaction {
 		}
 	}
 
-	public static VrfKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static VrfKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -2143,7 +2455,7 @@ public class VrfKeyLinkTransaction : ITransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new VrfKeyLinkTransaction()
+		var instance = new VrfKeyLinkTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -2192,7 +2504,7 @@ public class VrfKeyLinkTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
+public class EmbeddedVrfKeyLinkTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.VRF_KEY_LINK;
@@ -2208,7 +2520,7 @@ public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
 		{"LinkAction", "enum:LinkAction"}
 	};
 
-	public EmbeddedVrfKeyLinkTransaction() {
+	public EmbeddedVrfKeyLinkTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2247,7 +2559,7 @@ public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedVrfKeyLinkTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedVrfKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -2262,7 +2574,7 @@ public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
 		var linkedPublicKey = PublicKey.Deserialize(br);
 		var linkAction = LinkAction.Deserialize(br);
 
-		var instance = new EmbeddedVrfKeyLinkTransaction()
+		var instance = new EmbeddedVrfKeyLinkTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -2302,7 +2614,7 @@ public class EmbeddedVrfKeyLinkTransaction : IBaseTransaction {
 	}
 }
 
-public class HashLockTransaction : ITransaction {
+public class HashLockTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.HASH_LOCK;
@@ -2322,7 +2634,7 @@ public class HashLockTransaction : ITransaction {
 		{"Hash", "pod:Hash256"}
 	};
 
-	public HashLockTransaction() {
+	public HashLockTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -2377,7 +2689,7 @@ public class HashLockTransaction : ITransaction {
 		}
 	}
 
-	public static HashLockTransaction Deserialize(BinaryReader br) {
+	public static HashLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -2396,7 +2708,7 @@ public class HashLockTransaction : ITransaction {
 		var duration = BlockDuration.Deserialize(br);
 		var hash = Hash256.Deserialize(br);
 
-		var instance = new HashLockTransaction()
+		var instance = new HashLockTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -2448,7 +2760,7 @@ public class HashLockTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedHashLockTransaction : IBaseTransaction {
+public class EmbeddedHashLockTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.HASH_LOCK;
@@ -2465,7 +2777,7 @@ public class EmbeddedHashLockTransaction : IBaseTransaction {
 		{"Hash", "pod:Hash256"}
 	};
 
-	public EmbeddedHashLockTransaction() {
+	public EmbeddedHashLockTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2508,7 +2820,7 @@ public class EmbeddedHashLockTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedHashLockTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedHashLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -2524,7 +2836,7 @@ public class EmbeddedHashLockTransaction : IBaseTransaction {
 		var duration = BlockDuration.Deserialize(br);
 		var hash = Hash256.Deserialize(br);
 
-		var instance = new EmbeddedHashLockTransaction()
+		var instance = new EmbeddedHashLockTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -2624,7 +2936,7 @@ public class LockHashAlgorithm : IEnum<byte> {
 	}
 }
 
-public class SecretLockTransaction : ITransaction {
+public class SecretLockTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.SECRET_LOCK;
@@ -2646,7 +2958,7 @@ public class SecretLockTransaction : ITransaction {
 		{"HashAlgorithm", "enum:LockHashAlgorithm"}
 	};
 
-	public SecretLockTransaction() {
+	public SecretLockTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -2709,7 +3021,7 @@ public class SecretLockTransaction : ITransaction {
 		}
 	}
 
-	public static SecretLockTransaction Deserialize(BinaryReader br) {
+	public static SecretLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -2730,7 +3042,7 @@ public class SecretLockTransaction : ITransaction {
 		var duration = BlockDuration.Deserialize(br);
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
 
-		var instance = new SecretLockTransaction()
+		var instance = new SecretLockTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -2788,7 +3100,7 @@ public class SecretLockTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedSecretLockTransaction : IBaseTransaction {
+public class EmbeddedSecretLockTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.SECRET_LOCK;
@@ -2807,7 +3119,7 @@ public class EmbeddedSecretLockTransaction : IBaseTransaction {
 		{"HashAlgorithm", "enum:LockHashAlgorithm"}
 	};
 
-	public EmbeddedSecretLockTransaction() {
+	public EmbeddedSecretLockTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -2858,7 +3170,7 @@ public class EmbeddedSecretLockTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedSecretLockTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedSecretLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -2876,7 +3188,7 @@ public class EmbeddedSecretLockTransaction : IBaseTransaction {
 		var duration = BlockDuration.Deserialize(br);
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
 
-		var instance = new EmbeddedSecretLockTransaction()
+		var instance = new EmbeddedSecretLockTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -2925,7 +3237,7 @@ public class EmbeddedSecretLockTransaction : IBaseTransaction {
 	}
 }
 
-public class SecretProofTransaction : ITransaction {
+public class SecretProofTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.SECRET_PROOF;
@@ -2946,7 +3258,7 @@ public class SecretProofTransaction : ITransaction {
 		{"Proof", "bytes_array"}
 	};
 
-	public SecretProofTransaction() {
+	public SecretProofTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -3006,7 +3318,7 @@ public class SecretProofTransaction : ITransaction {
 		}
 	}
 
-	public static SecretProofTransaction Deserialize(BinaryReader br) {
+	public static SecretProofTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -3027,7 +3339,7 @@ public class SecretProofTransaction : ITransaction {
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
 		var proof = br.ReadBytes((int)proofSize);
 
-		var instance = new SecretProofTransaction()
+		var instance = new SecretProofTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -3083,7 +3395,7 @@ public class SecretProofTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedSecretProofTransaction : IBaseTransaction {
+public class EmbeddedSecretProofTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.SECRET_PROOF;
@@ -3101,7 +3413,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 		{"Proof", "bytes_array"}
 	};
 
-	public EmbeddedSecretProofTransaction() {
+	public EmbeddedSecretProofTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3149,7 +3461,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedSecretProofTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedSecretProofTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -3167,7 +3479,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 		var hashAlgorithm = LockHashAlgorithm.Deserialize(br);
 		var proof = br.ReadBytes((int)proofSize);
 
-		var instance = new EmbeddedSecretProofTransaction()
+		var instance = new EmbeddedSecretProofTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -3214,7 +3526,7 @@ public class EmbeddedSecretProofTransaction : IBaseTransaction {
 	}
 }
 
-public class AccountMetadataTransaction : ITransaction {
+public class AccountMetadataTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_METADATA;
@@ -3233,7 +3545,7 @@ public class AccountMetadataTransaction : ITransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public AccountMetadataTransaction() {
+	public AccountMetadataTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -3293,7 +3605,7 @@ public class AccountMetadataTransaction : ITransaction {
 		}
 	}
 
-	public static AccountMetadataTransaction Deserialize(BinaryReader br) {
+	public static AccountMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -3314,7 +3626,7 @@ public class AccountMetadataTransaction : ITransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new AccountMetadataTransaction()
+		var instance = new AccountMetadataTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -3370,7 +3682,7 @@ public class AccountMetadataTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
+public class EmbeddedAccountMetadataTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_METADATA;
@@ -3386,7 +3698,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public EmbeddedAccountMetadataTransaction() {
+	public EmbeddedAccountMetadataTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3434,7 +3746,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAccountMetadataTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAccountMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -3452,7 +3764,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new EmbeddedAccountMetadataTransaction()
+		var instance = new EmbeddedAccountMetadataTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -3499,7 +3811,7 @@ public class EmbeddedAccountMetadataTransaction : IBaseTransaction {
 	}
 }
 
-public class MosaicMetadataTransaction : ITransaction {
+public class MosaicMetadataTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_METADATA;
@@ -3519,7 +3831,7 @@ public class MosaicMetadataTransaction : ITransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public MosaicMetadataTransaction() {
+	public MosaicMetadataTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -3583,7 +3895,7 @@ public class MosaicMetadataTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicMetadataTransaction Deserialize(BinaryReader br) {
+	public static MosaicMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -3605,7 +3917,7 @@ public class MosaicMetadataTransaction : ITransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new MosaicMetadataTransaction()
+		var instance = new MosaicMetadataTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -3664,7 +3976,7 @@ public class MosaicMetadataTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
+public class EmbeddedMosaicMetadataTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_METADATA;
@@ -3681,7 +3993,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public EmbeddedMosaicMetadataTransaction() {
+	public EmbeddedMosaicMetadataTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3733,7 +4045,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicMetadataTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -3752,7 +4064,7 @@ public class EmbeddedMosaicMetadataTransaction : IBaseTransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new EmbeddedMosaicMetadataTransaction()
+		var instance = new EmbeddedMosaicMetadataTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -3925,7 +4237,7 @@ public class AliasAction : IEnum<byte> {
 	}
 }
 
-public class NamespaceMetadataTransaction : ITransaction {
+public class NamespaceMetadataTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_METADATA;
@@ -3945,7 +4257,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public NamespaceMetadataTransaction() {
+	public NamespaceMetadataTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -4009,7 +4321,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 		}
 	}
 
-	public static NamespaceMetadataTransaction Deserialize(BinaryReader br) {
+	public static NamespaceMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -4031,7 +4343,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new NamespaceMetadataTransaction()
+		var instance = new NamespaceMetadataTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -4090,7 +4402,7 @@ public class NamespaceMetadataTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
+public class EmbeddedNamespaceMetadataTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_METADATA;
@@ -4107,7 +4419,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 		{"Value", "bytes_array"}
 	};
 
-	public EmbeddedNamespaceMetadataTransaction() {
+	public EmbeddedNamespaceMetadataTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -4159,7 +4471,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedNamespaceMetadataTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedNamespaceMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -4178,7 +4490,7 @@ public class EmbeddedNamespaceMetadataTransaction : IBaseTransaction {
 		var valueSize = br.ReadUInt16();
 		var value = br.ReadBytes((int)valueSize);
 
-		var instance = new EmbeddedNamespaceMetadataTransaction()
+		var instance = new EmbeddedNamespaceMetadataTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -4350,7 +4662,7 @@ public class MosaicSupplyChangeAction : IEnum<byte> {
 	}
 }
 
-public class MosaicDefinitionTransaction : ITransaction {
+public class MosaicDefinitionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
@@ -4371,7 +4683,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		{"Flags", "enum:MosaicFlags"}
 	};
 
-	public MosaicDefinitionTransaction() {
+	public MosaicDefinitionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -4434,7 +4746,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicDefinitionTransaction Deserialize(BinaryReader br) {
+	public static MosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -4455,7 +4767,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 		var flags = MosaicFlags.Deserialize(br);
 		var divisibility = br.ReadByte();
 
-		var instance = new MosaicDefinitionTransaction()
+		var instance = new MosaicDefinitionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -4513,7 +4825,7 @@ public class MosaicDefinitionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
+public class EmbeddedMosaicDefinitionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_DEFINITION;
@@ -4531,7 +4843,7 @@ public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
 		{"Flags", "enum:MosaicFlags"}
 	};
 
-	public EmbeddedMosaicDefinitionTransaction() {
+	public EmbeddedMosaicDefinitionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -4582,7 +4894,7 @@ public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicDefinitionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -4600,7 +4912,7 @@ public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
 		var flags = MosaicFlags.Deserialize(br);
 		var divisibility = br.ReadByte();
 
-		var instance = new EmbeddedMosaicDefinitionTransaction()
+		var instance = new EmbeddedMosaicDefinitionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -4649,7 +4961,7 @@ public class EmbeddedMosaicDefinitionTransaction : IBaseTransaction {
 	}
 }
 
-public class MosaicSupplyChangeTransaction : ITransaction {
+public class MosaicSupplyChangeTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
@@ -4669,7 +4981,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		{"Action", "enum:MosaicSupplyChangeAction"}
 	};
 
-	public MosaicSupplyChangeTransaction() {
+	public MosaicSupplyChangeTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -4724,7 +5036,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+	public static MosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -4743,7 +5055,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 		var delta = Amount.Deserialize(br);
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 
-		var instance = new MosaicSupplyChangeTransaction()
+		var instance = new MosaicSupplyChangeTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -4795,7 +5107,7 @@ public class MosaicSupplyChangeTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
+public class EmbeddedMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_CHANGE;
@@ -4812,7 +5124,7 @@ public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
 		{"Action", "enum:MosaicSupplyChangeAction"}
 	};
 
-	public EmbeddedMosaicSupplyChangeTransaction() {
+	public EmbeddedMosaicSupplyChangeTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -4855,7 +5167,7 @@ public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicSupplyChangeTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -4871,7 +5183,7 @@ public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
 		var delta = Amount.Deserialize(br);
 		var action = MosaicSupplyChangeAction.Deserialize(br);
 
-		var instance = new EmbeddedMosaicSupplyChangeTransaction()
+		var instance = new EmbeddedMosaicSupplyChangeTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -4914,7 +5226,7 @@ public class EmbeddedMosaicSupplyChangeTransaction : IBaseTransaction {
 	}
 }
 
-public class MosaicSupplyRevocationTransaction : ITransaction {
+public class MosaicSupplyRevocationTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_REVOCATION;
@@ -4933,7 +5245,7 @@ public class MosaicSupplyRevocationTransaction : ITransaction {
 		{"Mosaic", "struct:UnresolvedMosaic"}
 	};
 
-	public MosaicSupplyRevocationTransaction() {
+	public MosaicSupplyRevocationTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -4984,7 +5296,7 @@ public class MosaicSupplyRevocationTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicSupplyRevocationTransaction Deserialize(BinaryReader br) {
+	public static MosaicSupplyRevocationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -5002,7 +5314,7 @@ public class MosaicSupplyRevocationTransaction : ITransaction {
 		var sourceAddress = UnresolvedAddress.Deserialize(br);
 		var mosaic = UnresolvedMosaic.Deserialize(br);
 
-		var instance = new MosaicSupplyRevocationTransaction()
+		var instance = new MosaicSupplyRevocationTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -5051,7 +5363,7 @@ public class MosaicSupplyRevocationTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
+public class EmbeddedMosaicSupplyRevocationTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_SUPPLY_REVOCATION;
@@ -5067,7 +5379,7 @@ public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
 		{"Mosaic", "struct:UnresolvedMosaic"}
 	};
 
-	public EmbeddedMosaicSupplyRevocationTransaction() {
+	public EmbeddedMosaicSupplyRevocationTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -5106,7 +5418,7 @@ public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicSupplyRevocationTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicSupplyRevocationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -5121,7 +5433,7 @@ public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
 		var sourceAddress = UnresolvedAddress.Deserialize(br);
 		var mosaic = UnresolvedMosaic.Deserialize(br);
 
-		var instance = new EmbeddedMosaicSupplyRevocationTransaction()
+		var instance = new EmbeddedMosaicSupplyRevocationTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -5161,7 +5473,7 @@ public class EmbeddedMosaicSupplyRevocationTransaction : IBaseTransaction {
 	}
 }
 
-public class MultisigAccountModificationTransaction : ITransaction {
+public class MultisigAccountModificationTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -5181,7 +5493,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		{"AddressDeletions", "array[UnresolvedAddress]"}
 	};
 
-	public MultisigAccountModificationTransaction() {
+	public MultisigAccountModificationTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -5244,7 +5556,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		}
 	}
 
-	public static MultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+	public static MultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -5269,7 +5581,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressAdditionsCount);
 		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressDeletionsCount);
 
-		var instance = new MultisigAccountModificationTransaction()
+		var instance = new MultisigAccountModificationTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -5327,7 +5639,7 @@ public class MultisigAccountModificationTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
+public class EmbeddedMultisigAccountModificationTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_ACCOUNT_MODIFICATION;
@@ -5344,7 +5656,7 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 		{"AddressDeletions", "array[UnresolvedAddress]"}
 	};
 
-	public EmbeddedMultisigAccountModificationTransaction() {
+	public EmbeddedMultisigAccountModificationTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -5395,7 +5707,7 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMultisigAccountModificationTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -5417,7 +5729,7 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 		var addressAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressAdditionsCount);
 		var addressDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)addressDeletionsCount);
 
-		var instance = new EmbeddedMultisigAccountModificationTransaction()
+		var instance = new EmbeddedMultisigAccountModificationTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -5466,7 +5778,7 @@ public class EmbeddedMultisigAccountModificationTransaction : IBaseTransaction {
 	}
 }
 
-public class AddressAliasTransaction : ITransaction {
+public class AddressAliasTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ADDRESS_ALIAS;
@@ -5486,7 +5798,7 @@ public class AddressAliasTransaction : ITransaction {
 		{"AliasAction", "enum:AliasAction"}
 	};
 
-	public AddressAliasTransaction() {
+	public AddressAliasTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -5541,7 +5853,7 @@ public class AddressAliasTransaction : ITransaction {
 		}
 	}
 
-	public static AddressAliasTransaction Deserialize(BinaryReader br) {
+	public static AddressAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -5560,7 +5872,7 @@ public class AddressAliasTransaction : ITransaction {
 		var address = Address.Deserialize(br);
 		var aliasAction = AliasAction.Deserialize(br);
 
-		var instance = new AddressAliasTransaction()
+		var instance = new AddressAliasTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -5612,7 +5924,7 @@ public class AddressAliasTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAddressAliasTransaction : IBaseTransaction {
+public class EmbeddedAddressAliasTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ADDRESS_ALIAS;
@@ -5629,7 +5941,7 @@ public class EmbeddedAddressAliasTransaction : IBaseTransaction {
 		{"AliasAction", "enum:AliasAction"}
 	};
 
-	public EmbeddedAddressAliasTransaction() {
+	public EmbeddedAddressAliasTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -5672,7 +5984,7 @@ public class EmbeddedAddressAliasTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAddressAliasTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAddressAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -5688,7 +6000,7 @@ public class EmbeddedAddressAliasTransaction : IBaseTransaction {
 		var address = Address.Deserialize(br);
 		var aliasAction = AliasAction.Deserialize(br);
 
-		var instance = new EmbeddedAddressAliasTransaction()
+		var instance = new EmbeddedAddressAliasTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -5731,7 +6043,7 @@ public class EmbeddedAddressAliasTransaction : IBaseTransaction {
 	}
 }
 
-public class MosaicAliasTransaction : ITransaction {
+public class MosaicAliasTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_ALIAS;
@@ -5751,7 +6063,7 @@ public class MosaicAliasTransaction : ITransaction {
 		{"AliasAction", "enum:AliasAction"}
 	};
 
-	public MosaicAliasTransaction() {
+	public MosaicAliasTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -5806,7 +6118,7 @@ public class MosaicAliasTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicAliasTransaction Deserialize(BinaryReader br) {
+	public static MosaicAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -5825,7 +6137,7 @@ public class MosaicAliasTransaction : ITransaction {
 		var mosaicId = MosaicId.Deserialize(br);
 		var aliasAction = AliasAction.Deserialize(br);
 
-		var instance = new MosaicAliasTransaction()
+		var instance = new MosaicAliasTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -5877,7 +6189,7 @@ public class MosaicAliasTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
+public class EmbeddedMosaicAliasTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_ALIAS;
@@ -5894,7 +6206,7 @@ public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
 		{"AliasAction", "enum:AliasAction"}
 	};
 
-	public EmbeddedMosaicAliasTransaction() {
+	public EmbeddedMosaicAliasTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -5937,7 +6249,7 @@ public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicAliasTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -5953,7 +6265,7 @@ public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
 		var mosaicId = MosaicId.Deserialize(br);
 		var aliasAction = AliasAction.Deserialize(br);
 
-		var instance = new EmbeddedMosaicAliasTransaction()
+		var instance = new EmbeddedMosaicAliasTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -5996,7 +6308,7 @@ public class EmbeddedMosaicAliasTransaction : IBaseTransaction {
 	}
 }
 
-public class NamespaceRegistrationTransaction : ITransaction {
+public class NamespaceRegistrationTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
@@ -6018,7 +6330,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		{"Name", "bytes_array"}
 	};
 
-	public NamespaceRegistrationTransaction() {
+	public NamespaceRegistrationTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -6086,7 +6398,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		}
 	}
 
-	public static NamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+	public static NamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -6124,7 +6436,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 		var nameSize = br.ReadByte();
 		var name = br.ReadBytes((int)nameSize);
 
-		var instance = new NamespaceRegistrationTransaction()
+		var instance = new NamespaceRegistrationTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -6191,7 +6503,7 @@ public class NamespaceRegistrationTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
+public class EmbeddedNamespaceRegistrationTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.NAMESPACE_REGISTRATION;
@@ -6210,7 +6522,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 		{"Name", "bytes_array"}
 	};
 
-	public EmbeddedNamespaceRegistrationTransaction() {
+	public EmbeddedNamespaceRegistrationTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -6266,7 +6578,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedNamespaceRegistrationTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedNamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -6301,7 +6613,7 @@ public class EmbeddedNamespaceRegistrationTransaction : IBaseTransaction {
 		var nameSize = br.ReadByte();
 		var name = br.ReadBytes((int)nameSize);
 
-		var instance = new EmbeddedNamespaceRegistrationTransaction()
+		var instance = new EmbeddedNamespaceRegistrationTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -6412,7 +6724,7 @@ public class AccountRestrictionFlags : IEnum<ushort> {
 	}
 }
 
-public class AccountAddressRestrictionTransaction : ITransaction {
+public class AccountAddressRestrictionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_ADDRESS_RESTRICTION;
@@ -6433,7 +6745,7 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 		{"RestrictionDeletions", "array[UnresolvedAddress]"}
 	};
 
-	public AccountAddressRestrictionTransaction() {
+	public AccountAddressRestrictionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -6492,7 +6804,7 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 		}
 	}
 
-	public static AccountAddressRestrictionTransaction Deserialize(BinaryReader br) {
+	public static AccountAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -6516,7 +6828,7 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new AccountAddressRestrictionTransaction()
+		var instance = new AccountAddressRestrictionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -6571,7 +6883,7 @@ public class AccountAddressRestrictionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
+public class EmbeddedAccountAddressRestrictionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_ADDRESS_RESTRICTION;
@@ -6589,7 +6901,7 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 		{"RestrictionDeletions", "array[UnresolvedAddress]"}
 	};
 
-	public EmbeddedAccountAddressRestrictionTransaction() {
+	public EmbeddedAccountAddressRestrictionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -6636,7 +6948,7 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAccountAddressRestrictionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAccountAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -6657,7 +6969,7 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedAddress.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new EmbeddedAccountAddressRestrictionTransaction()
+		var instance = new EmbeddedAccountAddressRestrictionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -6703,7 +7015,7 @@ public class EmbeddedAccountAddressRestrictionTransaction : IBaseTransaction {
 	}
 }
 
-public class AccountMosaicRestrictionTransaction : ITransaction {
+public class AccountMosaicRestrictionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_MOSAIC_RESTRICTION;
@@ -6724,7 +7036,7 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 		{"RestrictionDeletions", "array[UnresolvedMosaicId]"}
 	};
 
-	public AccountMosaicRestrictionTransaction() {
+	public AccountMosaicRestrictionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -6783,7 +7095,7 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 		}
 	}
 
-	public static AccountMosaicRestrictionTransaction Deserialize(BinaryReader br) {
+	public static AccountMosaicRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -6807,7 +7119,7 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new AccountMosaicRestrictionTransaction()
+		var instance = new AccountMosaicRestrictionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -6862,7 +7174,7 @@ public class AccountMosaicRestrictionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
+public class EmbeddedAccountMosaicRestrictionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_MOSAIC_RESTRICTION;
@@ -6880,7 +7192,7 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 		{"RestrictionDeletions", "array[UnresolvedMosaicId]"}
 	};
 
-	public EmbeddedAccountMosaicRestrictionTransaction() {
+	public EmbeddedAccountMosaicRestrictionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -6927,7 +7239,7 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAccountMosaicRestrictionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAccountMosaicRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -6948,7 +7260,7 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaicId.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new EmbeddedAccountMosaicRestrictionTransaction()
+		var instance = new EmbeddedAccountMosaicRestrictionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -6994,7 +7306,7 @@ public class EmbeddedAccountMosaicRestrictionTransaction : IBaseTransaction {
 	}
 }
 
-public class AccountOperationRestrictionTransaction : ITransaction {
+public class AccountOperationRestrictionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_OPERATION_RESTRICTION;
@@ -7015,7 +7327,7 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 		{"RestrictionDeletions", "array[TransactionType]"}
 	};
 
-	public AccountOperationRestrictionTransaction() {
+	public AccountOperationRestrictionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -7074,7 +7386,7 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 		}
 	}
 
-	public static AccountOperationRestrictionTransaction Deserialize(BinaryReader br) {
+	public static AccountOperationRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -7098,7 +7410,7 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new AccountOperationRestrictionTransaction()
+		var instance = new AccountOperationRestrictionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -7153,7 +7465,7 @@ public class AccountOperationRestrictionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
+public class EmbeddedAccountOperationRestrictionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.ACCOUNT_OPERATION_RESTRICTION;
@@ -7171,7 +7483,7 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 		{"RestrictionDeletions", "array[TransactionType]"}
 	};
 
-	public EmbeddedAccountOperationRestrictionTransaction() {
+	public EmbeddedAccountOperationRestrictionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -7218,7 +7530,7 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedAccountOperationRestrictionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedAccountOperationRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -7239,7 +7551,7 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 		var restrictionAdditions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionAdditionsCount);
 		var restrictionDeletions = ArrayHelpers.ReadArrayCount(br, TransactionType.Deserialize, (byte)restrictionDeletionsCount);
 
-		var instance = new EmbeddedAccountOperationRestrictionTransaction()
+		var instance = new EmbeddedAccountOperationRestrictionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -7285,7 +7597,7 @@ public class EmbeddedAccountOperationRestrictionTransaction : IBaseTransaction {
 	}
 }
 
-public class MosaicAddressRestrictionTransaction : ITransaction {
+public class MosaicAddressRestrictionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_ADDRESS_RESTRICTION;
@@ -7304,7 +7616,7 @@ public class MosaicAddressRestrictionTransaction : ITransaction {
 		{"TargetAddress", "pod:UnresolvedAddress"}
 	};
 
-	public MosaicAddressRestrictionTransaction() {
+	public MosaicAddressRestrictionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -7367,7 +7679,7 @@ public class MosaicAddressRestrictionTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicAddressRestrictionTransaction Deserialize(BinaryReader br) {
+	public static MosaicAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -7388,7 +7700,7 @@ public class MosaicAddressRestrictionTransaction : ITransaction {
 		var newRestrictionValue = br.ReadUInt64();
 		var targetAddress = UnresolvedAddress.Deserialize(br);
 
-		var instance = new MosaicAddressRestrictionTransaction()
+		var instance = new MosaicAddressRestrictionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -7446,7 +7758,7 @@ public class MosaicAddressRestrictionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
+public class EmbeddedMosaicAddressRestrictionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_ADDRESS_RESTRICTION;
@@ -7462,7 +7774,7 @@ public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
 		{"TargetAddress", "pod:UnresolvedAddress"}
 	};
 
-	public EmbeddedMosaicAddressRestrictionTransaction() {
+	public EmbeddedMosaicAddressRestrictionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -7513,7 +7825,7 @@ public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicAddressRestrictionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -7531,7 +7843,7 @@ public class EmbeddedMosaicAddressRestrictionTransaction : IBaseTransaction {
 		var newRestrictionValue = br.ReadUInt64();
 		var targetAddress = UnresolvedAddress.Deserialize(br);
 
-		var instance = new EmbeddedMosaicAddressRestrictionTransaction()
+		var instance = new EmbeddedMosaicAddressRestrictionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -7664,7 +7976,7 @@ public class MosaicRestrictionType : IEnum<byte> {
 	}
 }
 
-public class MosaicGlobalRestrictionTransaction : ITransaction {
+public class MosaicGlobalRestrictionTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_GLOBAL_RESTRICTION;
@@ -7685,7 +7997,7 @@ public class MosaicGlobalRestrictionTransaction : ITransaction {
 		{"NewRestrictionType", "enum:MosaicRestrictionType"}
 	};
 
-	public MosaicGlobalRestrictionTransaction() {
+	public MosaicGlobalRestrictionTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -7756,7 +8068,7 @@ public class MosaicGlobalRestrictionTransaction : ITransaction {
 		}
 	}
 
-	public static MosaicGlobalRestrictionTransaction Deserialize(BinaryReader br) {
+	public static MosaicGlobalRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -7779,7 +8091,7 @@ public class MosaicGlobalRestrictionTransaction : ITransaction {
 		var previousRestrictionType = MosaicRestrictionType.Deserialize(br);
 		var newRestrictionType = MosaicRestrictionType.Deserialize(br);
 
-		var instance = new MosaicGlobalRestrictionTransaction()
+		var instance = new MosaicGlobalRestrictionTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -7843,7 +8155,7 @@ public class MosaicGlobalRestrictionTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
+public class EmbeddedMosaicGlobalRestrictionTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MOSAIC_GLOBAL_RESTRICTION;
@@ -7861,7 +8173,7 @@ public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
 		{"NewRestrictionType", "enum:MosaicRestrictionType"}
 	};
 
-	public EmbeddedMosaicGlobalRestrictionTransaction() {
+	public EmbeddedMosaicGlobalRestrictionTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -7920,7 +8232,7 @@ public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedMosaicGlobalRestrictionTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedMosaicGlobalRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -7940,7 +8252,7 @@ public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
 		var previousRestrictionType = MosaicRestrictionType.Deserialize(br);
 		var newRestrictionType = MosaicRestrictionType.Deserialize(br);
 
-		var instance = new EmbeddedMosaicGlobalRestrictionTransaction()
+		var instance = new EmbeddedMosaicGlobalRestrictionTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -7995,7 +8307,7 @@ public class EmbeddedMosaicGlobalRestrictionTransaction : IBaseTransaction {
 	}
 }
 
-public class TransferTransaction : ITransaction {
+public class TransferTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -8017,7 +8329,7 @@ public class TransferTransaction : ITransaction {
 		{"Message", "bytes_array"}
 	};
 
-	public TransferTransaction() {
+	public TransferTransactionV1() {
 		Signature = new Signature();
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
@@ -8078,7 +8390,7 @@ public class TransferTransaction : ITransaction {
 		}
 	}
 
-	public static TransferTransaction Deserialize(BinaryReader br) {
+	public static TransferTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
@@ -8105,7 +8417,7 @@ public class TransferTransaction : ITransaction {
 		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, (byte)mosaicsCount);
 		var message = br.ReadBytes((int)messageSize);
 
-		var instance = new TransferTransaction()
+		var instance = new TransferTransactionV1()
 		{
 			Signature = signature,
 			SignerPublicKey = signerPublicKey,
@@ -8161,7 +8473,7 @@ public class TransferTransaction : ITransaction {
 	}
 }
 
-public class EmbeddedTransferTransaction : IBaseTransaction {
+public class EmbeddedTransferTransactionV1 : IBaseTransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.TRANSFER;
@@ -8180,7 +8492,7 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 		{"Message", "bytes_array"}
 	};
 
-	public EmbeddedTransferTransaction() {
+	public EmbeddedTransferTransactionV1() {
 		SignerPublicKey = new PublicKey();
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -8229,7 +8541,7 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 		}
 	}
 
-	public static EmbeddedTransferTransaction Deserialize(BinaryReader br) {
+	public static EmbeddedTransferTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
@@ -8253,7 +8565,7 @@ public class EmbeddedTransferTransaction : IBaseTransaction {
 		var mosaics = ArrayHelpers.ReadArrayCount(br, UnresolvedMosaic.Deserialize, (byte)mosaicsCount);
 		var message = br.ReadBytes((int)messageSize);
 
-		var instance = new EmbeddedTransferTransaction()
+		var instance = new EmbeddedTransferTransactionV1()
 		{
 			SignerPublicKey = signerPublicKey,
 			Version = version,
@@ -8306,31 +8618,33 @@ public class TransactionFactory {
 		var parent = Transaction.Deserialize(br);
 		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
 		{
-			{AccountKeyLinkTransaction.TRANSACTION_TYPE, AccountKeyLinkTransaction.Deserialize},
-			{NodeKeyLinkTransaction.TRANSACTION_TYPE, NodeKeyLinkTransaction.Deserialize},
-			{AggregateCompleteTransaction.TRANSACTION_TYPE, AggregateCompleteTransaction.Deserialize},
-			{AggregateBondedTransaction.TRANSACTION_TYPE, AggregateBondedTransaction.Deserialize},
-			{VotingKeyLinkTransaction.TRANSACTION_TYPE, VotingKeyLinkTransaction.Deserialize},
-			{VrfKeyLinkTransaction.TRANSACTION_TYPE, VrfKeyLinkTransaction.Deserialize},
-			{HashLockTransaction.TRANSACTION_TYPE, HashLockTransaction.Deserialize},
-			{SecretLockTransaction.TRANSACTION_TYPE, SecretLockTransaction.Deserialize},
-			{SecretProofTransaction.TRANSACTION_TYPE, SecretProofTransaction.Deserialize},
-			{AccountMetadataTransaction.TRANSACTION_TYPE, AccountMetadataTransaction.Deserialize},
-			{MosaicMetadataTransaction.TRANSACTION_TYPE, MosaicMetadataTransaction.Deserialize},
-			{NamespaceMetadataTransaction.TRANSACTION_TYPE, NamespaceMetadataTransaction.Deserialize},
-			{MosaicDefinitionTransaction.TRANSACTION_TYPE, MosaicDefinitionTransaction.Deserialize},
-			{MosaicSupplyChangeTransaction.TRANSACTION_TYPE, MosaicSupplyChangeTransaction.Deserialize},
-			{MosaicSupplyRevocationTransaction.TRANSACTION_TYPE, MosaicSupplyRevocationTransaction.Deserialize},
-			{MultisigAccountModificationTransaction.TRANSACTION_TYPE, MultisigAccountModificationTransaction.Deserialize},
-			{AddressAliasTransaction.TRANSACTION_TYPE, AddressAliasTransaction.Deserialize},
-			{MosaicAliasTransaction.TRANSACTION_TYPE, MosaicAliasTransaction.Deserialize},
-			{NamespaceRegistrationTransaction.TRANSACTION_TYPE, NamespaceRegistrationTransaction.Deserialize},
-			{AccountAddressRestrictionTransaction.TRANSACTION_TYPE, AccountAddressRestrictionTransaction.Deserialize},
-			{AccountMosaicRestrictionTransaction.TRANSACTION_TYPE, AccountMosaicRestrictionTransaction.Deserialize},
-			{AccountOperationRestrictionTransaction.TRANSACTION_TYPE, AccountOperationRestrictionTransaction.Deserialize},
-			{MosaicAddressRestrictionTransaction.TRANSACTION_TYPE, MosaicAddressRestrictionTransaction.Deserialize},
-			{MosaicGlobalRestrictionTransaction.TRANSACTION_TYPE, MosaicGlobalRestrictionTransaction.Deserialize},
-			{TransferTransaction.TRANSACTION_TYPE, TransferTransaction.Deserialize}
+			{AccountKeyLinkTransactionV1.TRANSACTION_TYPE, AccountKeyLinkTransactionV1.Deserialize},
+			{NodeKeyLinkTransactionV1.TRANSACTION_TYPE, NodeKeyLinkTransactionV1.Deserialize},
+			{AggregateCompleteTransactionV1.TRANSACTION_TYPE, AggregateCompleteTransactionV1.Deserialize},
+			{AggregateCompleteTransactionV2.TRANSACTION_TYPE, AggregateCompleteTransactionV2.Deserialize},
+			{AggregateBondedTransactionV1.TRANSACTION_TYPE, AggregateBondedTransactionV1.Deserialize},
+			{AggregateBondedTransactionV2.TRANSACTION_TYPE, AggregateBondedTransactionV2.Deserialize},
+			{VotingKeyLinkTransactionV1.TRANSACTION_TYPE, VotingKeyLinkTransactionV1.Deserialize},
+			{VrfKeyLinkTransactionV1.TRANSACTION_TYPE, VrfKeyLinkTransactionV1.Deserialize},
+			{HashLockTransactionV1.TRANSACTION_TYPE, HashLockTransactionV1.Deserialize},
+			{SecretLockTransactionV1.TRANSACTION_TYPE, SecretLockTransactionV1.Deserialize},
+			{SecretProofTransactionV1.TRANSACTION_TYPE, SecretProofTransactionV1.Deserialize},
+			{AccountMetadataTransactionV1.TRANSACTION_TYPE, AccountMetadataTransactionV1.Deserialize},
+			{MosaicMetadataTransactionV1.TRANSACTION_TYPE, MosaicMetadataTransactionV1.Deserialize},
+			{NamespaceMetadataTransactionV1.TRANSACTION_TYPE, NamespaceMetadataTransactionV1.Deserialize},
+			{MosaicDefinitionTransactionV1.TRANSACTION_TYPE, MosaicDefinitionTransactionV1.Deserialize},
+			{MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, MosaicSupplyChangeTransactionV1.Deserialize},
+			{MosaicSupplyRevocationTransactionV1.TRANSACTION_TYPE, MosaicSupplyRevocationTransactionV1.Deserialize},
+			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.Deserialize},
+			{AddressAliasTransactionV1.TRANSACTION_TYPE, AddressAliasTransactionV1.Deserialize},
+			{MosaicAliasTransactionV1.TRANSACTION_TYPE, MosaicAliasTransactionV1.Deserialize},
+			{NamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NamespaceRegistrationTransactionV1.Deserialize},
+			{AccountAddressRestrictionTransactionV1.TRANSACTION_TYPE, AccountAddressRestrictionTransactionV1.Deserialize},
+			{AccountMosaicRestrictionTransactionV1.TRANSACTION_TYPE, AccountMosaicRestrictionTransactionV1.Deserialize},
+			{AccountOperationRestrictionTransactionV1.TRANSACTION_TYPE, AccountOperationRestrictionTransactionV1.Deserialize},
+			{MosaicAddressRestrictionTransactionV1.TRANSACTION_TYPE, MosaicAddressRestrictionTransactionV1.Deserialize},
+			{MosaicGlobalRestrictionTransactionV1.TRANSACTION_TYPE, MosaicGlobalRestrictionTransactionV1.Deserialize},
+			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
@@ -8345,31 +8659,33 @@ public class TransactionFactory {
 	public static ITransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, ITransaction>
 		{
-			{"account_key_link_transaction", new AccountKeyLinkTransaction()},
-			{"node_key_link_transaction", new NodeKeyLinkTransaction()},
-			{"aggregate_complete_transaction", new AggregateCompleteTransaction()},
-			{"aggregate_bonded_transaction", new AggregateBondedTransaction()},
-			{"voting_key_link_transaction", new VotingKeyLinkTransaction()},
-			{"vrf_key_link_transaction", new VrfKeyLinkTransaction()},
-			{"hash_lock_transaction", new HashLockTransaction()},
-			{"secret_lock_transaction", new SecretLockTransaction()},
-			{"secret_proof_transaction", new SecretProofTransaction()},
-			{"account_metadata_transaction", new AccountMetadataTransaction()},
-			{"mosaic_metadata_transaction", new MosaicMetadataTransaction()},
-			{"namespace_metadata_transaction", new NamespaceMetadataTransaction()},
-			{"mosaic_definition_transaction", new MosaicDefinitionTransaction()},
-			{"mosaic_supply_change_transaction", new MosaicSupplyChangeTransaction()},
-			{"mosaic_supply_revocation_transaction", new MosaicSupplyRevocationTransaction()},
-			{"multisig_account_modification_transaction", new MultisigAccountModificationTransaction()},
-			{"address_alias_transaction", new AddressAliasTransaction()},
-			{"mosaic_alias_transaction", new MosaicAliasTransaction()},
-			{"namespace_registration_transaction", new NamespaceRegistrationTransaction()},
-			{"account_address_restriction_transaction", new AccountAddressRestrictionTransaction()},
-			{"account_mosaic_restriction_transaction", new AccountMosaicRestrictionTransaction()},
-			{"account_operation_restriction_transaction", new AccountOperationRestrictionTransaction()},
-			{"mosaic_address_restriction_transaction", new MosaicAddressRestrictionTransaction()},
-			{"mosaic_global_restriction_transaction", new MosaicGlobalRestrictionTransaction()},
-			{"transfer_transaction", new TransferTransaction()}
+			{"account_key_link_transaction_v1", new AccountKeyLinkTransactionV1()},
+			{"node_key_link_transaction_v1", new NodeKeyLinkTransactionV1()},
+			{"aggregate_complete_transaction_v1", new AggregateCompleteTransactionV1()},
+			{"aggregate_complete_transaction_v2", new AggregateCompleteTransactionV2()},
+			{"aggregate_bonded_transaction_v1", new AggregateBondedTransactionV1()},
+			{"aggregate_bonded_transaction_v2", new AggregateBondedTransactionV2()},
+			{"voting_key_link_transaction_v1", new VotingKeyLinkTransactionV1()},
+			{"vrf_key_link_transaction_v1", new VrfKeyLinkTransactionV1()},
+			{"hash_lock_transaction_v1", new HashLockTransactionV1()},
+			{"secret_lock_transaction_v1", new SecretLockTransactionV1()},
+			{"secret_proof_transaction_v1", new SecretProofTransactionV1()},
+			{"account_metadata_transaction_v1", new AccountMetadataTransactionV1()},
+			{"mosaic_metadata_transaction_v1", new MosaicMetadataTransactionV1()},
+			{"namespace_metadata_transaction_v1", new NamespaceMetadataTransactionV1()},
+			{"mosaic_definition_transaction_v1", new MosaicDefinitionTransactionV1()},
+			{"mosaic_supply_change_transaction_v1", new MosaicSupplyChangeTransactionV1()},
+			{"mosaic_supply_revocation_transaction_v1", new MosaicSupplyRevocationTransactionV1()},
+			{"multisig_account_modification_transaction_v1", new MultisigAccountModificationTransactionV1()},
+			{"address_alias_transaction_v1", new AddressAliasTransactionV1()},
+			{"mosaic_alias_transaction_v1", new MosaicAliasTransactionV1()},
+			{"namespace_registration_transaction_v1", new NamespaceRegistrationTransactionV1()},
+			{"account_address_restriction_transaction_v1", new AccountAddressRestrictionTransactionV1()},
+			{"account_mosaic_restriction_transaction_v1", new AccountMosaicRestrictionTransactionV1()},
+			{"account_operation_restriction_transaction_v1", new AccountOperationRestrictionTransactionV1()},
+			{"mosaic_address_restriction_transaction_v1", new MosaicAddressRestrictionTransactionV1()},
+			{"mosaic_global_restriction_transaction_v1", new MosaicGlobalRestrictionTransactionV1()},
+			{"transfer_transaction_v1", new TransferTransactionV1()}
 
 		};
 		return mapping[entityName];
@@ -8382,29 +8698,29 @@ public class EmbeddedTransactionFactory {
 		var parent = EmbeddedTransaction.Deserialize(br);
 		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
 		{
-			{EmbeddedAccountKeyLinkTransaction.TRANSACTION_TYPE, EmbeddedAccountKeyLinkTransaction.Deserialize},
-			{EmbeddedNodeKeyLinkTransaction.TRANSACTION_TYPE, EmbeddedNodeKeyLinkTransaction.Deserialize},
-			{EmbeddedVotingKeyLinkTransaction.TRANSACTION_TYPE, EmbeddedVotingKeyLinkTransaction.Deserialize},
-			{EmbeddedVrfKeyLinkTransaction.TRANSACTION_TYPE, EmbeddedVrfKeyLinkTransaction.Deserialize},
-			{EmbeddedHashLockTransaction.TRANSACTION_TYPE, EmbeddedHashLockTransaction.Deserialize},
-			{EmbeddedSecretLockTransaction.TRANSACTION_TYPE, EmbeddedSecretLockTransaction.Deserialize},
-			{EmbeddedSecretProofTransaction.TRANSACTION_TYPE, EmbeddedSecretProofTransaction.Deserialize},
-			{EmbeddedAccountMetadataTransaction.TRANSACTION_TYPE, EmbeddedAccountMetadataTransaction.Deserialize},
-			{EmbeddedMosaicMetadataTransaction.TRANSACTION_TYPE, EmbeddedMosaicMetadataTransaction.Deserialize},
-			{EmbeddedNamespaceMetadataTransaction.TRANSACTION_TYPE, EmbeddedNamespaceMetadataTransaction.Deserialize},
-			{EmbeddedMosaicDefinitionTransaction.TRANSACTION_TYPE, EmbeddedMosaicDefinitionTransaction.Deserialize},
-			{EmbeddedMosaicSupplyChangeTransaction.TRANSACTION_TYPE, EmbeddedMosaicSupplyChangeTransaction.Deserialize},
-			{EmbeddedMosaicSupplyRevocationTransaction.TRANSACTION_TYPE, EmbeddedMosaicSupplyRevocationTransaction.Deserialize},
-			{EmbeddedMultisigAccountModificationTransaction.TRANSACTION_TYPE, EmbeddedMultisigAccountModificationTransaction.Deserialize},
-			{EmbeddedAddressAliasTransaction.TRANSACTION_TYPE, EmbeddedAddressAliasTransaction.Deserialize},
-			{EmbeddedMosaicAliasTransaction.TRANSACTION_TYPE, EmbeddedMosaicAliasTransaction.Deserialize},
-			{EmbeddedNamespaceRegistrationTransaction.TRANSACTION_TYPE, EmbeddedNamespaceRegistrationTransaction.Deserialize},
-			{EmbeddedAccountAddressRestrictionTransaction.TRANSACTION_TYPE, EmbeddedAccountAddressRestrictionTransaction.Deserialize},
-			{EmbeddedAccountMosaicRestrictionTransaction.TRANSACTION_TYPE, EmbeddedAccountMosaicRestrictionTransaction.Deserialize},
-			{EmbeddedAccountOperationRestrictionTransaction.TRANSACTION_TYPE, EmbeddedAccountOperationRestrictionTransaction.Deserialize},
-			{EmbeddedMosaicAddressRestrictionTransaction.TRANSACTION_TYPE, EmbeddedMosaicAddressRestrictionTransaction.Deserialize},
-			{EmbeddedMosaicGlobalRestrictionTransaction.TRANSACTION_TYPE, EmbeddedMosaicGlobalRestrictionTransaction.Deserialize},
-			{EmbeddedTransferTransaction.TRANSACTION_TYPE, EmbeddedTransferTransaction.Deserialize}
+			{EmbeddedAccountKeyLinkTransactionV1.TRANSACTION_TYPE, EmbeddedAccountKeyLinkTransactionV1.Deserialize},
+			{EmbeddedNodeKeyLinkTransactionV1.TRANSACTION_TYPE, EmbeddedNodeKeyLinkTransactionV1.Deserialize},
+			{EmbeddedVotingKeyLinkTransactionV1.TRANSACTION_TYPE, EmbeddedVotingKeyLinkTransactionV1.Deserialize},
+			{EmbeddedVrfKeyLinkTransactionV1.TRANSACTION_TYPE, EmbeddedVrfKeyLinkTransactionV1.Deserialize},
+			{EmbeddedHashLockTransactionV1.TRANSACTION_TYPE, EmbeddedHashLockTransactionV1.Deserialize},
+			{EmbeddedSecretLockTransactionV1.TRANSACTION_TYPE, EmbeddedSecretLockTransactionV1.Deserialize},
+			{EmbeddedSecretProofTransactionV1.TRANSACTION_TYPE, EmbeddedSecretProofTransactionV1.Deserialize},
+			{EmbeddedAccountMetadataTransactionV1.TRANSACTION_TYPE, EmbeddedAccountMetadataTransactionV1.Deserialize},
+			{EmbeddedMosaicMetadataTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicMetadataTransactionV1.Deserialize},
+			{EmbeddedNamespaceMetadataTransactionV1.TRANSACTION_TYPE, EmbeddedNamespaceMetadataTransactionV1.Deserialize},
+			{EmbeddedMosaicDefinitionTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicDefinitionTransactionV1.Deserialize},
+			{EmbeddedMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicSupplyChangeTransactionV1.Deserialize},
+			{EmbeddedMosaicSupplyRevocationTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicSupplyRevocationTransactionV1.Deserialize},
+			{EmbeddedMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, EmbeddedMultisigAccountModificationTransactionV1.Deserialize},
+			{EmbeddedAddressAliasTransactionV1.TRANSACTION_TYPE, EmbeddedAddressAliasTransactionV1.Deserialize},
+			{EmbeddedMosaicAliasTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicAliasTransactionV1.Deserialize},
+			{EmbeddedNamespaceRegistrationTransactionV1.TRANSACTION_TYPE, EmbeddedNamespaceRegistrationTransactionV1.Deserialize},
+			{EmbeddedAccountAddressRestrictionTransactionV1.TRANSACTION_TYPE, EmbeddedAccountAddressRestrictionTransactionV1.Deserialize},
+			{EmbeddedAccountMosaicRestrictionTransactionV1.TRANSACTION_TYPE, EmbeddedAccountMosaicRestrictionTransactionV1.Deserialize},
+			{EmbeddedAccountOperationRestrictionTransactionV1.TRANSACTION_TYPE, EmbeddedAccountOperationRestrictionTransactionV1.Deserialize},
+			{EmbeddedMosaicAddressRestrictionTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicAddressRestrictionTransactionV1.Deserialize},
+			{EmbeddedMosaicGlobalRestrictionTransactionV1.TRANSACTION_TYPE, EmbeddedMosaicGlobalRestrictionTransactionV1.Deserialize},
+			{EmbeddedTransferTransactionV1.TRANSACTION_TYPE, EmbeddedTransferTransactionV1.Deserialize}
 		};
 		br.BaseStream.Position = position;
 		return mapping[parent.Type](br);
@@ -8419,29 +8735,29 @@ public class EmbeddedTransactionFactory {
 	public static IBaseTransaction CreateByName(string entityName) {
 		var mapping = new Dictionary<string, IBaseTransaction>
 		{
-			{"account_key_link_transaction", new EmbeddedAccountKeyLinkTransaction()},
-			{"node_key_link_transaction", new EmbeddedNodeKeyLinkTransaction()},
-			{"voting_key_link_transaction", new EmbeddedVotingKeyLinkTransaction()},
-			{"vrf_key_link_transaction", new EmbeddedVrfKeyLinkTransaction()},
-			{"hash_lock_transaction", new EmbeddedHashLockTransaction()},
-			{"secret_lock_transaction", new EmbeddedSecretLockTransaction()},
-			{"secret_proof_transaction", new EmbeddedSecretProofTransaction()},
-			{"account_metadata_transaction", new EmbeddedAccountMetadataTransaction()},
-			{"mosaic_metadata_transaction", new EmbeddedMosaicMetadataTransaction()},
-			{"namespace_metadata_transaction", new EmbeddedNamespaceMetadataTransaction()},
-			{"mosaic_definition_transaction", new EmbeddedMosaicDefinitionTransaction()},
-			{"mosaic_supply_change_transaction", new EmbeddedMosaicSupplyChangeTransaction()},
-			{"mosaic_supply_revocation_transaction", new EmbeddedMosaicSupplyRevocationTransaction()},
-			{"multisig_account_modification_transaction", new EmbeddedMultisigAccountModificationTransaction()},
-			{"address_alias_transaction", new EmbeddedAddressAliasTransaction()},
-			{"mosaic_alias_transaction", new EmbeddedMosaicAliasTransaction()},
-			{"namespace_registration_transaction", new EmbeddedNamespaceRegistrationTransaction()},
-			{"account_address_restriction_transaction", new EmbeddedAccountAddressRestrictionTransaction()},
-			{"account_mosaic_restriction_transaction", new EmbeddedAccountMosaicRestrictionTransaction()},
-			{"account_operation_restriction_transaction", new EmbeddedAccountOperationRestrictionTransaction()},
-			{"mosaic_address_restriction_transaction", new EmbeddedMosaicAddressRestrictionTransaction()},
-			{"mosaic_global_restriction_transaction", new EmbeddedMosaicGlobalRestrictionTransaction()},
-			{"transfer_transaction", new EmbeddedTransferTransaction()}
+			{"account_key_link_transaction_v1", new EmbeddedAccountKeyLinkTransactionV1()},
+			{"node_key_link_transaction_v1", new EmbeddedNodeKeyLinkTransactionV1()},
+			{"voting_key_link_transaction_v1", new EmbeddedVotingKeyLinkTransactionV1()},
+			{"vrf_key_link_transaction_v1", new EmbeddedVrfKeyLinkTransactionV1()},
+			{"hash_lock_transaction_v1", new EmbeddedHashLockTransactionV1()},
+			{"secret_lock_transaction_v1", new EmbeddedSecretLockTransactionV1()},
+			{"secret_proof_transaction_v1", new EmbeddedSecretProofTransactionV1()},
+			{"account_metadata_transaction_v1", new EmbeddedAccountMetadataTransactionV1()},
+			{"mosaic_metadata_transaction_v1", new EmbeddedMosaicMetadataTransactionV1()},
+			{"namespace_metadata_transaction_v1", new EmbeddedNamespaceMetadataTransactionV1()},
+			{"mosaic_definition_transaction_v1", new EmbeddedMosaicDefinitionTransactionV1()},
+			{"mosaic_supply_change_transaction_v1", new EmbeddedMosaicSupplyChangeTransactionV1()},
+			{"mosaic_supply_revocation_transaction_v1", new EmbeddedMosaicSupplyRevocationTransactionV1()},
+			{"multisig_account_modification_transaction_v1", new EmbeddedMultisigAccountModificationTransactionV1()},
+			{"address_alias_transaction_v1", new EmbeddedAddressAliasTransactionV1()},
+			{"mosaic_alias_transaction_v1", new EmbeddedMosaicAliasTransactionV1()},
+			{"namespace_registration_transaction_v1", new EmbeddedNamespaceRegistrationTransactionV1()},
+			{"account_address_restriction_transaction_v1", new EmbeddedAccountAddressRestrictionTransactionV1()},
+			{"account_mosaic_restriction_transaction_v1", new EmbeddedAccountMosaicRestrictionTransactionV1()},
+			{"account_operation_restriction_transaction_v1", new EmbeddedAccountOperationRestrictionTransactionV1()},
+			{"mosaic_address_restriction_transaction_v1", new EmbeddedMosaicAddressRestrictionTransactionV1()},
+			{"mosaic_global_restriction_transaction_v1", new EmbeddedMosaicGlobalRestrictionTransactionV1()},
+			{"transfer_transaction_v1", new EmbeddedTransferTransactionV1()}
 
 		};
 		return mapping[entityName];

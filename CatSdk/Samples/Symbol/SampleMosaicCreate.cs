@@ -23,7 +23,7 @@ public static class SampleMosaicCreate
         var innerTransactions = new IBaseTransaction[] { mosaicDefinitionTransaction, mosaicSupplyChangeTransaction};
         var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
         
-        var aggTx = new AggregateCompleteTransaction {
+        var aggTx = new AggregateCompleteTransactionV2 {
             Network = NetworkType.FromValue(facade.Network.Identifier),
             Transactions = 	innerTransactions,
             SignerPublicKey = keyPair.PublicKey,
@@ -45,11 +45,11 @@ public static class SampleMosaicCreate
         Console.WriteLine(responseDetailsJson);
     }
 
-    private static EmbeddedMosaicDefinitionTransaction CreateMosaicDefinitionTransaction(SymbolFacade facade, PublicKey publicKey, ulong nonce)
+    private static EmbeddedMosaicDefinitionTransactionV1 CreateMosaicDefinitionTransaction(SymbolFacade facade, PublicKey publicKey, ulong nonce)
     {
         var address = facade.Network.PublicKeyToAddress(publicKey.bytes);
         var id = IdGenerator.GenerateMosaicId(address, nonce);
-        return new EmbeddedMosaicDefinitionTransaction()
+        return new EmbeddedMosaicDefinitionTransactionV1()
         {
             Network = NetworkType.FromValue(facade.Network.Identifier),
             SignerPublicKey = publicKey,
@@ -67,9 +67,9 @@ public static class SampleMosaicCreate
         };
     }
     
-    private static EmbeddedMosaicSupplyChangeTransaction CreateMosaicSupplyChangeTransaction(SymbolFacade facade, PublicKey publicKey, MosaicId mosaicId, MosaicSupplyChangeAction action, ulong amount)
+    private static EmbeddedMosaicSupplyChangeTransactionV1 CreateMosaicSupplyChangeTransaction(SymbolFacade facade, PublicKey publicKey, MosaicId mosaicId, MosaicSupplyChangeAction action, ulong amount)
     {
-        return new EmbeddedMosaicSupplyChangeTransaction()
+        return new EmbeddedMosaicSupplyChangeTransactionV1()
         {
             Network = NetworkType.FromValue(facade.Network.Identifier),
             SignerPublicKey = publicKey,

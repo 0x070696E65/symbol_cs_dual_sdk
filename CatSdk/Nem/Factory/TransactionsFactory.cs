@@ -13,11 +13,12 @@ namespace CatSdk.Nem.Factory
             Network = network;
         }
 
-        public ITransaction Create(Dictionary<string, object> transactionDescriptor)
+        public ITransaction Create(Dictionary<string, object> transactionDescriptor, bool autosort = true)
         {
             var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
             transactionDescriptor.Add("Network", networkType);
             var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
+            if(autosort) transaction.Sort();
             return transaction;
             if (transaction.Type == TransactionType.TRANSFER)
             {

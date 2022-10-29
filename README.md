@@ -1,6 +1,8 @@
 # SymbolCsDualSDK
 # Features
 ブロックチェーンSymbolとNEMを一つのSDKで両方使えるC#用SDKです。<br>
+***[注意]現在NEMは使えません!!***<br>
+<br>
 もちろんUnityで使用可能です。<br>
 ※Unityのバージョンは2020.3.31, 2021.3.11は動作確認済みです。
 
@@ -167,6 +169,32 @@ var responseDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseDetailsJson);
 ```
 
+### TransferTransactionで複数モザイクを送信する場合はSortが必要です
+```c#
+var transfer = new TransferTransactionV1()
+{
+    Network = NetworkType.TESTNET,
+    SignerPublicKey = aliceKeyPair.PublicKey,
+    RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("ADDRESS")),
+    Mosaics = new UnresolvedMosaic[]
+    {
+        new()
+        {
+            MosaicId = new UnresolvedMosaicId(0x65DBB4CC472A5734),
+            Amount = new Amount(2)
+        },
+        new()
+        {
+            MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
+            Amount = new Amount(1)
+        }
+    },
+    Fee = new Amount(500000),
+    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp),
+};
+// Transaction構築後にSort()
+transfer.Sort();
+```
 ### Symbol AggregateCompleteTransaction using SSS Extension
 ####AliceがSSSで署名、Bobが連署者の場合
 ```c#

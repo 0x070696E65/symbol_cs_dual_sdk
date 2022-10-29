@@ -19,6 +19,8 @@ def is_bound_size(field):
 def is_const(field):
 	return field.is_const
 
+def is_computed(field):
+	return hasattr(field.field_type, 'sizeref') and field.field_type.sizeref
 
 def create_temporary_buffer_name(name):
 	return f'{name}_condition'
@@ -171,6 +173,25 @@ class StructFormatter(AbstractTypeFormatter):
 
 		return MethodDescriptor(body=body, arguments=arguments)
 
+	def get_comparer_descriptor(self):
+		if not self.struct.comparer:
+			return None
+
+		body = 'return [\n'
+		for (property_name, transform) in self.struct.comparer:
+			body += '\t'
+			if not transform:
+				body += f'this.{lang_field_name(property_name)}'
+			else:
+				body += f'{lang_field_name(transform).replace("_", "")}(this.{lang_field_name(property_name)}.bytes)'
+
+			body += ',\n'
+
+		body = body[:-2]  # strip trailing comma
+		body += '\n];'
+
+		return MethodDescriptor(body=body)
+
 	def generate_condition(self, field, prefix_field=False):
 		if not field.is_conditional:
 			return ''
@@ -212,6 +233,31 @@ class StructFormatter(AbstractTypeFormatter):
 			else:
 				return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name}.Value)'
 		#return f'if ({yoda_value} {condition_operator} {display_condition_field_name})'
+
+	def get_sort_descriptor(self):
+		body = ''
+		is_last_sort_field_conditional = False
+		for field in self.non_const_fields():
+			field_value = self.field_name(field)
+
+			sort = field.extensions.printer.sort(field_value)
+			if not sort:
+				continue
+
+			condition = self.generate_condition(field, True)
+
+			if is_computed(field):
+				sort += 'Computed'
+
+			body += indent_if_conditional(condition, f'{sort}\n')
+			is_last_sort_field_conditional = bool(condition)
+
+		# indent_if_conditional always adds a newline when there is a condition
+		# if the last sortable field has a condition, the newline needs to be stripped to avoid a blank line before closing brace
+		if is_last_sort_field_conditional:
+			body = body[:-1]
+
+		return MethodDescriptor(body=body)
 
 	def generate_deserialize_field(self, field, arg_buffer_name=None):
 		# pylint: disable=too-many-locals

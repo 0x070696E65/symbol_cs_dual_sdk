@@ -1930,15 +1930,7 @@ public class TransactionTest
 			Fee = new Amount(18370164183782063840),
 			Deadline = new Timestamp(8207562320463688160),
 		};
-		var a = new UnresolvedMosaic()
-		{
-			MosaicId = new UnresolvedMosaicId(8620336746491119575),
-			Amount = new Amount(2)
-		};
-		Console.WriteLine(Converter.BytesToHex(a.MosaicId.Serialize()));
-		Console.WriteLine(Converter.BytesToHex(tx.Mosaics[0].MosaicId.Serialize()));
-		Console.WriteLine(Converter.BytesToHex(tx.Mosaics[1].MosaicId.Serialize()));
-		Console.WriteLine(Converter.BytesToHex(tx.Mosaics[2].MosaicId.Serialize()));
+		tx.Sort();
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
@@ -2179,6 +2171,7 @@ public class TransactionTest
 			,
 			TransactionsHash = new Hash256(Converter.HexToBytes("611B90A6E05EE33D30D87DE5B58505B8B9807E54BB8B9229EAF95DBBD43819BC")),
 		};
+		((EmbeddedTransferTransactionV1)tx.Transactions[0]).Sort();
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]

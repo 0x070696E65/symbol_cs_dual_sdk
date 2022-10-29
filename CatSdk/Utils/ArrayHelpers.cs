@@ -2,6 +2,10 @@ namespace CatSdk.Utils
 {
     public static class ArrayHelpers
     {
+        public static int DeepCompare(object? lhs, object? rhs)
+        {
+            return 0;
+        }
         private static void AddPadding(int size, BinaryWriter bw,
             int alignment)
         {

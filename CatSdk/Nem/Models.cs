@@ -262,6 +262,9 @@ public class Transaction : ITransaction {
 		SignatureSize = 64; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -384,6 +387,9 @@ public class NonVerifiableTransaction : IBaseTransaction {
 		Deadline = new Timestamp();
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public TransactionType Type { get; set; }
@@ -566,6 +572,9 @@ public class AccountKeyLinkTransactionV1 : ITransaction {
 		RemotePublicKeySize = 32; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -719,6 +728,9 @@ public class NonVerifiableAccountKeyLinkTransactionV1 : IBaseTransaction {
 		RemotePublicKeySize = 32; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -835,6 +847,9 @@ public class NamespaceId : IStruct {
 		Name = Array.Empty<byte>();
 	}
 
+	public void Sort() {
+	}
+
 	public byte[] Name { get; set; }
 
 	public uint Size {
@@ -883,6 +898,10 @@ public class MosaicId : IStruct {
 	public MosaicId() {
 		NamespaceId = new NamespaceId();
 		Name = Array.Empty<byte>();
+	}
+
+	public void Sort() {
+		NamespaceId.Sort();
 	}
 
 	public NamespaceId NamespaceId { get; set; }
@@ -942,6 +961,10 @@ public class Mosaic : IStruct {
 		Amount = new Amount();
 	}
 
+	public void Sort() {
+		MosaicId.Sort();
+	}
+
 	public MosaicId MosaicId { get; set; }
 
 	public Amount Amount { get; set; }
@@ -996,6 +1019,10 @@ public class SizePrefixedMosaic : IStruct {
 
 	public SizePrefixedMosaic() {
 		Mosaic = new Mosaic();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
 	}
 
 	public Mosaic Mosaic { get; set; }
@@ -1109,6 +1136,10 @@ public class MosaicLevy : IStruct {
 		RecipientAddressSize = 40; // reserved field
 	}
 
+	public void Sort() {
+		MosaicId.Sort();
+	}
+
 	public MosaicTransferFeeType TransferFeeType { get; set; }
 
 	public Address RecipientAddress { get; set; }
@@ -1186,6 +1217,9 @@ public class MosaicProperty : IStruct {
 		Value = Array.Empty<byte>();
 	}
 
+	public void Sort() {
+	}
+
 	public byte[] Name { get; set; }
 
 	public byte[] Value { get; set; }
@@ -1242,6 +1276,10 @@ public class SizePrefixedMosaicProperty : IStruct {
 
 	public SizePrefixedMosaicProperty() {
 		Property = new MosaicProperty();
+	}
+
+	public void Sort() {
+		Property.Sort();
 	}
 
 	public MosaicProperty Property { get; set; }
@@ -1302,6 +1340,12 @@ public class MosaicDefinition : IStruct {
 		LevySize = 0;
 		Levy = new MosaicLevy();
 		OwnerPublicKeySize = 32; // reserved field
+	}
+
+	public void Sort() {
+		Id.Sort();
+		if (0 != LevySize)
+			Levy.Sort();
 	}
 
 	public PublicKey OwnerPublicKey { get; set; }
@@ -1439,6 +1483,10 @@ public class MosaicDefinitionTransactionV1 : ITransaction {
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
 		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public void Sort() {
+		MosaicDefinition.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -1605,6 +1653,10 @@ public class NonVerifiableMosaicDefinitionTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public void Sort() {
+		MosaicDefinition.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -1817,6 +1869,10 @@ public class MosaicSupplyChangeTransactionV1 : ITransaction {
 		SignatureSize = 64; // reserved field
 	}
 
+	public void Sort() {
+		MosaicId.Sort();
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -1974,6 +2030,10 @@ public class NonVerifiableMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 		Delta = new Amount();
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public void Sort() {
+		MosaicId.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -2156,6 +2216,9 @@ public class MultisigAccountModification : IStruct {
 		CosignatoryPublicKeySize = 32; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public MultisigAccountModificationType ModificationType { get; set; }
 
 	public PublicKey CosignatoryPublicKey { get; set; }
@@ -2211,6 +2274,10 @@ public class SizePrefixedMultisigAccountModification : IStruct {
 
 	public SizePrefixedMultisigAccountModification() {
 		Modification = new MultisigAccountModification();
+	}
+
+	public void Sort() {
+		Modification.Sort();
 	}
 
 	public MultisigAccountModification Modification { get; set; }
@@ -2285,6 +2352,17 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
+	}
+
+	public void Sort() {
+		Array.Sort(Modifications, (lhs, rhs) => {
+		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
+		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
+		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
 	}
 
 	public TransactionType Type { get; set; }
@@ -2427,6 +2505,17 @@ public class NonVerifiableMultisigAccountModificationTransactionV1 : IBaseTransa
 		SignerPublicKeySize = 32; // reserved field
 	}
 
+	public void Sort() {
+		Array.Sort(Modifications, (lhs, rhs) => {
+		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
+		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
+		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -2560,6 +2649,17 @@ public class MultisigAccountModificationTransactionV2 : ITransaction {
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
 		MinApprovalDeltaSize = 4; // reserved field
+	}
+
+	public void Sort() {
+		Array.Sort(Modifications, (lhs, rhs) => {
+		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
+		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
+		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
 	}
 
 	public TransactionType Type { get; set; }
@@ -2717,6 +2817,17 @@ public class NonVerifiableMultisigAccountModificationTransactionV2 : IBaseTransa
 		MinApprovalDeltaSize = 4; // reserved field
 	}
 
+	public void Sort() {
+		Array.Sort(Modifications, (lhs, rhs) => {
+		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
+		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
+		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -2869,6 +2980,9 @@ public class Cosignature : ITransaction {
 		MultisigAccountAddressSize = 40; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -3007,6 +3121,10 @@ public class SizePrefixedCosignature : IStruct {
 		Cosignature = new Cosignature();
 	}
 
+	public void Sort() {
+		Cosignature.Sort();
+	}
+
 	public Cosignature Cosignature { get; set; }
 
 	public uint Size {
@@ -3081,6 +3199,10 @@ public class MultisigTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
+	}
+
+	public void Sort() {
+		InnerTransaction.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -3244,6 +3366,9 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
 		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public TransactionType Type { get; set; }
@@ -3432,6 +3557,9 @@ public class NonVerifiableNamespaceRegistrationTransactionV1 : IBaseTransaction 
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		RentalFeeSinkSize = 40; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public TransactionType Type { get; set; }
@@ -3637,6 +3765,9 @@ public class Message : IStruct {
 		MessageField = Array.Empty<byte>();
 	}
 
+	public void Sort() {
+	}
+
 	public MessageType MessageType { get; set; }
 
 	public byte[] MessageField { get; set; }
@@ -3722,6 +3853,11 @@ public class TransferTransactionV1 : ITransaction {
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
 		RecipientAddressSize = 40; // reserved field
+	}
+
+	public void Sort() {
+		if (0 != MessageEnvelopeSize)
+			Message.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -3905,6 +4041,11 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 		RecipientAddressSize = 40; // reserved field
 	}
 
+	public void Sort() {
+		if (0 != MessageEnvelopeSize)
+			Message.Sort();
+	}
+
 	public TransactionType Type { get; set; }
 
 	public byte Version { get; set; }
@@ -4078,6 +4219,11 @@ public class TransferTransactionV2 : ITransaction {
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
 		RecipientAddressSize = 40; // reserved field
+	}
+
+	public void Sort() {
+		if (0 != MessageEnvelopeSize)
+			Message.Sort();
 	}
 
 	public TransactionType Type { get; set; }
@@ -4271,6 +4417,11 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		RecipientAddressSize = 40; // reserved field
+	}
+
+	public void Sort() {
+		if (0 != MessageEnvelopeSize)
+			Message.Sort();
 	}
 
 	public TransactionType Type { get; set; }

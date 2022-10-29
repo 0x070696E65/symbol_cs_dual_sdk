@@ -12,6 +12,9 @@ class Printer:
 		self.descriptor = descriptor
 		self.name = fix_name(lang_field_name(name or underline_name(self.descriptor.name)))
 
+	def sort(self, _field_name):  # pylint: disable=no-self-use
+		return None
+
 class IntPrinter(Printer):
 	def __init__(self, descriptor, name=None):
 		super().__init__(descriptor, name)
@@ -91,6 +94,15 @@ class TypedArrayPrinter(Printer):
 
 		return f'ArrayHelpers.Size({self.name[:1].upper() + self.name[1:]})'
 
+	#def _get_sort_comparer(self, variable_name):
+		#sort_key = lang_field_name(self.descriptor.field_type.sort_key)
+		#comparer = f'({variable_name}.{sort_key}.comparer ? {variable_name}.{sort_key}.comparer() : {variable_name}.{sort_key}.value)'
+		#return comparer
+
+	def _get_sort_accessor(self):
+		accessor = f'e => ({self._get_sort_comparer("e")})'
+		return accessor
+
 	def load(self, buffer_name):
 		del buffer_name
 		element_type = self.descriptor.field_type.element_type
@@ -161,10 +173,25 @@ class TypedArrayPrinter(Printer):
 
 		return f'ArrayHelpers.WriteArrayCount({args_str})'
 
+	def sort(self, field_name):
+		if not self.descriptor.field_type.sort_key:
+			return None
+
+		sort_key = pascal_name(lang_field_name(self.descriptor.field_type.sort_key))
+		body = f'Array.Sort({field_name}, (lhs, rhs) => {{\n'
+		body +=	f'return ((ulong) ((lhs.{sort_key}.GetType().GetMethod("Comparer") != null\n'
+		body += f'? lhs.{sort_key}.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {{}})\n'
+		body += f': lhs.{sort_key}.GetType().GetField("Value").GetValue(lhs.{sort_key}) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))\n'
+		body += f'.CompareTo((ulong) ((rhs.{sort_key}.GetType().GetMethod("Comparer") != null\n'
+		body += f'? rhs.{sort_key}.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {{}})\n'
+		body += f': rhs.{sort_key}.GetType().GetField("Value").GetValue(rhs.{sort_key}) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));\n'
+		body += f'}});'
+		#body = f'Array.Sort({field_name},(lhs, rhs)=>lhs.{sort_key}.Value.CompareTo(rhs.{sort_key}.Value));'
+		return body
+
 	@staticmethod
 	def to_string(field_name):
 		return f'string.Join(",", {field_name}.Select(e => e.ToString()))'
-
 
 class ArrayPrinter(Printer):
 	def __init__(self, descriptor, name=None):
@@ -253,6 +280,9 @@ class BuiltinPrinter(Printer):
 	@staticmethod
 	def store(field_name):
 		return f'{field_name}.Serialize()'
+
+	def sort(self, field_name):
+		return f'{field_name}.Sort();' if DisplayType.STRUCT == self.descriptor.display_type else None
 
 	def get_modifier(self):
 		return 'public static readonly TransactionType '

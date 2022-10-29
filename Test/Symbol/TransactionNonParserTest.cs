@@ -632,6 +632,7 @@ public class TransactionNonParserTest
 			{"TransactionsHash", new Hash256(Converter.HexToBytes("61E0F8B9AB2FE3E008DCE1380FECDAF5BCFB1851247BF990771154177A0B7E78"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
+		((AggregateBondedTransactionV2) tx).Version = 1;
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
@@ -738,6 +739,7 @@ public class TransactionNonParserTest
 			{"TransactionsHash", new Hash256(Converter.HexToBytes("6655F5FCF2290442DD1B3AEBB649A49249E32EBAF259403183A9A847EA22E0B6"))},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
+		((AggregateCompleteTransactionV2) tx).Version = 1;
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]

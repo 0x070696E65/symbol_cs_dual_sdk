@@ -4,7 +4,6 @@ using CatSdk.Facade;
 using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
 using CatSdk.Utils;
-using System.Text.Json;
 
 namespace CatSdk.Samples.Symbol;
 
@@ -69,11 +68,8 @@ public class SampleMetadata
         var result = await new HttpClient().GetStringAsync(url);
         //var response = await client.GetAsync(url);
         Console.WriteLine(result);
-        var root = JsonSerializer.Deserialize<Root>(result);
+        //var root = JsonSerializer.Deserialize<Root>(result);
         //return root.data[0].metadataEntry.value;
-        Console.WriteLine(root.pagination);
-        Console.WriteLine(root.data[0]);
-        Console.WriteLine(root.data[0].metadataEntry.value);
         return ""; //Task.FromResult(root.data[0].metadataEntry.value);
     }
     

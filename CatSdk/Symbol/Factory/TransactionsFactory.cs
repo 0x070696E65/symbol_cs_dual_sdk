@@ -27,13 +27,14 @@ namespace CatSdk.Symbol.Factory
 	     * @param {Dictionary} transactionDescriptor Transaction descriptor.
 	     * @returns {ITransaction} Newly created transaction.
 	     */
-        public ITransaction Create(Dictionary<string, object> transactionDescriptor)
+        public ITransaction Create(Dictionary<string, object> transactionDescriptor, bool autosort = true)
         {
             var transactionType = transactionDescriptor["Type"];
             if (transactionType is TransactionType type) transactionDescriptor["Type"] = TransactionTypeToString(type);
             var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
             transactionDescriptor.Add("Network", networkType);
             var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
+            if (autosort) transaction.Sort();
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
                 var namespaceRegistrationTransaction = (NamespaceRegistrationTransactionV1) transaction;
@@ -47,19 +48,20 @@ namespace CatSdk.Symbol.Factory
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
             return mosaicDefinitionTransaction;
         }
-            
+
         /**
 	     * Creates an embedded transaction from a transaction descriptor.
 	     * @param {Dictionary} transactionDescriptor Transaction descriptor.
 	     * @returns {IBaseTransaction} Newly created transaction.
 	     */
-        public IBaseTransaction CreateEmbedded(Dictionary<string, object> transactionDescriptor)
+        public IBaseTransaction CreateEmbedded(Dictionary<string, object> transactionDescriptor, bool autosort = true)
         {
             var transactionType = transactionDescriptor["Type"];
             if (transactionType is TransactionType type) transactionDescriptor["Type"] = TransactionTypeToString(type);
             var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
             transactionDescriptor.Add("Network", networkType);
             var transaction = Factory.CreateFromFactory(EmbeddedTransactionFactory.CreateByName, transactionDescriptor);
+            if (autosort) transaction.Sort();
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
                 var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransactionV1) transaction;

@@ -298,6 +298,9 @@ public class Mosaic : IStruct {
 		Amount = new Amount();
 	}
 
+	public void Sort() {
+	}
+
 	public MosaicId MosaicId { get; set; }
 
 	public Amount Amount { get; set; }
@@ -350,6 +353,9 @@ public class UnresolvedMosaic : IStruct {
 	public UnresolvedMosaic() {
 		MosaicId = new UnresolvedMosaicId();
 		Amount = new Amount();
+	}
+
+	public void Sort() {
 	}
 
 	public UnresolvedMosaicId MosaicId { get; set; }
@@ -655,6 +661,9 @@ public class Transaction : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -764,6 +773,9 @@ public class EmbeddedTransaction : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -864,6 +876,9 @@ public class AccountKeyLinkTransactionV1 : ITransaction {
 		LinkAction = LinkAction.UNLINK;
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -997,6 +1012,9 @@ public class EmbeddedAccountKeyLinkTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -1111,6 +1129,9 @@ public class NodeKeyLinkTransactionV1 : ITransaction {
 		LinkAction = LinkAction.UNLINK;
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -1244,6 +1265,9 @@ public class EmbeddedNodeKeyLinkTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -1340,6 +1364,9 @@ public class Cosignature : IStruct {
 		Signature = new Signature();
 	}
 
+	public void Sort() {
+	}
+
 	public ulong Version { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -1402,6 +1429,9 @@ public class DetachedCosignature : IStruct {
 		SignerPublicKey = new PublicKey();
 		Signature = new Signature();
 		ParentHash = new Hash256();
+	}
+
+	public void Sort() {
 	}
 
 	public ulong Version { get; set; }
@@ -1495,6 +1525,9 @@ public class AggregateCompleteTransactionV1 : ITransaction {
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
 		AggregateTransactionHeaderReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -1653,6 +1686,9 @@ public class AggregateCompleteTransactionV2 : ITransaction {
 		AggregateTransactionHeaderReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -1807,6 +1843,9 @@ public class AggregateBondedTransactionV1 : ITransaction {
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
 		AggregateTransactionHeaderReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -1965,6 +2004,9 @@ public class AggregateBondedTransactionV2 : ITransaction {
 		AggregateTransactionHeaderReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -2121,6 +2163,9 @@ public class VotingKeyLinkTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -2270,6 +2315,9 @@ public class EmbeddedVotingKeyLinkTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -2398,6 +2446,9 @@ public class VrfKeyLinkTransactionV1 : ITransaction {
 		LinkAction = LinkAction.UNLINK;
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -2531,6 +2582,9 @@ public class EmbeddedVrfKeyLinkTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -2647,6 +2701,10 @@ public class HashLockTransactionV1 : ITransaction {
 		Hash = new Hash256();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
 	}
 
 	public Signature Signature { get; set; }
@@ -2787,6 +2845,10 @@ public class EmbeddedHashLockTransactionV1 : IBaseTransaction {
 		Hash = new Hash256();
 		EmbeddedTransactionHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
 	}
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -2975,6 +3037,10 @@ public class SecretLockTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -3133,6 +3199,10 @@ public class EmbeddedSecretLockTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -3272,6 +3342,9 @@ public class SecretProofTransactionV1 : ITransaction {
 		Proof = Array.Empty<byte>();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -3426,6 +3499,9 @@ public class EmbeddedSecretProofTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -3559,6 +3635,9 @@ public class AccountMetadataTransactionV1 : ITransaction {
 		Value = Array.Empty<byte>();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -3711,6 +3790,9 @@ public class EmbeddedAccountMetadataTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -3846,6 +3928,9 @@ public class MosaicMetadataTransactionV1 : ITransaction {
 		Value = Array.Empty<byte>();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -4005,6 +4090,9 @@ public class EmbeddedMosaicMetadataTransactionV1 : IBaseTransaction {
 		Value = Array.Empty<byte>();
 		EmbeddedTransactionHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -4274,6 +4362,9 @@ public class NamespaceMetadataTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -4431,6 +4522,9 @@ public class EmbeddedNamespaceMetadataTransactionV1 : IBaseTransaction {
 		Value = Array.Empty<byte>();
 		EmbeddedTransactionHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -4700,6 +4794,9 @@ public class MosaicDefinitionTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -4857,6 +4954,9 @@ public class EmbeddedMosaicDefinitionTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -4994,6 +5094,9 @@ public class MosaicSupplyChangeTransactionV1 : ITransaction {
 		Action = MosaicSupplyChangeAction.DECREASE;
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -5136,6 +5239,9 @@ public class EmbeddedMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -5257,6 +5363,10 @@ public class MosaicSupplyRevocationTransactionV1 : ITransaction {
 		Mosaic = new UnresolvedMosaic();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
 	}
 
 	public Signature Signature { get; set; }
@@ -5390,6 +5500,10 @@ public class EmbeddedMosaicSupplyRevocationTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -5508,6 +5622,9 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
 		MultisigAccountModificationTransactionBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -5670,6 +5787,9 @@ public class EmbeddedMultisigAccountModificationTransactionV1 : IBaseTransaction
 		MultisigAccountModificationTransactionBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -5813,6 +5933,9 @@ public class AddressAliasTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -5953,6 +6076,9 @@ public class EmbeddedAddressAliasTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -6076,6 +6202,9 @@ public class MosaicAliasTransactionV1 : ITransaction {
 		AliasAction = AliasAction.UNLINK;
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -6218,6 +6347,9 @@ public class EmbeddedMosaicAliasTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -6345,6 +6477,9 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 		Name = Array.Empty<byte>();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -6534,6 +6669,9 @@ public class EmbeddedNamespaceRegistrationTransactionV1 : IBaseTransaction {
 		Name = Array.Empty<byte>();
 		EmbeddedTransactionHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -6761,6 +6899,9 @@ public class AccountAddressRestrictionTransactionV1 : ITransaction {
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -6914,6 +7055,9 @@ public class EmbeddedAccountAddressRestrictionTransactionV1 : IBaseTransaction {
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -7050,6 +7194,9 @@ public class AccountMosaicRestrictionTransactionV1 : ITransaction {
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -7205,6 +7352,9 @@ public class EmbeddedAccountMosaicRestrictionTransactionV1 : IBaseTransaction {
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -7341,6 +7491,9 @@ public class AccountOperationRestrictionTransactionV1 : ITransaction {
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -7496,6 +7649,9 @@ public class EmbeddedAccountOperationRestrictionTransactionV1 : IBaseTransaction
 		AccountRestrictionTransactionBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -7631,6 +7787,9 @@ public class MosaicAddressRestrictionTransactionV1 : ITransaction {
 		TargetAddress = new UnresolvedAddress();
 		VerifiableEntityHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public Signature Signature { get; set; }
@@ -7786,6 +7945,9 @@ public class EmbeddedMosaicAddressRestrictionTransactionV1 : IBaseTransaction {
 		TargetAddress = new UnresolvedAddress();
 		EmbeddedTransactionHeaderReserved_1 = 0; // reserved field
 		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
 	}
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -8016,6 +8178,9 @@ public class MosaicGlobalRestrictionTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public Signature Signature { get; set; }
 
 	public PublicKey SignerPublicKey { get; set; }
@@ -8189,6 +8354,9 @@ public class EmbeddedMosaicGlobalRestrictionTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 	}
 
+	public void Sort() {
+	}
+
 	public PublicKey SignerPublicKey { get; set; }
 
 	public byte Version { get; set; }
@@ -8344,6 +8512,17 @@ public class TransferTransactionV1 : ITransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		TransferTransactionBodyReserved_1 = 0; // reserved field
 		TransferTransactionBodyReserved_2 = 0; // reserved field
+	}
+
+	public void Sort() {
+		Array.Sort(Mosaics, (lhs, rhs) => {
+		return ((ulong) ((lhs.MosaicId.GetType().GetMethod("Comparer") != null
+		? lhs.MosaicId.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.MosaicId.GetType().GetField("Value").GetValue(lhs.MosaicId) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.MosaicId.GetType().GetMethod("Comparer") != null
+		? rhs.MosaicId.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.MosaicId.GetType().GetField("Value").GetValue(rhs.MosaicId) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
 	}
 
 	public Signature Signature { get; set; }
@@ -8504,6 +8683,17 @@ public class EmbeddedTransferTransactionV1 : IBaseTransaction {
 		EntityBodyReserved_1 = 0; // reserved field
 		TransferTransactionBodyReserved_1 = 0; // reserved field
 		TransferTransactionBodyReserved_2 = 0; // reserved field
+	}
+
+	public void Sort() {
+		Array.Sort(Mosaics, (lhs, rhs) => {
+		return ((ulong) ((lhs.MosaicId.GetType().GetMethod("Comparer") != null
+		? lhs.MosaicId.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: lhs.MosaicId.GetType().GetField("Value").GetValue(lhs.MosaicId) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
+		.CompareTo((ulong) ((rhs.MosaicId.GetType().GetMethod("Comparer") != null
+		? rhs.MosaicId.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
+		: rhs.MosaicId.GetType().GetField("Value").GetValue(rhs.MosaicId) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+		});
 	}
 
 	public PublicKey SignerPublicKey { get; set; }

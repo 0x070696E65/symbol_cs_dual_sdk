@@ -46,8 +46,8 @@ namespace CatSdk.Symbol
         public static readonly Network TestNet = new Network(
             "testnet",
             0x98,
-            new DateTime(2021, 11, 25, 14, 0, 47, DateTimeKind.Utc),
-            new Hash256(Converter.HexToBytes("7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836"))
+            new DateTime(2022, 10, 31, 21, 07, 47, DateTimeKind.Utc),
+            new Hash256(Converter.HexToBytes("49D6E1CE276A85B70EAFE52349AACCA389302E7A9754BCF1221E79494FC665A4"))
         );
             
         /**

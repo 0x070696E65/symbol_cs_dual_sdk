@@ -1,3 +1,4 @@
+using System;
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
@@ -9,14 +10,15 @@ namespace CatSdk.Nem
     public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
         public NetworkTimestamp(ulong timestamp) : base(timestamp) { }
-        
+
         /**
 	     * Adds a specified number of seconds to this timestamp.
 	     * @override
 	     * @param {ulong} count Number of seconds to add.
 	     * @returns {NetworkTimestamp} New timestamp that is the specified number of seconds past this timestamp.
 	     */
-        public override CatSdk.NetworkTimestamp AddSeconds(ulong count) {
+        public override CatSdk.NetworkTimestamp AddSeconds(ulong count)
+        {
             return new NetworkTimestamp(Timestamp + count);
         }
     }
@@ -27,7 +29,7 @@ namespace CatSdk.Nem
     public class Network : BaseNetwork<NemAddress>
     {
         private Hash256? GenerationHashSeed { get; }
-        
+
         public static readonly Network MainNet = new Network(
             "mainnet",
             0x68,
@@ -38,7 +40,7 @@ namespace CatSdk.Nem
             0x98,
             new DateTime(2015, 3, 29, 0, 6, 25, DateTimeKind.Utc)
         );
-        
+
         /**
 	     * Creates a new network with the specified name, identifier byte and generation hash seed.
 	     * @param {string} name Network name.
@@ -57,7 +59,7 @@ namespace CatSdk.Nem
         {
             GenerationHashSeed = generationHashSeed;
         }
-        
+
         private static NemAddress CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)
         {
             var newBytes = new byte[addressWithoutChecksum.Length + checksum.Length];
@@ -74,7 +76,7 @@ namespace CatSdk.Nem
     {
         private const byte SIZE = 25;
         private const byte ENCODED_SIZE = 39;
-        
+
         /**
 	     * Creates a NEM address.
 	     * @param {Uint8Array|string|Address} address Input string, byte array or address.
@@ -82,7 +84,7 @@ namespace CatSdk.Nem
         public NemAddress(string address) : base(SIZE, Base32.Decode(address)) { }
         public NemAddress(ByteArray address) : base(SIZE, address.bytes) { }
         public NemAddress(byte[] address) : base(SIZE, address) { }
-        
+
         /**
 	     * Returns string representation of this object.
 	     * @returns {string} String representation of this object

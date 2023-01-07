@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -6,8 +7,9 @@ namespace CatSdk.Crypto
     public static class CatapultCrypto
     {
         const int Key_Size = 32;
-        
-        static void Clamp(byte[] d) {
+
+        static void Clamp(byte[] d)
+        {
             d[0] &= 248;
             d[31] &= 127;
             d[31] |= 64;
@@ -22,18 +24,20 @@ namespace CatSdk.Crypto
             Clamp(d);
             return d;
         }
-        
-        public static byte[] DeriveSharedKey (byte[] privateKey, byte[] publicKey) {
+
+        public static byte[] DeriveSharedKey(byte[] privateKey, byte[] publicKey)
+        {
             var sharedSecret = DeriveSharedSecret(privateKey, publicKey);
             const string info = "catapult";
             var hkdf = new Hkdf();
             return hkdf.DeriveKey(new byte[32], sharedSecret, Encoding.UTF8.GetBytes(info), 32);
         }
-        
-        private static byte[] DeriveSharedSecret(byte[] privateKey, byte[] publicKey) {
+
+        private static byte[] DeriveSharedSecret(byte[] privateKey, byte[] publicKey)
+        {
             var d = PrepareForScalarMult(privateKey);
-            var q = new []{NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf()};
-            var p = new []{NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf()};
+            var q = new[] { NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf() };
+            var p = new[] { NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf(), NaclCatapult.Gf() };
             var sharedSecret = new long[Key_Size];
 
             NaclCatapult.Unpack(q, publicKey);
@@ -46,5 +50,5 @@ namespace CatSdk.Crypto
             }
             return result;
         }
-    }   
+    }
 }

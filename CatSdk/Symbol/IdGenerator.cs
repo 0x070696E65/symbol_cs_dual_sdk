@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Text;
 using Org.BouncyCastle.Crypto.Digests;
 
@@ -5,7 +7,7 @@ namespace CatSdk.Symbol
 {
     public static class IdGenerator
     {
-        private const ulong NAMESPACE_FLAG = (ulong) 1 << 63;
+        private const ulong NAMESPACE_FLAG = (ulong)1 << 63;
 
         /**
          * Generates a mosaic id from an owner address and a nonce.
@@ -13,7 +15,7 @@ namespace CatSdk.Symbol
          * @param {ulong} nonce Nonce.
          * @returns {ulong} Computed mosaic id.
          */
-        public static ulong GenerateMosaicId<T>(T ownerAddress, ulong nonce) where T: ByteArray
+        public static ulong GenerateMosaicId<T>(T ownerAddress, ulong nonce) where T : ByteArray
         {
             var hasher = new Sha3Digest(256);
             var arr = new byte[32];
@@ -24,7 +26,7 @@ namespace CatSdk.Symbol
             if ((result & NAMESPACE_FLAG) != 0) result -= NAMESPACE_FLAG;
             return result;
         }
-    
+
         /**
          * Generates a namespace id from a name and an optional parent namespace id.
          * @param {byte[]} name Namespace name.

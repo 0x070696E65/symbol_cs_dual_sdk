@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace CatSdk.Utils
 {
     public static class ArrayHelpers
@@ -31,8 +36,8 @@ namespace CatSdk.Utils
             var padding = GetPadding(size, alignment);
             dataInputStream.BaseStream.Position += padding;
         }
-            
-        public static void WriteArray<T>(BinaryWriter bw, IEnumerable<T> elements) where T: ISerializer
+
+        public static void WriteArray<T>(BinaryWriter bw, IEnumerable<T> elements) where T : ISerializer
         {
             foreach (var t in elements)
             {
@@ -51,7 +56,7 @@ namespace CatSdk.Utils
         {
             return (uint)Math.Floor((size + alignment - 1) / (float)alignment) * alignment;
         }
-        
+
         /**
 	     * Calculates size of variable size objects.
 	     * @param {array&lt;T&gt;} elements Serializable elements.
@@ -59,16 +64,16 @@ namespace CatSdk.Utils
 	     * @param {bool} skipLastElementPadding true if last element should not be aligned.
 	     * @returns {uint} Computed size.
 	     */
-        public static uint Size<T>(T[] elements, uint alignment = 0, bool skipLastElementPadding = false) where T: ISerializer
+        public static uint Size<T>(T[] elements, uint alignment = 0, bool skipLastElementPadding = false) where T : ISerializer
         {
-            if (alignment == 0) return (uint) elements.Sum((e) => e.Size);
-                
-            if (!skipLastElementPadding) return (uint) elements.Sum((e) => AlignUp(e.Size, alignment));
-                
+            if (alignment == 0) return (uint)elements.Sum((e) => e.Size);
+
+            if (!skipLastElementPadding) return (uint)elements.Sum((e) => AlignUp(e.Size, alignment));
+
             var sum = elements.Take(elements.Length - 1).Sum((e) => e.Size);
-            return (uint) (sum + elements[elements.Length - 1].Size);
+            return (uint)(sum + elements[elements.Length - 1].Size);
         }
-        
+
         /**
 	     * Writes array of variable size objects.
 	     * @param {BinaryWriter} output An output sink.
@@ -76,7 +81,8 @@ namespace CatSdk.Utils
 	     * @param {uint} alignment Alignment used to make sure each object is at boundary.
 	     * @param {bool} skipLastElementPadding true if last element should not be aligned/padded.
 	     */
-        public static void WriteVariableSizeElements<T>(BinaryWriter bw, T[] elements, uint alignment, bool skipLastElementPadding = false) where T: ISerializer {
+        public static void WriteVariableSizeElements<T>(BinaryWriter bw, T[] elements, uint alignment, bool skipLastElementPadding = false) where T : ISerializer
+        {
             for (var i = 0; i < elements.Length; i++)
             {
                 bw.Write(elements[i].Serialize().ToArray());
@@ -88,7 +94,7 @@ namespace CatSdk.Utils
                 }
             }
         }
-        
+
         /**
 	     * Reads array of variable size objects.
 	     * @param {BinaryReader} bufferInput A uint8 array.
@@ -97,12 +103,13 @@ namespace CatSdk.Utils
 	     * @param {bool} skipLastElementPadding true if last element is not aligned/padded.
 	     * @returns {array&lt;T&gt;} Array of deserialized objects.
 	     */
-        public static T[] ReadVariableSizeElements<T>(BinaryReader br, Func<BinaryReader, T> factory, uint payloadSize, int alignment, bool skipLastElementPadding = false) where T: ISerializer
+        public static T[] ReadVariableSizeElements<T>(BinaryReader br, Func<BinaryReader, T> factory, uint payloadSize, int alignment, bool skipLastElementPadding = false) where T : ISerializer
         {
             var elements = new List<T>();
             if (alignment == 0) return elements.ToArray();
             var remainingByteSizes = (int)payloadSize;
-            while (remainingByteSizes > 0){
+            while (remainingByteSizes > 0)
+            {
                 var entity = factory(br);
                 elements.Add(entity);
                 var size = (int)entity.Size;
@@ -112,7 +119,7 @@ namespace CatSdk.Utils
             }
             return elements.ToArray();
         }
-        
+
         /**
 	     * Reads array of objects.
 	     * @param {BinaryReader} bufferInput Input buffer.
@@ -132,14 +139,14 @@ namespace CatSdk.Utils
             }
             return elements.ToArray();
         }
-        
+
         /**
 	     * Reads array of deterministic number of objects.
 	     * @param {BinaryReader} bufferInput A uint8 array.
 	     * @param {Func} accessor Optional accessor used to check objects order.
          * @param {byte} count Number of object to deserialize.
 	     * @returns {array&lt;T&gt;} Array of deserialized objects.
-	     */    
+	     */
         public static T[] ReadArrayCount<T>(BinaryReader br, Func<BinaryReader, T> factory, byte count) where T : ISerializer
         {
             var alignment = br.BaseStream.Length;

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
@@ -9,13 +11,14 @@ namespace CatSdk.Symbol
     public class NetworkTimestamp : CatSdk.NetworkTimestamp
     {
         public NetworkTimestamp(ulong timestamp) : base(timestamp) { }
-        
+
         /**
 	     * Adds a specified number of milliseconds to this timestamp.
 	     * @param {ulong} count Number of milliseconds to add.
 	     * @returns {NetworkTimestamp} New timestamp that is the specified number of milliseconds past this timestamp.
 	     */
-        public CatSdk.NetworkTimestamp AddMilliseconds(ulong count) {
+        public CatSdk.NetworkTimestamp AddMilliseconds(ulong count)
+        {
             return new NetworkTimestamp(Timestamp + count);
         }
 
@@ -25,11 +28,12 @@ namespace CatSdk.Symbol
 	     * @param {ulong} count Number of seconds to add.
 	     * @returns {NetworkTimestamp} New timestamp that is the specified number of seconds past this timestamp.
 	     */
-        public override CatSdk.NetworkTimestamp AddSeconds(ulong count) {
+        public override CatSdk.NetworkTimestamp AddSeconds(ulong count)
+        {
             return AddMilliseconds(1000 * count);
         }
     }
-    
+
     /**
      * Represents a Symbol network.
      */
@@ -49,7 +53,7 @@ namespace CatSdk.Symbol
             new DateTime(2022, 10, 31, 21, 07, 47, DateTimeKind.Utc),
             new Hash256(Converter.HexToBytes("49D6E1CE276A85B70EAFE52349AACCA389302E7A9754BCF1221E79494FC665A4"))
         );
-            
+
         /**
 	     * Creates a new network with the specified name, identifier byte and generation hash seed.
 	     * @param {string} name Network name.
@@ -86,7 +90,7 @@ namespace CatSdk.Symbol
     {
         private const byte SIZE = 24;
         private const byte ENCODED_SIZE = 39;
-            
+
         /**
 	     * Creates a Symbol address.
 	     * @param {byte[]|string|Address} address Input string, byte array or address.
@@ -94,7 +98,7 @@ namespace CatSdk.Symbol
         public SymbolAddress(string address) : base(SIZE, Converter.StringToAddress(address)) { }
         public SymbolAddress(ByteArray address) : base(SIZE, address.bytes) { }
         public SymbolAddress(byte[] address) : base(SIZE, address) { }
-            
+
         /**
 	     * Returns string representation of this object.
 	     * @returns {string} String representation of this object
@@ -102,6 +106,6 @@ namespace CatSdk.Symbol
         public override string ToString()
         {
             return Converter.AddressToString(bytes);
-        } 
+        }
     }
 }

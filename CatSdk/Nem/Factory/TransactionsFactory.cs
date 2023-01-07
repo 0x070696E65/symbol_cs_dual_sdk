@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using CatSdk.Utils;
 
@@ -18,13 +21,10 @@ namespace CatSdk.Nem.Factory
             var networkType = Network == Network.MainNet ? NetworkType.MAINNET : NetworkType.TESTNET;
             transactionDescriptor.Add("Network", networkType);
             var transaction = Factory.CreateFromFactory(TransactionFactory.CreateByName, transactionDescriptor);
-            if(autosort) transaction.Sort();
+            if (autosort) transaction.Sort();
             return transaction;
-            if (transaction.Type == TransactionType.TRANSFER)
-            {
-            }
         }
-        
+
         /*
 	     * Converts a transaction to a non-verifiable transaction.
 	     * @param {object} transaction Transaction object.
@@ -43,10 +43,10 @@ namespace CatSdk.Nem.Factory
             var nonVerifiableClass = types.Find(m => m.Name == nonVerifiableClassName);
             if (nonVerifiableClass == null) throw new NullReferenceException("nonVerifiableClass type is invalid");
             var inst = (IBaseTransaction)Activator.CreateInstance(nonVerifiableClass)!;
-            
+
             var pInfos = inst.GetType().GetProperties();
             var tInfos = transaction.GetType().GetProperties();
-            
+
             foreach (var propertyInfo in pInfos)
             {
                 if (!propertyInfo.CanWrite) continue;
@@ -56,20 +56,22 @@ namespace CatSdk.Nem.Factory
             }
             return inst;
         }
-        
-        public static string AttachSignature(ITransaction transaction, Signature signature) {
+
+        public static string AttachSignature(ITransaction transaction, Signature signature)
+        {
             transaction.Signature = new Signature(signature.bytes);
             var transactionHex = Converter.BytesToHex(ToNonVerifiableTransaction(transaction).Serialize());
             var signatureHex = signature.ToString();
             var jsonPayload = "{\"data\":\"" + transactionHex + "\",\"signature\":\"" + signatureHex + "\"}";
             return jsonPayload;
         }
-        
-        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
+
+        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature)
+        {
             transaction.Signature = new Signature(signature.bytes);
             return transaction;
         }
-        
+
         private static Address? NemTypeConverter(object value)
         {
             if (value.GetType() != typeof(Address)) return null;
@@ -81,7 +83,7 @@ namespace CatSdk.Nem.Factory
         {
             return Converter.Utf8ToBytes(rawAddress);
         }
-        
+
         private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
         {
             var assm = Assembly.GetExecutingAssembly();
@@ -92,10 +94,10 @@ namespace CatSdk.Nem.Factory
                 .ToList();
             //var factory = new RuleBasedTransactionFactory(types, NemTypeConverter, typeRuleOverrides);
             var factory = new RuleBasedTransactionFactory(types, RawAddressToBytes, null, typeRuleOverrides);
-            
+
             factory.Autodetect();
-            
-            var enumsMapping = new []
+
+            var enumsMapping = new[]
             {
                 "LinkAction",
                 "MessageType",
@@ -109,8 +111,8 @@ namespace CatSdk.Nem.Factory
             {
                 factory.AddEnumParser(key);
             }
-            
-            var structsMapping = new []
+
+            var structsMapping = new[]
             {
                 "Cosignature",
                 "SizePrefixedCosignature",
@@ -126,12 +128,12 @@ namespace CatSdk.Nem.Factory
                 "MultisigAccountModification",
                 "SizePrefixedMultisigAccountModification",
             };
-            
+
             foreach (var key in structsMapping)
             {
                 factory.AddStructParser(key);
             }
-            
+
             var sdkTypeMapping = new Dictionary<string, Type>()
             {
                 {"Address", typeof(Address)},
@@ -142,8 +144,8 @@ namespace CatSdk.Nem.Factory
             {
                 factory.AddPodParser(key, sdkTypeMapping[key]);
             }
-            
-            var arrayParserMapping = new []
+
+            var arrayParserMapping = new[]
             {
                 "struct:SizePrefixedCosignature",
                 "struct:SizePrefixedMosaic",

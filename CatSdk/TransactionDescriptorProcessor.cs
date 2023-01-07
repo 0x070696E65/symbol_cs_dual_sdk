@@ -1,4 +1,6 @@
 using CatSdk.Utils;
+using System;
+using System.Collections.Generic;
 
 namespace CatSdk
 {
@@ -11,7 +13,7 @@ namespace CatSdk
         private readonly Dictionary<string, Func<object, object>> TypeParsingRules;
         private readonly Func<object, object?>? TypeConverter;
         public Dictionary<string, string>? TypeHints;
-            
+
         /**
          * Creates a transaction descriptor processor.
          * @param {object} transactionDescriptor Transaction descriptor.
@@ -25,8 +27,9 @@ namespace CatSdk
             TypeConverter = typeConverter ?? (value => value);
             TypeHints = null;
         }
-            
-        private object LookupValueAndApplyTypeHints(string key) {
+
+        private object LookupValueAndApplyTypeHints(string key)
+        {
             if (null == TransactionDescriptor[key])
                 throw new ArgumentOutOfRangeException($"transaction descriptor does not have attribute {key}");
             var value = TransactionDescriptor[key];
@@ -36,7 +39,7 @@ namespace CatSdk
             if (typeHint != null && TypeParsingRules.ContainsKey(typeHint)) value = TypeParsingRules[typeHint].Invoke(value);
             return value;
         }
-            
+
         /**
 	     * Looks up the value for key.
 	     * @param {string} key Key for which to retrieve value.
@@ -47,7 +50,7 @@ namespace CatSdk
         {
             return LookupValueAndApplyTypeHints(key);
         }
-            
+
         /**
 	     * Copies all descriptor information to a transaction.
 	     * @param {IStruct} transaction Transaction to which to copy keys.
@@ -57,11 +60,11 @@ namespace CatSdk
         {
             foreach (var kvp in TransactionDescriptor)
             {
-                if(ignoreKeys != null && -1 != Array.IndexOf(ignoreKeys, kvp.Key)) continue;
+                if (ignoreKeys != null && -1 != Array.IndexOf(ignoreKeys, kvp.Key)) continue;
                 var p = transaction.GetType().GetProperty(kvp.Key);
-                if(p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {kvp.Key}");
+                if (p == null) throw new ArgumentOutOfRangeException($"transaction does not have attribute {kvp.Key}");
                 var value = LookupValue(kvp.Key);
-                if (value is int i && Math.Sign(i) < 0 && p.PropertyType == typeof(ushort)) value = (ushort) (i - 0xFFFF0000);
+                if (value is int i && Math.Sign(i) < 0 && p.PropertyType == typeof(ushort)) value = (ushort)(i - 0xFFFF0000);
                 if (value is int ii && Math.Sign(ii) < 0 && p.PropertyType == typeof(uint)) value = (uint)ii;
                 if (p.PropertyType == typeof(byte)) value = Convert.ToByte(value);
                 if (p.PropertyType == typeof(ushort)) value = Convert.ToUInt16(value);
@@ -73,7 +76,7 @@ namespace CatSdk
                 p.SetValue(transaction, value);
             }
         }
-            
+
         /**
 	     * Sets type hints.
 	     * @param {Dictionary} typeHints New type hints.

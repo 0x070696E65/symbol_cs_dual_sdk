@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using CatSdk.Utils;
 
@@ -10,7 +13,7 @@ namespace CatSdk.Symbol.Factory
     {
         private readonly RuleBasedTransactionFactory Factory;
         public readonly Network Network;
-            
+
         /**
 	     * Creates a factory for the specified network.
 	     * @param {Network} network Symbol network.
@@ -21,7 +24,7 @@ namespace CatSdk.Symbol.Factory
             Factory = BuildRules(typeRuleOverrides);
             Network = network;
         }
-            
+
         /**
 	     * Creates a transaction from a transaction descriptor.
 	     * @param {Dictionary} transactionDescriptor Transaction descriptor.
@@ -37,13 +40,13 @@ namespace CatSdk.Symbol.Factory
             if (autosort) transaction.Sort();
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
-                var namespaceRegistrationTransaction = (NamespaceRegistrationTransactionV1) transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
+                var namespaceRegistrationTransaction = (NamespaceRegistrationTransactionV1)transaction;
+                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
                 namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
-                return namespaceRegistrationTransaction; 
+                return namespaceRegistrationTransaction;
             }
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-            var mosaicDefinitionTransaction = (MosaicDefinitionTransactionV1) transaction;
+            var mosaicDefinitionTransaction = (MosaicDefinitionTransactionV1)transaction;
             var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
             return mosaicDefinitionTransaction;
@@ -64,60 +67,63 @@ namespace CatSdk.Symbol.Factory
             if (autosort) transaction.Sort();
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
-                var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransactionV1) transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value); 
-                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId); 
+                var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransactionV1)transaction;
+                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
+                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
                 return namespaceRegistrationTransaction;
             }
 
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
-            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransactionV1) transaction;
+            var mosaicDefinitionTransaction = (EmbeddedMosaicDefinitionTransactionV1)transaction;
             var address = Network.PublicKeyToAddress(mosaicDefinitionTransaction.SignerPublicKey.bytes);
             mosaicDefinitionTransaction.Id = new MosaicId(IdGenerator.GenerateMosaicId(address, mosaicDefinitionTransaction.Nonce.Value));
             return mosaicDefinitionTransaction;
         }
-            
+
         /**
 	     * Attaches a signature to a transaction.
 	     * @param {ITransaction} transaction Transaction object.
 	     * @param {Signature} signature Signature to attach.
 	     * @returns {string} JSON transaction payload.
 	     */
-        public static string AttachSignature(ITransaction transaction, Signature signature) {
+        public static string AttachSignature(ITransaction transaction, Signature signature)
+        {
             transaction.Signature = signature;
-            var transactionBuffer = transaction.Serialize();
-            var hexPayload = Converter.BytesToHex(transactionBuffer);
-            var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
-            return jsonPayload;
-        }
-        
-        public static string CreatePayload(ITransaction transaction, Signature? signature = null) {
-            if(signature != null) transaction.Signature = signature;
             var transactionBuffer = transaction.Serialize();
             var hexPayload = Converter.BytesToHex(transactionBuffer);
             var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
             return jsonPayload;
         }
 
-        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature) {
+        public static string CreatePayload(ITransaction transaction, Signature? signature = null)
+        {
+            if (signature != null) transaction.Signature = signature;
+            var transactionBuffer = transaction.Serialize();
+            var hexPayload = Converter.BytesToHex(transactionBuffer);
+            var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
+            return jsonPayload;
+        }
+
+        public static ITransaction AttachSignatureTransaction(ITransaction transaction, Signature signature)
+        {
             transaction.Signature = signature;
             return transaction;
         }
-            
+
         private static UnresolvedAddress? SymbolTypeConverter(object value)
         {
             if (value.GetType() != typeof(Address)) return null;
             var castValue = (ByteArray)value;
             return new UnresolvedAddress(castValue.bytes);
         }
-            
+
         private static byte[] RawAddressToBytes(string rawAddress)
         {
             var rawBytes = Base32.Decode(rawAddress + "A");
             Array.Resize(ref rawBytes, rawBytes.Length - 1);
             return rawBytes;
         }
-            
+
         private static RuleBasedTransactionFactory BuildRules(Dictionary<Type, Func<object, object>>? typeRuleOverrides)
         {
             var assm = Assembly.GetExecutingAssembly();
@@ -129,7 +135,7 @@ namespace CatSdk.Symbol.Factory
             var factory = new RuleBasedTransactionFactory(types, RawAddressToBytes, null, typeRuleOverrides);
             factory.Autodetect();
 
-            var flagsMapping = new []
+            var flagsMapping = new[]
             {
                 "MosaicFlags",
                 "AccountRestrictionFlags",
@@ -138,8 +144,8 @@ namespace CatSdk.Symbol.Factory
             {
                 factory.AddFlagsParser(key);
             }
-                
-            var enumsMapping = new []
+
+            var enumsMapping = new[]
             {
                 "AliasAction",
                 "LinkAction",
@@ -154,10 +160,10 @@ namespace CatSdk.Symbol.Factory
             {
                 factory.AddEnumParser(key);
             }
-                
+
             factory.AddStructParser("UnresolvedMosaic");
             factory.AddStructParser("Cosignature");
-                
+
             var sdkTypeMapping = new Dictionary<string, Type>()
             {
                 {"UnresolvedAddress", typeof(UnresolvedAddress)},
@@ -171,7 +177,7 @@ namespace CatSdk.Symbol.Factory
             {
                 factory.AddPodParser(key, sdkTypeMapping[key]);
             }
-            var arrayParserMapping = new []
+            var arrayParserMapping = new[]
             {
                 "struct:Cosignature",
                 "UnresolvedMosaicId",
@@ -183,7 +189,7 @@ namespace CatSdk.Symbol.Factory
             {
                 factory.AddArrayParser(key);
             }
-                
+
             return factory;
         }
 

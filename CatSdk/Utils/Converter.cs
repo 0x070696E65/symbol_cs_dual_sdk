@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -15,12 +18,12 @@ namespace CatSdk.Utils
                     {"nemAddressDecoded", 40},
                     {"symbolAddressEncoded", 39},
                     {"nemAddressEncoded", 40},
-                    {"key", 32}, 
+                    {"key", 32},
                     {"checksum", 3},
                 }
-            }                
+            }
         };
-        
+
         /**
 	     * Converts a hex string to a uint8 array.
 	     * @param {string} input A hex encoded string.
@@ -35,7 +38,7 @@ namespace CatSdk.Utils
             }
             return bs.ToArray();
         }
-        
+
         /**
 	     * Converts a uint8 array to a hex string.
 	     * @param {byte[]} input A uint8 array.
@@ -47,18 +50,19 @@ namespace CatSdk.Utils
             str = str.Replace("-", string.Empty);
             return str;
         }
-            
+
         /**
          * Converts an encoded address string to a decoded address.
          * @param {string} encoded The encoded address string.
          * @returns {byte[]} The decoded address corresponding to the input.
          */
-        public static byte[] StringToAddress(string encoded){
+        public static byte[] StringToAddress(string encoded)
+        {
             if (_constants["sizes"]["symbolAddressEncoded"] == encoded.Length)
             {
                 var bytes = Base32.Decode(encoded + "A");
                 Array.Resize(ref bytes, _constants["sizes"]["symbolAddressDecoded"]);
-                return bytes;   
+                return bytes;
             }
             if (_constants["sizes"]["nemAddressEncoded"] == encoded.Length)
             {
@@ -66,7 +70,7 @@ namespace CatSdk.Utils
             }
             throw new Exception(encoded + " does not represent a valid encoded address");
         }
-            
+
         /*
          * Converts a decoded address to an encoded address string.
          * @param {byte[]} decoded The decoded address.
@@ -76,9 +80,9 @@ namespace CatSdk.Utils
         {
             if (_constants["sizes"]["symbolAddressDecoded"] != decoded.Length)
             {
-                var padded  = new byte[_constants["sizes"]["addressDecoded"] + 1];
+                var padded = new byte[_constants["sizes"]["addressDecoded"] + 1];
                 Array.Copy(decoded, padded, decoded.Length);
-                return Base32.Encode(padded).Substring(0, _constants["sizes"]["symbolAddressEncoded"]);   
+                return Base32.Encode(padded).Substring(0, _constants["sizes"]["symbolAddressEncoded"]);
             }
             if (_constants["sizes"]["nemAddressDecoded"] != decoded.Length)
             {
@@ -86,47 +90,50 @@ namespace CatSdk.Utils
             }
             throw new Exception(BytesToHex(decoded) + " does not represent a valid decoded address");
         }
-            
+
         /**
          * Convert UTF-8 to hex
          * @param {string} input - An UTF-8 string
          * @return {string}
          */
-        public static string Utf8ToHex(string input) {
+        public static string Utf8ToHex(string input)
+        {
             var bytes = Encoding.UTF8.GetBytes(input);
             var hexString = BitConverter.ToString(bytes);
             hexString = hexString.Replace("-", "");
             return hexString;
         }
-            
-        public static byte[] Utf8ToBytes(string input) {
+
+        public static byte[] Utf8ToBytes(string input)
+        {
             return Encoding.UTF8.GetBytes(input);
         }
-            
-        public static string HexToUtf8(string input) {
+
+        public static string HexToUtf8(string input)
+        {
             return Encoding.UTF8.GetString(Converter.HexToBytes(input));
         }
 
         public static byte[] Utf8ToPlainMessage(string input)
         {
             var message = Encoding.UTF8.GetBytes(input);
-            var zero = new byte[] {0};
+            var zero = new byte[] { 0 };
             var newArr = new byte[message.Length + 1];
             zero.CopyTo(newArr, 0);
             message.CopyTo(newArr, 1);
             return newArr;
         }
-        
+
         public static byte[] Utf8ToEncryptoMessage(string input)
         {
             var message = Encoding.UTF8.GetBytes(input);
-            var zero = new byte[] {0};
+            var zero = new byte[] { 0 };
             var newArr = new byte[message.Length + 1];
             zero.CopyTo(newArr, 0);
             message.CopyTo(newArr, 1);
             return newArr;
         }
-        
+
         public static string ToHex<T>(T value, byte i = 0)
         {
             return i switch
@@ -141,25 +148,25 @@ namespace CatSdk.Utils
                 _ => throw new Exception("i is not excepted value")
             };
         }
-            
+
         public static string ToString<T>(T value)
         {
             return "0x" + $"{value:X}";
         }
-            
+
         private static string ToPascal(string text)
         {
             return Regex.Replace(
-                text.Replace("_", " "), 
-                @"\b[a-z]", 
+                text.Replace("_", " "),
+                @"\b[a-z]",
                 match => match.Value.ToUpper()).Replace(" ", "");
         }
-            
+
         public static bool IsHexString(string s)
         {
             return !string.IsNullOrEmpty(s) && s.All(Uri.IsHexDigit);
         }
-        
+
         public static byte[] Xor(byte[] currentMetadataValueBytes, byte[] newMetadataValueBytes)
         {
             var length = Math.Max(currentMetadataValueBytes.Length, newMetadataValueBytes.Length);

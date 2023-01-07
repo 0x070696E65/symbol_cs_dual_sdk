@@ -1,3 +1,5 @@
+using System;
+
 namespace CatSdk
 {
     /**
@@ -23,23 +25,25 @@ namespace CatSdk
         {
             return 0 == Timestamp;
         }
-        
+
         /**
 	     * Adds a specified number of seconds to this timestamp.
 	     * @abstract
 	     * @param {ulong} count Number of seconds to add.
 	     * @returns {NetworkTimestamp} New timestamp that is the specified number of seconds past this timestamp.
 	     */
-        public virtual NetworkTimestamp AddSeconds(ulong count) {
+        public virtual NetworkTimestamp AddSeconds(ulong count)
+        {
             throw new Exception("addSeconds be implemented by concrete class");
         }
-        
+
         /**
 		 * Adds a specified number of minutes to this timestamp.
 		 * @param {ulong} count Number of minutes to add.
 		 * @returns {NetworkTimestamp} New timestamp that is the specified number of minutes past this timestamp.
 		 */
-        public NetworkTimestamp AddMinutes(ulong count) {
+        public NetworkTimestamp AddMinutes(ulong count)
+        {
             return AddSeconds(60 * count);
         }
 
@@ -48,7 +52,8 @@ namespace CatSdk
 		 * @param {ulong} count Number of hours to add.
 		 * @returns {NetworkTimestamp} New timestamp that is the specified number of hours past this timestamp.
 		 */
-        public NetworkTimestamp AddHours(ulong count) {
+        public NetworkTimestamp AddHours(ulong count)
+        {
             return AddMinutes(60 * count);
         }
 
@@ -56,7 +61,8 @@ namespace CatSdk
 		 * Returns string representation of this object.
 		 * @returns {string} String representation of this object
 		 */
-        public override string ToString() {
+        public override string ToString()
+        {
             return Timestamp.ToString();
         }
     }
@@ -76,7 +82,7 @@ namespace CatSdk
 	     */
         public NetworkTimestampDatetimeConverter(DateTime epoch, string timeUnits)
         {
-	        Epoch = epoch;
+            Epoch = epoch;
             TimeUnits = GetTimeUnits(timeUnits);
         }
 
@@ -91,14 +97,15 @@ namespace CatSdk
                 _ => 1
             };
         }
-        
+
         /**
 		 * Converts a network timestamp to a datetime.
 		 * @param {ulong} rawTimestamp Raw network timestamp.
 		 * @returns {DateTime} Date representation of the network timestamp.
 		 */
-        public DateTime ToDatetime(ulong rawTimestamp) {
-	        return new DateTime(Epoch.Millisecond + (int)rawTimestamp * TimeUnits);
+        public DateTime ToDatetime(ulong rawTimestamp)
+        {
+            return new DateTime(Epoch.Millisecond + (int)rawTimestamp * TimeUnits);
         }
 
         /**
@@ -106,10 +113,11 @@ namespace CatSdk
 		 * @param {Date} referenceDatetime Reference date.
 		 * @returns {number} Number of network time units between the reference date and the network epoch.
 		 */
-        public ulong ToDifference(DateTime referenceDatetime) {
-	        if (referenceDatetime < Epoch)
-		        throw new Exception("timestamp cannot be before epoch");
-	        return (ulong)((referenceDatetime - Epoch).TotalMilliseconds / TimeUnits);
+        public ulong ToDifference(DateTime referenceDatetime)
+        {
+            if (referenceDatetime < Epoch)
+                throw new Exception("timestamp cannot be before epoch");
+            return (ulong)((referenceDatetime - Epoch).TotalMilliseconds / TimeUnits);
         }
     }
 }

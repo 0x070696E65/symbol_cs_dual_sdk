@@ -1,3 +1,4 @@
+using System;
 using CatSdk.Utils;
 
 namespace CatSdk
@@ -25,10 +26,10 @@ namespace CatSdk
             else
             {
                 if (fixedSize != arrayInput.Length) throw new Exception($"bytes was size {arrayInput.Length} but must be {fixedSize}");
-                bytes = arrayInput;   
+                bytes = arrayInput;
             }
         }
-    
+
         /**
 	     * Creates a byte array.
 	     * @param {byte} fixedSize Size of the array.

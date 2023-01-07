@@ -44,7 +44,7 @@ def generate_files(ast_models, output_directory: Path):
 
 	with open(output_directory / 'Models.cs', 'w', encoding='utf8', newline='\n') as output_file:
 		output_file.write(
-			f'using CatSdk.Utils;\nnamespace CatSdk.{chain_name(output_directory)}{{\n\n'
+			f'using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Linq;\nusing CatSdk.Utils;\nnamespace CatSdk.{chain_name(output_directory)}{{\n\n'
 		)
 
 		for ast_model in ast_models:

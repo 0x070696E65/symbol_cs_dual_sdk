@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Org.BouncyCastle.Crypto.Digests;
 
@@ -14,7 +16,7 @@ namespace CatSdk.Symbol
         {
             hashes = new List<byte[]>();
         }
-        
+
         /**
 	     * Adds a hash to the merkle hash.""
 	     * @param {Hash256} componentHash Hash to add.
@@ -23,26 +25,31 @@ namespace CatSdk.Symbol
         {
             hashes.Add(componentHash.bytes);
         }
-        
+
         /**
 	     * Calculates the merkle hash.
 	     * @returns {Hash256} Merkle hash.
 	     */
-        public Hash256 Final() {
+        public Hash256 Final()
+        {
             if (0 == hashes.Count)
                 return new Hash256();
 
             var numRemainingHashes = hashes.Count;
-            while (1 < numRemainingHashes) {
+            while (1 < numRemainingHashes)
+            {
                 var i = 0;
                 while (i < numRemainingHashes)
                 {
                     var hasher = new Sha3Digest(256);
                     hasher.BlockUpdate(hashes[i], 0, hashes[i].Length);
 
-                    if (i + 1 < numRemainingHashes) {
+                    if (i + 1 < numRemainingHashes)
+                    {
                         hasher.BlockUpdate(hashes[i + 1], 0, hashes[i + 1].Length);
-                    } else {
+                    }
+                    else
+                    {
                         // if there is an odd number of hashes, duplicate the last one
                         hasher.BlockUpdate(hashes[i], 0, hashes[i].Length);
                         numRemainingHashes += 1;
@@ -57,5 +64,5 @@ namespace CatSdk.Symbol
 
             return new Hash256(hashes[0]);
         }
-    }   
+    }
 }

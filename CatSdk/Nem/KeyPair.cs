@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using CatSdk.CryptoTypes;
 using CatSdk.Nem.External;
 
@@ -22,8 +24,8 @@ namespace CatSdk.Nem
         }
 
         private Dictionary<string, byte[]> _keypair { get; }
-        
-	    /**
+
+        /**
 		 * Gets the private key.
 		 * @returns {PrivateKey} Private key.
 		 */
@@ -45,19 +47,21 @@ namespace CatSdk.Nem
             return new Signature(TweetnaclNaclFastKeccak.Detached(data, _keypair["secretKey"]));
         }
     }
-    
+
     /**
 	 * Verifies signatures signed by a single key pair.
 	 */
-    public class Verifier {
+    public class Verifier
+    {
         /**
 		 * Creates a verifier from a public key.
 		 * @param {PublicKey} publicKey Public key.
 		 */
-        public Verifier (PublicKey publicKey) {
+        public Verifier(PublicKey publicKey)
+        {
             PublicKey = publicKey;
         }
-	    
+
         public PublicKey PublicKey { get; }
 
         /**

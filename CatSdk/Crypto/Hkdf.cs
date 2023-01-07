@@ -1,17 +1,18 @@
+using System;
 using System.Security.Cryptography;
 
 namespace CatSdk.Crypto
 {
     public class Hkdf
     {
-        readonly Func<byte[],byte[],byte[]> keyedHash;
+        readonly Func<byte[], byte[], byte[]> keyedHash;
 
         public Hkdf()
         {
             var hmac = new HMACSHA256();
-            keyedHash = (key, message)=>
+            keyedHash = (key, message) =>
             {
-                hmac.Key=key;
+                hmac.Key = key;
                 return hmac.ComputeHash(message);
             };
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace CatSdk.Utils
@@ -7,7 +8,7 @@ namespace CatSdk.Utils
         private static readonly char[] _digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".ToCharArray();
         private const int _mask = 31;
         private const int _shift = 5;
-            
+
         private static int CharToInt(char c)
         {
             return c switch
@@ -47,7 +48,7 @@ namespace CatSdk.Utils
                 _ => -1
             };
         }
-            
+
         public static byte[] Decode(string encoded)
         {
             if (encoded == null)
@@ -75,15 +76,15 @@ namespace CatSdk.Utils
                 buffer |= charValue & _mask;
                 bitsLeft += _shift;
                 if (bitsLeft < 8) continue;
-                result[next++] = (byte) (buffer >> (bitsLeft - 8));
+                result[next++] = (byte)(buffer >> (bitsLeft - 8));
                 bitsLeft -= 8;
             }
 
             return result;
         }
-            
+
         public static string Encode(byte[] data, bool padOutput = false)
-        { 
+        {
             return Encode(data, 0, data.Length, padOutput);
         }
 

@@ -61,7 +61,7 @@ namespace CatSdk.Symbol
 	     * @param {Date} epochTime Network epoch time.
 	     * @param {Hash256} generationHashSeed Network generation hash seed.
 	     */
-        private Network(string name, byte identifier, DateTime epochTime, Hash256? generationHashSeed = null) : base(
+        public Network(string name, byte identifier, DateTime epochTime, Hash256? generationHashSeed = null) : base(
             name,
             identifier,
             new NetworkTimestampDatetimeConverter(epochTime, "milliseconds'"),

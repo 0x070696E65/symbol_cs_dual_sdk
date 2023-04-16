@@ -40,6 +40,7 @@ namespace CatSdk.Symbol
     public class Network : BaseNetwork<SymbolAddress>
     {
         public Hash256? GenerationHashSeed { get; }
+        public DateTime? epocTime { get; }
 
         public static readonly Network MainNet = new Network(
             "mainnet",
@@ -72,6 +73,7 @@ namespace CatSdk.Symbol
         )
         {
             GenerationHashSeed = generationHashSeed;
+            epocTime = epochTime;
         }
 
         private static SymbolAddress CreateAddressFunc(byte[] addressWithoutChecksum, byte[] checksum)

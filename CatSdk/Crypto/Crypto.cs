@@ -7,6 +7,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Crypto
 {
@@ -131,6 +132,14 @@ namespace CatSdk.Crypto
             var iv = RandomBytes(12);
             return _Encode(senderPrivateKey, recipientPub, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
         }
+        
+        public static string Encode<T, U>(T senderPrivateKey, U recipientPub, string msg, bool isHexString = false)
+            where T : ByteArray 
+            where U : ByteArray
+        {
+            var iv = RandomBytes(12);
+            return _Encode(senderPrivateKey.bytes, recipientPub.bytes, isHexString ? msg : Converter.Utf8ToHex(msg), iv);
+        }
 
         /**
          * Decode an encrypted message payload
@@ -177,6 +186,14 @@ namespace CatSdk.Crypto
         public static string? Decode(byte[] recipientPrivateKey, byte[] senderPublic, string payload)
         {
             var decoded = _Decode(recipientPrivateKey, senderPublic, Converter.HexToBytes(payload));
+            return decoded != null ? Converter.HexToUtf8(decoded) : null;
+        }
+        
+        public static string? Decode<T, U>(T recipientPrivateKey, U senderPublic, string payload)
+            where T : ByteArray 
+            where U : ByteArray
+        {
+            var decoded = _Decode(recipientPrivateKey.bytes, senderPublic.bytes, Converter.HexToBytes(payload));
             return decoded != null ? Converter.HexToUtf8(decoded) : null;
         }
 
@@ -244,6 +261,29 @@ namespace CatSdk.Crypto
             deriveBytes.IterationCount = 1000;
             key = deriveBytes.GetBytes(keySize / 8);
             iv = deriveBytes.GetBytes(blockSize / 8);
+        }
+        
+        public static (byte[] proof, byte[] secret) CreateSha3256Pair()
+        {
+            var proof = Crypto.RandomBytes(20);
+            var sha256Hasher = new Sha3Digest(256);
+            var secret = new byte[32];
+            sha256Hasher.BlockUpdate(proof, 0, proof.Length);
+            sha256Hasher.DoFinal(secret, 0);
+            return (proof, secret);
+        }
+        
+        public static (byte[] proof, byte[] secret) CreateHash256Pair()
+        {
+            var proof = RandomBytes(32);
+            var sha256Hasher = new Sha256Digest();
+            var preSecret = new byte[32];
+            var secret = new byte[32];
+            sha256Hasher.BlockUpdate(proof, 0, proof.Length);
+            sha256Hasher.DoFinal(preSecret, 0);
+            sha256Hasher.BlockUpdate(preSecret, 0, preSecret.Length);
+            sha256Hasher.DoFinal(secret, 0);
+            return (proof, secret);
         }
     }
 }

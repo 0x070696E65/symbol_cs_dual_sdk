@@ -29,13 +29,15 @@ namespace CatSdk.Utils
 	     * @param {string} input A hex encoded string.
 	     * @returns {byte[]} A uint8 array corresponding to the input.
 	     */
-        public static byte[] HexToBytes(string hexString)
+        public static byte[] HexToBytes(string hexString, bool reverse = false)
         {
             var bs = new List<byte>();
             for (var i = 0; i < hexString.Length / 2; i++)
             {
                 bs.Add(Convert.ToByte(hexString.Substring(i * 2, 2), 16));
             }
+
+            if (reverse) bs.Reverse();
             return bs.ToArray();
         }
 
@@ -175,6 +177,43 @@ namespace CatSdk.Utils
             var metadataNewlist = new List<byte>();
             for (var i = 0; i < length; i++) metadataNewlist.Add((byte)(currentMetadataValueBytes[i] ^ newMetadataValueBytes[i]));
             return metadataNewlist.ToArray();
+        }
+        
+        public static byte[] AliasToRecipient(byte[] namespaceId, byte networkIdentifier)
+        {
+            // 0x91 | namespaceId on 8 bytes | 15 bytes 0-pad = 24 bytes
+            var padded = new byte[1 + 8 + 15];
+            padded[0] = (byte)(networkIdentifier | 0x01);
+            Array.Copy(namespaceId, 0, padded, 1, namespaceId.Length);
+            Array.Copy(HexToBytes(new string('0', 30)), 0, padded, 9, 15);
+            return padded;
+        }
+        
+        public static byte[] AliasToRecipient(ulong namespaceId, byte networkIdentifier)
+        {
+            return AliasToRecipient(BitConverter.GetBytes(namespaceId), networkIdentifier);
+        }
+        
+        public static byte CreateMosaicFlags(bool supplyMutable, bool transferable, bool restrictable, bool revokable)
+        {
+            byte flags = 0;
+            if (supplyMutable)
+            {
+                flags |= 1 << 0;
+            }
+            if (transferable)
+            {
+                flags |= 1 << 1;
+            }
+            if (restrictable)
+            {
+                flags |= 1 << 2;
+            }
+            if (revokable)
+            {
+                flags |= 1 << 3;
+            }
+            return flags;
         }
     }
 }

@@ -2,6 +2,7 @@ using Org.BouncyCastle.Crypto.Digests;
 using CatSdk.Utils;
 using System;
 using System.Linq;
+using CatSdk.Nem;
 
 namespace CatSdk
 {
@@ -38,10 +39,20 @@ namespace CatSdk
             AddressClass = addressClass;
             NetworkTimestampClass = networkTimestampClass;
         }
-
+        
         /**
 	     * Converts a public key to an address.
 	     * @param {PublicKey} publicKey Public key to convert.
+	     * @returns {Address} Address corresponding to the public key input.
+	     */
+        public T PublicKeyToAddress<W>(W publicKey) where W : ByteArray
+        {
+	        return PublicKeyToAddress(publicKey.bytes);
+        }
+
+        /**
+	     * Converts a public key to an address.
+	     * @param {string} string publicKey Public key to convert.
 	     * @returns {Address} Address corresponding to the public key input.
 	     */
         public T PublicKeyToAddress(string publicKey)
@@ -51,7 +62,7 @@ namespace CatSdk
 
         /**
 	     * Converts a public key to an address.
-	     * @param {PublicKey} publicKey Public key to convert.
+	     * @param {byte[]} publicKey Public key to convert.
 	     * @returns {Address} Address corresponding to the public key input.
 	     */
         public T PublicKeyToAddress(byte[] publicKey)

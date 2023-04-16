@@ -4,5 +4,6 @@ namespace CatSdk.Symbol
     {
         public Signature Signature { get; set; }
         public PublicKey SignerPublicKey { get; set; }
+        public Amount Fee { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Symbol
@@ -26,7 +27,66 @@ namespace CatSdk.Symbol
             if ((result & NAMESPACE_FLAG) != 0) result -= NAMESPACE_FLAG;
             return result;
         }
+        
+        /**
+         * Generates a namespace id from a name and an optional parent namespace id.
+         * @param {string} name Namespace name.
+         * @returns {ulong} Computed namespace id.
+         */
+        public static ulong GenerateNamespaceId(string name)
+        {
+            var arr = name.Split('.');
+            ulong parentId;
+            switch (arr.Length)
+            {
+                case 1:
+                    return GenerateNamespaceId(Converter.Utf8ToBytes(arr[0]));
+                case 2:
+                    parentId = GenerateNamespaceId(Converter.Utf8ToBytes(arr[0]));
+                    return GenerateNamespaceId(Converter.Utf8ToBytes(arr[1]), parentId);
+                case 3:
+                    var grandParentId = GenerateNamespaceId(Converter.Utf8ToBytes(arr[0]));
+                    parentId = GenerateNamespaceId(Converter.Utf8ToBytes(arr[1]), grandParentId);
+                    return GenerateNamespaceId(Converter.Utf8ToBytes(arr[2]), parentId);
+                default:
+                    throw new Exception("name is not in the correct format");
+            }
+        }
+        
+        /**
+         * Generates a namespace id from a name and an optional parent namespace id.
+         * @param {string} name Namespace name.
+         * @param {string} parentNamespaceId Parent namespace id.
+         * @returns {ulong} Computed namespace id.
+         */
+        public static ulong GenerateNamespaceId(string name, ulong parentNamespaceId)
+        {
+            return GenerateNamespaceId(Converter.Utf8ToBytes(name), parentNamespaceId);
+        }
+        
+        /**
+         * Generates a namespace id from a name and an optional parent namespace id.
+         * @param {string} name Namespace name.
+         * @param {string} parentNamespaceId Parent namespace id.
+         * @returns {ulong} Computed namespace id.
+         */
+        public static ulong GenerateNamespaceId(string name, string parentNamespaceId)
+        {
+            return GenerateNamespaceId(Converter.Utf8ToBytes(name), parentNamespaceId);
+        }
 
+        /**
+         * Generates a namespace id from a name and an optional parent namespace id.
+         * @param {byte[]} name Namespace name.
+         * @param {string} parentNamespaceId Parent namespace id.
+         * @returns {ulong} Computed namespace id.
+         */
+        public static ulong GenerateNamespaceId(byte[] name, string parentNamespaceId)
+        {
+            var _parentNamespaceId = Convert.ToUInt64(parentNamespaceId, 16);
+            return GenerateNamespaceId(name, _parentNamespaceId);
+        }
+        
         /**
          * Generates a namespace id from a name and an optional parent namespace id.
          * @param {byte[]} name Namespace name.

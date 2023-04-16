@@ -1,4 +1,5 @@
 using CatSdk.CryptoTypes;
+using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
 
@@ -9,6 +10,14 @@ namespace CatSdk.Symbol
 	 */
 	public class KeyPair
 	{
+		/**
+	     * Creates a new key pair.
+	     */
+		static public KeyPair GenerateNewKeyPair()
+		{
+			var _privateKey = new PrivateKey(Crypto.Crypto.RandomBytes(32));
+			return new KeyPair(_privateKey);
+		}
 		/**
 	     * Creates a key pair from a private key.
 	     * @param {PrivateKey} privateKey Private key.
@@ -52,6 +61,16 @@ namespace CatSdk.Symbol
 			var signature = signer.GenerateSignature();
 			return new Signature(signature);
 		}
+		
+		/**
+		 * Signs a message with the private key.
+		 * @param {string} message Message to sign.
+		 * @returns {Signature} Message signature.
+		 */
+		public Signature Sign(string data)
+		{
+			return Sign(Converter.HexToBytes(data));
+		}
 	}
 
 	/**
@@ -81,6 +100,17 @@ namespace CatSdk.Symbol
 			verifier.Init(false, publicKey);
 			verifier.BlockUpdate(message, 0, message.Length);
 			return verifier.VerifySignature(signature.bytes);
+		}
+		
+		/**
+		 * Verifies a message signature.
+		 * @param {string} message Message to verify.
+		 * @param {Signature} signature Signature to verify.
+		 * @returns {bool} true if the message signature verifies.
+		 */
+		public bool Verify(string message, Signature signature)
+		{
+			return Verify(Converter.Utf8ToBytes(message), signature);
 		}
 	}
 }

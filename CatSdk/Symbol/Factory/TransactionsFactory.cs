@@ -94,7 +94,7 @@ namespace CatSdk.Symbol.Factory
             var jsonPayload = "{\"payload\": \"" + hexPayload + "\"}";
             return jsonPayload;
         }
-
+        
         public static string CreatePayload(ITransaction transaction, Signature? signature = null)
         {
             if (signature != null) transaction.Signature = signature;

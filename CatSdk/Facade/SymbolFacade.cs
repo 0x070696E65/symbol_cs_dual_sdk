@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CatSdk.Symbol;
 using CatSdk.Symbol.Factory;
+using CatSdk.Utils;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace CatSdk.Facade
@@ -45,6 +46,18 @@ namespace CatSdk.Facade
             hasher.DoFinal(hash, 0);
             return new Hash256(hash);
         }
+        
+        /**
+		 * Hashes a Symbol transaction.
+		 * @param {ITransaction} transaction Transaction object.
+         * @param {Signature} signature.
+		 * @returns {Hash256} Transaction hash.
+		 */
+        public Hash256 HashTransaction(ITransaction transaction, Signature signature)
+        {
+	        transaction.Signature = signature;
+	        return HashTransaction(transaction);
+        }
 
         /**
 		 * Signs a Symbol transaction.
@@ -61,21 +74,23 @@ namespace CatSdk.Facade
             txByte.CopyTo(newBytes, Network.GenerationHashSeed.bytes.Length);
             return keyPair.Sign(newBytes);
         }
-
+        
         /**
-		 * Verifies a NEM transaction.
+		 * Verifies a Symbol transaction.
 		 * @param {IBaseTransaction} transaction Transaction object.
 		 * @param {Signature} signature Signature to verify.
+         * @param {PublicKey} signer PublicKey.
 		 * @returns {bool} true if transaction signature is verified.
 		 */
-        public bool VerifyTransaction(ITransaction transaction, Signature signature)
+        public bool VerifyTransaction(ITransaction transaction, Signature signature, PublicKey? publicKey = null)
         {
             var txByte = TransactionDataBuffer(transaction.Serialize());
+            Console.WriteLine(Converter.BytesToHex(txByte));
             if (Network.GenerationHashSeed == null) throw new Exception("GenerationHashSeed is Null");
             var newBytes = new byte[Network.GenerationHashSeed.bytes.Length + txByte.Length];
             Network.GenerationHashSeed.bytes.CopyTo(newBytes, 0);
             txByte.CopyTo(newBytes, Network.GenerationHashSeed.bytes.Length);
-            return new Verifier(transaction.SignerPublicKey).Verify(newBytes, signature);
+            return publicKey == null ? new Verifier(transaction.SignerPublicKey).Verify(newBytes, signature) : new Verifier(publicKey).Verify(newBytes, signature);
         }
 
         /**

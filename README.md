@@ -23,151 +23,16 @@ Unityの場合はAssetsフォルダ配下に配置すれば自動で参照が追
 [リファレンス](https://0x070696e65.github.io/symbol_cs_dual_sdk_reference/) を参照して利用したいネームスペースを以下のように読み込んでください。<br>
 ※よく分からない場合でIDE（Visual StudioやRider）を利用している場合は、usingを書かなくとも参照候補が出ると思います。
 
-```c#
-using CatSdk.Facade;
-```
+使い方に関しては以下の速習Symbol for C#を参照してください。<br>
+https://github.com/0x070696E65/quick_learning_symbol_csharp
 
-使用するブロックチェーン、ネットワークのFacadeを作成します。<br><br>
-<b>例）Symbolブロックチェーン、テストネットの場合</b>
-```c#
-var Facade = new SymbolFacade(Network.TestNet);
-```
+Symbolの学習目的や本SDKのドキュメントとして活用してください。
 
-<b>例）Nemブロックチェーン、メインネットの場合</b>
-```c#
-var Facade = new NemFacade(Network.MainNet);
-```
+速習Symbolは以下のオリジナル版をC#に合わせて主にコード箇所を改変したものです。<br>
+https://github.com/xembook/quick_learning_symbol<br>
+オリジナル版の著作者である<a href="https://github.com/xembook" target="_blank">xembook</a>さんにお礼申し上げます。
 
-## SampleTransaction
-
-### Symbol TransferTransaction
-
-```c#
-using System.Text;
-using CatSdk.CryptoTypes;
-using CatSdk.Facade;
-using CatSdk.Utils;
-using CatSdk.Symbol;
-using CatSdk.Symbol.Factory;
-
-var facade = new SymbolFacade(Network.TestNet);
-
-var privateKey = new PrivateKey("PRIVATE_KEY");
-var keyPair = new KeyPair(privateKey);
-
-var tx = new TransferTransactionV1
-{
-    Network = NetworkType.TESTNET,
-    RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("RECIPIENT_ADDRESS")),
-    Mosaics = new UnresolvedMosaic[]
-    {
-        new()
-        {
-            MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
-            Amount = new Amount(1000000)
-        },
-    },
-    SignerPublicKey = keyPair.PublicKey,
-    Message = Converter.Utf8ToPlainMessage("Hello, Symbol"),
-    Fee = new Amount(1000000),
-    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp)
-};
-
-var signature = facade.SignTransaction(keyPair, transferTransaction);
-var payload = TransactionsFactory.AttachSignature(transferTransaction, signature);
-var signed = TransactionsFactory.AttachSignatureTransaction(transferTransaction, signature);
-var hash = facade.HashTransaction(TransactionsFactory.AttachSignatureTransaction(transferTransaction, signature));
-Console.WriteLine(payload);
-Console.WriteLine(hash);
-Console.WriteLine(signed.Signature);
-
-const string node = "NODE_URL";
-using var client = new HttpClient();
-var content = new StringContent(payload, Encoding.UTF8, "application/json");
-var response =  client.PutAsync(node + "/transactions", content).Result;
-var responseDetailsJson = await response.Content.ReadAsStringAsync();
-Console.WriteLine(responseDetailsJson);
-
-```
-
-### Symbol AggregateCompleteTransaction
-```c#
-using System.Text;
-using CatSdk.CryptoTypes;
-using CatSdk.Facade;
-using CatSdk.Utils;
-using CatSdk.Symbol;
-using CatSdk.Symbol.Factory;
-
-var facade = new SymbolFacade(Network.TestNet);
-var alicePrivateKey = new PrivateKey("ALICE_PRIVATE_KEY");
-var aliceKeyPair = new KeyPair(alicePrivateKey);
-
-var bobPrivateKey = new PrivateKey("BOB_PRIVATE_KEY");
-var bobKeyPair = new KeyPair(bobPrivateKey);
-
-var innerTransactions = new IBaseTransaction[] {
-    new EmbeddedTransferTransactionV1
-    {
-        Network = NetworkType.TESTNET,
-        SignerPublicKey = aliceKeyPair.PublicKey,
-        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("ALICE_ADDRESS")),
-        Mosaics = new UnresolvedMosaic[]
-        {
-            new()
-            {
-                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
-                Amount = new Amount(100)
-            }
-        }
-    }, 
-    new EmbeddedTransferTransactionV1
-    {
-        Network = NetworkType.TESTNET,
-        SignerPublicKey = bobKeyPair.PublicKey,
-        RecipientAddress = new UnresolvedAddress(Converter.StringToAddress("BOB_ADDRESS")),
-        Mosaics = new UnresolvedMosaic[]
-        {
-            new()
-            {
-                MosaicId = new UnresolvedMosaicId(0x3A8416DB2D53B6C8),
-                Amount = new Amount(100)
-            }
-        }
-    }
-};
-
-var merkleHash = SymbolFacade.HashEmbeddedTransactions(innerTransactions);
-
-var aggTx = new AggregateCompleteTransactionV2 {
-    Network = NetworkType.TESTNET,
-    Transactions = 	innerTransactions,
-    SignerPublicKey = aliceKeyPair.PublicKey,
-    Fee = new Amount(1000000),
-    TransactionsHash = merkleHash,
-    Deadline = new Timestamp(facade.Network.FromDatetime<NetworkTimestamp>(DateTime.UtcNow).AddHours(2).Timestamp),
-};
-
-var aliceSignature = facade.SignTransaction(aliceKeyPair, aggTx);
-TransactionsFactory.AttachSignature(aggTx, aliceSignature);
-
-var hash = facade.HashTransaction(aggTx);
-var bobCosignature = new Cosignature
-{
-    Signature = bobKeyPair.Sign(hash.bytes),
-    SignerPublicKey = bobKeyPair.PublicKey
-};
-aggTx.Cosignatures = new [] {bobCosignature};
-
-var payload = TransactionsFactory.CreatePayload(aggTx);
-
-const string node = "NODE";
-using var client = new HttpClient();
-var content = new StringContent(payload, Encoding.UTF8, "application/json");
-var response =  client.PutAsync(node + "/transactions", content).Result;
-var responseDetailsJson = await response.Content.ReadAsStringAsync();
-Console.WriteLine(responseDetailsJson);
-```
+以下に速習Symbolに含まれていない点は記載しておきます。
 
 ### TransferTransactionで複数モザイクを送信する場合はSortが必要です
 ```c#
@@ -196,7 +61,7 @@ var transfer = new TransferTransactionV1()
 transfer.Sort();
 ```
 ### Symbol AggregateCompleteTransaction using SSS Extension
-####AliceがSSSで署名、Bobが連署者の場合
+#### AliceがSSSで署名、Bobが連署者の場合
 ```c#
 var facade = new SymbolFacade(Network.TestNet);
 
@@ -282,7 +147,7 @@ var responseDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseDetailsJson);
 ```
 
-####Aliceが署名者でBobがSSSで連署する場合
+#### Aliceが署名者でBobがSSSで連署する場合
 アグリゲートトランザクションの構築まで上と同じ
 ```c#
 var aliceSignature = facade.SignTransaction(aliceKeyPair, aggTx);
@@ -352,16 +217,3 @@ var response =  client.PostAsync(node + "/transaction/announce", content).Result
 var problemDetailsJson = await response.Content.ReadAsStringAsync();
 Console.WriteLine(problemDetailsJson);
 ```
-
-その他のトランザクションはテストデータを参考にしてください。<br>
-今後、需要があればドキュメントを更新するかもしれません。<br>
-
-[Symbol Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Symbol/TransactionTest.cs)
-<br>
-[NEM Transactions](https://github.com/0x070696E65/symbol_cs_dual_sdk/blob/master/Test/Nem/TransactionTest.cs)
-
-# Author
-[toshi](https://twitter.com/toshiya_ma)
-
-# License
-SymbolCsDualSDK is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).

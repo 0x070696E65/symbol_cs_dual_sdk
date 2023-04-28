@@ -60,7 +60,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("8FF91B4D9027D09053E39059C271A3C633B6B740D0722172FB58838A1DDBE2B472D9537151EA989AF5BF183BD1DE42CC9117F466DAC0A4F3CA5C8424A7D24938"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -85,16 +85,16 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("EBB7CEC3AF0608CA6BB21826B2E5AE07BE95E49B20C98B0DB33D2DB36B09174A0D54C98855D68999DFBE81F893B6F5D496F9233730BA56B7FA8BDD7DE2DAA566"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
 	}
 	[Test]
-	public void Cosignature_cosignature_single_1(){
+	public void CosignatureV1_CosignatureV1_single_1(){
 		var payload = "0210000001000098701EE77120000000B6EAB90980D34E3F91467C1D1CAB734587F02D4AF645FBE1CD7AF60BF10DDB264000000007B5D9FDCFB9F0887AF46BF6003AAF1E008069B6764788296F9A6B6DD5E942BA5F9FF87212AF0D9D2E37FD02DCA7FC1BADD2767F54016C4D89B0B22E4EEA4407E0FEEEEFFEEEEFFE000000002400000020000000F51C1E0B91C34AB3E54B8B6FD2BA6209254D47E0AF0C74C90BB2B99100B94829280000005442543747414351514C59585546425351435548585857514D535244414A504143544E4A37323457";
 		var descriptor = new Dictionary<string, object>(){
-			{"Type", "cosignature"},
+			{"Type", "CosignatureV1"},
 			{"MultisigTransactionHash", new Hash256(Converter.HexToBytes("F51C1E0B91C34AB3E54B8B6FD2BA6209254D47E0AF0C74C90BB2B99100B94829"))},
 			{"MultisigAccountAddress", new Address(Converter.Utf8ToBytes("TBT7GACQQLYXUFBSQCUHXXWQMSRDAJPACTNJ724W"))},
 			{"SignerPublicKey", new PublicKey(Converter.HexToBytes("B6EAB90980D34E3F91467C1D1CAB734587F02D4AF645FBE1CD7AF60BF10DDB26"))},
@@ -394,7 +394,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("32D1342734620E653DE0D6987C77EBD99D8B9818E9BF20BB7E042BF96FD2A288CB16DA71B3D60AB7627DDD5C3BCEA5901DACBDAF42B55184C51D1F19E04C62AD"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -449,7 +449,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("15C8937E60CE6D6EBFC8CD244B3C617E92E45E5C386C2DC7F05010039DF9B95D65529BD7646A7772390ED95828F65792399C78C53B00F349F142B6FBBC749BF8"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -504,7 +504,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("4AEF7D973B45E8D60E030DDE3D6EEB6CDA947FA7663A87223B780A6E9F23C28FC78B196EFFF719894B4E09D223D77F2B87D7334C06F47D95762E284326D10ADC"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -566,7 +566,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("B05C06CA83AD72C227D8303EC80013EBB0484CA1C4F3C3C5BEA9066C0CE39BD9D89F3AA05BB4FBA9BA4CB24C1ACD6119A5BC884C7D2DE41C815FFBD425F81A67"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -628,7 +628,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("52C55E52B6BE665C50A752D79869D8B212265CE0185E0F786C83A830C050ACDFF5E87F531D4C8078F11B87C2539CFE36A3A04758479D123F9F9769BBACE92D07"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -695,7 +695,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("654E486DC8DB96B8C5307ABA03C65DEBD61270A24AFC473703D1FF1DB0B554C91945A07C6B1D77DE5F1406E8B48EE09480097F0402397A5AF925E3B00C091EAC"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -724,7 +724,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("8C31F816AE5EDBDCF507DF2F6E05CA7EDF4DE59AB8C3F67AA7474D44065A9E53618859CE09F2D76B92028EA267255B2DCCA6D1E0D7A10A5F3884F936883E25DF"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -769,8 +769,8 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("A4CF491E41929CA363AC40EE3B1045911DFD1993E4A4B106643117F51053DB3138FCE6EAC9E98FBEBD63C3D496F2E6AF900197DE5C0E2D85C4BAE4E2D43ACD4A"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", 
-				new Cosignature[]{
+			{"CosignatureV1s", 
+				new CosignatureV1[]{
 						new (){
 							MultisigTransactionHash = new Hash256(Converter.HexToBytes("b35451bdb43c11742aaf3c7566a5a6fc6677be6efb3e44cebdb7fcb2f3fd2e3b")),
 							MultisigAccountAddress = new Address(Converter.Utf8ToBytes("TBT7GACQQLYXUFBSQCUHXXWQMSRDAJPACTNJ724W")),
@@ -910,7 +910,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("2F7A423985277AC4FBFB7860BEE69DCCB113324544429ED43067BFD0042F75DE8243BDBFAC71877961C7D2C0082060271C2CAFDFD68505107B2D923E54748077"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -951,7 +951,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("1C33E6FBC82EB99C7BA172E78394DD2767FA1650E766692215B7D21B6247D962FF24C74CB941CF95478E43FB1E7F7E5219F0FF1FB9FFC33B6B7A8DBFF52D3DB4"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -992,7 +992,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("02012328766D313AF310374F30D5A283B7F85C135F53B012B596B8BBB095B1B469C79889AB081D8EE95D1690F0916907172DBF562D080E01314CE082FE2F8A92"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1118,7 +1118,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("C6BA30DB3557984A9C43B79B6C4097FD5C67C4734AE51C487D934BA09019EA233A391D44A3A006CD4390E98D8455FBFA423F15DE69CA9255A2EF8F04F211E1D0"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1150,7 +1150,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("1288E3F647E049524FB947783D3B6C2AC9B58BE8C3C117DA5424EBF7C09B02FD3EA31686161A53699569668CFDD8B35B7AC903E1D8E5E2235C585A6DADE546BE"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1192,7 +1192,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("209522F3C83DCDB0AAD6FC19E798678233A767B23034ED530DA3F638307DBF26FC2E0DD49277012EC5FFA60A4ED12D2EFEBAC9140D28139D1F222B23B76C972F"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1234,7 +1234,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("9DB08CBA4B1E40273C51DD7FAD0D884349748D4CEEDE6EB47802BC7C3CAEF8487EB237ACD3BC65DEC94B3AEF566F797B3CC7A8A5980EDC554F44A9807202CA84"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1295,7 +1295,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("4C08B813E15C24982EE1D908942CBC07F7EE373EB78F99935D657CAB1CE6397156FF07C97D334F8E2E71B57E293E98B0523633FF36C052E3AB0B5E3FF4924310"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1322,7 +1322,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("BC0F54C2F8ECC9AF9964BA7BBD76797981A7030F037228B256F220C04E0CA1A9C2C45C9E4A8914143E1AAD5E1DFDB2A4503BC1D0095EB21FC2CD8B0DF21D31A2"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1419,7 +1419,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("58BD925C85C56EC3C14AAC4190760E370BE4CBA71113DE23D1008F7D287FC60700A18F0B61AA7C5581DC2A2CF5EF0E598367DAED7521FD437A8A843CAB79F926"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1448,7 +1448,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("BBEF8579B84777583421A9FB40C17E6791F82356C99E88C267C1EAE1F45C72FAB1DB114B07DA4EE8FEB3C1CC906A79466A1C44564853A67200C2FA491063AADA"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1477,7 +1477,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("D8BF7CA0CE3E090B08280486648C966041D76FD9CAF23E85F4CE8BD71D6F4DF48DB0A1A60A378F3213A5BCA88C02D9DDE00742424F8111966DFC30DD4E7833DD"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1506,7 +1506,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("601A66C1C9104F0FFE1639130185B31508BDF3E40A35CF4A5EAC364698D631F5E211FAB201C4C040B7492FC7BA2BCF6DB2AB5D9DD28C0A84BEDF480D2CED2C28"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1685,7 +1685,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("019211148FA787440848B3FB7AA7FACE888BF1144ED1B80CF246244C906D7102404E38955ACFB56F9BFF83B139AC4D178D784969C46194D012C14F435B46D006"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1724,7 +1724,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("239B664D4B3F61B5B35C5C4F5FAC2D35010E00BDD67AB411F43CDE3E21B1F9D6A2BBAD4F6846B81841F20E35ACCDABD8317A59D17AC50FC01C6AA6B5049807B4"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1775,7 +1775,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("CBF429AAE16CACCF18CCFB5AF41FBE232A826117DC361F509128C66AF897EBC397ADBDD7B59F596CA70BA819088C58A23178CA15AF57DB123A28F0CA19C5E591"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));
@@ -1826,7 +1826,7 @@ public class TransactionNonParserTest
 			{"Signature", new Signature(Converter.HexToBytes("B2BBC7190E940339AC7FEB57010EA2A194A20A479DA2669D1CA7D3E261598B7551212BDCE33147E0CE9F0BDE671D6FD2987FAF5A34B0A94EA1E6E76A0BA546E8"))},
 			{"Fee", new Amount(18370164183782063840)},
 			{"Timestamp", new Timestamp(1910972016)},
-			{"Cosignatures", System.Array.Empty<Cosignature>()},
+			{"CosignatureV1s", System.Array.Empty<CosignatureV1>()},
 		};
 		var tx = Facade.TransactionFactory.Create(descriptor);
 		Assert.AreEqual(payload, Converter.BytesToHex(tx.Serialize()));

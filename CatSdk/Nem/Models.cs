@@ -2941,7 +2941,7 @@ public class NonVerifiableMultisigAccountModificationTransactionV2 : IBaseTransa
 	}
 }
 
-public class Cosignature : ITransaction {
+public class CosignatureV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
 	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_COSIGNATURE;
@@ -2965,7 +2965,7 @@ public class Cosignature : ITransaction {
 		{"MultisigAccountAddress", "pod:Address"}
 	};
 
-	public Cosignature() {
+	public CosignatureV1() {
 		Type = TRANSACTION_TYPE;
 		Version = TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
@@ -3030,7 +3030,7 @@ public class Cosignature : ITransaction {
 		}
 	}
 
-	public static Cosignature Deserialize(BinaryReader br) {
+	public static CosignatureV1 Deserialize(BinaryReader br) {
 		var type = TransactionType.Deserialize(br);
 		var version = br.ReadByte();
 		var entityBodyReserved_1 = br.ReadUInt16();
@@ -3060,7 +3060,7 @@ public class Cosignature : ITransaction {
 			throw new Exception($"Invalid value of reserved field ({multisigAccountAddressSize})");
 		var multisigAccountAddress = Address.Deserialize(br);
 
-		var instance = new Cosignature()
+		var instance = new CosignatureV1()
 		{
 			Type = type,
 			Version = version,
@@ -3115,21 +3115,21 @@ public class Cosignature : ITransaction {
 	}
 }
 
-public class SizePrefixedCosignature : IStruct {
+public class SizePrefixedCosignatureV1 : IStruct {
 
 	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
-		{"Cosignature", "struct:Cosignature"}
+		{"Cosignature", "struct:CosignatureV1"}
 	};
 
-	public SizePrefixedCosignature() {
-		Cosignature = new Cosignature();
+	public SizePrefixedCosignatureV1() {
+		Cosignature = new CosignatureV1();
 	}
 
 	public void Sort() {
 		Cosignature.Sort();
 	}
 
-	public Cosignature Cosignature { get; set; }
+	public CosignatureV1 Cosignature { get; set; }
 
 	public uint Size {
 		get {
@@ -3140,12 +3140,12 @@ public class SizePrefixedCosignature : IStruct {
 		}
 	}
 
-	public static SizePrefixedCosignature Deserialize(BinaryReader br) {
+	public static SizePrefixedCosignatureV1 Deserialize(BinaryReader br) {
 		var cosignatureSize = br.ReadUInt32();
 		// marking sizeof field
-		var cosignature = Cosignature.Deserialize(br);
+		var cosignature = CosignatureV1.Deserialize(br);
 
-		var instance = new SizePrefixedCosignature()
+		var instance = new SizePrefixedCosignatureV1()
 		{
 			Cosignature = cosignature
 		};
@@ -3186,7 +3186,7 @@ public class MultisigTransactionV1 : ITransaction {
 		{"Fee", "pod:Amount"},
 		{"Deadline", "pod:Timestamp"},
 		{"InnerTransaction", "struct:NonVerifiableTransaction"},
-		{"Cosignatures", "array[SizePrefixedCosignature]"}
+		{"Cosignatures", "array[SizePrefixedCosignatureV1]"}
 	};
 
 	public MultisigTransactionV1() {
@@ -3199,7 +3199,7 @@ public class MultisigTransactionV1 : ITransaction {
 		Fee = new Amount();
 		Deadline = new Timestamp();
 		InnerTransaction = new NonVerifiableTransaction();
-		Cosignatures = Array.Empty<SizePrefixedCosignature>();
+		Cosignatures = Array.Empty<SizePrefixedCosignatureV1>();
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
@@ -3227,7 +3227,7 @@ public class MultisigTransactionV1 : ITransaction {
 
 	public IBaseTransaction InnerTransaction { get; set; }
 
-	public SizePrefixedCosignature[] Cosignatures { get; set; }
+	public SizePrefixedCosignatureV1[] Cosignatures { get; set; }
 
 	public uint Size {
 		get {
@@ -3273,7 +3273,7 @@ public class MultisigTransactionV1 : ITransaction {
 		// marking sizeof field
 		var innerTransaction = (NonVerifiableTransaction)NonVerifiableTransactionFactory.Deserialize(br);
 		var cosignaturesCount = br.ReadUInt32();
-		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignature.Deserialize, (byte)cosignaturesCount);
+		var cosignatures = ArrayHelpers.ReadArrayCount(br, SizePrefixedCosignatureV1.Deserialize, (byte)cosignaturesCount);
 
 		var instance = new MultisigTransactionV1()
 		{
@@ -3324,6 +3324,139 @@ public class MultisigTransactionV1 : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"innerTransaction: {InnerTransaction}, ";
 		result += $"cosignatures: [{string.Join(",", Cosignatures.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NonVerifiableMultisigTransactionV1 : IBaseTransaction {
+	public const byte TRANSACTION_VERSION = 1;
+
+	public static readonly TransactionType TRANSACTION_TYPE = TransactionType.MULTISIG_TRANSACTION;
+
+	private readonly int EntityBodyReserved_1;
+	private readonly int SignerPublicKeySize;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:TransactionType"},
+		{"Network", "enum:NetworkType"},
+		{"Timestamp", "pod:Timestamp"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Fee", "pod:Amount"},
+		{"Deadline", "pod:Timestamp"},
+		{"InnerTransaction", "struct:NonVerifiableTransaction"}
+	};
+
+	public NonVerifiableMultisigTransactionV1() {
+		Type = TRANSACTION_TYPE;
+		Version = TRANSACTION_VERSION;
+		Network = NetworkType.MAINNET;
+		Timestamp = new Timestamp();
+		SignerPublicKey = new PublicKey();
+		Fee = new Amount();
+		Deadline = new Timestamp();
+		InnerTransaction = new NonVerifiableTransaction();
+		EntityBodyReserved_1 = 0; // reserved field
+		SignerPublicKeySize = 32; // reserved field
+	}
+
+	public void Sort() {
+		InnerTransaction.Sort();
+	}
+
+	public TransactionType Type { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public Amount Fee { get; set; }
+
+	public Timestamp Deadline { get; set; }
+
+	public IBaseTransaction InnerTransaction { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Type.Size;
+			size += 1;
+			size += 2;
+			size += Network.Size;
+			size += Timestamp.Size;
+			size += 4;
+			size += SignerPublicKey.Size;
+			size += Fee.Size;
+			size += Deadline.Size;
+			size += 4;
+			size += InnerTransaction.Size;
+			return size;
+		}
+	}
+
+	public static NonVerifiableMultisigTransactionV1 Deserialize(BinaryReader br) {
+		var type = TransactionType.Deserialize(br);
+		var version = br.ReadByte();
+		var entityBodyReserved_1 = br.ReadUInt16();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var network = NetworkType.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var signerPublicKeySize = br.ReadUInt32();
+		if (32 != signerPublicKeySize)
+			throw new Exception($"Invalid value of reserved field ({signerPublicKeySize})");
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var fee = Amount.Deserialize(br);
+		var deadline = Timestamp.Deserialize(br);
+		var innerTransactionSize = br.ReadUInt32();
+		// marking sizeof field
+		var innerTransaction = (NonVerifiableTransaction)NonVerifiableTransactionFactory.Deserialize(br);
+
+		var instance = new NonVerifiableMultisigTransactionV1()
+		{
+			Type = type,
+			Version = version,
+			Network = network,
+			Timestamp = timestamp,
+			SignerPublicKey = signerPublicKey,
+			Fee = fee,
+			Deadline = deadline,
+			InnerTransaction = innerTransaction
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Type.Serialize()); 
+		bw.Write((byte)Version); 
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)EntityBodyReserved_1)); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SignerPublicKeySize)); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(Fee.Serialize()); 
+		bw.Write(Deadline.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)InnerTransaction.Size));  // bound: inner_transaction_size
+		bw.Write(InnerTransaction.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"type: {Type}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"fee: {Fee}, ";
+		result += $"deadline: {Deadline}, ";
+		result += $"innerTransaction: {InnerTransaction}, ";
 		result += ")";
 		return result;
 	}
@@ -4580,7 +4713,7 @@ public class TransactionFactory {
 			{MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, MosaicSupplyChangeTransactionV1.Deserialize},
 			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.Deserialize},
 			{MultisigAccountModificationTransactionV2.TRANSACTION_TYPE, MultisigAccountModificationTransactionV2.Deserialize},
-			{Cosignature.TRANSACTION_TYPE, Cosignature.Deserialize},
+			{CosignatureV1.TRANSACTION_TYPE, CosignatureV1.Deserialize},
 			{MultisigTransactionV1.TRANSACTION_TYPE, MultisigTransactionV1.Deserialize},
 			{NamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NamespaceRegistrationTransactionV1.Deserialize},
 			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.Deserialize},
@@ -4604,7 +4737,7 @@ public class TransactionFactory {
 			{"mosaic_supply_change_transaction_v1", new MosaicSupplyChangeTransactionV1()},
 			{"multisig_account_modification_transaction_v1", new MultisigAccountModificationTransactionV1()},
 			{"multisig_account_modification_transaction_v2", new MultisigAccountModificationTransactionV2()},
-			{"cosignature", new Cosignature()},
+			{"cosignature_v1", new CosignatureV1()},
 			{"multisig_transaction_v1", new MultisigTransactionV1()},
 			{"namespace_registration_transaction_v1", new NamespaceRegistrationTransactionV1()},
 			{"transfer_transaction_v1", new TransferTransactionV1()},
@@ -4626,6 +4759,7 @@ public class NonVerifiableTransactionFactory {
 			{NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransactionV1.Deserialize},
 			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
 			{NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV2.Deserialize},
+			{NonVerifiableMultisigTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigTransactionV1.Deserialize},
 			{NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransactionV1.Deserialize},
 			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.Deserialize},
 			{NonVerifiableTransferTransactionV2.TRANSACTION_TYPE, NonVerifiableTransferTransactionV2.Deserialize}
@@ -4648,6 +4782,7 @@ public class NonVerifiableTransactionFactory {
 			{"non_verifiable_mosaic_supply_change_transaction_v1", new NonVerifiableMosaicSupplyChangeTransactionV1()},
 			{"non_verifiable_multisig_account_modification_transaction_v1", new NonVerifiableMultisigAccountModificationTransactionV1()},
 			{"non_verifiable_multisig_account_modification_transaction_v2", new NonVerifiableMultisigAccountModificationTransactionV2()},
+			{"non_verifiable_multisig_transaction_v1", new NonVerifiableMultisigTransactionV1()},
 			{"non_verifiable_namespace_registration_transaction_v1", new NonVerifiableNamespaceRegistrationTransactionV1()},
 			{"non_verifiable_transfer_transaction_v1", new NonVerifiableTransferTransactionV1()},
 			{"non_verifiable_transfer_transaction_v2", new NonVerifiableTransferTransactionV2()}

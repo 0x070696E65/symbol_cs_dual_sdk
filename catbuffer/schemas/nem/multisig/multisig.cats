@@ -2,7 +2,7 @@ import "transaction.cats"
 
 # cosignature attached to an aggregate transaction
 @is_size_implicit
-struct Cosignature
+struct CosignatureV1
 	TRANSACTION_VERSION = make_const(uint8, 1)
 	TRANSACTION_TYPE = make_const(TransactionType, MULTISIG_COSIGNATURE)
 
@@ -22,19 +22,17 @@ struct Cosignature
 	multisig_account_address = inline SizePrefixedAddress
 
 # cosignature attached to an aggregate transaction with prefixed size
-struct SizePrefixedCosignature
+struct SizePrefixedCosignatureV1
 	# cosignature size
 	cosignature_size = sizeof(uint32, cosignature)
 
 	# cosignature
-	cosignature = Cosignature
+	cosignature = CosignatureV1
 
-# binary layout for a multisig transaction (V1, latest)
-struct MultisigTransactionV1
+# shared content between V1 verifiable and non-verifiable multisig transactions
+inline struct MultisigTransactionV1Body
 	TRANSACTION_VERSION = make_const(uint8, 1)
 	TRANSACTION_TYPE = make_const(TransactionType, MULTISIG_TRANSACTION)
-
-	inline Transaction
 
 	# inner transaction size
 	inner_transaction_size = sizeof(uint32, inner_transaction)
@@ -42,8 +40,19 @@ struct MultisigTransactionV1
 	# inner transaction
 	inner_transaction = NonVerifiableTransaction
 
+# binary layout for a multisig transaction (V1, latest)
+struct MultisigTransactionV1
+	inline Transaction
+	inline MultisigTransactionV1Body
+
 	# number of attached cosignatures
 	cosignatures_count = uint32
 
 	# cosignatures
-	cosignatures = array(SizePrefixedCosignature, cosignatures_count)
+	cosignatures = array(SizePrefixedCosignatureV1, cosignatures_count)
+
+# binary layout for a non-verifiable multisig transaction (V1, latest)
+struct NonVerifiableMultisigTransactionV1
+	inline NonVerifiableTransaction
+	inline MultisigTransactionV1Body
+

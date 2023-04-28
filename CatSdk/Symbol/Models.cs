@@ -849,6 +849,2908 @@ public class EmbeddedTransaction : IBaseTransaction {
 	}
 }
 
+public class ProofGamma : ByteArray, ISerializer {
+	public const byte SIZE = 32;
+
+	public ProofGamma(byte[]? proofGamma = null): base(SIZE, proofGamma) {
+	}
+
+	public static ProofGamma Deserialize(BinaryReader br) {
+		return new ProofGamma(br.ReadBytes(32));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class ProofVerificationHash : ByteArray, ISerializer {
+	public const byte SIZE = 16;
+
+	public ProofVerificationHash(byte[]? proofVerificationHash = null): base(SIZE, proofVerificationHash) {
+	}
+
+	public static ProofVerificationHash Deserialize(BinaryReader br) {
+		return new ProofVerificationHash(br.ReadBytes(16));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class ProofScalar : ByteArray, ISerializer {
+	public const byte SIZE = 32;
+
+	public ProofScalar(byte[]? proofScalar = null): base(SIZE, proofScalar) {
+	}
+
+	public static ProofScalar Deserialize(BinaryReader br) {
+		return new ProofScalar(br.ReadBytes(32));
+	}
+
+	public byte[] Serialize() {
+		return bytes;
+	}
+}
+
+public class BlockType : IEnum<ushort> {
+	public static readonly BlockType NEMESIS = new BlockType(32835);
+
+	public static readonly BlockType NORMAL = new BlockType(33091);
+
+	public static readonly BlockType IMPORTANCE = new BlockType(33347);
+
+	public ushort Value { get; }
+
+	public BlockType(ushort value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			32835, 33091, 33347
+		};
+		var keys = new []{
+			"NEMESIS", "NORMAL", "IMPORTANCE"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static BlockType FromValue(uint value) {
+		return value switch
+		{
+			32835 => NEMESIS,
+			33091 => NORMAL,
+			33347 => IMPORTANCE,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 2;
+		}
+	}
+
+	public static BlockType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt16());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"BlockType.{ValueToKey(Value)}";
+	}
+}
+
+public class VrfProof : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Gamma", "pod:ProofGamma"},
+		{"VerificationHash", "pod:ProofVerificationHash"},
+		{"Scalar", "pod:ProofScalar"}
+	};
+
+	public VrfProof() {
+		Gamma = new ProofGamma();
+		VerificationHash = new ProofVerificationHash();
+		Scalar = new ProofScalar();
+	}
+
+	public void Sort() {
+	}
+
+	public ProofGamma Gamma { get; set; }
+
+	public ProofVerificationHash VerificationHash { get; set; }
+
+	public ProofScalar Scalar { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Gamma.Size;
+			size += VerificationHash.Size;
+			size += Scalar.Size;
+			return size;
+		}
+	}
+
+	public static VrfProof Deserialize(BinaryReader br) {
+		var gamma = ProofGamma.Deserialize(br);
+		var verificationHash = ProofVerificationHash.Deserialize(br);
+		var scalar = ProofScalar.Deserialize(br);
+
+		var instance = new VrfProof()
+		{
+			Gamma = gamma,
+			VerificationHash = verificationHash,
+			Scalar = scalar
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Gamma.Serialize()); 
+		bw.Write(VerificationHash.Serialize()); 
+		bw.Write(Scalar.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"gamma: {Gamma}, ";
+		result += $"verificationHash: {VerificationHash}, ";
+		result += $"scalar: {Scalar}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class Block : IStruct {
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:BlockType"},
+		{"Height", "pod:Height"},
+		{"Timestamp", "pod:Timestamp"},
+		{"Difficulty", "pod:Difficulty"},
+		{"GenerationHashProof", "struct:VrfProof"},
+		{"PreviousBlockHash", "pod:Hash256"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"ReceiptsHash", "pod:Hash256"},
+		{"StateHash", "pod:Hash256"},
+		{"BeneficiaryAddress", "pod:Address"},
+		{"FeeMultiplier", "pod:BlockFeeMultiplier"}
+	};
+
+	public Block() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = 0;
+		Network = NetworkType.MAINNET;
+		Type = BlockType.NEMESIS;
+		Height = new Height();
+		Timestamp = new Timestamp();
+		Difficulty = new Difficulty();
+		GenerationHashProof = new VrfProof();
+		PreviousBlockHash = new Hash256();
+		TransactionsHash = new Hash256();
+		ReceiptsHash = new Hash256();
+		StateHash = new Hash256();
+		BeneficiaryAddress = new Address();
+		FeeMultiplier = new BlockFeeMultiplier();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		GenerationHashProof.Sort();
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public BlockType Type { get; set; }
+
+	public Height Height { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public Difficulty Difficulty { get; set; }
+
+	public VrfProof GenerationHashProof { get; set; }
+
+	public Hash256 PreviousBlockHash { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public Hash256 ReceiptsHash { get; set; }
+
+	public Hash256 StateHash { get; set; }
+
+	public Address BeneficiaryAddress { get; set; }
+
+	public BlockFeeMultiplier FeeMultiplier { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Height.Size;
+			size += Timestamp.Size;
+			size += Difficulty.Size;
+			size += GenerationHashProof.Size;
+			size += PreviousBlockHash.Size;
+			size += TransactionsHash.Size;
+			size += ReceiptsHash.Size;
+			size += StateHash.Size;
+			size += BeneficiaryAddress.Size;
+			size += FeeMultiplier.Size;
+			return size;
+		}
+	}
+
+	public static Block Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = BlockType.Deserialize(br);
+		var height = Height.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var difficulty = Difficulty.Deserialize(br);
+		var generationHashProof = VrfProof.Deserialize(br);
+		var previousBlockHash = Hash256.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var receiptsHash = Hash256.Deserialize(br);
+		var stateHash = Hash256.Deserialize(br);
+		var beneficiaryAddress = Address.Deserialize(br);
+		var feeMultiplier = BlockFeeMultiplier.Deserialize(br);
+
+		var instance = new Block()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Height = height,
+			Timestamp = timestamp,
+			Difficulty = difficulty,
+			GenerationHashProof = generationHashProof,
+			PreviousBlockHash = previousBlockHash,
+			TransactionsHash = transactionsHash,
+			ReceiptsHash = receiptsHash,
+			StateHash = stateHash,
+			BeneficiaryAddress = beneficiaryAddress,
+			FeeMultiplier = feeMultiplier
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Height.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(Difficulty.Serialize()); 
+		bw.Write(GenerationHashProof.Serialize()); 
+		bw.Write(PreviousBlockHash.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(ReceiptsHash.Serialize()); 
+		bw.Write(StateHash.Serialize()); 
+		bw.Write(BeneficiaryAddress.Serialize()); 
+		bw.Write(FeeMultiplier.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"height: {Height}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"difficulty: {Difficulty}, ";
+		result += $"generationHashProof: {GenerationHashProof}, ";
+		result += $"previousBlockHash: {PreviousBlockHash}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"receiptsHash: {ReceiptsHash}, ";
+		result += $"stateHash: {StateHash}, ";
+		result += $"beneficiaryAddress: {BeneficiaryAddress}, ";
+		result += $"feeMultiplier: {FeeMultiplier}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NemesisBlockV1 : IStruct {
+	public const byte BLOCK_VERSION = 1;
+
+	public static readonly BlockType BLOCK_TYPE = BlockType.NEMESIS;
+
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:BlockType"},
+		{"Height", "pod:Height"},
+		{"Timestamp", "pod:Timestamp"},
+		{"Difficulty", "pod:Difficulty"},
+		{"GenerationHashProof", "struct:VrfProof"},
+		{"PreviousBlockHash", "pod:Hash256"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"ReceiptsHash", "pod:Hash256"},
+		{"StateHash", "pod:Hash256"},
+		{"BeneficiaryAddress", "pod:Address"},
+		{"FeeMultiplier", "pod:BlockFeeMultiplier"},
+		{"TotalVotingBalance", "pod:Amount"},
+		{"PreviousImportanceBlockHash", "pod:Hash256"},
+		{"Transactions", "array[Transaction]"}
+	};
+
+	public NemesisBlockV1() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = BLOCK_VERSION;
+		Network = NetworkType.MAINNET;
+		Type = BLOCK_TYPE;
+		Height = new Height();
+		Timestamp = new Timestamp();
+		Difficulty = new Difficulty();
+		GenerationHashProof = new VrfProof();
+		PreviousBlockHash = new Hash256();
+		TransactionsHash = new Hash256();
+		ReceiptsHash = new Hash256();
+		StateHash = new Hash256();
+		BeneficiaryAddress = new Address();
+		FeeMultiplier = new BlockFeeMultiplier();
+		VotingEligibleAccountsCount = 0;
+		HarvestingEligibleAccountsCount = 0;
+		TotalVotingBalance = new Amount();
+		PreviousImportanceBlockHash = new Hash256();
+		Transactions = Array.Empty<Transaction>();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		GenerationHashProof.Sort();
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public BlockType Type { get; set; }
+
+	public Height Height { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public Difficulty Difficulty { get; set; }
+
+	public VrfProof GenerationHashProof { get; set; }
+
+	public Hash256 PreviousBlockHash { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public Hash256 ReceiptsHash { get; set; }
+
+	public Hash256 StateHash { get; set; }
+
+	public Address BeneficiaryAddress { get; set; }
+
+	public BlockFeeMultiplier FeeMultiplier { get; set; }
+
+	public uint VotingEligibleAccountsCount { get; set; }
+
+	public ulong HarvestingEligibleAccountsCount { get; set; }
+
+	public Amount TotalVotingBalance { get; set; }
+
+	public Hash256 PreviousImportanceBlockHash { get; set; }
+
+	public IBaseTransaction[] Transactions { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Height.Size;
+			size += Timestamp.Size;
+			size += Difficulty.Size;
+			size += GenerationHashProof.Size;
+			size += PreviousBlockHash.Size;
+			size += TransactionsHash.Size;
+			size += ReceiptsHash.Size;
+			size += StateHash.Size;
+			size += BeneficiaryAddress.Size;
+			size += FeeMultiplier.Size;
+			size += 4;
+			size += 8;
+			size += TotalVotingBalance.Size;
+			size += PreviousImportanceBlockHash.Size;
+			size += ArrayHelpers.Size(Transactions, 8);
+			return size;
+		}
+	}
+
+	public static NemesisBlockV1 Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = BlockType.Deserialize(br);
+		var height = Height.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var difficulty = Difficulty.Deserialize(br);
+		var generationHashProof = VrfProof.Deserialize(br);
+		var previousBlockHash = Hash256.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var receiptsHash = Hash256.Deserialize(br);
+		var stateHash = Hash256.Deserialize(br);
+		var beneficiaryAddress = Address.Deserialize(br);
+		var feeMultiplier = BlockFeeMultiplier.Deserialize(br);
+		var votingEligibleAccountsCount = br.ReadUInt32();
+		var harvestingEligibleAccountsCount = br.ReadUInt64();
+		var totalVotingBalance = Amount.Deserialize(br);
+		var previousImportanceBlockHash = Hash256.Deserialize(br);
+		var transactions = ArrayHelpers.ReadVariableSizeElements(br, TransactionFactory.Deserialize, (uint)(br.BaseStream.Length - br.BaseStream.Position), 8);
+
+		var instance = new NemesisBlockV1()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Height = height,
+			Timestamp = timestamp,
+			Difficulty = difficulty,
+			GenerationHashProof = generationHashProof,
+			PreviousBlockHash = previousBlockHash,
+			TransactionsHash = transactionsHash,
+			ReceiptsHash = receiptsHash,
+			StateHash = stateHash,
+			BeneficiaryAddress = beneficiaryAddress,
+			FeeMultiplier = feeMultiplier,
+			VotingEligibleAccountsCount = votingEligibleAccountsCount,
+			HarvestingEligibleAccountsCount = harvestingEligibleAccountsCount,
+			TotalVotingBalance = totalVotingBalance,
+			PreviousImportanceBlockHash = previousImportanceBlockHash,
+			Transactions = transactions
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Height.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(Difficulty.Serialize()); 
+		bw.Write(GenerationHashProof.Serialize()); 
+		bw.Write(PreviousBlockHash.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(ReceiptsHash.Serialize()); 
+		bw.Write(StateHash.Serialize()); 
+		bw.Write(BeneficiaryAddress.Serialize()); 
+		bw.Write(FeeMultiplier.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)VotingEligibleAccountsCount)); 
+		bw.Write(BitConverter.GetBytes((ulong)(ulong)HarvestingEligibleAccountsCount)); 
+		bw.Write(TotalVotingBalance.Serialize()); 
+		bw.Write(PreviousImportanceBlockHash.Serialize()); 
+		ArrayHelpers.WriteVariableSizeElements(bw, Transactions, 8);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"height: {Height}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"difficulty: {Difficulty}, ";
+		result += $"generationHashProof: {GenerationHashProof}, ";
+		result += $"previousBlockHash: {PreviousBlockHash}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"receiptsHash: {ReceiptsHash}, ";
+		result += $"stateHash: {StateHash}, ";
+		result += $"beneficiaryAddress: {BeneficiaryAddress}, ";
+		result += $"feeMultiplier: {FeeMultiplier}, ";
+		result += $"votingEligibleAccountsCount: {Converter.ToString(VotingEligibleAccountsCount)}, ";
+		result += $"harvestingEligibleAccountsCount: {Converter.ToString(HarvestingEligibleAccountsCount)}, ";
+		result += $"totalVotingBalance: {TotalVotingBalance}, ";
+		result += $"previousImportanceBlockHash: {PreviousImportanceBlockHash}, ";
+		result += $"transactions: [{string.Join(",", Transactions.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NormalBlockV1 : IStruct {
+	public const byte BLOCK_VERSION = 1;
+
+	public static readonly BlockType BLOCK_TYPE = BlockType.NORMAL;
+
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+	private readonly int BlockHeaderReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:BlockType"},
+		{"Height", "pod:Height"},
+		{"Timestamp", "pod:Timestamp"},
+		{"Difficulty", "pod:Difficulty"},
+		{"GenerationHashProof", "struct:VrfProof"},
+		{"PreviousBlockHash", "pod:Hash256"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"ReceiptsHash", "pod:Hash256"},
+		{"StateHash", "pod:Hash256"},
+		{"BeneficiaryAddress", "pod:Address"},
+		{"FeeMultiplier", "pod:BlockFeeMultiplier"},
+		{"Transactions", "array[Transaction]"}
+	};
+
+	public NormalBlockV1() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = BLOCK_VERSION;
+		Network = NetworkType.MAINNET;
+		Type = BLOCK_TYPE;
+		Height = new Height();
+		Timestamp = new Timestamp();
+		Difficulty = new Difficulty();
+		GenerationHashProof = new VrfProof();
+		PreviousBlockHash = new Hash256();
+		TransactionsHash = new Hash256();
+		ReceiptsHash = new Hash256();
+		StateHash = new Hash256();
+		BeneficiaryAddress = new Address();
+		FeeMultiplier = new BlockFeeMultiplier();
+		Transactions = Array.Empty<Transaction>();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+		BlockHeaderReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		GenerationHashProof.Sort();
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public BlockType Type { get; set; }
+
+	public Height Height { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public Difficulty Difficulty { get; set; }
+
+	public VrfProof GenerationHashProof { get; set; }
+
+	public Hash256 PreviousBlockHash { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public Hash256 ReceiptsHash { get; set; }
+
+	public Hash256 StateHash { get; set; }
+
+	public Address BeneficiaryAddress { get; set; }
+
+	public BlockFeeMultiplier FeeMultiplier { get; set; }
+
+	public IBaseTransaction[] Transactions { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Height.Size;
+			size += Timestamp.Size;
+			size += Difficulty.Size;
+			size += GenerationHashProof.Size;
+			size += PreviousBlockHash.Size;
+			size += TransactionsHash.Size;
+			size += ReceiptsHash.Size;
+			size += StateHash.Size;
+			size += BeneficiaryAddress.Size;
+			size += FeeMultiplier.Size;
+			size += 4;
+			size += ArrayHelpers.Size(Transactions, 8);
+			return size;
+		}
+	}
+
+	public static NormalBlockV1 Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = BlockType.Deserialize(br);
+		var height = Height.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var difficulty = Difficulty.Deserialize(br);
+		var generationHashProof = VrfProof.Deserialize(br);
+		var previousBlockHash = Hash256.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var receiptsHash = Hash256.Deserialize(br);
+		var stateHash = Hash256.Deserialize(br);
+		var beneficiaryAddress = Address.Deserialize(br);
+		var feeMultiplier = BlockFeeMultiplier.Deserialize(br);
+		var blockHeaderReserved_1 = br.ReadUInt32();
+		if (0 != blockHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({blockHeaderReserved_1})");
+		var transactions = ArrayHelpers.ReadVariableSizeElements(br, TransactionFactory.Deserialize, (uint)(br.BaseStream.Length - br.BaseStream.Position), 8);
+
+		var instance = new NormalBlockV1()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Height = height,
+			Timestamp = timestamp,
+			Difficulty = difficulty,
+			GenerationHashProof = generationHashProof,
+			PreviousBlockHash = previousBlockHash,
+			TransactionsHash = transactionsHash,
+			ReceiptsHash = receiptsHash,
+			StateHash = stateHash,
+			BeneficiaryAddress = beneficiaryAddress,
+			FeeMultiplier = feeMultiplier,
+			Transactions = transactions
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Height.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(Difficulty.Serialize()); 
+		bw.Write(GenerationHashProof.Serialize()); 
+		bw.Write(PreviousBlockHash.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(ReceiptsHash.Serialize()); 
+		bw.Write(StateHash.Serialize()); 
+		bw.Write(BeneficiaryAddress.Serialize()); 
+		bw.Write(FeeMultiplier.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)BlockHeaderReserved_1)); 
+		ArrayHelpers.WriteVariableSizeElements(bw, Transactions, 8);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"height: {Height}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"difficulty: {Difficulty}, ";
+		result += $"generationHashProof: {GenerationHashProof}, ";
+		result += $"previousBlockHash: {PreviousBlockHash}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"receiptsHash: {ReceiptsHash}, ";
+		result += $"stateHash: {StateHash}, ";
+		result += $"beneficiaryAddress: {BeneficiaryAddress}, ";
+		result += $"feeMultiplier: {FeeMultiplier}, ";
+		result += $"transactions: [{string.Join(",", Transactions.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class ImportanceBlockV1 : IStruct {
+	public const byte BLOCK_VERSION = 1;
+
+	public static readonly BlockType BLOCK_TYPE = BlockType.IMPORTANCE;
+
+	private readonly int VerifiableEntityHeaderReserved_1;
+	private readonly int EntityBodyReserved_1;
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Signature", "pod:Signature"},
+		{"SignerPublicKey", "pod:PublicKey"},
+		{"Network", "enum:NetworkType"},
+		{"Type", "enum:BlockType"},
+		{"Height", "pod:Height"},
+		{"Timestamp", "pod:Timestamp"},
+		{"Difficulty", "pod:Difficulty"},
+		{"GenerationHashProof", "struct:VrfProof"},
+		{"PreviousBlockHash", "pod:Hash256"},
+		{"TransactionsHash", "pod:Hash256"},
+		{"ReceiptsHash", "pod:Hash256"},
+		{"StateHash", "pod:Hash256"},
+		{"BeneficiaryAddress", "pod:Address"},
+		{"FeeMultiplier", "pod:BlockFeeMultiplier"},
+		{"TotalVotingBalance", "pod:Amount"},
+		{"PreviousImportanceBlockHash", "pod:Hash256"},
+		{"Transactions", "array[Transaction]"}
+	};
+
+	public ImportanceBlockV1() {
+		Signature = new Signature();
+		SignerPublicKey = new PublicKey();
+		Version = BLOCK_VERSION;
+		Network = NetworkType.MAINNET;
+		Type = BLOCK_TYPE;
+		Height = new Height();
+		Timestamp = new Timestamp();
+		Difficulty = new Difficulty();
+		GenerationHashProof = new VrfProof();
+		PreviousBlockHash = new Hash256();
+		TransactionsHash = new Hash256();
+		ReceiptsHash = new Hash256();
+		StateHash = new Hash256();
+		BeneficiaryAddress = new Address();
+		FeeMultiplier = new BlockFeeMultiplier();
+		VotingEligibleAccountsCount = 0;
+		HarvestingEligibleAccountsCount = 0;
+		TotalVotingBalance = new Amount();
+		PreviousImportanceBlockHash = new Hash256();
+		Transactions = Array.Empty<Transaction>();
+		VerifiableEntityHeaderReserved_1 = 0; // reserved field
+		EntityBodyReserved_1 = 0; // reserved field
+	}
+
+	public void Sort() {
+		GenerationHashProof.Sort();
+	}
+
+	public Signature Signature { get; set; }
+
+	public PublicKey SignerPublicKey { get; set; }
+
+	public byte Version { get; set; }
+
+	public NetworkType Network { get; set; }
+
+	public BlockType Type { get; set; }
+
+	public Height Height { get; set; }
+
+	public Timestamp Timestamp { get; set; }
+
+	public Difficulty Difficulty { get; set; }
+
+	public VrfProof GenerationHashProof { get; set; }
+
+	public Hash256 PreviousBlockHash { get; set; }
+
+	public Hash256 TransactionsHash { get; set; }
+
+	public Hash256 ReceiptsHash { get; set; }
+
+	public Hash256 StateHash { get; set; }
+
+	public Address BeneficiaryAddress { get; set; }
+
+	public BlockFeeMultiplier FeeMultiplier { get; set; }
+
+	public uint VotingEligibleAccountsCount { get; set; }
+
+	public ulong HarvestingEligibleAccountsCount { get; set; }
+
+	public Amount TotalVotingBalance { get; set; }
+
+	public Hash256 PreviousImportanceBlockHash { get; set; }
+
+	public IBaseTransaction[] Transactions { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += Signature.Size;
+			size += SignerPublicKey.Size;
+			size += 4;
+			size += 1;
+			size += Network.Size;
+			size += Type.Size;
+			size += Height.Size;
+			size += Timestamp.Size;
+			size += Difficulty.Size;
+			size += GenerationHashProof.Size;
+			size += PreviousBlockHash.Size;
+			size += TransactionsHash.Size;
+			size += ReceiptsHash.Size;
+			size += StateHash.Size;
+			size += BeneficiaryAddress.Size;
+			size += FeeMultiplier.Size;
+			size += 4;
+			size += 8;
+			size += TotalVotingBalance.Size;
+			size += PreviousImportanceBlockHash.Size;
+			size += ArrayHelpers.Size(Transactions, 8);
+			return size;
+		}
+	}
+
+	public static ImportanceBlockV1 Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
+		if (0 != verifiableEntityHeaderReserved_1)
+			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
+		var signature = Signature.Deserialize(br);
+		var signerPublicKey = PublicKey.Deserialize(br);
+		var entityBodyReserved_1 = br.ReadUInt32();
+		if (0 != entityBodyReserved_1)
+			throw new Exception($"Invalid value of reserved field ({entityBodyReserved_1})");
+		var version = br.ReadByte();
+		var network = NetworkType.Deserialize(br);
+		var type = BlockType.Deserialize(br);
+		var height = Height.Deserialize(br);
+		var timestamp = Timestamp.Deserialize(br);
+		var difficulty = Difficulty.Deserialize(br);
+		var generationHashProof = VrfProof.Deserialize(br);
+		var previousBlockHash = Hash256.Deserialize(br);
+		var transactionsHash = Hash256.Deserialize(br);
+		var receiptsHash = Hash256.Deserialize(br);
+		var stateHash = Hash256.Deserialize(br);
+		var beneficiaryAddress = Address.Deserialize(br);
+		var feeMultiplier = BlockFeeMultiplier.Deserialize(br);
+		var votingEligibleAccountsCount = br.ReadUInt32();
+		var harvestingEligibleAccountsCount = br.ReadUInt64();
+		var totalVotingBalance = Amount.Deserialize(br);
+		var previousImportanceBlockHash = Hash256.Deserialize(br);
+		var transactions = ArrayHelpers.ReadVariableSizeElements(br, TransactionFactory.Deserialize, (uint)(br.BaseStream.Length - br.BaseStream.Position), 8);
+
+		var instance = new ImportanceBlockV1()
+		{
+			Signature = signature,
+			SignerPublicKey = signerPublicKey,
+			Version = version,
+			Network = network,
+			Type = type,
+			Height = height,
+			Timestamp = timestamp,
+			Difficulty = difficulty,
+			GenerationHashProof = generationHashProof,
+			PreviousBlockHash = previousBlockHash,
+			TransactionsHash = transactionsHash,
+			ReceiptsHash = receiptsHash,
+			StateHash = stateHash,
+			BeneficiaryAddress = beneficiaryAddress,
+			FeeMultiplier = feeMultiplier,
+			VotingEligibleAccountsCount = votingEligibleAccountsCount,
+			HarvestingEligibleAccountsCount = harvestingEligibleAccountsCount,
+			TotalVotingBalance = totalVotingBalance,
+			PreviousImportanceBlockHash = previousImportanceBlockHash,
+			Transactions = transactions
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((uint)(uint)VerifiableEntityHeaderReserved_1)); 
+		bw.Write(Signature.Serialize()); 
+		bw.Write(SignerPublicKey.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)EntityBodyReserved_1)); 
+		bw.Write((byte)Version); 
+		bw.Write(Network.Serialize()); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Height.Serialize()); 
+		bw.Write(Timestamp.Serialize()); 
+		bw.Write(Difficulty.Serialize()); 
+		bw.Write(GenerationHashProof.Serialize()); 
+		bw.Write(PreviousBlockHash.Serialize()); 
+		bw.Write(TransactionsHash.Serialize()); 
+		bw.Write(ReceiptsHash.Serialize()); 
+		bw.Write(StateHash.Serialize()); 
+		bw.Write(BeneficiaryAddress.Serialize()); 
+		bw.Write(FeeMultiplier.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)VotingEligibleAccountsCount)); 
+		bw.Write(BitConverter.GetBytes((ulong)(ulong)HarvestingEligibleAccountsCount)); 
+		bw.Write(TotalVotingBalance.Serialize()); 
+		bw.Write(PreviousImportanceBlockHash.Serialize()); 
+		ArrayHelpers.WriteVariableSizeElements(bw, Transactions, 8);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"signature: {Signature}, ";
+		result += $"signerPublicKey: {SignerPublicKey}, ";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"network: {Network}, ";
+		result += $"type: {Type}, ";
+		result += $"height: {Height}, ";
+		result += $"timestamp: {Timestamp}, ";
+		result += $"difficulty: {Difficulty}, ";
+		result += $"generationHashProof: {GenerationHashProof}, ";
+		result += $"previousBlockHash: {PreviousBlockHash}, ";
+		result += $"transactionsHash: {TransactionsHash}, ";
+		result += $"receiptsHash: {ReceiptsHash}, ";
+		result += $"stateHash: {StateHash}, ";
+		result += $"beneficiaryAddress: {BeneficiaryAddress}, ";
+		result += $"feeMultiplier: {FeeMultiplier}, ";
+		result += $"votingEligibleAccountsCount: {Converter.ToString(VotingEligibleAccountsCount)}, ";
+		result += $"harvestingEligibleAccountsCount: {Converter.ToString(HarvestingEligibleAccountsCount)}, ";
+		result += $"totalVotingBalance: {TotalVotingBalance}, ";
+		result += $"previousImportanceBlockHash: {PreviousImportanceBlockHash}, ";
+		result += $"transactions: [{string.Join(",", Transactions.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class FinalizationRound : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Epoch", "pod:FinalizationEpoch"},
+		{"Point", "pod:FinalizationPoint"}
+	};
+
+	public FinalizationRound() {
+		Epoch = new FinalizationEpoch();
+		Point = new FinalizationPoint();
+	}
+
+	public void Sort() {
+	}
+
+	public FinalizationEpoch Epoch { get; set; }
+
+	public FinalizationPoint Point { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Epoch.Size;
+			size += Point.Size;
+			return size;
+		}
+	}
+
+	public static FinalizationRound Deserialize(BinaryReader br) {
+		var epoch = FinalizationEpoch.Deserialize(br);
+		var point = FinalizationPoint.Deserialize(br);
+
+		var instance = new FinalizationRound()
+		{
+			Epoch = epoch,
+			Point = point
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Epoch.Serialize()); 
+		bw.Write(Point.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"epoch: {Epoch}, ";
+		result += $"point: {Point}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class FinalizedBlockHeader : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Round", "struct:FinalizationRound"},
+		{"Height", "pod:Height"},
+		{"Hash", "pod:Hash256"}
+	};
+
+	public FinalizedBlockHeader() {
+		Round = new FinalizationRound();
+		Height = new Height();
+		Hash = new Hash256();
+	}
+
+	public void Sort() {
+		Round.Sort();
+	}
+
+	public FinalizationRound Round { get; set; }
+
+	public Height Height { get; set; }
+
+	public Hash256 Hash { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Round.Size;
+			size += Height.Size;
+			size += Hash.Size;
+			return size;
+		}
+	}
+
+	public static FinalizedBlockHeader Deserialize(BinaryReader br) {
+		var round = FinalizationRound.Deserialize(br);
+		var height = Height.Deserialize(br);
+		var hash = Hash256.Deserialize(br);
+
+		var instance = new FinalizedBlockHeader()
+		{
+			Round = round,
+			Height = height,
+			Hash = hash
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Round.Serialize()); 
+		bw.Write(Height.Serialize()); 
+		bw.Write(Hash.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"round: {Round}, ";
+		result += $"height: {Height}, ";
+		result += $"hash: {Hash}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class ReceiptType : IEnum<ushort> {
+	public static readonly ReceiptType MOSAIC_RENTAL_FEE = new ReceiptType(4685);
+
+	public static readonly ReceiptType NAMESPACE_RENTAL_FEE = new ReceiptType(4942);
+
+	public static readonly ReceiptType HARVEST_FEE = new ReceiptType(8515);
+
+	public static readonly ReceiptType LOCK_HASH_COMPLETED = new ReceiptType(8776);
+
+	public static readonly ReceiptType LOCK_HASH_EXPIRED = new ReceiptType(9032);
+
+	public static readonly ReceiptType LOCK_SECRET_COMPLETED = new ReceiptType(8786);
+
+	public static readonly ReceiptType LOCK_SECRET_EXPIRED = new ReceiptType(9042);
+
+	public static readonly ReceiptType LOCK_HASH_CREATED = new ReceiptType(12616);
+
+	public static readonly ReceiptType LOCK_SECRET_CREATED = new ReceiptType(12626);
+
+	public static readonly ReceiptType MOSAIC_EXPIRED = new ReceiptType(16717);
+
+	public static readonly ReceiptType NAMESPACE_EXPIRED = new ReceiptType(16718);
+
+	public static readonly ReceiptType NAMESPACE_DELETED = new ReceiptType(16974);
+
+	public static readonly ReceiptType INFLATION = new ReceiptType(20803);
+
+	public static readonly ReceiptType TRANSACTION_GROUP = new ReceiptType(57667);
+
+	public static readonly ReceiptType ADDRESS_ALIAS_RESOLUTION = new ReceiptType(61763);
+
+	public static readonly ReceiptType MOSAIC_ALIAS_RESOLUTION = new ReceiptType(62019);
+
+	public ushort Value { get; }
+
+	public ReceiptType(ushort value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			4685, 4942, 8515, 8776, 9032, 8786, 9042, 12616, 12626, 16717, 16718, 16974, 20803, 57667, 61763, 62019
+		};
+		var keys = new []{
+			"MOSAIC_RENTAL_FEE", "NAMESPACE_RENTAL_FEE", "HARVEST_FEE", "LOCK_HASH_COMPLETED", "LOCK_HASH_EXPIRED", "LOCK_SECRET_COMPLETED",
+			"LOCK_SECRET_EXPIRED", "LOCK_HASH_CREATED", "LOCK_SECRET_CREATED", "MOSAIC_EXPIRED", "NAMESPACE_EXPIRED", "NAMESPACE_DELETED",
+			"INFLATION", "TRANSACTION_GROUP", "ADDRESS_ALIAS_RESOLUTION", "MOSAIC_ALIAS_RESOLUTION"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static ReceiptType FromValue(uint value) {
+		return value switch
+		{
+			4685 => MOSAIC_RENTAL_FEE,
+			4942 => NAMESPACE_RENTAL_FEE,
+			8515 => HARVEST_FEE,
+			8776 => LOCK_HASH_COMPLETED,
+			9032 => LOCK_HASH_EXPIRED,
+			8786 => LOCK_SECRET_COMPLETED,
+			9042 => LOCK_SECRET_EXPIRED,
+			12616 => LOCK_HASH_CREATED,
+			12626 => LOCK_SECRET_CREATED,
+			16717 => MOSAIC_EXPIRED,
+			16718 => NAMESPACE_EXPIRED,
+			16974 => NAMESPACE_DELETED,
+			20803 => INFLATION,
+			57667 => TRANSACTION_GROUP,
+			61763 => ADDRESS_ALIAS_RESOLUTION,
+			62019 => MOSAIC_ALIAS_RESOLUTION,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 2;
+		}
+	}
+
+	public static ReceiptType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadUInt16());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes(Value);
+	}
+
+	public override string ToString() {
+		return $"ReceiptType.{ValueToKey(Value)}";
+	}
+}
+
+public class Receipt : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"}
+	};
+
+	public Receipt() {
+		Version = 0;
+		Type = ReceiptType.MOSAIC_RENTAL_FEE;
+	}
+
+	public void Sort() {
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			return size;
+		}
+	}
+
+	public static Receipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+
+		var instance = new Receipt()
+		{
+			Version = version,
+			Type = type
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class HarvestFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.HARVEST_FEE;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public HarvestFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static HarvestFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new HarvestFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class InflationReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.INFLATION;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"}
+	};
+
+	public InflationReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			return size;
+		}
+	}
+
+	public static InflationReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+
+		var instance = new InflationReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockHashCreatedFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_HASH_CREATED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockHashCreatedFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockHashCreatedFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockHashCreatedFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockHashCompletedFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_HASH_COMPLETED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockHashCompletedFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockHashCompletedFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockHashCompletedFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockHashExpiredFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_HASH_EXPIRED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockHashExpiredFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockHashExpiredFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockHashExpiredFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockSecretCreatedFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_SECRET_CREATED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockSecretCreatedFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockSecretCreatedFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockSecretCreatedFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockSecretCompletedFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_SECRET_COMPLETED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockSecretCompletedFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockSecretCompletedFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockSecretCompletedFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class LockSecretExpiredFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.LOCK_SECRET_EXPIRED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"TargetAddress", "pod:Address"}
+	};
+
+	public LockSecretExpiredFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		TargetAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address TargetAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += TargetAddress.Size;
+			return size;
+		}
+	}
+
+	public static LockSecretExpiredFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var targetAddress = Address.Deserialize(br);
+
+		var instance = new LockSecretExpiredFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			TargetAddress = targetAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(TargetAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"targetAddress: {TargetAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicExpiredReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.MOSAIC_EXPIRED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"ArtifactId", "pod:MosaicId"}
+	};
+
+	public MosaicExpiredReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		ArtifactId = new MosaicId();
+	}
+
+	public void Sort() {
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public MosaicId ArtifactId { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += ArtifactId.Size;
+			return size;
+		}
+	}
+
+	public static MosaicExpiredReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var artifactId = MosaicId.Deserialize(br);
+
+		var instance = new MosaicExpiredReceipt()
+		{
+			Version = version,
+			Type = type,
+			ArtifactId = artifactId
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(ArtifactId.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"artifactId: {ArtifactId}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicRentalFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.MOSAIC_RENTAL_FEE;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"SenderAddress", "pod:Address"},
+		{"RecipientAddress", "pod:Address"}
+	};
+
+	public MosaicRentalFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		SenderAddress = new Address();
+		RecipientAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address SenderAddress { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += SenderAddress.Size;
+			size += RecipientAddress.Size;
+			return size;
+		}
+	}
+
+	public static MosaicRentalFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var senderAddress = Address.Deserialize(br);
+		var recipientAddress = Address.Deserialize(br);
+
+		var instance = new MosaicRentalFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			SenderAddress = senderAddress,
+			RecipientAddress = recipientAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(SenderAddress.Serialize()); 
+		bw.Write(RecipientAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"senderAddress: {SenderAddress}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NamespaceId : BaseValue, ISerializer {
+	public const byte SIZE = 8;
+
+	public NamespaceId(ulong namespaceId = 0): base(SIZE, namespaceId) {
+	}
+
+	public static NamespaceId Deserialize(BinaryReader br) {
+		return new NamespaceId(br.ReadUInt64());
+	}
+
+	public byte[] Serialize() {
+		return BitConverter.GetBytes((ulong)Value);
+	}
+}
+
+public class NamespaceRegistrationType : IEnum<byte> {
+	public static readonly NamespaceRegistrationType ROOT = new NamespaceRegistrationType(0);
+
+	public static readonly NamespaceRegistrationType CHILD = new NamespaceRegistrationType(1);
+
+	public byte Value { get; }
+
+	public NamespaceRegistrationType(byte value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			0, 1
+		};
+		var keys = new []{
+			"ROOT", "CHILD"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static NamespaceRegistrationType FromValue(uint value) {
+		return value switch
+		{
+			0 => ROOT,
+			1 => CHILD,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 1;
+		}
+	}
+
+	public static NamespaceRegistrationType Deserialize(BinaryReader br) {
+		return FromValue(br.ReadByte());
+	}
+
+	public byte[] Serialize() {
+		return new []{Value};
+	}
+
+	public override string ToString() {
+		return $"NamespaceRegistrationType.{ValueToKey(Value)}";
+	}
+}
+
+public class AliasAction : IEnum<byte> {
+	public static readonly AliasAction UNLINK = new AliasAction(0);
+
+	public static readonly AliasAction LINK = new AliasAction(1);
+
+	public byte Value { get; }
+
+	public AliasAction(byte value = 0) {
+		Value = value;
+	}
+
+	internal static string ValueToKey(uint value) {
+		var values = new uint[]{
+			0, 1
+		};
+		var keys = new []{
+			"UNLINK", "LINK"
+		};
+
+		var index = Array.IndexOf(values, value);
+		if (-1 == index)
+			throw new Exception($"invalid enum value {value}");
+
+		return keys[index];
+	}
+
+	internal static AliasAction FromValue(uint value) {
+		return value switch
+		{
+			0 => UNLINK,
+			1 => LINK,
+			_ => throw new Exception($"invalid enum value {value}")
+		};
+	}
+
+	public uint Size {
+		get {
+			return 1;
+		}
+	}
+
+	public static AliasAction Deserialize(BinaryReader br) {
+		return FromValue(br.ReadByte());
+	}
+
+	public byte[] Serialize() {
+		return new []{Value};
+	}
+
+	public override string ToString() {
+		return $"AliasAction.{ValueToKey(Value)}";
+	}
+}
+
+public class NamespaceExpiredReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.NAMESPACE_EXPIRED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"ArtifactId", "pod:NamespaceId"}
+	};
+
+	public NamespaceExpiredReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		ArtifactId = new NamespaceId();
+	}
+
+	public void Sort() {
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public NamespaceId ArtifactId { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += ArtifactId.Size;
+			return size;
+		}
+	}
+
+	public static NamespaceExpiredReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var artifactId = NamespaceId.Deserialize(br);
+
+		var instance = new NamespaceExpiredReceipt()
+		{
+			Version = version,
+			Type = type,
+			ArtifactId = artifactId
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(ArtifactId.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"artifactId: {ArtifactId}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NamespaceDeletedReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.NAMESPACE_DELETED;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"ArtifactId", "pod:NamespaceId"}
+	};
+
+	public NamespaceDeletedReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		ArtifactId = new NamespaceId();
+	}
+
+	public void Sort() {
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public NamespaceId ArtifactId { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += ArtifactId.Size;
+			return size;
+		}
+	}
+
+	public static NamespaceDeletedReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var artifactId = NamespaceId.Deserialize(br);
+
+		var instance = new NamespaceDeletedReceipt()
+		{
+			Version = version,
+			Type = type,
+			ArtifactId = artifactId
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(ArtifactId.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"artifactId: {ArtifactId}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class NamespaceRentalFeeReceipt : IStruct {
+	public static readonly ReceiptType RECEIPT_TYPE = ReceiptType.NAMESPACE_RENTAL_FEE;
+
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Type", "enum:ReceiptType"},
+		{"Mosaic", "struct:Mosaic"},
+		{"SenderAddress", "pod:Address"},
+		{"RecipientAddress", "pod:Address"}
+	};
+
+	public NamespaceRentalFeeReceipt() {
+		Version = 0;
+		Type = RECEIPT_TYPE;
+		Mosaic = new Mosaic();
+		SenderAddress = new Address();
+		RecipientAddress = new Address();
+	}
+
+	public void Sort() {
+		Mosaic.Sort();
+	}
+
+	public ushort Version { get; set; }
+
+	public ReceiptType Type { get; set; }
+
+	public Mosaic Mosaic { get; set; }
+
+	public Address SenderAddress { get; set; }
+
+	public Address RecipientAddress { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 2;
+			size += Type.Size;
+			size += Mosaic.Size;
+			size += SenderAddress.Size;
+			size += RecipientAddress.Size;
+			return size;
+		}
+	}
+
+	public static NamespaceRentalFeeReceipt Deserialize(BinaryReader br) {
+		var size = br.ReadUInt32();
+		var version = br.ReadUInt16();
+		var type = ReceiptType.Deserialize(br);
+		var mosaic = Mosaic.Deserialize(br);
+		var senderAddress = Address.Deserialize(br);
+		var recipientAddress = Address.Deserialize(br);
+
+		var instance = new NamespaceRentalFeeReceipt()
+		{
+			Version = version,
+			Type = type,
+			Mosaic = mosaic,
+			SenderAddress = senderAddress,
+			RecipientAddress = recipientAddress
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Size);
+		bw.Write(BitConverter.GetBytes((ushort)(ushort)Version)); 
+		bw.Write(Type.Serialize()); 
+		bw.Write(Mosaic.Serialize()); 
+		bw.Write(SenderAddress.Serialize()); 
+		bw.Write(RecipientAddress.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"version: {Converter.ToString(Version)}, ";
+		result += $"type: {Type}, ";
+		result += $"mosaic: {Mosaic}, ";
+		result += $"senderAddress: {SenderAddress}, ";
+		result += $"recipientAddress: {RecipientAddress}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class ReceiptSource : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+	};
+
+	public ReceiptSource() {
+		PrimaryId = 0;
+		SecondaryId = 0;
+	}
+
+	public void Sort() {
+	}
+
+	public uint PrimaryId { get; set; }
+
+	public uint SecondaryId { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			return size;
+		}
+	}
+
+	public static ReceiptSource Deserialize(BinaryReader br) {
+		var primaryId = br.ReadUInt32();
+		var secondaryId = br.ReadUInt32();
+
+		var instance = new ReceiptSource()
+		{
+			PrimaryId = primaryId,
+			SecondaryId = secondaryId
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)PrimaryId)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SecondaryId)); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"primaryId: {Converter.ToString(PrimaryId)}, ";
+		result += $"secondaryId: {Converter.ToString(SecondaryId)}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class AddressResolutionEntry : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Source", "struct:ReceiptSource"},
+		{"ResolvedValue", "pod:Address"}
+	};
+
+	public AddressResolutionEntry() {
+		Source = new ReceiptSource();
+		ResolvedValue = new Address();
+	}
+
+	public void Sort() {
+		Source.Sort();
+	}
+
+	public ReceiptSource Source { get; set; }
+
+	public Address ResolvedValue { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Source.Size;
+			size += ResolvedValue.Size;
+			return size;
+		}
+	}
+
+	public static AddressResolutionEntry Deserialize(BinaryReader br) {
+		var source = ReceiptSource.Deserialize(br);
+		var resolvedValue = Address.Deserialize(br);
+
+		var instance = new AddressResolutionEntry()
+		{
+			Source = source,
+			ResolvedValue = resolvedValue
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Source.Serialize()); 
+		bw.Write(ResolvedValue.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"source: {Source}, ";
+		result += $"resolvedValue: {ResolvedValue}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class AddressResolutionStatement : ISerializer {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Unresolved", "pod:UnresolvedAddress"},
+		{"ResolutionEntries", "array[AddressResolutionEntry]"}
+	};
+
+	public AddressResolutionStatement() {
+		Unresolved = new UnresolvedAddress();
+		ResolutionEntries = Array.Empty<AddressResolutionEntry>();
+	}
+
+	public void Sort() {
+	}
+
+	public UnresolvedAddress Unresolved { get; set; }
+
+	public AddressResolutionEntry[] ResolutionEntries { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Unresolved.Size;
+			size += 4;
+			size += ArrayHelpers.Size(ResolutionEntries);
+			return size;
+		}
+	}
+
+	public static AddressResolutionStatement Deserialize(BinaryReader br) {
+		var unresolved = UnresolvedAddress.Deserialize(br);
+		var resolutionEntriesCount = br.ReadUInt32();
+		var resolutionEntries = ArrayHelpers.ReadArrayCount(br, AddressResolutionEntry.Deserialize, (byte)resolutionEntriesCount);
+
+		var instance = new AddressResolutionStatement()
+		{
+			Unresolved = unresolved,
+			ResolutionEntries = resolutionEntries
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Unresolved.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)ResolutionEntries.Length));  // bound: resolution_entries_count
+		ArrayHelpers.WriteArray(bw, ResolutionEntries);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"unresolved: {Unresolved}, ";
+		result += $"resolutionEntries: [{string.Join(",", ResolutionEntries.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicResolutionEntry : IStruct {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Source", "struct:ReceiptSource"},
+		{"ResolvedValue", "pod:MosaicId"}
+	};
+
+	public MosaicResolutionEntry() {
+		Source = new ReceiptSource();
+		ResolvedValue = new MosaicId();
+	}
+
+	public void Sort() {
+		Source.Sort();
+	}
+
+	public ReceiptSource Source { get; set; }
+
+	public MosaicId ResolvedValue { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Source.Size;
+			size += ResolvedValue.Size;
+			return size;
+		}
+	}
+
+	public static MosaicResolutionEntry Deserialize(BinaryReader br) {
+		var source = ReceiptSource.Deserialize(br);
+		var resolvedValue = MosaicId.Deserialize(br);
+
+		var instance = new MosaicResolutionEntry()
+		{
+			Source = source,
+			ResolvedValue = resolvedValue
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Source.Serialize()); 
+		bw.Write(ResolvedValue.Serialize()); 
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"source: {Source}, ";
+		result += $"resolvedValue: {ResolvedValue}, ";
+		result += ")";
+		return result;
+	}
+}
+
+public class MosaicResolutionStatement : ISerializer {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Unresolved", "pod:UnresolvedMosaicId"},
+		{"ResolutionEntries", "array[MosaicResolutionEntry]"}
+	};
+
+	public MosaicResolutionStatement() {
+		Unresolved = new UnresolvedMosaicId();
+		ResolutionEntries = Array.Empty<MosaicResolutionEntry>();
+	}
+
+	public void Sort() {
+	}
+
+	public UnresolvedMosaicId Unresolved { get; set; }
+
+	public MosaicResolutionEntry[] ResolutionEntries { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += Unresolved.Size;
+			size += 4;
+			size += ArrayHelpers.Size(ResolutionEntries);
+			return size;
+		}
+	}
+
+	public static MosaicResolutionStatement Deserialize(BinaryReader br) {
+		var unresolved = UnresolvedMosaicId.Deserialize(br);
+		var resolutionEntriesCount = br.ReadUInt32();
+		var resolutionEntries = ArrayHelpers.ReadArrayCount(br, MosaicResolutionEntry.Deserialize, (byte)resolutionEntriesCount);
+
+		var instance = new MosaicResolutionStatement()
+		{
+			Unresolved = unresolved,
+			ResolutionEntries = resolutionEntries
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(Unresolved.Serialize()); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)ResolutionEntries.Length));  // bound: resolution_entries_count
+		ArrayHelpers.WriteArray(bw, ResolutionEntries);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"unresolved: {Unresolved}, ";
+		result += $"resolutionEntries: [{string.Join(",", ResolutionEntries.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class TransactionStatement : ISerializer {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"Receipts", "array[Receipt]"}
+	};
+
+	public TransactionStatement() {
+		PrimaryId = 0;
+		SecondaryId = 0;
+		Receipts = Array.Empty<Receipt>();
+	}
+
+	public void Sort() {
+	}
+
+	public uint PrimaryId { get; set; }
+
+	public uint SecondaryId { get; set; }
+
+	public Receipt[] Receipts { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += 4;
+			size += 4;
+			size += ArrayHelpers.Size(Receipts);
+			return size;
+		}
+	}
+
+	public static TransactionStatement Deserialize(BinaryReader br) {
+		var primaryId = br.ReadUInt32();
+		var secondaryId = br.ReadUInt32();
+		var receiptCount = br.ReadUInt32();
+		var receipts = ArrayHelpers.ReadArrayCount(br, Receipt.Deserialize, (byte)receiptCount);
+
+		var instance = new TransactionStatement()
+		{
+			PrimaryId = primaryId,
+			SecondaryId = secondaryId,
+			Receipts = receipts
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)PrimaryId)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)SecondaryId)); 
+		bw.Write(BitConverter.GetBytes((uint)(uint)Receipts.Length));  // bound: receipt_count
+		ArrayHelpers.WriteArray(bw, Receipts);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"primaryId: {Converter.ToString(PrimaryId)}, ";
+		result += $"secondaryId: {Converter.ToString(SecondaryId)}, ";
+		result += $"receipts: [{string.Join(",", Receipts.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
+public class BlockStatement : ISerializer {
+
+	public Dictionary<string, string> TypeHints { get; } = new Dictionary<string, string>(){
+		{"TransactionStatements", "array[TransactionStatement]"},
+		{"AddressResolutionStatements", "array[AddressResolutionStatement]"},
+		{"MosaicResolutionStatements", "array[MosaicResolutionStatement]"}
+	};
+
+	public BlockStatement() {
+		TransactionStatements = Array.Empty<TransactionStatement>();
+		AddressResolutionStatements = Array.Empty<AddressResolutionStatement>();
+		MosaicResolutionStatements = Array.Empty<MosaicResolutionStatement>();
+	}
+
+	public void Sort() {
+	}
+
+	public TransactionStatement[] TransactionStatements { get; set; }
+
+	public AddressResolutionStatement[] AddressResolutionStatements { get; set; }
+
+	public MosaicResolutionStatement[] MosaicResolutionStatements { get; set; }
+
+	public uint Size {
+		get {
+			uint size = 0;
+			size += 4;
+			size += ArrayHelpers.Size(TransactionStatements);
+			size += 4;
+			size += ArrayHelpers.Size(AddressResolutionStatements);
+			size += 4;
+			size += ArrayHelpers.Size(MosaicResolutionStatements);
+			return size;
+		}
+	}
+
+	public static BlockStatement Deserialize(BinaryReader br) {
+		var transactionStatementCount = br.ReadUInt32();
+		var transactionStatements = ArrayHelpers.ReadArrayCount(br, TransactionStatement.Deserialize, (byte)transactionStatementCount);
+		var addressResolutionStatementCount = br.ReadUInt32();
+		var addressResolutionStatements = ArrayHelpers.ReadArrayCount(br, AddressResolutionStatement.Deserialize, (byte)addressResolutionStatementCount);
+		var mosaicResolutionStatementCount = br.ReadUInt32();
+		var mosaicResolutionStatements = ArrayHelpers.ReadArrayCount(br, MosaicResolutionStatement.Deserialize, (byte)mosaicResolutionStatementCount);
+
+		var instance = new BlockStatement()
+		{
+			TransactionStatements = transactionStatements,
+			AddressResolutionStatements = addressResolutionStatements,
+			MosaicResolutionStatements = mosaicResolutionStatements
+		};
+		return instance;
+	}
+
+	public byte[] Serialize() {
+		using var ms = new MemoryStream();
+		using var bw = new BinaryWriter(ms);
+		bw.Write(BitConverter.GetBytes((uint)(uint)TransactionStatements.Length));  // bound: transaction_statement_count
+		ArrayHelpers.WriteArray(bw, TransactionStatements);
+		bw.Write(BitConverter.GetBytes((uint)(uint)AddressResolutionStatements.Length));  // bound: address_resolution_statement_count
+		ArrayHelpers.WriteArray(bw, AddressResolutionStatements);
+		bw.Write(BitConverter.GetBytes((uint)(uint)MosaicResolutionStatements.Length));  // bound: mosaic_resolution_statement_count
+		ArrayHelpers.WriteArray(bw, MosaicResolutionStatements);
+		return ms.ToArray();
+	}
+
+	public override string ToString() {
+		var result = "(";
+		result += $"transactionStatements: [{string.Join(",", TransactionStatements.Select(e => e.ToString()))}], ";
+		result += $"addressResolutionStatements: [{string.Join(",", AddressResolutionStatements.Select(e => e.ToString()))}], ";
+		result += $"mosaicResolutionStatements: [{string.Join(",", MosaicResolutionStatements.Select(e => e.ToString()))}], ";
+		result += ")";
+		return result;
+	}
+}
+
 public class AccountKeyLinkTransactionV1 : ITransaction {
 	public const byte TRANSACTION_VERSION = 1;
 
@@ -4203,129 +7105,6 @@ public class EmbeddedMosaicMetadataTransactionV1 : IBaseTransaction {
 		result += $"value: hex({Converter.BytesToHex(Value)}), ";
 		result += ")";
 		return result;
-	}
-}
-
-public class NamespaceId : BaseValue, ISerializer {
-	public const byte SIZE = 8;
-
-	public NamespaceId(ulong namespaceId = 0): base(SIZE, namespaceId) {
-	}
-
-	public static NamespaceId Deserialize(BinaryReader br) {
-		return new NamespaceId(br.ReadUInt64());
-	}
-
-	public byte[] Serialize() {
-		return BitConverter.GetBytes((ulong)Value);
-	}
-}
-
-public class NamespaceRegistrationType : IEnum<byte> {
-	public static readonly NamespaceRegistrationType ROOT = new NamespaceRegistrationType(0);
-
-	public static readonly NamespaceRegistrationType CHILD = new NamespaceRegistrationType(1);
-
-	public byte Value { get; }
-
-	public NamespaceRegistrationType(byte value = 0) {
-		Value = value;
-	}
-
-	internal static string ValueToKey(uint value) {
-		var values = new uint[]{
-			0, 1
-		};
-		var keys = new []{
-			"ROOT", "CHILD"
-		};
-
-		var index = Array.IndexOf(values, value);
-		if (-1 == index)
-			throw new Exception($"invalid enum value {value}");
-
-		return keys[index];
-	}
-
-	internal static NamespaceRegistrationType FromValue(uint value) {
-		return value switch
-		{
-			0 => ROOT,
-			1 => CHILD,
-			_ => throw new Exception($"invalid enum value {value}")
-		};
-	}
-
-	public uint Size {
-		get {
-			return 1;
-		}
-	}
-
-	public static NamespaceRegistrationType Deserialize(BinaryReader br) {
-		return FromValue(br.ReadByte());
-	}
-
-	public byte[] Serialize() {
-		return new []{Value};
-	}
-
-	public override string ToString() {
-		return $"NamespaceRegistrationType.{ValueToKey(Value)}";
-	}
-}
-
-public class AliasAction : IEnum<byte> {
-	public static readonly AliasAction UNLINK = new AliasAction(0);
-
-	public static readonly AliasAction LINK = new AliasAction(1);
-
-	public byte Value { get; }
-
-	public AliasAction(byte value = 0) {
-		Value = value;
-	}
-
-	internal static string ValueToKey(uint value) {
-		var values = new uint[]{
-			0, 1
-		};
-		var keys = new []{
-			"UNLINK", "LINK"
-		};
-
-		var index = Array.IndexOf(values, value);
-		if (-1 == index)
-			throw new Exception($"invalid enum value {value}");
-
-		return keys[index];
-	}
-
-	internal static AliasAction FromValue(uint value) {
-		return value switch
-		{
-			0 => UNLINK,
-			1 => LINK,
-			_ => throw new Exception($"invalid enum value {value}")
-		};
-	}
-
-	public uint Size {
-		get {
-			return 1;
-		}
-	}
-
-	public static AliasAction Deserialize(BinaryReader br) {
-		return FromValue(br.ReadByte());
-	}
-
-	public byte[] Serialize() {
-		return new []{Value};
-	}
-
-	public override string ToString() {
-		return $"AliasAction.{ValueToKey(Value)}";
 	}
 }
 
@@ -8814,9 +11593,7 @@ public class TransactionFactory {
 		{
 			{AccountKeyLinkTransactionV1.TRANSACTION_TYPE, AccountKeyLinkTransactionV1.Deserialize},
 			{NodeKeyLinkTransactionV1.TRANSACTION_TYPE, NodeKeyLinkTransactionV1.Deserialize},
-			{AggregateCompleteTransactionV1.TRANSACTION_TYPE, AggregateCompleteTransactionV1.Deserialize},
 			{AggregateCompleteTransactionV2.TRANSACTION_TYPE, AggregateCompleteTransactionV2.Deserialize},
-			{AggregateBondedTransactionV1.TRANSACTION_TYPE, AggregateBondedTransactionV1.Deserialize},
 			{AggregateBondedTransactionV2.TRANSACTION_TYPE, AggregateBondedTransactionV2.Deserialize},
 			{VotingKeyLinkTransactionV1.TRANSACTION_TYPE, VotingKeyLinkTransactionV1.Deserialize},
 			{VrfKeyLinkTransactionV1.TRANSACTION_TYPE, VrfKeyLinkTransactionV1.Deserialize},
@@ -8952,6 +11729,90 @@ public class EmbeddedTransactionFactory {
 			{"mosaic_address_restriction_transaction_v1", new EmbeddedMosaicAddressRestrictionTransactionV1()},
 			{"mosaic_global_restriction_transaction_v1", new EmbeddedMosaicGlobalRestrictionTransactionV1()},
 			{"transfer_transaction_v1", new EmbeddedTransferTransactionV1()}
+
+		};
+		return mapping[entityName];
+	}
+}
+
+public class BlockFactory {
+	public static IStruct Deserialize(BinaryReader br) {
+		var position = br.BaseStream.Position;
+		var parent = Block.Deserialize(br);
+		var mapping = new Dictionary<BlockType, Func<BinaryReader, IStruct>>
+		{
+			{NemesisBlockV1.BLOCK_TYPE, NemesisBlockV1.Deserialize},
+			{NormalBlockV1.BLOCK_TYPE, NormalBlockV1.Deserialize},
+			{ImportanceBlockV1.BLOCK_TYPE, ImportanceBlockV1.Deserialize}
+		};
+		br.BaseStream.Position = position;
+		return mapping[parent.Type](br);
+	}
+
+	public static IStruct Deserialize(string payload) {
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
+		using var br = new BinaryReader(ms);
+		return Deserialize(br);
+	}
+
+	public static IStruct CreateByName(string entityName) {
+		var mapping = new Dictionary<string, IStruct>
+		{
+			{"nemesis_block_v1", new NemesisBlockV1()},
+			{"normal_block_v1", new NormalBlockV1()},
+			{"importance_block_v1", new ImportanceBlockV1()}
+
+		};
+		return mapping[entityName];
+	}
+}
+
+public class ReceiptFactory {
+	public static IStruct Deserialize(BinaryReader br) {
+		var position = br.BaseStream.Position;
+		var parent = Receipt.Deserialize(br);
+		var mapping = new Dictionary<ReceiptType, Func<BinaryReader, IStruct>>
+		{
+			{HarvestFeeReceipt.RECEIPT_TYPE, HarvestFeeReceipt.Deserialize},
+			{InflationReceipt.RECEIPT_TYPE, InflationReceipt.Deserialize},
+			{LockHashCreatedFeeReceipt.RECEIPT_TYPE, LockHashCreatedFeeReceipt.Deserialize},
+			{LockHashCompletedFeeReceipt.RECEIPT_TYPE, LockHashCompletedFeeReceipt.Deserialize},
+			{LockHashExpiredFeeReceipt.RECEIPT_TYPE, LockHashExpiredFeeReceipt.Deserialize},
+			{LockSecretCreatedFeeReceipt.RECEIPT_TYPE, LockSecretCreatedFeeReceipt.Deserialize},
+			{LockSecretCompletedFeeReceipt.RECEIPT_TYPE, LockSecretCompletedFeeReceipt.Deserialize},
+			{LockSecretExpiredFeeReceipt.RECEIPT_TYPE, LockSecretExpiredFeeReceipt.Deserialize},
+			{MosaicExpiredReceipt.RECEIPT_TYPE, MosaicExpiredReceipt.Deserialize},
+			{MosaicRentalFeeReceipt.RECEIPT_TYPE, MosaicRentalFeeReceipt.Deserialize},
+			{NamespaceExpiredReceipt.RECEIPT_TYPE, NamespaceExpiredReceipt.Deserialize},
+			{NamespaceDeletedReceipt.RECEIPT_TYPE, NamespaceDeletedReceipt.Deserialize},
+			{NamespaceRentalFeeReceipt.RECEIPT_TYPE, NamespaceRentalFeeReceipt.Deserialize}
+		};
+		br.BaseStream.Position = position;
+		return mapping[parent.Type](br);
+	}
+
+	public static IStruct Deserialize(string payload) {
+		using var ms = new MemoryStream(Converter.HexToBytes(payload).ToArray());
+		using var br = new BinaryReader(ms);
+		return Deserialize(br);
+	}
+
+	public static IStruct CreateByName(string entityName) {
+		var mapping = new Dictionary<string, IStruct>
+		{
+			{"harvest_fee_receipt", new HarvestFeeReceipt()},
+			{"inflation_receipt", new InflationReceipt()},
+			{"lock_hash_created_fee_receipt", new LockHashCreatedFeeReceipt()},
+			{"lock_hash_completed_fee_receipt", new LockHashCompletedFeeReceipt()},
+			{"lock_hash_expired_fee_receipt", new LockHashExpiredFeeReceipt()},
+			{"lock_secret_created_fee_receipt", new LockSecretCreatedFeeReceipt()},
+			{"lock_secret_completed_fee_receipt", new LockSecretCompletedFeeReceipt()},
+			{"lock_secret_expired_fee_receipt", new LockSecretExpiredFeeReceipt()},
+			{"mosaic_expired_receipt", new MosaicExpiredReceipt()},
+			{"mosaic_rental_fee_receipt", new MosaicRentalFeeReceipt()},
+			{"namespace_expired_receipt", new NamespaceExpiredReceipt()},
+			{"namespace_deleted_receipt", new NamespaceDeletedReceipt()},
+			{"namespace_rental_fee_receipt", new NamespaceRentalFeeReceipt()}
 
 		};
 		return mapping[entityName];

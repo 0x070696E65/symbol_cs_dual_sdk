@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using CatSdk.Symbol;
 
 namespace CatSdk.Utils

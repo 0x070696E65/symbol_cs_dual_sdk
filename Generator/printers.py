@@ -55,7 +55,7 @@ class IntPrinter(Printer):
 		else:
 			return f'BitConverter.GetBytes(({self.get_type()}){field_name})'
 
-	def get_modifier(self):
+	def get_modifier(self, field_name = None):
 		return 'public const byte '
 
 	@staticmethod
@@ -113,7 +113,9 @@ class TypedArrayPrinter(Printer):
 				element_type = f'{element_type}Factory.Deserialize'
 
 			data_size = ''
-			if not self.descriptor.field_type.is_expandable:
+			if self.descriptor.field_type.is_expandable:
+				data_size = '(uint)(br.BaseStream.Length - br.BaseStream.Position)'
+			else:
 				data_size = lang_field_name(self.descriptor.size)
 
 			alignment = self.descriptor.field_type.alignment
@@ -284,8 +286,8 @@ class BuiltinPrinter(Printer):
 	def sort(self, field_name):
 		return f'{field_name}.Sort();' if DisplayType.STRUCT == self.descriptor.display_type else None
 
-	def get_modifier(self):
-		return 'public static readonly TransactionType '
+	def get_modifier(self, field_name):
+		return f'public static readonly {field_name.lower().title().replace("_", "")} '
 
 	def assign(self, value):
 		return f'{self.get_type()}.{value}'

@@ -79,7 +79,7 @@ class StructFormatter(AbstractTypeFormatter):
 
 	@staticmethod
 	def generate_class_field(field):
-		modifier = field.extensions.printer.get_modifier()
+		modifier = field.extensions.printer.get_modifier(field.name)
 		default_value = field.extensions.printer.assign(field.value)
 		return f'{modifier}{field.name} = {default_value};\n'
 
@@ -116,6 +116,8 @@ class StructFormatter(AbstractTypeFormatter):
 					base_transaction = 'ITransaction'
 				else:
 					base_transaction = 'IStruct'
+		if 'Statement' in self.typename:
+			base_transaction = 'ISerializer'
 		return base_transaction if self._is_struct else None
 
 	def get_fields(self):
@@ -446,10 +448,10 @@ class StructFormatter(AbstractTypeFormatter):
 
 	def create_getter_setter_descriptor(self, field):
 		class_name = field.extensions.printer.get_type()
-		if field.extensions.printer.get_type() == 'NonVerifiableTransaction':
-			class_name = 'IBaseTransaction'
-		elif field.extensions.printer.get_type() == 'EmbeddedTransaction[]':
+		if self.field_name(field) == 'Transactions':
 			class_name = 'IBaseTransaction[]'
+		elif self.field_name(field) == 'InnerTransaction':
+			class_name = 'IBaseTransaction'
 		method_descriptor = MethodDescriptor(
 			method_name=f'public {class_name} {self.field_name(field)} {{ get; set; }}',
 			note='getter_setter',

@@ -6,6 +6,7 @@ from .name_formatting import fix_name, underline_name
 from .printers import BuiltinPrinter
 from .TypeFormatter import ClassFormatter
 
+import re
 
 # hack: skip embedded from names
 def skip_embedded(name):
@@ -63,6 +64,8 @@ class FactoryFormatter(AbstractTypeFormatter):
 			return "ITransaction"
 		elif self.abstract.name == "EmbeddedTransaction" or self.abstract.name == "NonVerifiableTransaction":
 			return "IBaseTransaction"
+		elif self.abstract.name == "Block" or self.abstract.name == "Receipt":
+			return "IStruct"
 
 	def get_ctor_descriptor(self):
 		raise NotImplementedError('`get_ctor_descriptor` not supported by FactoryFormatter')
@@ -78,22 +81,40 @@ class FactoryFormatter(AbstractTypeFormatter):
 	def get_base_class(self):
 		return ''
 
-	def create_discriminator(self, name):
-		field_values = self.factory_descriptor.discriminator_values
-		field_types = self.factory_descriptor.discriminator_types
+	def create_discriminator(self ,name):
+		#field_values = self.factory_descriptor.discriminator_values
+		#field_types = self.factory_descriptor.discriminator_types
 
-		values = ', '.join(map(lambda value_type: self.map_to_value(name, *value_type), zip(field_values, field_types)))
-		return f'{{{name}.TRANSACTION_TYPE, {name}.Deserialize}}'
+		if self.abstract.name == "Block":
+			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'BlockType')).upper()
+		elif self.abstract.name == "Receipt":
+			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'ReceiptType')).upper()
+		else:
+			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'TransactionType')).upper()
+
+		#values = ', '.join(map(lambda value_type: self.map_to_value(name, *value_type), zip(field_values, field_types)))
+		return f'{{{name}.{t}, {name}.Deserialize}}'
 		#return f'{{{values}, {name}.Deserialize}}'
 
 	def get_deserialize_descriptor(self):
 		body = 'var position = br.BaseStream.Position;\n'
 		body += f'var {self.printer.name} = {self.printer.load()};\n'
-
-		body += f'var mapping = new Dictionary<TransactionType, Func<BinaryReader, {self.return_class}>>\n{{\n'
-
+		
+		if self.abstract.name == "Block":
+			key_type = 'BlockType'
+		elif self.abstract.name == "Receipt":
+			key_type = 'ReceiptType'
+		else:
+			key_type = 'TransactionType'
+		body += f'var mapping = new Dictionary<{key_type}, Func<BinaryReader, {self.return_class}>>\n{{\n'
+		
 		if self.factory_descriptor:
 			names = [f'{concrete.name}' for concrete in self.factory_descriptor.children]
+			if "AggregateCompleteTransactionV1" in names: 
+				names.remove("AggregateCompleteTransactionV1")
+			if "AggregateBondedTransactionV1" in names: 
+				names.remove("AggregateBondedTransactionV1")
+
 			body += indent(
 				',\n'.join(map(self.create_discriminator, names))
 			)

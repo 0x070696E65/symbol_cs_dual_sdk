@@ -701,6 +701,7 @@ public class Transaction : ITransaction {
 
 	public static Transaction Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -804,6 +805,7 @@ public class EmbeddedTransaction : IBaseTransaction {
 
 	public static EmbeddedTransaction Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -1119,6 +1121,7 @@ public class Block : IStruct {
 
 	public static Block Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -1337,6 +1340,7 @@ public class NemesisBlockV1 : IStruct {
 
 	public static NemesisBlockV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -1560,6 +1564,7 @@ public class NormalBlockV1 : IStruct {
 
 	public static NormalBlockV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -1786,6 +1791,7 @@ public class ImportanceBlockV1 : IStruct {
 
 	public static ImportanceBlockV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -2147,6 +2153,7 @@ public class Receipt : IStruct {
 
 	public static Receipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 
@@ -2219,6 +2226,7 @@ public class HarvestFeeReceipt : IStruct {
 
 	public static HarvestFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2294,6 +2302,7 @@ public class InflationReceipt : IStruct {
 
 	public static InflationReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2370,6 +2379,7 @@ public class LockHashCreatedFeeReceipt : IStruct {
 
 	public static LockHashCreatedFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2450,6 +2460,7 @@ public class LockHashCompletedFeeReceipt : IStruct {
 
 	public static LockHashCompletedFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2530,6 +2541,7 @@ public class LockHashExpiredFeeReceipt : IStruct {
 
 	public static LockHashExpiredFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2610,6 +2622,7 @@ public class LockSecretCreatedFeeReceipt : IStruct {
 
 	public static LockSecretCreatedFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2690,6 +2703,7 @@ public class LockSecretCompletedFeeReceipt : IStruct {
 
 	public static LockSecretCompletedFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2770,6 +2784,7 @@ public class LockSecretExpiredFeeReceipt : IStruct {
 
 	public static LockSecretExpiredFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -2844,6 +2859,7 @@ public class MosaicExpiredReceipt : IStruct {
 
 	public static MosaicExpiredReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var artifactId = MosaicId.Deserialize(br);
@@ -2925,6 +2941,7 @@ public class MosaicRentalFeeReceipt : IStruct {
 
 	public static MosaicRentalFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -3126,6 +3143,7 @@ public class NamespaceExpiredReceipt : IStruct {
 
 	public static NamespaceExpiredReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var artifactId = NamespaceId.Deserialize(br);
@@ -3196,6 +3214,7 @@ public class NamespaceDeletedReceipt : IStruct {
 
 	public static NamespaceDeletedReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var artifactId = NamespaceId.Deserialize(br);
@@ -3277,6 +3296,7 @@ public class NamespaceRentalFeeReceipt : IStruct {
 
 	public static NamespaceRentalFeeReceipt Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var version = br.ReadUInt16();
 		var type = ReceiptType.Deserialize(br);
 		var mosaic = Mosaic.Deserialize(br);
@@ -3826,6 +3846,7 @@ public class AccountKeyLinkTransactionV1 : ITransaction {
 
 	public static AccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -3951,6 +3972,7 @@ public class EmbeddedAccountKeyLinkTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedAccountKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -4079,6 +4101,7 @@ public class NodeKeyLinkTransactionV1 : ITransaction {
 
 	public static NodeKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -4204,6 +4227,7 @@ public class EmbeddedNodeKeyLinkTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedNodeKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -4480,6 +4504,7 @@ public class AggregateCompleteTransactionV1 : ITransaction {
 
 	public static AggregateCompleteTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -4639,6 +4664,7 @@ public class AggregateCompleteTransactionV2 : ITransaction {
 
 	public static AggregateCompleteTransactionV2 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -4798,6 +4824,7 @@ public class AggregateBondedTransactionV1 : ITransaction {
 
 	public static AggregateBondedTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -4957,6 +4984,7 @@ public class AggregateBondedTransactionV2 : ITransaction {
 
 	public static AggregateBondedTransactionV2 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -5117,6 +5145,7 @@ public class VotingKeyLinkTransactionV1 : ITransaction {
 
 	public static VotingKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -5260,6 +5289,7 @@ public class EmbeddedVotingKeyLinkTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedVotingKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -5396,6 +5426,7 @@ public class VrfKeyLinkTransactionV1 : ITransaction {
 
 	public static VrfKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -5521,6 +5552,7 @@ public class EmbeddedVrfKeyLinkTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedVrfKeyLinkTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -5655,6 +5687,7 @@ public class HashLockTransactionV1 : ITransaction {
 
 	public static HashLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -5790,6 +5823,7 @@ public class EmbeddedHashLockTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedHashLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -5995,6 +6029,7 @@ public class SecretLockTransactionV1 : ITransaction {
 
 	public static SecretLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -6148,6 +6183,7 @@ public class EmbeddedSecretLockTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedSecretLockTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -6299,6 +6335,7 @@ public class SecretProofTransactionV1 : ITransaction {
 
 	public static SecretProofTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -6445,6 +6482,7 @@ public class EmbeddedSecretProofTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedSecretProofTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -6592,6 +6630,7 @@ public class AccountMetadataTransactionV1 : ITransaction {
 
 	public static AccountMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -6736,6 +6775,7 @@ public class EmbeddedAccountMetadataTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedAccountMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -6888,6 +6928,7 @@ public class MosaicMetadataTransactionV1 : ITransaction {
 
 	public static MosaicMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -7041,6 +7082,7 @@ public class EmbeddedMosaicMetadataTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -7197,6 +7239,7 @@ public class NamespaceMetadataTransactionV1 : ITransaction {
 
 	public static NamespaceMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -7350,6 +7393,7 @@ public class EmbeddedNamespaceMetadataTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedNamespaceMetadataTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -7628,6 +7672,7 @@ public class MosaicDefinitionTransactionV1 : ITransaction {
 
 	public static MosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -7779,6 +7824,7 @@ public class EmbeddedMosaicDefinitionTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicDefinitionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -7924,6 +7970,7 @@ public class MosaicSupplyChangeTransactionV1 : ITransaction {
 
 	public static MosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -8058,6 +8105,7 @@ public class EmbeddedMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicSupplyChangeTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -8191,6 +8239,7 @@ public class MosaicSupplyRevocationTransactionV1 : ITransaction {
 
 	public static MosaicSupplyRevocationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -8317,6 +8366,7 @@ public class EmbeddedMosaicSupplyRevocationTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicSupplyRevocationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -8458,6 +8508,7 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 
 	public static MultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -8612,6 +8663,7 @@ public class EmbeddedMultisigAccountModificationTransactionV1 : IBaseTransaction
 
 	public static EmbeddedMultisigAccountModificationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -8761,6 +8813,7 @@ public class AddressAliasTransactionV1 : ITransaction {
 
 	public static AddressAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -8895,6 +8948,7 @@ public class EmbeddedAddressAliasTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedAddressAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -9032,6 +9086,7 @@ public class MosaicAliasTransactionV1 : ITransaction {
 
 	public static MosaicAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -9166,6 +9221,7 @@ public class EmbeddedMosaicAliasTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicAliasTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -9318,6 +9374,7 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 
 	public static NamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -9501,6 +9558,7 @@ public class EmbeddedNamespaceRegistrationTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedNamespaceRegistrationTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -9730,6 +9788,7 @@ public class AccountAddressRestrictionTransactionV1 : ITransaction {
 
 	public static AccountAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -9877,6 +9936,7 @@ public class EmbeddedAccountAddressRestrictionTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedAccountAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -10027,6 +10087,7 @@ public class AccountMosaicRestrictionTransactionV1 : ITransaction {
 
 	public static AccountMosaicRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -10174,6 +10235,7 @@ public class EmbeddedAccountMosaicRestrictionTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedAccountMosaicRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -10324,6 +10386,7 @@ public class AccountOperationRestrictionTransactionV1 : ITransaction {
 
 	public static AccountOperationRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -10471,6 +10534,7 @@ public class EmbeddedAccountOperationRestrictionTransactionV1 : IBaseTransaction
 
 	public static EmbeddedAccountOperationRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -10623,6 +10687,7 @@ public class MosaicAddressRestrictionTransactionV1 : ITransaction {
 
 	public static MosaicAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -10772,6 +10837,7 @@ public class EmbeddedMosaicAddressRestrictionTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicAddressRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -11018,6 +11084,7 @@ public class MosaicGlobalRestrictionTransactionV1 : ITransaction {
 
 	public static MosaicGlobalRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -11185,6 +11252,7 @@ public class EmbeddedMosaicGlobalRestrictionTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedMosaicGlobalRestrictionTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");
@@ -11354,6 +11422,7 @@ public class TransferTransactionV1 : ITransaction {
 
 	public static TransferTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var verifiableEntityHeaderReserved_1 = br.ReadUInt32();
 		if (0 != verifiableEntityHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({verifiableEntityHeaderReserved_1})");
@@ -11516,6 +11585,7 @@ public class EmbeddedTransferTransactionV1 : IBaseTransaction {
 
 	public static EmbeddedTransferTransactionV1 Deserialize(BinaryReader br) {
 		var size = br.ReadUInt32();
+		br = new BinaryReader(new MemoryStream(br.ReadBytes((int) size - 4)));
 		var embeddedTransactionHeaderReserved_1 = br.ReadUInt32();
 		if (0 != embeddedTransactionHeaderReserved_1)
 			throw new Exception($"Invalid value of reserved field ({embeddedTransactionHeaderReserved_1})");

@@ -291,6 +291,10 @@ class StructFormatter(AbstractTypeFormatter):
 			additional_statements = f'if ({field.value} != {field.extensions.printer.name})\n'
 			additional_statements += indent(f'throw new Exception($"Invalid value of reserved field ({{{field.extensions.printer.name}}})");')
 
+		if self.struct.size == field.extensions.printer.name:
+			additional_statements += f'br = new BinaryReader(new MemoryStream(br.ReadBytes((int) {field_name} - {field.extensions.printer.advancement_size()})));\n'
+			#additional_statements += f'view.shrink({field_name} - {field.extensions.printer.advancement_size()});\n'
+
 		if is_bound_size(field) and field.is_size_reference:
 			additional_statements += '// marking sizeof field\n'
 

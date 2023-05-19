@@ -171,14 +171,17 @@ namespace CatSdk.Utils
 
         public static byte[] Xor(byte[] currentMetadataValueBytes, byte[] newMetadataValueBytes)
         {
-            var length = Math.Max(currentMetadataValueBytes.Length, newMetadataValueBytes.Length);
-            for (var i = currentMetadataValueBytes.Length; i < length; i++) currentMetadataValueBytes.ToList().Add(0);
-            for (var i = newMetadataValueBytes.Length; i < length; i++) newMetadataValueBytes.ToList().Add(0);
-            var metadataNewlist = new List<byte>();
-            for (var i = 0; i < length; i++) metadataNewlist.Add((byte)(currentMetadataValueBytes[i] ^ newMetadataValueBytes[i]));
-            return metadataNewlist.ToArray();
+            int num = Math.Max(currentMetadataValueBytes.Length, newMetadataValueBytes.Length);
+            byte[] result = new byte[num];
+            for (int i = 0; i < num; i++)
+            {
+                byte firstByte = i < currentMetadataValueBytes.Length ? currentMetadataValueBytes[i] : (byte)0;
+                byte secondByte = i < newMetadataValueBytes.Length ? newMetadataValueBytes[i] : (byte)0;
+                result[i] = (byte)(firstByte ^ secondByte);
+            }
+            return result;
         }
-        
+
         public static byte[] AliasToRecipient(byte[] namespaceId, byte networkIdentifier)
         {
             // 0x91 | namespaceId on 8 bytes | 15 bytes 0-pad = 24 bytes

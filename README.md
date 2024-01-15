@@ -10,10 +10,10 @@
 https://0x070696e65.github.io/symbol_cs_dual_sdk_reference/
 
 # Usage
-Nuegtを使ってインストールしてください
-https://www.nuget.org/packages/CatSdk
-`dotnet add package CatSdk --version 1.0.7`
-
+Nuegtを使ってインストールしてください<br>
+https://www.nuget.org/packages/CatSdk<br>
+`dotnet add package CatSdk --version 1.0.7`<br>
+<br>
 nugetを使わない場合は以下でも可能です
 [Release](https://github.com/0x070696E65/symbol_cs_dual_sdk/releases) 
 よりCatSdk.dllとBouncyCastle.Crypto.dll、2つのファイルをダウンロードし、ご自身のプロジェクト等より参照を追加してください。<br>

@@ -128,7 +128,7 @@ namespace CatSdk.Utils
 
         public static byte[] Utf8ToEncryptoMessage(string input)
         {
-            var message = Encoding.UTF8.GetBytes(input);
+            var message = Converter.HexToBytes(input);
             var zero = new byte[] { 1 };
             var newArr = new byte[message.Length + 1];
             zero.CopyTo(newArr, 0);

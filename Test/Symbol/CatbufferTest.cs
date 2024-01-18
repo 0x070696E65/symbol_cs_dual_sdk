@@ -17,7 +17,7 @@ public class CatbufferTest
         return Converter.BytesToHex(d.Serialize());
     }
     [Test]public void MosaicMetadataTransaction0(){    Assert.AreEqual(Transactions.transactions[0].value, Test(Transactions.transactions[0].value, Transactions.transactions[0].func));}
-[Test]public void MosaicMetadataTransaction1(){    Assert.AreEqual(Transactions.transactions[1].value, Test(Transactions.transactions[1].value, Transactions.transactions[1].func));}
+    [Test]public void MosaicMetadataTransaction1(){    Assert.AreEqual(Transactions.transactions[1].value, Test(Transactions.transactions[1].value, Transactions.transactions[1].func));}
 [Test]public void AggregateBondedTransaction2(){    Assert.AreEqual(Transactions.transactions[2].value, Test(Transactions.transactions[2].value, Transactions.transactions[2].func));}
 [Test]public void MosaicAliasTransaction3(){    Assert.AreEqual(Transactions.transactions[3].value, Test(Transactions.transactions[3].value, Transactions.transactions[3].func));}
 [Test]public void MosaicAliasTransaction4(){    Assert.AreEqual(Transactions.transactions[4].value, Test(Transactions.transactions[4].value, Transactions.transactions[4].func));}

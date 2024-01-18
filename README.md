@@ -6,16 +6,15 @@
 もちろんUnityで使用可能です。<br>
 ※Unityのバージョンは2020.3.31, 2021.3.11は動作確認済みです。
 
-# Requirement
-<li>BouncyCastle.Crypto(1.9.0)</li>
-
-Releaseに同梱<br>
-[BouncyCastle.Crypto1.9.0](https://www.bouncycastle.org/csharp/)
-
 # Reference
 https://0x070696e65.github.io/symbol_cs_dual_sdk_reference/
 
 # Usage
+Nuegtを使ってインストールしてください<br>
+https://www.nuget.org/packages/CatSdk<br>
+`dotnet add package CatSdk --version 1.0.7`<br>
+<br>
+nugetを使わない場合は以下でも可能です
 [Release](https://github.com/0x070696E65/symbol_cs_dual_sdk/releases) 
 よりCatSdk.dllとBouncyCastle.Crypto.dll、2つのファイルをダウンロードし、ご自身のプロジェクト等より参照を追加してください。<br>
 Unityの場合はAssetsフォルダ配下に配置すれば自動で参照が追加されます。

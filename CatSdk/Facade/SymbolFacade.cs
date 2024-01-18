@@ -85,7 +85,6 @@ namespace CatSdk.Facade
         public bool VerifyTransaction(ITransaction transaction, Signature signature, PublicKey? publicKey = null)
         {
             var txByte = TransactionDataBuffer(transaction.Serialize());
-            Console.WriteLine(Converter.BytesToHex(txByte));
             if (Network.GenerationHashSeed == null) throw new Exception("GenerationHashSeed is Null");
             var newBytes = new byte[Network.GenerationHashSeed.bytes.Length + txByte.Length];
             Network.GenerationHashSeed.bytes.CopyTo(newBytes, 0);

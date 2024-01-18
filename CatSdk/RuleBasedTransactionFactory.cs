@@ -277,7 +277,8 @@ namespace CatSdk
                                 if (pi.PropertyType.FullName != propertyInfo.PropertyType.FullName || !propertyInfo.CanWrite)
                                     continue;
                                 var value = propertyInfo.GetValue(structDescriptor);
-                                dic[propertyInfo.Name] = value ?? throw new Exception("");
+                                if (value != null)
+                                    dic[propertyInfo.Name] = value;
                             }   
                         }
                     }

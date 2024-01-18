@@ -7,10 +7,34 @@ namespace CatSdk.Utils
 {
     public static class ArrayHelpers
     {
-        public static int DeepCompare(object? lhs, object? rhs)
+        public static int DeepCompare(object lhs, object rhs)
         {
-            return 0;
+            if (lhs is not (Array or byte[]))
+            {
+                if (Equals(lhs, rhs))
+                    return 0;
+                var property = lhs.GetType().GetProperty("Value");
+                if (property == null)
+                {
+                    return Comparer<object>.Default.Compare(lhs, rhs);
+                }
+                {
+                    var lhsValue = (uint)property.GetValue(lhs);
+                    var rhsValue = (uint)property.GetValue(rhs);
+                    return lhsValue > rhsValue ? 1 : -1;
+                }
+            }
+
+            var lhsArray = (Array)lhs;
+            var rhsArray = (Array)rhs;
+            
+            if (lhsArray.Length != rhsArray.Length)
+                return lhsArray.Length > rhsArray.Length ? 1 : -1;
+
+            return lhsArray.Cast<object>().Select((t, i) => 
+                DeepCompare(lhsArray.GetValue(i), rhsArray.GetValue(i))).FirstOrDefault(compareResult => compareResult != 0);
         }
+        
         private static void AddPadding(int size, BinaryWriter bw,
             int alignment)
         {

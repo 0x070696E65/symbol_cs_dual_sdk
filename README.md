@@ -1,7 +1,6 @@
 # SymbolCsDualSDK
 # Features
 ブロックチェーンSymbolとNEMを一つのSDKで両方使えるC#用SDKです。<br>
-***[注意]現在NEMは使えません!!***<br>
 <br>
 もちろんUnityで使用可能です。<br>
 ※Unityのバージョンは2020.3.31, 2021.3.11は動作確認済みです。

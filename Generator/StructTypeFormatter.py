@@ -62,10 +62,13 @@ class StructFormatter(AbstractTypeFormatter):
 		return filter(is_const, self.struct.fields)
 
 	def non_reserved_fields(self):
-		return filter_size_if_first(filterfalse(is_bound_size, filterfalse(is_reserved, self.non_const_fields())))
+		return filter_size_if_first(filterfalse(is_computed, filterfalse(is_bound_size, filterfalse(is_reserved, self.non_const_fields()))))
 
 	def reserved_fields(self):
 		return filter(is_reserved, self.non_const_fields())
+
+	def computed_fields(self):
+		return filter(is_computed, self.non_const_fields())
 
 	@property
 	def typename(self):
@@ -73,9 +76,13 @@ class StructFormatter(AbstractTypeFormatter):
 
 	def field_name(self, field, object_name='this'):
 		name = pascal_name(field.extensions.printer.name)
-		if "Message" == name and "Message" == self.typename:
-			name = "MessageField"
-		return name
+		if is_computed(field):
+			# add _computed postfix for easier filtering in bespoke code
+			return f'{name}Computed'
+		
+		if name == self.typename:
+			name += 'Field'
+		return f'{name}'
 
 	@staticmethod
 	def generate_class_field(field):
@@ -150,7 +157,7 @@ class StructFormatter(AbstractTypeFormatter):
 			if const_field.name.lower().endswith(field.name):
 				return const_field
 		return None
-
+	
 	def get_ctor_descriptor(self):
 		arguments = []
 
@@ -159,9 +166,20 @@ class StructFormatter(AbstractTypeFormatter):
 			const_field = self.get_paired_const_field(field)
 			field_name = self.field_name(field)
 			if const_field:
-				body += f'{field_name} = {const_field.name};\n'
+				body += f'{field_name} = {self.typename}.{const_field.name};\n'
 			else:
-				body += f'{field_name} = {field.extensions.printer.get_default_value()};\n'
+				value = field.extensions.printer.get_default_value()
+				if field.is_conditional:
+					conditional = field.value
+					condition_field_name = conditional.linked_field_name
+					condition_field = next(f for f in self.non_const_fields() if condition_field_name == f.name)
+					condition_model = condition_field.extensions.type_model
+
+					# only initialize default implicit union field in constructor
+					if f'{condition_model.name}.{conditional.value}' != condition_field.extensions.printer.get_default_value():
+						value = 'null'  # needs to be null or else field will not be destination when copying descriptor properties
+
+				body += f'{field_name} = {value};\n'
 
 		body += '\n'.join(
 			map(
@@ -178,19 +196,19 @@ class StructFormatter(AbstractTypeFormatter):
 	def get_comparer_descriptor(self):
 		if not self.struct.comparer:
 			return None
-
-		body = 'return [\n'
+		
+		body = 'return new object[] {\n'
 		for (property_name, transform) in self.struct.comparer:
 			body += '\t'
 			if not transform:
-				body += f'this.{lang_field_name(property_name)}'
+				body += f'{pascal_name(lang_field_name(property_name))}'
 			else:
-				body += f'{lang_field_name(transform).replace("_", "")}(this.{lang_field_name(property_name)}.bytes)'
+				body += f'Transform.{pascal_name(lang_field_name(transform).replace("_", ""))}({pascal_name(lang_field_name(property_name))}.Serialize())'
 
 			body += ',\n'
 
 		body = body[:-2]  # strip trailing comma
-		body += '\n];'
+		body += '\n};'
 
 		return MethodDescriptor(body=body)
 
@@ -224,14 +242,15 @@ class StructFormatter(AbstractTypeFormatter):
 		if conditional.operation in ['not in', 'in']:
 			return f'if ({condition_operator}{display_condition_field_name}.has({yoda_value}))'
 		
+		field_postfix = 'Computed' if prefix_field and is_computed(condition_field) else ''
 		if prefix_field:
 			if yoda_value.isdecimal():
-				return f'if ({yoda_value} {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]})'
+				return f'if ({yoda_value} {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]}{field_postfix})'
 			else:
 				return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name[:1].upper() + display_condition_field_name[1:]}.Value)'
 		else :
 			if yoda_value.isdecimal():
-				return f'if ({yoda_value} {condition_operator} {display_condition_field_name})'
+				return f'if ({yoda_value} {condition_operator} {display_condition_field_name}{field_postfix})'
 			else:
 				return f'if ({yoda_value}.Value {condition_operator} {display_condition_field_name}.Value)'
 		#return f'if ({yoda_value} {condition_operator} {display_condition_field_name})'
@@ -436,9 +455,6 @@ class StructFormatter(AbstractTypeFormatter):
 		else:
 			size_field = field.extensions.printer.get_size()
 
-		#if "Message" == self.typename:
-		#	size_field.replace("Message", "MessageField")
-
 		return indent_if_conditional(condition, f'size += {size_field};\n')
 
 	def get_size_descriptor(self):
@@ -456,11 +472,37 @@ class StructFormatter(AbstractTypeFormatter):
 			class_name = 'IBaseTransaction[]'
 		elif self.field_name(field) == 'InnerTransaction':
 			class_name = 'IBaseTransaction'
-		method_descriptor = MethodDescriptor(
-			method_name=f'public {class_name} {self.field_name(field)} {{ get; set; }}',
-			note='getter_setter',
-		)
+
+		note='getter_setter'
+		if is_computed(field):
+			sizeref = field.field_type.sizeref
+			body = f'get {{ return {pascal_name(sizeref.property_name)} != null ? {pascal_name(sizeref.property_name)}.Size + 0 : 0; }}'
+		else:
+			body = f'get; set;'
+
+		except_null = ''
+		if field.is_conditional:
+			conditional = field.value
+			condition_field_name = conditional.linked_field_name
+			condition_field = next(f for f in self.non_const_fields() if condition_field_name == f.name)
+			condition_model = condition_field.extensions.type_model
+			if f'{condition_model.name}.{conditional.value}' != condition_field.extensions.printer.get_default_value():
+				except_null = '?'
+
+		method_name = f'public {class_name}{except_null} {self.field_name(field)}'
+		method_descriptor = MethodDescriptor(method_name=method_name, body=body, note=note)
 		return method_descriptor
+	"""
+if field.is_conditional:
+					conditional = field.value
+					condition_field_name = conditional.linked_field_name
+					condition_field = next(f for f in self.non_const_fields() if condition_field_name == f.name)
+					condition_model = condition_field.extensions.type_model
+
+					# only initialize default implicit union field in constructor
+					if f'{condition_model.name}.{conditional.value}' != condition_field.extensions.printer.get_default_value():
+						value = 'null'  # needs to be null or else field will not be destination when copying descriptor properties
+	"""
 
 	def create_getter_descriptor(self, field):
 		method_descriptor = MethodDescriptor(
@@ -480,6 +522,9 @@ class StructFormatter(AbstractTypeFormatter):
 	def get_getter_setter_descriptors(self):
 		descriptors = []
 		for field in self.non_reserved_fields():
+			descriptors.append(self.create_getter_setter_descriptor(field))
+
+		for field in self.computed_fields():
 			descriptors.append(self.create_getter_setter_descriptor(field))
 		return descriptors
 

@@ -38,8 +38,8 @@ class FactoryClassFormatter(ClassFormatter):
 
 	def generate_methods(self):
 		methods = []
-		#getters_setters = self.generate_getters_setters()
-		#methods.extend(getters_setters)
+		getters_setters = self.generate_getters_setters()
+		methods.extend(getters_setters)
 		methods.append(self.generate_deserializer())
 		methods.append(self.generate_deserializer2())
 		methods.append(self.generate_create_by_name())
@@ -76,25 +76,20 @@ class FactoryFormatter(AbstractTypeFormatter):
 
 	@staticmethod
 	def map_to_value(name, value, field_type):
-		return f'{name}.{value}'# if isinstance(field_type, FixedSizeInteger) else f'{name}.{value}.value'
+		if isinstance(field_type, FixedSizeInteger):
+			return f'{name}.{value}'
+		else:
+			return f'{name}.{value}.Value'
 
 	def get_base_class(self):
 		return ''
 
 	def create_discriminator(self ,name):
-		#field_values = self.factory_descriptor.discriminator_values
-		#field_types = self.factory_descriptor.discriminator_types
+		field_values = self.factory_descriptor.discriminator_values
+		field_types = self.factory_descriptor.discriminator_types
 
-		if self.abstract.name == "Block":
-			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'BlockType')).upper()
-		elif self.abstract.name == "Receipt":
-			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'ReceiptType')).upper()
-		else:
-			t = '_'.join(re.findall(r'[A-Z][a-z]*', 'TransactionType')).upper()
-
-		#values = ', '.join(map(lambda value_type: self.map_to_value(name, *value_type), zip(field_values, field_types)))
-		return f'{{{name}.{t}, {name}.Deserialize}}'
-		#return f'{{{values}, {name}.Deserialize}}'
+		values = ', '.join(map(lambda value_type: self.map_to_value(name, *value_type), zip(field_values, field_types)))
+		return f'{{ToKey(new uint[]{{{values}}}), {name}.Deserialize}}'
 
 	def get_deserialize_descriptor(self):
 		body = 'var position = br.BaseStream.Position;\n'
@@ -106,14 +101,10 @@ class FactoryFormatter(AbstractTypeFormatter):
 			key_type = 'ReceiptType'
 		else:
 			key_type = 'TransactionType'
-		body += f'var mapping = new Dictionary<{key_type}, Func<BinaryReader, {self.return_class}>>\n{{\n'
+		body += f'var mapping = new Dictionary<ulong, Func<BinaryReader, {self.return_class}>>\n{{\n'
 		
 		if self.factory_descriptor:
 			names = [f'{concrete.name}' for concrete in self.factory_descriptor.children]
-			if "AggregateCompleteTransactionV1" in names: 
-				names.remove("AggregateCompleteTransactionV1")
-			if "AggregateBondedTransactionV1" in names: 
-				names.remove("AggregateBondedTransactionV1")
 
 			body += indent(
 				',\n'.join(map(self.create_discriminator, names))
@@ -121,7 +112,7 @@ class FactoryFormatter(AbstractTypeFormatter):
 
 		body += '};\n'
 		body += 'br.BaseStream.Position = position;\n'
-		body += 'return mapping[parent.Type](br);'
+		body += 'return mapping[ToKey(new uint[]{parent.Type.Value, parent.Version})](br);'
 
 		return MethodDescriptor(body=body)
 
@@ -139,7 +130,6 @@ class FactoryFormatter(AbstractTypeFormatter):
 			',\n'.join(
 				map(
 					lambda child: f'{{"{skip_embedded(underline_name(child.name))}", new {child.name}()}}',
-					#lambda child: f'{{{skip_embedded(child.name)}.TRANSACTION_TYPE, new {child.name}()}}',
 					{} if not self.factory_descriptor else self.factory_descriptor.children
 				)
 			)
@@ -159,11 +149,11 @@ class FactoryFormatter(AbstractTypeFormatter):
 	def get_getter_setter_descriptors(self):
 		# toKey is a helper method that is used to create map keys, that are used inside factory's deserialize method
 		methods = []
-		body = '''if (1 === values.length)
-	return values[0];
+		body = '''if (values.Length == 1)
+	return (ulong)values[0];
 
 // assume each key is at most 32bits
-return values.map(n => BigInt(n)).reduce((accumulator, value) => (accumulator << 32n) + value);
+return values.Aggregate(0UL, (accumulator, value) => (accumulator << 32) + (ulong)value);
 '''
-		methods.append(MethodDescriptor(method_name='static toKey', arguments=['values'], body=body))
+		methods.append(MethodDescriptor(method_name='public static ulong ToKey', arguments=['uint[] values'], body=body))
 		return methods

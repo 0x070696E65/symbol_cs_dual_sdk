@@ -32,7 +32,7 @@ class ClassFormatter(ABC):
 		if method_descriptor.note == 'size':
 			return f'{method_descriptor.method_name} {{\n{body}}}\n'
 		if method_descriptor.note == 'getter_setter':
-			return f'{method_descriptor.method_name}\n'
+			return f'{method_descriptor.method_name} {{\n{body}}}\n'
 		return f'{method_descriptor.method_name}({arguments}){method_descriptor.base} {{\n{body}}}\n'
 
 	def generate_class_header(self):
@@ -86,7 +86,7 @@ class TypeFormatter(ClassFormatter):
 		if not method_descriptor:
 			return None
 
-		method_descriptor.method_name = 'Comparer'
+		method_descriptor.method_name = 'public object[] Comparer'
 		method_descriptor.arguments = []
 		return self.generate_method(method_descriptor)
 		
@@ -151,7 +151,7 @@ class TypeFormatter(ClassFormatter):
 		methods = []
 
 		_append_if_not_none(methods, self.generate_ctor())
-		#_append_if_not_none(methods, self.generate_comparer())
+		_append_if_not_none(methods, self.generate_comparer())
 		_append_if_not_none(methods, self.generate_sort())
 
 		methods.extend(self.generate_getters_setters())

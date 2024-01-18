@@ -110,6 +110,11 @@ Desktop.ini
 CatSdk/Doxyfile
 CatSdk/reference
 CatSdk/latex
+CatSdk/obj
+CatSdk/bin
 
 #ConsoleApp
 ConsoleApp
+
+**/bin
+**/obj

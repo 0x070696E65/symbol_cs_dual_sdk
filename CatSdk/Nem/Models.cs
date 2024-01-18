@@ -269,21 +269,37 @@ public class Transaction : ITransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -396,19 +412,33 @@ public class NonVerifiableTransaction : IBaseTransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -560,8 +590,8 @@ public class AccountKeyLinkTransactionV1 : ITransaction {
 	};
 
 	public AccountKeyLinkTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = AccountKeyLinkTransactionV1.TRANSACTION_TYPE;
+		Version = AccountKeyLinkTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -579,25 +609,45 @@ public class AccountKeyLinkTransactionV1 : ITransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public LinkAction LinkAction { get; set; }
+	public LinkAction LinkAction {
+		get; set;
+	}
 
-	public PublicKey RemotePublicKey { get; set; }
+	public PublicKey RemotePublicKey {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -718,8 +768,8 @@ public class NonVerifiableAccountKeyLinkTransactionV1 : IBaseTransaction {
 	};
 
 	public NonVerifiableAccountKeyLinkTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -735,23 +785,41 @@ public class NonVerifiableAccountKeyLinkTransactionV1 : IBaseTransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public LinkAction LinkAction { get; set; }
+	public LinkAction LinkAction {
+		get; set;
+	}
 
-	public PublicKey RemotePublicKey { get; set; }
+	public PublicKey RemotePublicKey {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -854,7 +922,9 @@ public class NamespaceId : IStruct {
 	public void Sort() {
 	}
 
-	public byte[] Name { get; set; }
+	public byte[] Name {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -908,9 +978,13 @@ public class MosaicId : IStruct {
 		NamespaceId.Sort();
 	}
 
-	public NamespaceId NamespaceId { get; set; }
+	public NamespaceId NamespaceId {
+		get; set;
+	}
 
-	public byte[] Name { get; set; }
+	public byte[] Name {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -969,9 +1043,13 @@ public class Mosaic : IStruct {
 		MosaicId.Sort();
 	}
 
-	public MosaicId MosaicId { get; set; }
+	public MosaicId MosaicId {
+		get; set;
+	}
 
-	public Amount Amount { get; set; }
+	public Amount Amount {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1029,7 +1107,9 @@ public class SizePrefixedMosaic : IStruct {
 		Mosaic.Sort();
 	}
 
-	public Mosaic Mosaic { get; set; }
+	public Mosaic Mosaic {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1144,13 +1224,21 @@ public class MosaicLevy : IStruct {
 		MosaicId.Sort();
 	}
 
-	public MosaicTransferFeeType TransferFeeType { get; set; }
+	public MosaicTransferFeeType TransferFeeType {
+		get; set;
+	}
 
-	public Address RecipientAddress { get; set; }
+	public Address RecipientAddress {
+		get; set;
+	}
 
-	public MosaicId MosaicId { get; set; }
+	public MosaicId MosaicId {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1224,9 +1312,13 @@ public class MosaicProperty : IStruct {
 	public void Sort() {
 	}
 
-	public byte[] Name { get; set; }
+	public byte[] Name {
+		get; set;
+	}
 
-	public byte[] Value { get; set; }
+	public byte[] Value {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1286,7 +1378,9 @@ public class SizePrefixedMosaicProperty : IStruct {
 		Property.Sort();
 	}
 
-	public MosaicProperty Property { get; set; }
+	public MosaicProperty Property {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1341,28 +1435,39 @@ public class MosaicDefinition : IStruct {
 		Id = new MosaicId();
 		Description = Array.Empty<byte>();
 		Properties = Array.Empty<SizePrefixedMosaicProperty>();
-		LevySize = 0;
-		Levy = new MosaicLevy();
+		Levy = null;
 		OwnerPublicKeySize = 32; // reserved field
 	}
 
 	public void Sort() {
 		Id.Sort();
-		if (0 != LevySize)
+		if (0 != LevySizeComputed)
 			Levy.Sort();
 	}
 
-	public PublicKey OwnerPublicKey { get; set; }
+	public PublicKey OwnerPublicKey {
+		get; set;
+	}
 
-	public MosaicId Id { get; set; }
+	public MosaicId Id {
+		get; set;
+	}
 
-	public byte[] Description { get; set; }
+	public byte[] Description {
+		get; set;
+	}
 
-	public SizePrefixedMosaicProperty[] Properties { get; set; }
+	public SizePrefixedMosaicProperty[] Properties {
+		get; set;
+	}
 
-	public uint LevySize { get; set; }
+	public MosaicLevy? Levy {
+		get; set;
+	}
 
-	public MosaicLevy Levy { get; set; }
+	public uint LevySizeComputed {
+		get { return Levy != null ? Levy.Size + 0 : 0; }
+	}
 
 	public uint Size {
 		get {
@@ -1376,7 +1481,7 @@ public class MosaicDefinition : IStruct {
 			size += 4;
 			size += ArrayHelpers.Size(Properties);
 			size += 4;
-			if (0 != LevySize)
+			if (0 != LevySizeComputed)
 				size += Levy.Size;
 
 			return size;
@@ -1409,7 +1514,6 @@ public class MosaicDefinition : IStruct {
 			Id = id,
 			Description = description,
 			Properties = properties,
-			LevySize = levySize,
 			Levy = levy
 		};
 		return instance;
@@ -1426,8 +1530,8 @@ public class MosaicDefinition : IStruct {
 		bw.Write(Description); 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Properties.Length));  // bound: properties_count
 		ArrayHelpers.WriteArray(bw, Properties);
-		bw.Write(BitConverter.GetBytes((uint)(uint)LevySize)); 
-		if (0 != LevySize)
+		bw.Write(BitConverter.GetBytes((uint)(uint)LevySizeComputed)); 
+		if (0 != LevySizeComputed)
 			bw.Write(Levy.Serialize()); 
 
 		return ms.ToArray();
@@ -1439,8 +1543,7 @@ public class MosaicDefinition : IStruct {
 		result += $"id: {Id}, ";
 		result += $"description: hex({Converter.BytesToHex(Description)}), ";
 		result += $"properties: [{string.Join(",", Properties.Select(e => e.ToString()))}], ";
-		result += $"levySize: {Converter.ToString(LevySize)}, ";
-		if (0 != LevySize)
+		if (0 != LevySizeComputed)
 			result += $"levy: {Levy}, ";
 
 		result += ")";
@@ -1472,8 +1575,8 @@ public class MosaicDefinitionTransactionV1 : ITransaction {
 	};
 
 	public MosaicDefinitionTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = MosaicDefinitionTransactionV1.TRANSACTION_TYPE;
+		Version = MosaicDefinitionTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -1493,27 +1596,49 @@ public class MosaicDefinitionTransactionV1 : ITransaction {
 		MosaicDefinition.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public MosaicDefinition MosaicDefinition { get; set; }
+	public MosaicDefinition MosaicDefinition {
+		get; set;
+	}
 
-	public Address RentalFeeSink { get; set; }
+	public Address RentalFeeSink {
+		get; set;
+	}
 
-	public Amount RentalFee { get; set; }
+	public Amount RentalFee {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1644,8 +1769,8 @@ public class NonVerifiableMosaicDefinitionTransactionV1 : IBaseTransaction {
 	};
 
 	public NonVerifiableMosaicDefinitionTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -1663,25 +1788,45 @@ public class NonVerifiableMosaicDefinitionTransactionV1 : IBaseTransaction {
 		MosaicDefinition.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public MosaicDefinition MosaicDefinition { get; set; }
+	public MosaicDefinition MosaicDefinition {
+		get; set;
+	}
 
-	public Address RentalFeeSink { get; set; }
+	public Address RentalFeeSink {
+		get; set;
+	}
 
-	public Amount RentalFee { get; set; }
+	public Amount RentalFee {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -1857,8 +2002,8 @@ public class MosaicSupplyChangeTransactionV1 : ITransaction {
 	};
 
 	public MosaicSupplyChangeTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE;
+		Version = MosaicSupplyChangeTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -1877,27 +2022,49 @@ public class MosaicSupplyChangeTransactionV1 : ITransaction {
 		MosaicId.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public MosaicId MosaicId { get; set; }
+	public MosaicId MosaicId {
+		get; set;
+	}
 
-	public MosaicSupplyChangeAction Action { get; set; }
+	public MosaicSupplyChangeAction Action {
+		get; set;
+	}
 
-	public Amount Delta { get; set; }
+	public Amount Delta {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2022,8 +2189,8 @@ public class NonVerifiableMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 	};
 
 	public NonVerifiableMosaicSupplyChangeTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2040,25 +2207,45 @@ public class NonVerifiableMosaicSupplyChangeTransactionV1 : IBaseTransaction {
 		MosaicId.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public MosaicId MosaicId { get; set; }
+	public MosaicId MosaicId {
+		get; set;
+	}
 
-	public MosaicSupplyChangeAction Action { get; set; }
+	public MosaicSupplyChangeAction Action {
+		get; set;
+	}
 
-	public Amount Delta { get; set; }
+	public Amount Delta {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2220,12 +2407,23 @@ public class MultisigAccountModification : IStruct {
 		CosignatoryPublicKeySize = 32; // reserved field
 	}
 
+	public object[] Comparer() {
+		return new object[] {
+			ModificationType,
+			Transform.RipemdKeccak256(CosignatoryPublicKey.Serialize())
+		};
+	}
+
 	public void Sort() {
 	}
 
-	public MultisigAccountModificationType ModificationType { get; set; }
+	public MultisigAccountModificationType ModificationType {
+		get; set;
+	}
 
-	public PublicKey CosignatoryPublicKey { get; set; }
+	public PublicKey CosignatoryPublicKey {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2284,7 +2482,9 @@ public class SizePrefixedMultisigAccountModification : IStruct {
 		Modification.Sort();
 	}
 
-	public MultisigAccountModification Modification { get; set; }
+	public MultisigAccountModification Modification {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2344,8 +2544,8 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 	};
 
 	public MultisigAccountModificationTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = MultisigAccountModificationTransactionV1.TRANSACTION_TYPE;
+		Version = MultisigAccountModificationTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2360,32 +2560,49 @@ public class MultisigAccountModificationTransactionV1 : ITransaction {
 
 	public void Sort() {
 		Array.Sort(Modifications, (lhs, rhs) => {
-		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
-		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
-		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
-		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+			var comparerMethod = lhs.Modification.GetType().GetMethod("Comparer");	return comparerMethod != null
+				? ArrayHelpers.DeepCompare(comparerMethod.Invoke(lhs.Modification, new object[] { }),
+					comparerMethod.Invoke(rhs.Modification, new object[] { }))
+				: ArrayHelpers.DeepCompare(lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException(),
+		rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException());
 		});
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+	public SizePrefixedMultisigAccountModification[] Modifications {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2497,8 +2714,8 @@ public class NonVerifiableMultisigAccountModificationTransactionV1 : IBaseTransa
 	};
 
 	public NonVerifiableMultisigAccountModificationTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2511,30 +2728,45 @@ public class NonVerifiableMultisigAccountModificationTransactionV1 : IBaseTransa
 
 	public void Sort() {
 		Array.Sort(Modifications, (lhs, rhs) => {
-		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
-		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
-		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
-		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+			var comparerMethod = lhs.Modification.GetType().GetMethod("Comparer");	return comparerMethod != null
+				? ArrayHelpers.DeepCompare(comparerMethod.Invoke(lhs.Modification, new object[] { }),
+					comparerMethod.Invoke(rhs.Modification, new object[] { }))
+				: ArrayHelpers.DeepCompare(lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException(),
+		rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException());
 		});
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+	public SizePrefixedMultisigAccountModification[] Modifications {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2639,8 +2871,8 @@ public class MultisigAccountModificationTransactionV2 : ITransaction {
 	};
 
 	public MultisigAccountModificationTransactionV2() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = MultisigAccountModificationTransactionV2.TRANSACTION_TYPE;
+		Version = MultisigAccountModificationTransactionV2.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2657,34 +2889,53 @@ public class MultisigAccountModificationTransactionV2 : ITransaction {
 
 	public void Sort() {
 		Array.Sort(Modifications, (lhs, rhs) => {
-		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
-		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
-		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
-		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+			var comparerMethod = lhs.Modification.GetType().GetMethod("Comparer");	return comparerMethod != null
+				? ArrayHelpers.DeepCompare(comparerMethod.Invoke(lhs.Modification, new object[] { }),
+					comparerMethod.Invoke(rhs.Modification, new object[] { }))
+				: ArrayHelpers.DeepCompare(lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException(),
+		rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException());
 		});
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+	public SizePrefixedMultisigAccountModification[] Modifications {
+		get; set;
+	}
 
-	public uint MinApprovalDelta { get; set; }
+	public uint MinApprovalDelta {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2807,8 +3058,8 @@ public class NonVerifiableMultisigAccountModificationTransactionV2 : IBaseTransa
 	};
 
 	public NonVerifiableMultisigAccountModificationTransactionV2() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_TYPE;
+		Version = NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2823,32 +3074,49 @@ public class NonVerifiableMultisigAccountModificationTransactionV2 : IBaseTransa
 
 	public void Sort() {
 		Array.Sort(Modifications, (lhs, rhs) => {
-		return ((ulong) ((lhs.Modification.GetType().GetMethod("Comparer") != null
-		? lhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))
-		.CompareTo((ulong) ((rhs.Modification.GetType().GetMethod("Comparer") != null
-		? rhs.Modification.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {})
-		: rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));
+			var comparerMethod = lhs.Modification.GetType().GetMethod("Comparer");	return comparerMethod != null
+				? ArrayHelpers.DeepCompare(comparerMethod.Invoke(lhs.Modification, new object[] { }),
+					comparerMethod.Invoke(rhs.Modification, new object[] { }))
+				: ArrayHelpers.DeepCompare(lhs.Modification.GetType().GetField("Value").GetValue(lhs.Modification) ?? throw new InvalidOperationException(),
+		rhs.Modification.GetType().GetField("Value").GetValue(rhs.Modification) ?? throw new InvalidOperationException());
 		});
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public SizePrefixedMultisigAccountModification[] Modifications { get; set; }
+	public SizePrefixedMultisigAccountModification[] Modifications {
+		get; set;
+	}
 
-	public uint MinApprovalDelta { get; set; }
+	public uint MinApprovalDelta {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -2966,8 +3234,8 @@ public class CosignatureV1 : ITransaction {
 	};
 
 	public CosignatureV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = CosignatureV1.TRANSACTION_TYPE;
+		Version = CosignatureV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -2987,25 +3255,45 @@ public class CosignatureV1 : ITransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Hash256 MultisigTransactionHash { get; set; }
+	public Hash256 MultisigTransactionHash {
+		get; set;
+	}
 
-	public Address MultisigAccountAddress { get; set; }
+	public Address MultisigAccountAddress {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3129,7 +3417,9 @@ public class SizePrefixedCosignatureV1 : IStruct {
 		Cosignature.Sort();
 	}
 
-	public CosignatureV1 Cosignature { get; set; }
+	public CosignatureV1 Cosignature {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3190,8 +3480,8 @@ public class MultisigTransactionV1 : ITransaction {
 	};
 
 	public MultisigTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = MultisigTransactionV1.TRANSACTION_TYPE;
+		Version = MultisigTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -3209,25 +3499,45 @@ public class MultisigTransactionV1 : ITransaction {
 		InnerTransaction.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public IBaseTransaction InnerTransaction { get; set; }
+	public IBaseTransaction InnerTransaction {
+		get; set;
+	}
 
-	public SizePrefixedCosignatureV1[] Cosignatures { get; set; }
+	public SizePrefixedCosignatureV1[] Cosignatures {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3348,8 +3658,8 @@ public class NonVerifiableMultisigTransactionV1 : IBaseTransaction {
 	};
 
 	public NonVerifiableMultisigTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableMultisigTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableMultisigTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -3364,21 +3674,37 @@ public class NonVerifiableMultisigTransactionV1 : IBaseTransaction {
 		InnerTransaction.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public IBaseTransaction InnerTransaction { get; set; }
+	public IBaseTransaction InnerTransaction {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3487,8 +3813,8 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 	};
 
 	public NamespaceRegistrationTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NamespaceRegistrationTransactionV1.TRANSACTION_TYPE;
+		Version = NamespaceRegistrationTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -3498,7 +3824,7 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 		RentalFeeSink = new Address();
 		RentalFee = new Amount();
 		Name = Array.Empty<byte>();
-		ParentName = Array.Empty<byte>();
+		ParentName = null;
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
@@ -3508,29 +3834,53 @@ public class NamespaceRegistrationTransactionV1 : ITransaction {
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RentalFeeSink { get; set; }
+	public Address RentalFeeSink {
+		get; set;
+	}
 
-	public Amount RentalFee { get; set; }
+	public Amount RentalFee {
+		get; set;
+	}
 
-	public byte[] Name { get; set; }
+	public byte[] Name {
+		get; set;
+	}
 
-	public byte[] ParentName { get; set; }
+	public byte[]? ParentName {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3680,8 +4030,8 @@ public class NonVerifiableNamespaceRegistrationTransactionV1 : IBaseTransaction 
 	};
 
 	public NonVerifiableNamespaceRegistrationTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -3690,7 +4040,7 @@ public class NonVerifiableNamespaceRegistrationTransactionV1 : IBaseTransaction 
 		RentalFeeSink = new Address();
 		RentalFee = new Amount();
 		Name = Array.Empty<byte>();
-		ParentName = Array.Empty<byte>();
+		ParentName = null;
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		RentalFeeSinkSize = 40; // reserved field
@@ -3699,27 +4049,49 @@ public class NonVerifiableNamespaceRegistrationTransactionV1 : IBaseTransaction 
 	public void Sort() {
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RentalFeeSink { get; set; }
+	public Address RentalFeeSink {
+		get; set;
+	}
 
-	public Amount RentalFee { get; set; }
+	public Amount RentalFee {
+		get; set;
+	}
 
-	public byte[] Name { get; set; }
+	public byte[] Name {
+		get; set;
+	}
 
-	public byte[] ParentName { get; set; }
+	public byte[]? ParentName {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3905,9 +4277,13 @@ public class Message : IStruct {
 	public void Sort() {
 	}
 
-	public MessageType MessageType { get; set; }
+	public MessageType MessageType {
+		get; set;
+	}
 
-	public byte[] MessageField { get; set; }
+	public byte[] MessageField {
+		get; set;
+	}
 
 	public uint Size {
 		get {
@@ -3974,8 +4350,8 @@ public class TransferTransactionV1 : ITransaction {
 	};
 
 	public TransferTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = TransferTransactionV1.TRANSACTION_TYPE;
+		Version = TransferTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -3984,8 +4360,7 @@ public class TransferTransactionV1 : ITransaction {
 		Deadline = new Timestamp();
 		RecipientAddress = new Address();
 		Amount = new Amount();
-		MessageEnvelopeSize = 0;
-		Message = new Message();
+		Message = null;
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		SignatureSize = 64; // reserved field
@@ -3993,33 +4368,57 @@ public class TransferTransactionV1 : ITransaction {
 	}
 
 	public void Sort() {
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			Message.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RecipientAddress { get; set; }
+	public Address RecipientAddress {
+		get; set;
+	}
 
-	public Amount Amount { get; set; }
+	public Amount Amount {
+		get; set;
+	}
 
-	public uint MessageEnvelopeSize { get; set; }
+	public Message? Message {
+		get; set;
+	}
 
-	public Message Message { get; set; }
+	public uint MessageEnvelopeSizeComputed {
+		get { return Message != null ? Message.Size + 0 : 0; }
+	}
 
 	public uint Size {
 		get {
@@ -4039,7 +4438,7 @@ public class TransferTransactionV1 : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0 != MessageEnvelopeSize)
+			if (0 != MessageEnvelopeSizeComputed)
 				size += Message.Size;
 
 			return size;
@@ -4089,7 +4488,6 @@ public class TransferTransactionV1 : ITransaction {
 			Deadline = deadline,
 			RecipientAddress = recipientAddress,
 			Amount = amount,
-			MessageEnvelopeSize = messageEnvelopeSize,
 			Message = message
 		};
 		return instance;
@@ -4112,8 +4510,8 @@ public class TransferTransactionV1 : ITransaction {
 		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
-		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0 != MessageEnvelopeSize)
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSizeComputed)); 
+		if (0 != MessageEnvelopeSizeComputed)
 			bw.Write(Message.Serialize()); 
 
 		return ms.ToArray();
@@ -4131,8 +4529,7 @@ public class TransferTransactionV1 : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
-		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			result += $"message: {Message}, ";
 
 		result += ")";
@@ -4162,8 +4559,8 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 	};
 
 	public NonVerifiableTransferTransactionV1() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableTransferTransactionV1.TRANSACTION_TYPE;
+		Version = NonVerifiableTransferTransactionV1.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -4171,39 +4568,60 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 		Deadline = new Timestamp();
 		RecipientAddress = new Address();
 		Amount = new Amount();
-		MessageEnvelopeSize = 0;
-		Message = new Message();
+		Message = null;
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
 		RecipientAddressSize = 40; // reserved field
 	}
 
 	public void Sort() {
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			Message.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RecipientAddress { get; set; }
+	public Address RecipientAddress {
+		get; set;
+	}
 
-	public Amount Amount { get; set; }
+	public Amount Amount {
+		get; set;
+	}
 
-	public uint MessageEnvelopeSize { get; set; }
+	public Message? Message {
+		get; set;
+	}
 
-	public Message Message { get; set; }
+	public uint MessageEnvelopeSizeComputed {
+		get { return Message != null ? Message.Size + 0 : 0; }
+	}
 
 	public uint Size {
 		get {
@@ -4221,7 +4639,7 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0 != MessageEnvelopeSize)
+			if (0 != MessageEnvelopeSizeComputed)
 				size += Message.Size;
 
 			return size;
@@ -4266,7 +4684,6 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 			Deadline = deadline,
 			RecipientAddress = recipientAddress,
 			Amount = amount,
-			MessageEnvelopeSize = messageEnvelopeSize,
 			Message = message
 		};
 		return instance;
@@ -4287,8 +4704,8 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
-		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0 != MessageEnvelopeSize)
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSizeComputed)); 
+		if (0 != MessageEnvelopeSizeComputed)
 			bw.Write(Message.Serialize()); 
 
 		return ms.ToArray();
@@ -4305,8 +4722,7 @@ public class NonVerifiableTransferTransactionV1 : IBaseTransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
-		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			result += $"message: {Message}, ";
 
 		result += ")";
@@ -4339,8 +4755,8 @@ public class TransferTransactionV2 : ITransaction {
 	};
 
 	public TransferTransactionV2() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = TransferTransactionV2.TRANSACTION_TYPE;
+		Version = TransferTransactionV2.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -4349,8 +4765,7 @@ public class TransferTransactionV2 : ITransaction {
 		Deadline = new Timestamp();
 		RecipientAddress = new Address();
 		Amount = new Amount();
-		MessageEnvelopeSize = 0;
-		Message = new Message();
+		Message = null;
 		Mosaics = Array.Empty<SizePrefixedMosaic>();
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
@@ -4359,35 +4774,61 @@ public class TransferTransactionV2 : ITransaction {
 	}
 
 	public void Sort() {
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			Message.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Signature Signature { get; set; }
+	public Signature Signature {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RecipientAddress { get; set; }
+	public Address RecipientAddress {
+		get; set;
+	}
 
-	public Amount Amount { get; set; }
+	public Amount Amount {
+		get; set;
+	}
 
-	public uint MessageEnvelopeSize { get; set; }
+	public Message? Message {
+		get; set;
+	}
 
-	public Message Message { get; set; }
+	public SizePrefixedMosaic[] Mosaics {
+		get; set;
+	}
 
-	public SizePrefixedMosaic[] Mosaics { get; set; }
+	public uint MessageEnvelopeSizeComputed {
+		get { return Message != null ? Message.Size + 0 : 0; }
+	}
 
 	public uint Size {
 		get {
@@ -4407,7 +4848,7 @@ public class TransferTransactionV2 : ITransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0 != MessageEnvelopeSize)
+			if (0 != MessageEnvelopeSizeComputed)
 				size += Message.Size;
 
 			size += 4;
@@ -4461,7 +4902,6 @@ public class TransferTransactionV2 : ITransaction {
 			Deadline = deadline,
 			RecipientAddress = recipientAddress,
 			Amount = amount,
-			MessageEnvelopeSize = messageEnvelopeSize,
 			Message = message,
 			Mosaics = mosaics
 		};
@@ -4485,8 +4925,8 @@ public class TransferTransactionV2 : ITransaction {
 		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
-		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0 != MessageEnvelopeSize)
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSizeComputed)); 
+		if (0 != MessageEnvelopeSizeComputed)
 			bw.Write(Message.Serialize()); 
 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
@@ -4506,8 +4946,7 @@ public class TransferTransactionV2 : ITransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
-		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			result += $"message: {Message}, ";
 
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
@@ -4539,8 +4978,8 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 	};
 
 	public NonVerifiableTransferTransactionV2() {
-		Type = TRANSACTION_TYPE;
-		Version = TRANSACTION_VERSION;
+		Type = NonVerifiableTransferTransactionV2.TRANSACTION_TYPE;
+		Version = NonVerifiableTransferTransactionV2.TRANSACTION_VERSION;
 		Network = NetworkType.MAINNET;
 		Timestamp = new Timestamp();
 		SignerPublicKey = new PublicKey();
@@ -4548,8 +4987,7 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 		Deadline = new Timestamp();
 		RecipientAddress = new Address();
 		Amount = new Amount();
-		MessageEnvelopeSize = 0;
-		Message = new Message();
+		Message = null;
 		Mosaics = Array.Empty<SizePrefixedMosaic>();
 		EntityBodyReserved_1 = 0; // reserved field
 		SignerPublicKeySize = 32; // reserved field
@@ -4557,33 +4995,57 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 	}
 
 	public void Sort() {
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			Message.Sort();
 	}
 
-	public TransactionType Type { get; set; }
+	public TransactionType Type {
+		get; set;
+	}
 
-	public byte Version { get; set; }
+	public byte Version {
+		get; set;
+	}
 
-	public NetworkType Network { get; set; }
+	public NetworkType Network {
+		get; set;
+	}
 
-	public Timestamp Timestamp { get; set; }
+	public Timestamp Timestamp {
+		get; set;
+	}
 
-	public PublicKey SignerPublicKey { get; set; }
+	public PublicKey SignerPublicKey {
+		get; set;
+	}
 
-	public Amount Fee { get; set; }
+	public Amount Fee {
+		get; set;
+	}
 
-	public Timestamp Deadline { get; set; }
+	public Timestamp Deadline {
+		get; set;
+	}
 
-	public Address RecipientAddress { get; set; }
+	public Address RecipientAddress {
+		get; set;
+	}
 
-	public Amount Amount { get; set; }
+	public Amount Amount {
+		get; set;
+	}
 
-	public uint MessageEnvelopeSize { get; set; }
+	public Message? Message {
+		get; set;
+	}
 
-	public Message Message { get; set; }
+	public SizePrefixedMosaic[] Mosaics {
+		get; set;
+	}
 
-	public SizePrefixedMosaic[] Mosaics { get; set; }
+	public uint MessageEnvelopeSizeComputed {
+		get { return Message != null ? Message.Size + 0 : 0; }
+	}
 
 	public uint Size {
 		get {
@@ -4601,7 +5063,7 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 			size += RecipientAddress.Size;
 			size += Amount.Size;
 			size += 4;
-			if (0 != MessageEnvelopeSize)
+			if (0 != MessageEnvelopeSizeComputed)
 				size += Message.Size;
 
 			size += 4;
@@ -4650,7 +5112,6 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 			Deadline = deadline,
 			RecipientAddress = recipientAddress,
 			Amount = amount,
-			MessageEnvelopeSize = messageEnvelopeSize,
 			Message = message,
 			Mosaics = mosaics
 		};
@@ -4672,8 +5133,8 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 		bw.Write(BitConverter.GetBytes((uint)(uint)RecipientAddressSize)); 
 		bw.Write(RecipientAddress.Serialize()); 
 		bw.Write(Amount.Serialize()); 
-		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSize)); 
-		if (0 != MessageEnvelopeSize)
+		bw.Write(BitConverter.GetBytes((uint)(uint)MessageEnvelopeSizeComputed)); 
+		if (0 != MessageEnvelopeSizeComputed)
 			bw.Write(Message.Serialize()); 
 
 		bw.Write(BitConverter.GetBytes((uint)(uint)Mosaics.Length));  // bound: mosaics_count
@@ -4692,8 +5153,7 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 		result += $"deadline: {Deadline}, ";
 		result += $"recipientAddress: {RecipientAddress}, ";
 		result += $"amount: {Amount}, ";
-		result += $"messageEnvelopeSize: {Converter.ToString(MessageEnvelopeSize)}, ";
-		if (0 != MessageEnvelopeSize)
+		if (0 != MessageEnvelopeSizeComputed)
 			result += $"message: {Message}, ";
 
 		result += $"mosaics: [{string.Join(",", Mosaics.Select(e => e.ToString()))}], ";
@@ -4703,24 +5163,32 @@ public class NonVerifiableTransferTransactionV2 : IBaseTransaction {
 }
 
 public class TransactionFactory {
+	public static ulong ToKey(uint[] values) {
+		if (values.Length == 1)
+			return (ulong)values[0];
+
+		// assume each key is at most 32bits
+		return values.Aggregate(0UL, (accumulator, value) => (accumulator << 32) + (ulong)value);
+	}
+
 	public static ITransaction Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = Transaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, ITransaction>>
+		var mapping = new Dictionary<ulong, Func<BinaryReader, ITransaction>>
 		{
-			{AccountKeyLinkTransactionV1.TRANSACTION_TYPE, AccountKeyLinkTransactionV1.Deserialize},
-			{MosaicDefinitionTransactionV1.TRANSACTION_TYPE, MosaicDefinitionTransactionV1.Deserialize},
-			{MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, MosaicSupplyChangeTransactionV1.Deserialize},
-			{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE, MultisigAccountModificationTransactionV1.Deserialize},
-			{MultisigAccountModificationTransactionV2.TRANSACTION_TYPE, MultisigAccountModificationTransactionV2.Deserialize},
-			{CosignatureV1.TRANSACTION_TYPE, CosignatureV1.Deserialize},
-			{MultisigTransactionV1.TRANSACTION_TYPE, MultisigTransactionV1.Deserialize},
-			{NamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NamespaceRegistrationTransactionV1.Deserialize},
-			{TransferTransactionV1.TRANSACTION_TYPE, TransferTransactionV1.Deserialize},
-			{TransferTransactionV2.TRANSACTION_TYPE, TransferTransactionV2.Deserialize}
+			{ToKey(new uint[]{AccountKeyLinkTransactionV1.TRANSACTION_TYPE.Value, AccountKeyLinkTransactionV1.TRANSACTION_VERSION}), AccountKeyLinkTransactionV1.Deserialize},
+			{ToKey(new uint[]{MosaicDefinitionTransactionV1.TRANSACTION_TYPE.Value, MosaicDefinitionTransactionV1.TRANSACTION_VERSION}), MosaicDefinitionTransactionV1.Deserialize},
+			{ToKey(new uint[]{MosaicSupplyChangeTransactionV1.TRANSACTION_TYPE.Value, MosaicSupplyChangeTransactionV1.TRANSACTION_VERSION}), MosaicSupplyChangeTransactionV1.Deserialize},
+			{ToKey(new uint[]{MultisigAccountModificationTransactionV1.TRANSACTION_TYPE.Value, MultisigAccountModificationTransactionV1.TRANSACTION_VERSION}), MultisigAccountModificationTransactionV1.Deserialize},
+			{ToKey(new uint[]{MultisigAccountModificationTransactionV2.TRANSACTION_TYPE.Value, MultisigAccountModificationTransactionV2.TRANSACTION_VERSION}), MultisigAccountModificationTransactionV2.Deserialize},
+			{ToKey(new uint[]{CosignatureV1.TRANSACTION_TYPE.Value, CosignatureV1.TRANSACTION_VERSION}), CosignatureV1.Deserialize},
+			{ToKey(new uint[]{MultisigTransactionV1.TRANSACTION_TYPE.Value, MultisigTransactionV1.TRANSACTION_VERSION}), MultisigTransactionV1.Deserialize},
+			{ToKey(new uint[]{NamespaceRegistrationTransactionV1.TRANSACTION_TYPE.Value, NamespaceRegistrationTransactionV1.TRANSACTION_VERSION}), NamespaceRegistrationTransactionV1.Deserialize},
+			{ToKey(new uint[]{TransferTransactionV1.TRANSACTION_TYPE.Value, TransferTransactionV1.TRANSACTION_VERSION}), TransferTransactionV1.Deserialize},
+			{ToKey(new uint[]{TransferTransactionV2.TRANSACTION_TYPE.Value, TransferTransactionV2.TRANSACTION_VERSION}), TransferTransactionV2.Deserialize}
 		};
 		br.BaseStream.Position = position;
-		return mapping[parent.Type](br);
+		return mapping[ToKey(new uint[]{parent.Type.Value, parent.Version})](br);
 	}
 
 	public static ITransaction Deserialize(string payload) {
@@ -4749,23 +5217,31 @@ public class TransactionFactory {
 }
 
 public class NonVerifiableTransactionFactory {
+	public static ulong ToKey(uint[] values) {
+		if (values.Length == 1)
+			return (ulong)values[0];
+
+		// assume each key is at most 32bits
+		return values.Aggregate(0UL, (accumulator, value) => (accumulator << 32) + (ulong)value);
+	}
+
 	public static IBaseTransaction Deserialize(BinaryReader br) {
 		var position = br.BaseStream.Position;
 		var parent = NonVerifiableTransaction.Deserialize(br);
-		var mapping = new Dictionary<TransactionType, Func<BinaryReader, IBaseTransaction>>
+		var mapping = new Dictionary<ulong, Func<BinaryReader, IBaseTransaction>>
 		{
-			{NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_TYPE, NonVerifiableAccountKeyLinkTransactionV1.Deserialize},
-			{NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_TYPE, NonVerifiableMosaicDefinitionTransactionV1.Deserialize},
-			{NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE, NonVerifiableMosaicSupplyChangeTransactionV1.Deserialize},
-			{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
-			{NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_TYPE, NonVerifiableMultisigAccountModificationTransactionV2.Deserialize},
-			{NonVerifiableMultisigTransactionV1.TRANSACTION_TYPE, NonVerifiableMultisigTransactionV1.Deserialize},
-			{NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_TYPE, NonVerifiableNamespaceRegistrationTransactionV1.Deserialize},
-			{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE, NonVerifiableTransferTransactionV1.Deserialize},
-			{NonVerifiableTransferTransactionV2.TRANSACTION_TYPE, NonVerifiableTransferTransactionV2.Deserialize}
+			{ToKey(new uint[]{NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableAccountKeyLinkTransactionV1.TRANSACTION_VERSION}), NonVerifiableAccountKeyLinkTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableMosaicDefinitionTransactionV1.TRANSACTION_VERSION}), NonVerifiableMosaicDefinitionTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableMosaicSupplyChangeTransactionV1.TRANSACTION_VERSION}), NonVerifiableMosaicSupplyChangeTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableMultisigAccountModificationTransactionV1.TRANSACTION_VERSION}), NonVerifiableMultisigAccountModificationTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_TYPE.Value, NonVerifiableMultisigAccountModificationTransactionV2.TRANSACTION_VERSION}), NonVerifiableMultisigAccountModificationTransactionV2.Deserialize},
+			{ToKey(new uint[]{NonVerifiableMultisigTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableMultisigTransactionV1.TRANSACTION_VERSION}), NonVerifiableMultisigTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableNamespaceRegistrationTransactionV1.TRANSACTION_VERSION}), NonVerifiableNamespaceRegistrationTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableTransferTransactionV1.TRANSACTION_TYPE.Value, NonVerifiableTransferTransactionV1.TRANSACTION_VERSION}), NonVerifiableTransferTransactionV1.Deserialize},
+			{ToKey(new uint[]{NonVerifiableTransferTransactionV2.TRANSACTION_TYPE.Value, NonVerifiableTransferTransactionV2.TRANSACTION_VERSION}), NonVerifiableTransferTransactionV2.Deserialize}
 		};
 		br.BaseStream.Position = position;
-		return mapping[parent.Type](br);
+		return mapping[ToKey(new uint[]{parent.Type.Value, parent.Version})](br);
 	}
 
 	public static IBaseTransaction Deserialize(string payload) {

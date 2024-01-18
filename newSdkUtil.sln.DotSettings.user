@@ -6,7 +6,10 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FCatSdk_002FPlugins_002FBouncyCastle_002ECrypto_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FConsoleApp_002FPlugins_002Fnetstandard_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FConsoleApp_002FPlugins_002FSystem_002ERuntime_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002Fopenapi_002FSymbolRestClient_002Fsrc_002FSymbolRestClient_002Fbin_002FRelease_002Fnetstandard2_002E0_002FSymbolRestClient_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002Fopenapi_002Fsymbol_002Drest_002Fsrc_002FSymbolRestClientStandard_002Fbin_002FDebug_002Fnetstandard2_002E0_002FSymbolRestClientStandard_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002Fopenapi_002Fsymbol_002Drest_002Fsrc_002FSymbolRestClient_002Fbin_002FDebug_002Fnet6_002E0_002FSymbolRestClient_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002Fopenapi_002Fsymbol_002Drest_002Fsrc_002FSymbolRestClient_002Fbin_002FRelease_002Fnetstandard2_002E0_002FSymbolRestClient_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FJsonSubTypes_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FMicrosoft_002ECSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FNewSdk_002FSymbolOpenApi_002FPlugins_002FNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
@@ -19,20 +22,44 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=_002FUsers_002Fmatsukawatoshiya_002Fprograms_002FSymbolOpenApi_002Fapi_002Fsrc_002FSymbolOpenApi_002FPlugins_002FSystem_002EComponentModel_002EAnnotations_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/Users/matsukawatoshiya/.nuget/packages/bouncycastle.netcoresdk/1.9.6/lib/net6.0/BouncyCastle.Crypto.dll" /&gt;
+  &lt;Assembly Path="/Users/matsukawatoshiya/programs/NewSdk/openapi/symbol-rest/src/SymbolRestClient/bin/Release/netstandard2.0/SymbolRestClient.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=87c990d0_002Dc45a_002D4aa3_002D9ca9_002D613de7bcb653/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TransactionNonParserTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0f7995e2_002D1a26_002D41e9_002Db185_002Dce9f56a45f14/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TransactionTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionNonParserTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionParserTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionNonParserTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.AddressTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.SignTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.AddressTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.CatbufferTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.MosaicIdTest&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.SignTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionNonParserTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.AddressTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.SignTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionNonParserTest&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.AccountKeyLinkTransaction_account_key_link_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.TransferTransaction_transfer_single_1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3696083e_002D1597_002D418a_002Dbe92_002Dc584d43348c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountKeyLinkTransactionV1_account_key_link_aggregate_1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.AccountKeyLinkTransactionV1_account_key_link_aggregate_1&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=71da6e49_002D608a_002D47e0_002Da458_002D29fb15e4921a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountKeyLinkTransactionV1_account_key_link_aggregate_2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Nem.TransactionTest.AccountKeyLinkTransactionV1_account_key_link_aggregate_2&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=adc151d7_002D5ffb_002D49e9_002D9b09_002Dc235eac44126/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountAddressRestrictionTransactionV1_account_address_restriction_single_1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::71FA44B1-ABCA-4A7E-B4A3-36AA7781BE5F::.NETCoreApp,Version=v3.1::Test.Symbol.TransactionTest.AccountAddressRestrictionTransactionV1_account_address_restriction_single_1&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	</wpf:ResourceDictionary>

@@ -41,8 +41,12 @@ namespace CatSdk.Symbol.Factory
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
                 var namespaceRegistrationTransaction = (NamespaceRegistrationTransactionV1)transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
-                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
+                if (namespaceRegistrationTransaction.ParentId != null)
+                {
+                    var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
+                    namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
+                }
+
                 return namespaceRegistrationTransaction;
             }
             if (transaction.Type != TransactionType.MOSAIC_DEFINITION) return transaction;
@@ -68,8 +72,12 @@ namespace CatSdk.Symbol.Factory
             if (transaction.Type == TransactionType.NAMESPACE_REGISTRATION)
             {
                 var namespaceRegistrationTransaction = (EmbeddedNamespaceRegistrationTransactionV1)transaction;
-                var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
-                namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
+                if (namespaceRegistrationTransaction.ParentId != null)
+                {
+                    var rawNamespaceId = IdGenerator.GenerateNamespaceId(namespaceRegistrationTransaction.Name, namespaceRegistrationTransaction.ParentId.Value);
+                    namespaceRegistrationTransaction.Id = new NamespaceId(rawNamespaceId);
+                }
+
                 return namespaceRegistrationTransaction;
             }
 

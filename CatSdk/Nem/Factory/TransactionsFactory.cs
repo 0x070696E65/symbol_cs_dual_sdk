@@ -114,8 +114,8 @@ namespace CatSdk.Nem.Factory
 
             var structsMapping = new[]
             {
-                "Cosignature",
-                "SizePrefixedCosignature",
+                "CosignatureV1",
+                "SizePrefixedCosignatureV1",
                 "Message",
                 "NamespaceId",
                 "MosaicId",
@@ -147,7 +147,7 @@ namespace CatSdk.Nem.Factory
 
             var arrayParserMapping = new[]
             {
-                "struct:SizePrefixedCosignature",
+                "struct:SizePrefixedCosignatureV1",
                 "struct:SizePrefixedMosaic",
                 "struct:SizePrefixedMosaicProperty",
                 "struct:SizePrefixedMultisigAccountModification",

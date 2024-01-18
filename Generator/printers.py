@@ -181,16 +181,14 @@ class TypedArrayPrinter(Printer):
 
 		sort_key = pascal_name(lang_field_name(self.descriptor.field_type.sort_key))
 		body = f'Array.Sort({field_name}, (lhs, rhs) => {{\n'
-		body +=	f'return ((ulong) ((lhs.{sort_key}.GetType().GetMethod("Comparer") != null\n'
-		body += f'? lhs.{sort_key}.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {{}})\n'
-		body += f': lhs.{sort_key}.GetType().GetField("Value").GetValue(lhs.{sort_key}) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()))\n'
-		body += f'.CompareTo((ulong) ((rhs.{sort_key}.GetType().GetMethod("Comparer") != null\n'
-		body += f'? rhs.{sort_key}.GetType().GetMethod("Comparer")?.Invoke(null, new object[] {{}})\n'
-		body += f': rhs.{sort_key}.GetType().GetField("Value").GetValue(rhs.{sort_key}) ?? throw new InvalidOperationException()) ?? throw new InvalidOperationException()));\n'
+		body += f'\tvar comparerMethod = lhs.{sort_key}.GetType().GetMethod("Comparer");'
+		body += f'\treturn comparerMethod != null\n'
+		body += f'\t\t? ArrayHelpers.DeepCompare(comparerMethod.Invoke(lhs.{sort_key}, new object[] {{ }}),\n'
+		body += f'\t\t\tcomparerMethod.Invoke(rhs.{sort_key}, new object[] {{ }}))\n'
+		body += f'\t\t: ArrayHelpers.DeepCompare(lhs.{sort_key}.GetType().GetField("Value").GetValue(lhs.{sort_key}) ?? throw new InvalidOperationException(),\n'
+		body += f'rhs.{sort_key}.GetType().GetField("Value").GetValue(rhs.{sort_key}) ?? throw new InvalidOperationException());\n'
 		body += f'}});'
-		#body = f'Array.Sort({field_name},(lhs, rhs)=>lhs.{sort_key}.Value.CompareTo(rhs.{sort_key}.Value));'
 		return body
-
 	@staticmethod
 	def to_string(field_name):
 		return f'string.Join(",", {field_name}.Select(e => e.ToString()))'

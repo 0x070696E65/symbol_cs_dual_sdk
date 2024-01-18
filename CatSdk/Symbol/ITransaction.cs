@@ -4,6 +4,7 @@ namespace CatSdk.Symbol
     {
         public Signature Signature { get; set; }
         public Amount Fee { get; set; }
-        public NetworkType Network { get; set; }
+        public new NetworkType Network { get; set; }
+        public Timestamp Deadline { get; set; }
     }
 }

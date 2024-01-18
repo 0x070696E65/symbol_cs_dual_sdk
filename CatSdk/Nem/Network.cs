@@ -75,7 +75,7 @@ namespace CatSdk.Nem
     public class NemAddress : ByteArray
     {
         private const byte SIZE = 25;
-        private const byte ENCODED_SIZE = 39;
+        private const byte ENCODED_SIZE = 40;
 
         /**
 	     * Creates a NEM address.

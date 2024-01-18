@@ -7,11 +7,11 @@
         <RootNamespace>CatSdk</RootNamespace>
         <LangVersion>10</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.7</Version>
+        <Version>1.1.1</Version>
         <Description>C# SDK for Symbol</Description>
         <Copyright>toshi</Copyright>
-        <AssemblyVersion>7</AssemblyVersion>
-        <FileVersion>1.0.7</FileVersion>
+        <AssemblyVersion>9</AssemblyVersion>
+        <FileVersion>1.1.1</FileVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 

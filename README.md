@@ -11,7 +11,7 @@ https://0x070696e65.github.io/symbol_cs_dual_sdk_reference/
 # Usage
 Nuegtを使ってインストールしてください<br>
 https://www.nuget.org/packages/CatSdk<br>
-`dotnet add package CatSdk --version 1.0.7`<br>
+`dotnet add package CatSdk`<br>
 <br>
 nugetを使わない場合は以下でも可能です
 [Release](https://github.com/0x070696E65/symbol_cs_dual_sdk/releases) 

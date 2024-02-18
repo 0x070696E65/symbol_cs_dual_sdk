@@ -1,4 +1,12 @@
 # SymbolCsDualSDK
+
+> [!WARNING]
+> 本SDKは新たなSDKとして以下に生まれ変わりました
+> https://www.nuget.org/packages/SymbolSdk
+>
+> 使用方法は以下になります
+> https://github.com/0x070696E65/symbol_sdk/tree/main/sdk/csharp/quick_learning_symbol_csharp
+
 # Features
 ブロックチェーンSymbolとNEMを一つのSDKで両方使えるC#用SDKです。<br>
 <br>

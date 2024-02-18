@@ -1,10 +1,10 @@
 # SymbolCsDualSDK
 
 > [!WARNING]
-> 本SDKは新たなSDKとして以下に生まれ変わりました
+> 本SDKは新たなSDKとして以下に生まれ変わりました<br>
 > https://www.nuget.org/packages/SymbolSdk
 >
-> 使用方法は以下になります
+> 使用方法は以下になります<br>
 > https://github.com/0x070696E65/symbol_sdk/tree/main/sdk/csharp/quick_learning_symbol_csharp
 
 # Features
